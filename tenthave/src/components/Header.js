@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import "../components/Header.css"; // Ensure correct path to CSS file
+import "./Header.css";
 import BurgerIcon from "../assets/burger.svg"; // Import your vector burger icon
+import CloseIcon from "../assets/closeButton.svg"
 
 function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [menuActive, setMenuActive] = useState(false);
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setMenuActive(!menuActive);
     };
 
     return (
@@ -20,16 +21,32 @@ function Header() {
                 </div>
 
                 <div className="rightSide">
-                    <div className="burger" onClick={toggleMenu}>
+                    <button className="burger" onClick={toggleMenu}>
                         <img src={BurgerIcon} alt="Menu" />
-                    </div>
-                    <ul className={`navLinks ${isOpen ? "open" : ""}`}>
-                        <li><Link to="/">HOME</Link></li>
-                        <li><Link to="/about">ABOUT US</Link></li>
-                        <li><Link to="/sermon">SERMON</Link></li>
-                        <li><Link to="/prayers">PRAYERS</Link></li>
-                        <li><Link to="/contact">CONTACT US</Link></li>
+                    </button>
+                    {/* Combine the original styling with the new "navLinks" class for mobile */}
+                    <ul className={`navLinks ${menuActive ? "open" : ""}`}>
+                        <li>
+                            <Link to="/" onClick={toggleMenu}>HOME</Link>
+                        </li>
+                        <li>
+                            <Link to="/about" onClick={toggleMenu}>ABOUT US</Link>
+                        </li>
+                        <li>
+                            <Link to="/sermon" onClick={toggleMenu}>SERMON</Link>
+                        </li>
+                        <li>
+                            <Link to="/prayers" onClick={toggleMenu}>PRAYERS</Link>
+                        </li>
+                        <li>
+                            <Link to="/contact" onClick={toggleMenu}>CONTACT US</Link>
+                        </li>
+                        <li className="closeButton" onClick={toggleMenu}>
+                            <img src={CloseIcon} alt="Menu" />
+                        </li>
                     </ul>
+
+
                 </div>
             </nav>
         </header>

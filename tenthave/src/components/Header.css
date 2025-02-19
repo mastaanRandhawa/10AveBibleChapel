@@ -4,7 +4,7 @@
     /* 🎨 Color Palette */
     --color-dark: #000000;
     --color-primary: #FBCB9C;
-    --color-light: #F9F6F2;
+    --color-light: #F7F6F1;
     --color-bg: #FFFFFF;
 
     /* Font Styles */
@@ -73,9 +73,8 @@
     color: inherit;
 }
 
-/* Navigation Styles (Desktop) */
-
-.rightSide ul {
+/* Desktop Navigation Styles */
+.navLinks {
     list-style: none;
     display: flex;
     gap: var(--padding-xl);
@@ -84,28 +83,28 @@
     border-left: 1px solid var(--color-dark);
 }
 
-.rightSide ul li {
+.navLinks li {
     font-family: var(--font-primary);
     font-size: var(--font-size-h5);
     font-weight: var(--font-weight-regular);
 }
 
-.rightSide ul li a {
+.navLinks li a,
+.closeButton {
     text-decoration: none;
     color: var(--color-dark);
-    transition: color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     padding: var(--padding-sm) var(--padding-md);
 }
 
-.rightSide ul li a:hover {
+.navLinks li a:hover {
     color: var(--color-primary);
+    transition: all 0.3s ease-in-out;
 }
 
-/* 
-  Burger Menu Icon - hidden on larger screens 
-  (The React component will toggle the menu via the "open" class on .navLinks)
-*/
-.burger {
+/* Burger Menu Icon - hidden on larger screens */
+.burger,
+.closeButton {
     display: none;
     cursor: pointer;
 }
@@ -115,12 +114,12 @@
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
     :root {
-        --font-size-h1: 40px;
-        --font-size-h2: 32px;
-        --font-size-h3: 28px;
-        --font-size-h4: 20px;
-        --font-size-h5: 16px;
-        --font-size-h6: 12px;
+        --font-size-h1: 28px;
+        --font-size-h2: 22px;
+        --font-size-h3: 18px;
+        --font-size-h4: 12px;
+        --font-size-h5: 10px;
+        --font-size-h6: 8px;
         --padding-xs: 2px;
         --padding-sm: 4px;
         --padding-md: 8px;
@@ -144,8 +143,8 @@
         letter-spacing: var(--letter-spacing-sm);
     }
 
-    /* For very small devices, if not using burger logic the nav would stack */
-    .rightSide ul {
+    /* Nav links stack vertically if not using burger logic */
+    .navLinks {
         gap: var(--padding-lg);
         padding: 0 var(--padding-md);
         flex-direction: column;
@@ -153,8 +152,15 @@
         border-left: none;
     }
 
-    .rightSide ul li a {
+    .navLinks li a,
+    .closeButton {
         padding: var(--padding-xs) var(--padding-sm);
+    }
+
+    .burger img,
+    li img {
+        width: 15px;
+        height: auto;
     }
 }
 
@@ -190,8 +196,7 @@
         letter-spacing: var(--letter-spacing-sm);
     }
 
-    /* By default the navLinks are styled similarly to .rightSide ul */
-    .rightSide ul {
+    .navLinks {
         gap: var(--padding-lg);
         padding: 0 var(--padding-md);
         flex-direction: column;
@@ -199,8 +204,15 @@
         border-left: none;
     }
 
-    .rightSide ul li a {
+    .navLinks li a,
+    .closeButton {
         padding: var(--padding-xs) var(--padding-sm);
+    }
+
+    .burger img,
+    li img {
+        width: 20px;
+        height: auto;
     }
 }
 
@@ -236,8 +248,7 @@
         letter-spacing: var(--letter-spacing-sm);
     }
 
-    /* For small devices (576px to 767.98px), nav items still stack */
-    .rightSide ul {
+    .navLinks {
         gap: var(--padding-lg);
         padding: 0 var(--padding-md);
         flex-direction: column;
@@ -245,8 +256,15 @@
         border-left: none;
     }
 
-    .rightSide ul li a {
+    .navLinks li a,
+    .closeButton {
         padding: var(--padding-xs) var(--padding-sm);
+    }
+
+    .burger img,
+    li img {
+        width: 25px;
+        height: auto;
     }
 }
 
@@ -282,16 +300,10 @@
         letter-spacing: var(--letter-spacing-sm);
     }
 
-    .rightSide ul {
-        gap: var(--padding-lg);
-        padding: 0 var(--padding-md);
-        flex-direction: column;
-        align-items: center;
-        border-left: none;
-    }
-
-    .rightSide ul li a {
-        padding: var(--padding-xs) var(--padding-sm);
+    .burger img,
+    li img {
+        width: 55px;
+        height: auto;
     }
 }
 
@@ -327,14 +339,16 @@
         letter-spacing: var(--letter-spacing-sm);
     }
 
-    .rightSide ul {
+    .navLinks {
         gap: var(--padding-lg);
         padding: 0 var(--padding-md);
     }
 
-    .rightSide ul li a {
+    .navLinks li a,
+    .closeButton {
         padding: var(--padding-xs) var(--padding-sm);
     }
+
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -369,12 +383,13 @@
         letter-spacing: var(--letter-spacing-sm);
     }
 
-    .rightSide ul {
+    .navLinks {
         gap: var(--padding-lg);
         padding: 0 var(--padding-md);
     }
 
-    .rightSide ul li a {
+    .navLinks li a,
+    .closeButton {
         padding: var(--padding-xs) var(--padding-sm);
     }
 }
@@ -385,14 +400,11 @@
    - The nav links (with class .navLinks) are hidden by default.
    - When toggled (i.e. when the .open class is added), the nav links display as a vertical menu.
 */
-@media (max-width: 767.98px) {
-    .burger {
-        display: block;
-    }
+@media (max-width: 991.98px) {
 
-    .burger img {
-        width: 35%;
-        height: auto;
+    .burger,
+    .closeButton {
+        display: block;
     }
 
     .navLinks {
@@ -401,10 +413,9 @@
         align-items: center;
         background-color: var(--color-bg);
         position: absolute;
-        top: 100%;
+        top: 0;
         left: 0;
         right: 0;
-        padding: var(--padding-md) 0;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
