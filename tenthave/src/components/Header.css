@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+:root {
+    /* 🎨 Color Palette */
+    --color-dark: #000000;
+    --color-primary: #FBCB9C;
+    --color-light: #F9F6F2;
+    --color-bg: #FFFFFF;
+
+    /* Font Styles */
+    --font-primary: 'Roboto Condensed', sans-serif;
+
+    /* Font Sizes (Desktop Default for 1400px and up) */
+    --font-size-h1: 64px;
+    --font-size-h2: 48px;
+    --font-size-h3: 40px;
+    --font-size-h4: 32px;
+    --font-size-h5: 24px;
+    --font-size-h6: 16px;
+
+    /* Font Weights */
+    --font-weight-bold: 600;
+    --font-weight-regular: 400;
+
+    /* Spacing (Padding & Margins) */
+    --padding-xs: 4px;
+    --padding-sm: 8px;
+    --padding-md: 16px;
+    --padding-lg: 24px;
+    --padding-xl: 32px;
+
+    /* Letter Spacing */
+    --letter-spacing-xsm: 0.5px;
+    --letter-spacing-sm: 1px;
+    --letter-spacing-md: 2px;
+    --letter-spacing-lg: 4px;
+
+    /* Header & Navbar Specific */
+    --padding-header: var(--padding-md);
+    --margin-menu-items: 30px;
+}
+
+/* Base Styles */
+.header {
+    width: 100%;
+    background-color: var(--color-light);
+    padding: var(--padding-header) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-md);
+}
+
+.leftSide {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-lg);
+    color: var(--color-dark);
+    padding-left: var(--padding-md);
+}
+
+.leftSide a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navigation Styles (Desktop) */
+
+.rightSide ul {
+    list-style: none;
+    display: flex;
+    gap: var(--padding-xl);
+    padding: 0 var(--padding-xl);
+    margin: 0;
+    border-left: 1px solid var(--color-dark);
+}
+
+.rightSide ul li {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-regular);
+}
+
+.rightSide ul li a {
+    text-decoration: none;
+    color: var(--color-dark);
+    transition: color 0.3s ease-in-out;
+    padding: var(--padding-sm) var(--padding-md);
+}
+
+.rightSide ul li a:hover {
+    color: var(--color-primary);
+}
+
+/* 
+  Burger Menu Icon - hidden on larger screens 
+  (The React component will toggle the menu via the "open" class on .navLinks)
+*/
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+/* Responsive Media Queries */
+
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    :root {
+        --font-size-h1: 40px;
+        --font-size-h2: 32px;
+        --font-size-h3: 28px;
+        --font-size-h4: 20px;
+        --font-size-h5: 16px;
+        --font-size-h6: 12px;
+        --padding-xs: 2px;
+        --padding-sm: 4px;
+        --padding-md: 8px;
+        --padding-lg: 12px;
+        --padding-xl: 16px;
+        --letter-spacing-lg: 2px;
+        --letter-spacing-sm: 0.5px;
+    }
+
+    .header {
+        padding: var(--padding-sm) 0;
+    }
+
+    .nav-container {
+        padding: var(--padding-sm);
+    }
+
+    .leftSide {
+        font-size: var(--font-size-h4);
+        padding-left: var(--padding-sm);
+        letter-spacing: var(--letter-spacing-sm);
+    }
+
+    /* For very small devices, if not using burger logic the nav would stack */
+    .rightSide ul {
+        gap: var(--padding-lg);
+        padding: 0 var(--padding-md);
+        flex-direction: column;
+        align-items: center;
+        border-left: none;
+    }
+
+    .rightSide ul li a {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    :root {
+        --font-size-h1: 48px;
+        --font-size-h2: 40px;
+        --font-size-h3: 32px;
+        --font-size-h4: 24px;
+        --font-size-h5: 20px;
+        --font-size-h6: 14px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 12px;
+        --padding-lg: 18px;
+        --padding-xl: 24px;
+        --letter-spacing-lg: 3px;
+        --letter-spacing-sm: 0.8px;
+    }
+
+    .header {
+        padding: var(--padding-sm) 0;
+    }
+
+    .nav-container {
+        padding: var(--padding-sm);
+    }
+
+    .leftSide {
+        font-size: var(--font-size-h4);
+        padding-left: var(--padding-sm);
+        letter-spacing: var(--letter-spacing-sm);
+    }
+
+    /* By default the navLinks are styled similarly to .rightSide ul */
+    .rightSide ul {
+        gap: var(--padding-lg);
+        padding: 0 var(--padding-md);
+        flex-direction: column;
+        align-items: center;
+        border-left: none;
+    }
+
+    .rightSide ul li a {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    :root {
+        --font-size-h1: 56px;
+        --font-size-h2: 42px;
+        --font-size-h3: 36px;
+        --font-size-h4: 28px;
+        --font-size-h5: 22px;
+        --font-size-h6: 15px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 12px;
+        --padding-lg: 18px;
+        --padding-xl: 24px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 0.9px;
+    }
+
+    .header {
+        padding: var(--padding-sm) 0;
+    }
+
+    .nav-container {
+        padding: var(--padding-sm);
+    }
+
+    .leftSide {
+        font-size: var(--font-size-h4);
+        padding-left: var(--padding-sm);
+        letter-spacing: var(--letter-spacing-sm);
+    }
+
+    /* For small devices (576px to 767.98px), nav items still stack */
+    .rightSide ul {
+        gap: var(--padding-lg);
+        padding: 0 var(--padding-md);
+        flex-direction: column;
+        align-items: center;
+        border-left: none;
+    }
+
+    .rightSide ul li a {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+}
+
+/* Medium Devices / iPad Portrait (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    :root {
+        --font-size-h1: 60px;
+        --font-size-h2: 44px;
+        --font-size-h3: 36px;
+        --font-size-h4: 30px;
+        --font-size-h5: 26px;
+        --font-size-h6: 18px;
+        --padding-xs: 3px;
+        --padding-sm: 7px;
+        --padding-md: 14px;
+        --padding-lg: 21px;
+        --padding-xl: 28px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 1px;
+    }
+
+    .header {
+        padding: var(--padding-sm) 0;
+    }
+
+    .nav-container {
+        padding: var(--padding-sm);
+    }
+
+    .leftSide {
+        font-size: var(--font-size-h4);
+        padding-left: var(--padding-sm);
+        letter-spacing: var(--letter-spacing-sm);
+    }
+
+    .rightSide ul {
+        gap: var(--padding-lg);
+        padding: 0 var(--padding-md);
+        flex-direction: column;
+        align-items: center;
+        border-left: none;
+    }
+
+    .rightSide ul li a {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+}
+
+/* iPad Landscape (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    :root {
+        --font-size-h1: 62px;
+        --font-size-h2: 46px;
+        --font-size-h3: 38px;
+        --font-size-h4: 30px;
+        --font-size-h5: 22px;
+        --font-size-h6: 14px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 14px;
+        --padding-lg: 22px;
+        --padding-xl: 28px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 0.8px;
+    }
+
+    .header {
+        padding: var(--padding-sm) 0;
+    }
+
+    .nav-container {
+        padding: var(--padding-sm);
+    }
+
+    .leftSide {
+        font-size: var(--font-size-h4);
+        padding-left: var(--padding-sm);
+        letter-spacing: var(--letter-spacing-sm);
+    }
+
+    .rightSide ul {
+        gap: var(--padding-lg);
+        padding: 0 var(--padding-md);
+    }
+
+    .rightSide ul li a {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+}
+
+/* Laptops (1200px to 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    :root {
+        --font-size-h1: 62px;
+        --font-size-h2: 46px;
+        --font-size-h3: 38px;
+        --font-size-h4: 30px;
+        --font-size-h5: 22px;
+        --font-size-h6: 14px;
+        --padding-xs: 3px;
+        --padding-sm: 7px;
+        --padding-md: 14px;
+        --padding-lg: 22px;
+        --padding-xl: 30px;
+        --letter-spacing-lg: 3.8px;
+        --letter-spacing-sm: 0.9px;
+    }
+
+    .header {
+        padding: var(--padding-sm) 0;
+    }
+
+    .nav-container {
+        padding: var(--padding-sm);
+    }
+
+    .leftSide {
+        font-size: var(--font-size-h4);
+        padding-left: var(--padding-sm);
+        letter-spacing: var(--letter-spacing-sm);
+    }
+
+    .rightSide ul {
+        gap: var(--padding-lg);
+        padding: 0 var(--padding-md);
+    }
+
+    .rightSide ul li a {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+}
+
+/* --- Burger Menu Logic for Mobile Devices --- */
+/* This block ensures that on very small screens (max-width: 575.98px):
+   - The burger icon is displayed.
+   - The nav links (with class .navLinks) are hidden by default.
+   - When toggled (i.e. when the .open class is added), the nav links display as a vertical menu.
+*/
+@media (max-width: 767.98px) {
+    .burger {
+        display: block;
+    }
+
+    .burger img {
+        width: 35%;
+        height: auto;
+    }
+
+    .navLinks {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--color-bg);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: var(--padding-md) 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .navLinks.open {
+        display: flex;
+    }
+}
