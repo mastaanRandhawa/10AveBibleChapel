@@ -59,8 +59,9 @@
 }
 
 .button-primary:hover {
-    background-color: var(--color-primary);
-    opacity: 0.8;
+    background-color: var(--color-dark);
+    color: var(--color-primary);
+    transition: all 0.3s ease-in-out;
 }
 
 .button-secondary {
@@ -78,12 +79,13 @@
     display: inline-block;
     text-align: center;
     background-color: var(--color-dark);
-    color: var(--color-light);
+    color: var(--color-primary);
 }
 
 .button-secondary:hover {
-    background-color: var(--color-dark);
-    opacity: 0.8;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    transition: all 0.3s ease-in-out;
 }
 
 /* Responsive Media Queries */
@@ -106,6 +108,53 @@
         --letter-spacing-sm: 0.5px;
     }
 
+    .button-primary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+    }
+
+    .button-primary:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button-secondary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 /* Extra Small Devices (376px to 575.98px) */
@@ -126,6 +175,53 @@
         --letter-spacing-sm: 0.8px;
     }
 
+    .button-primary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+    }
+
+    .button-primary:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button-secondary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 /* Small Devices (576px to 767.98px) */
@@ -146,6 +242,53 @@
         --letter-spacing-sm: 0.9px;
     }
 
+    .button-primary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+    }
+
+    .button-primary:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button-secondary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
@@ -166,6 +309,53 @@
         --letter-spacing-sm: 1px;
     }
 
+    .button-primary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+    }
+
+    .button-primary:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button-secondary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 /* iPad Landscape (992px to 1199.98px) */
@@ -186,6 +376,53 @@
         --letter-spacing-sm: 0.8px;
     }
 
+    .button-primary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+    }
+
+    .button-primary:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button-secondary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+        transition: all 0.3s ease-in-out;
+    }
 
 }
 
@@ -207,4 +444,51 @@
         --letter-spacing-sm: 0.9px;
     }
 
+    .button-primary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+    }
+
+    .button-primary:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button-secondary {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-h6);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-sm);
+        padding: var(--padding-md) var(--padding-xl);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+        text-align: center;
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--color-primary);
+        color: var(--color-dark);
+        transition: all 0.3s ease-in-out;
+    }
 }
