@@ -28,16 +28,13 @@
     --padding-md: 16px;
     --padding-lg: 24px;
     --padding-xl: 32px;
+    --padding-xxl: 48px;
 
     /* Letter Spacing */
     --letter-spacing-xsm: 0.5px;
     --letter-spacing-sm: 1px;
     --letter-spacing-md: 2px;
     --letter-spacing-lg: 4px;
-
-    /* Header & Navbar Specific */
-    --padding-header: var(--padding-md);
-    --margin-menu-items: 30px;
 }
 
 .button-primary {
@@ -47,7 +44,7 @@
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
-    padding: var(--padding-md) var(--padding-xl);
+    padding: var(--padding-lg) var(--padding-xxl);
     border: none;
     border-radius: 12px;
     cursor: pointer;

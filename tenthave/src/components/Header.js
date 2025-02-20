@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./Header.css";
 import BurgerIcon from "../assets/burger.svg"; // Import your vector burger icon
 import CloseIcon from "../assets/closeButton.svg"
+import HomeIcon from "../assets/home.svg"
 
 function Header() {
     const [menuActive, setMenuActive] = useState(false);
@@ -16,7 +17,8 @@ function Header() {
             <nav className="nav-container">
                 <div className="leftSide">
                     <Link to="/">
-                        <span>10TH AVE BIBLE CHAPEL</span>
+                        <span className="churchIconName">10TH AVE BIBLE CHAPEL</span>
+                        <img className="churchIcon" alt="Church Icon" src={HomeIcon}></img>
                     </Link>
                 </div>
 

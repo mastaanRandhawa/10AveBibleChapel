@@ -5,6 +5,7 @@ import Sermon from "./pages/Sermon";
 import Prayers from "./pages/Prayers";
 import Contact from "./pages/Contact";
 import Header from "./components/Header";
+import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
       </Routes>
 
 
-
+      <Footer />
     </Router>
   );
 }
