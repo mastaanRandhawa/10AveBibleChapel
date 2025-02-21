@@ -50,7 +50,7 @@ function Footer() {
                 <form onSubmit={handleSubmit} className="subscribe-form">
                     <input
                         type="email"
-                        placeholder="Yourmail@gmail.com"
+                        placeholder="Yourmail@mail.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

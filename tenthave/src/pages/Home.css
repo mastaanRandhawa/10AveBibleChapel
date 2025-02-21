@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap");
 
 :root {
     /* 🎨 Color Palette */
     --color-dark: #000000;
-    --color-primary: #FBCB9C;
-    --color-light: #F7F6F1;
-    --color-bg: #FFFFFF;
+    --color-primary: #fbcb9c;
+    --color-light: #f7f6f1;
+    --color-bg: #ffffff;
 
     /* Font Styles */
-    --font-primary: 'Roboto Condensed', sans-serif;
+    --font-primary: "Roboto Condensed", sans-serif;
 
     /* Font Sizes (Desktop Default for 1400px and up) */
     --font-size-h1: 64px;
@@ -34,7 +34,6 @@
     --letter-spacing-sm: 1px;
     --letter-spacing-md: 2px;
     --letter-spacing-lg: 4px;
-
 }
 
 .hero {
@@ -83,6 +82,27 @@
 
 .text-hero-description {
     padding-left: var(--padding-lg);
+}
+
+.weeklyServices h2{
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    color: var(--color-dark);
+}
+
+.weeklyServices {
+    padding: var(--padding-xl) var(--padding-md);
+    text-align: center;
+}
+
+.weeklyServicesCard {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    /* Space between cards */
+    flex-wrap: wrap;
+    /* Makes it responsive */
+    padding: var(--padding-lg);
 }
 
 /* Responsive Media Queries */
@@ -155,6 +175,20 @@
         padding-left: var(--padding-lg);
     }
 
+    .weeklyServices {
+        padding: var(--padding-xl) var(--padding-md);
+        text-align: center;
+    }
+
+    .weeklyServicesCard {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        /* Space between cards */
+        flex-wrap: wrap;
+        /* Makes it responsive */
+        padding: var(--padding-lg);
+    }
 }
 
 /* Extra Small Devices (376px to 575.98px) */
@@ -223,6 +257,20 @@
         padding-left: var(--padding-lg);
     }
 
+    .weeklyServices {
+        padding: var(--padding-xl) var(--padding-md);
+        text-align: center;
+    }
+
+    .weeklyServicesCard {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        /* Space between cards */
+        flex-wrap: wrap;
+        /* Makes it responsive */
+        padding: var(--padding-lg);
+    }
 }
 
 /* Small Devices (576px to 767.98px) */
@@ -291,6 +339,20 @@
         padding-left: var(--padding-lg);
     }
 
+    .weeklyServices {
+        padding: var(--padding-xl) var(--padding-md);
+        text-align: center;
+    }
+
+    .weeklyServicesCard {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        /* Space between cards */
+        flex-wrap: wrap;
+        /* Makes it responsive */
+        padding: var(--padding-lg);
+    }
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
@@ -359,6 +421,20 @@
         padding-left: var(--padding-lg);
     }
 
+    .weeklyServices {
+        padding: var(--padding-xl) var(--padding-md);
+        text-align: center;
+    }
+
+    .weeklyServicesCard {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        /* Space between cards */
+        flex-wrap: wrap;
+        /* Makes it responsive */
+        padding: var(--padding-lg);
+    }
 }
 
 /* iPad Landscape (992px to 1199.98px) */
@@ -378,7 +454,6 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.8px;
     }
-
 
     .hero {
         position: relative;
@@ -428,6 +503,20 @@
         padding-left: var(--padding-lg);
     }
 
+    .weeklyServices {
+        padding: var(--padding-xl) var(--padding-md);
+        text-align: center;
+    }
+
+    .weeklyServicesCard {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        /* Space between cards */
+        flex-wrap: wrap;
+        /* Makes it responsive */
+        padding: var(--padding-lg);
+    }
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -496,4 +585,18 @@
         padding-left: var(--padding-lg);
     }
 
+    .weeklyServices {
+        padding: var(--padding-xl) var(--padding-md);
+        text-align: center;
+    }
+
+    .weeklyServicesCard {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        /* Space between cards */
+        flex-wrap: wrap;
+        /* Makes it responsive */
+        padding: var(--padding-lg);
+    }
 }

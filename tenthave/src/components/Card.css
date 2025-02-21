@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+:root {
+    /* 🎨 Color Palette */
+    --color-dark: #000000;
+    --color-primary: #FBCB9C;
+    --color-light: #F7F6F1;
+    --color-bg: #FFFFFF;
+
+    /* Font Styles */
+    --font-primary: 'Roboto Condensed', sans-serif;
+
+    /* Font Sizes (Desktop Default for 1400px and up) */
+    --font-size-h1: 64px;
+    --font-size-h2: 48px;
+    --font-size-h3: 40px;
+    --font-size-h4: 32px;
+    --font-size-h5: 24px;
+    --font-size-h6: 16px;
+
+    /* Font Weights */
+    --font-weight-bold: 600;
+    --font-weight-regular: 400;
+
+
+    /* Spacing (Padding & Margins) */
+    --padding-xs: 4px;
+    --padding-sm: 8px;
+    --padding-md: 16px;
+    --padding-lg: 24px;
+    --padding-xl: 32px;
+
+    /* Letter Spacing */
+    --letter-spacing-xsm: 0.5px;
+    --letter-spacing-sm: 1px;
+    --letter-spacing-md: 2px;
+    --letter-spacing-lg: 4px;
+
+    /* Border Radius */
+    --border-radius: 12px;
+    /* Box Shadow */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Container */
+.card {
+    background-color: var(--color-light);
+    /* border: 2px solid var(--color-primart); */
+    border-bottom: 15px solid var(--color-primary);
+    padding: var(--padding-xl) var(--padding-xl);
+    text-align: left;
+    max-width: 400px;
+
+    font-family: var(--font-primary);
+}
+
+.card img {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding-top: 0;
+}
+
+/* Card Title */
+.card-title {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+    padding-top: var(--padding-lg) 0;
+}
+
+/* Card Text */
+.card-text {
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    font-weight: var(--font-weight-regular);
+    margin: 0;
+    padding: var(--padding-md) 0;
+}
+
+/* Learn More Link */
+.card-link {
+    display: inline-block;
+    margin-top: var(--padding-md);
+    text-decoration: none;
+    color: var(--color-primary);
+    letter-spacing: var(--letter-spacing-sm);
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
+}
+
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Media Queries */
+
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    :root {
+        --font-size-h1: 28px;
+        --font-size-h2: 22px;
+        --font-size-h3: 18px;
+        --font-size-h4: 12px;
+        --font-size-h5: 10px;
+        --font-size-h6: 8px;
+        --padding-xs: 2px;
+        --padding-sm: 4px;
+        --padding-md: 8px;
+        --padding-lg: 12px;
+        --padding-xl: 16px;
+        --letter-spacing-lg: 2px;
+        --letter-spacing-sm: 0.5px;
+    }
+
+    /* Card Container */
+    .card {
+        background-color: var(--color-light);
+        padding: var(--padding-xl) var(--padding-xl);
+        text-align: left;
+        max-width: 400px;
+
+        font-family: var(--font-primary);
+    }
+
+    .card img {
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: 0;
+        padding-top: var(--padding-lg) 0;
+    }
+
+    /* Card Text */
+    .card-text {
+        font-size: var(--font-size-h6);
+        color: var(--color-dark);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        padding: var(--padding-md) 0;
+    }
+
+    /* Learn More Link */
+    .card-link {
+        display: inline-block;
+        margin-top: var(--padding-md);
+        text-decoration: none;
+        color: var(--color-primary);
+        letter-spacing: var(--letter-spacing-sm);
+        font-size: var(--font-size-h5);
+        color: var(--color-dark);
+    }
+
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    :root {
+        --font-size-h1: 48px;
+        --font-size-h2: 40px;
+        --font-size-h3: 32px;
+        --font-size-h4: 24px;
+        --font-size-h5: 20px;
+        --font-size-h6: 14px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 12px;
+        --padding-lg: 18px;
+        --padding-xl: 24px;
+        --letter-spacing-lg: 3px;
+        --letter-spacing-sm: 0.8px;
+    }
+
+    /* Card Container */
+    .card {
+        background-color: var(--color-light);
+
+        padding: var(--padding-xl) var(--padding-xl);
+        text-align: left;
+        max-width: 350px;
+
+        font-family: var(--font-primary);
+    }
+
+    .card img {
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: 0;
+        padding-top: var(--padding-lg) 0;
+    }
+
+    /* Card Text */
+    .card-text {
+        font-size: var(--font-size-h6);
+        color: var(--color-dark);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        padding: var(--padding-md) 0;
+    }
+
+    /* Learn More Link */
+    .card-link {
+        display: inline-block;
+        margin-top: var(--padding-md);
+        text-decoration: none;
+        color: var(--color-primary);
+        letter-spacing: var(--letter-spacing-sm);
+        font-size: var(--font-size-h5);
+        color: var(--color-dark);
+    }
+
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    :root {
+        --font-size-h1: 56px;
+        --font-size-h2: 42px;
+        --font-size-h3: 36px;
+        --font-size-h4: 28px;
+        --font-size-h5: 22px;
+        --font-size-h6: 15px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 12px;
+        --padding-lg: 18px;
+        --padding-xl: 24px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 0.9px;
+    }
+
+    /* Card Container */
+    .card {
+        background-color: var(--color-light);
+
+        padding: var(--padding-xl) var(--padding-xl);
+        text-align: left;
+        max-width: 375px;
+
+        font-family: var(--font-primary);
+    }
+
+    .card img {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: 0;
+        padding-top: var(--padding-lg) 0;
+    }
+
+    /* Card Text */
+    .card-text {
+        font-size: var(--font-size-h6);
+        color: var(--color-dark);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        padding: var(--padding-md) 0;
+    }
+
+    /* Learn More Link */
+    .card-link {
+        display: inline-block;
+        margin-top: var(--padding-md);
+        text-decoration: none;
+        color: var(--color-primary);
+        letter-spacing: var(--letter-spacing-sm);
+        font-size: var(--font-size-h5);
+        color: var(--color-dark);
+    }
+
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+
+}
+
+/* Medium Devices / iPad Portrait (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    :root {
+        --font-size-h1: 60px;
+        --font-size-h2: 44px;
+        --font-size-h3: 36px;
+        --font-size-h4: 30px;
+        --font-size-h5: 26px;
+        --font-size-h6: 18px;
+        --padding-xs: 3px;
+        --padding-sm: 7px;
+        --padding-md: 14px;
+        --padding-lg: 21px;
+        --padding-xl: 28px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 1px;
+    }
+
+    /* Card Container */
+    .card {
+        background-color: var(--color-light);
+
+        padding: var(--padding-xl) var(--padding-xl);
+        text-align: left;
+        max-width: 315px;
+
+        font-family: var(--font-primary);
+    }
+
+    .card img {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: 0;
+        padding-top: var(--padding-lg) 0;
+    }
+
+    /* Card Text */
+    .card-text {
+        font-size: var(--font-size-h6);
+        color: var(--color-dark);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        padding: var(--padding-md) 0;
+    }
+
+    /* Learn More Link */
+    .card-link {
+        display: inline-block;
+        margin-top: var(--padding-md);
+        text-decoration: none;
+        color: var(--color-primary);
+        letter-spacing: var(--letter-spacing-sm);
+        font-size: var(--font-size-h5);
+        color: var(--color-dark);
+    }
+
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+
+}
+
+/* iPad Landscape (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    :root {
+        --font-size-h1: 62px;
+        --font-size-h2: 46px;
+        --font-size-h3: 38px;
+        --font-size-h4: 30px;
+        --font-size-h5: 22px;
+        --font-size-h6: 14px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 14px;
+        --padding-lg: 22px;
+        --padding-xl: 28px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 0.8px;
+    }
+
+    /* Card Container */
+    .card {
+        background-color: var(--color-light);
+
+        padding: var(--padding-xl) var(--padding-xl);
+        text-align: left;
+        max-width: 300px;
+
+        font-family: var(--font-primary);
+    }
+
+    .card img {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: 0;
+        padding-top: var(--padding-lg) 0;
+    }
+
+    /* Card Text */
+    .card-text {
+        font-size: var(--font-size-h6);
+        color: var(--color-dark);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        padding: var(--padding-md) 0;
+    }
+
+    /* Learn More Link */
+    .card-link {
+        display: inline-block;
+        margin-top: var(--padding-md);
+        text-decoration: none;
+        color: var(--color-primary);
+        letter-spacing: var(--letter-spacing-sm);
+        font-size: var(--font-size-h5);
+        color: var(--color-dark);
+    }
+
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+
+
+}
+
+/* Laptops (1200px to 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    :root {
+        --font-size-h1: 62px;
+        --font-size-h2: 46px;
+        --font-size-h3: 38px;
+        --font-size-h4: 30px;
+        --font-size-h5: 22px;
+        --font-size-h6: 14px;
+        --padding-xs: 3px;
+        --padding-sm: 7px;
+        --padding-md: 14px;
+        --padding-lg: 22px;
+        --padding-xl: 30px;
+        --letter-spacing-lg: 3.8px;
+        --letter-spacing-sm: 0.9px;
+    }
+
+    /* Card Container */
+    .card {
+        background-color: var(--color-light);
+
+        padding: var(--padding-xl) var(--padding-xl);
+        text-align: left;
+        max-width: 300px;
+
+        font-family: var(--font-primary);
+    }
+
+    .card img {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: 0;
+        padding-top: var(--padding-lg) 0;
+    }
+
+    /* Card Text */
+    .card-text {
+        font-size: var(--font-size-h6);
+        color: var(--color-dark);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        padding: var(--padding-md) 0;
+    }
+
+    /* Learn More Link */
+    .card-link {
+        display: inline-block;
+        margin-top: var(--padding-md);
+        text-decoration: none;
+        color: var(--color-primary);
+        letter-spacing: var(--letter-spacing-sm);
+        font-size: var(--font-size-h5);
+        color: var(--color-dark);
+    }
+
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+
+}

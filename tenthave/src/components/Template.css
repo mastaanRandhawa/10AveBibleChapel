@@ -35,9 +35,6 @@
     --letter-spacing-md: 2px;
     --letter-spacing-lg: 4px;
 
-    /* Header & Navbar Specific */
-    --padding-header: var(--padding-md);
-    --margin-menu-items: 30px;
 }
 
 /* Responsive Media Queries */
