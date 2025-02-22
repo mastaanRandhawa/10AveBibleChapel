@@ -138,7 +138,7 @@
         letter-spacing: var(--letter-spacing-sm);
         padding: var(--padding-md) var(--padding-xl);
         border: none;
-        border-radius: 12px;
+        border-radius: 2px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         display: inline-block;
@@ -205,7 +205,7 @@
         letter-spacing: var(--letter-spacing-sm);
         padding: var(--padding-md) var(--padding-xl);
         border: none;
-        border-radius: 12px;
+        border-radius: 2px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         display: inline-block;
@@ -272,7 +272,7 @@
         letter-spacing: var(--letter-spacing-sm);
         padding: var(--padding-md) var(--padding-xl);
         border: none;
-        border-radius: 12px;
+        border-radius: 3px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         display: inline-block;
@@ -339,7 +339,7 @@
         letter-spacing: var(--letter-spacing-sm);
         padding: var(--padding-md) var(--padding-xl);
         border: none;
-        border-radius: 12px;
+        border-radius: 3px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         display: inline-block;
@@ -406,7 +406,7 @@
         letter-spacing: var(--letter-spacing-sm);
         padding: var(--padding-md) var(--padding-xl);
         border: none;
-        border-radius: 12px;
+        border-radius: 4px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         display: inline-block;
@@ -474,7 +474,7 @@
         letter-spacing: var(--letter-spacing-sm);
         padding: var(--padding-md) var(--padding-xl);
         border: none;
-        border-radius: 12px;
+        border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         display: inline-block;

@@ -22,7 +22,6 @@
     --font-weight-bold: 600;
     --font-weight-regular: 400;
 
-
     /* Spacing (Padding & Margins) */
     --padding-xs: 4px;
     --padding-sm: 8px;
@@ -36,44 +35,38 @@
     --letter-spacing-md: 2px;
     --letter-spacing-lg: 4px;
 
-    /* Border Radius */
-    --border-radius: 12px;
-    /* Box Shadow */
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Card Container */
-.card {
+/* specialCard Container */
+.specialCard {
     background-color: var(--color-light);
-    border: 2px solid var(--color-primary);
-    border-bottom: 15px solid var(--color-primary);
     padding: var(--padding-xl) var(--padding-xl);
+    display: flex;
+    flex-direction: column;
+    /* Stack elements vertically */
+    justify-content: flex-end;
+    /* Move text to bottom */
+    align-items: flex-start;
+    /* Align text to the left */
     text-align: left;
-    max-width: 400px;
-
+    max-width: 20%;
+    height: 500px;
     font-family: var(--font-primary);
 }
 
-.card img {
-    width: 40px;
-    height: 40px;
-    margin: 0;
-    padding-top: 0;
-}
-
-/* Card Title */
-.card-title {
+/* specialCard Title */
+.specialCard-title {
     font-size: var(--font-size-h4);
     font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
+    color: var(--color-light);
     margin: 0;
     padding-top: var(--padding-lg) 0;
 }
 
-/* Card Text */
-.card-text {
+/* specialCard Text */
+.specialCard-text {
     font-size: var(--font-size-h6);
-    color: var(--color-dark);
+    color: var(--color-light);
     font-weight: var(--font-weight-regular);
     margin: 0;
     padding: var(--padding-md) 0;
@@ -99,55 +92,39 @@
         --letter-spacing-sm: 0.5px;
     }
 
-    /* Card Container */
-    .card {
+    /* specialCard Container */
+    .specialCard {
         background-color: var(--color-light);
         padding: var(--padding-xl) var(--padding-xl);
+        display: flex;
+        flex-direction: column;
+        /* Stack elements vertically */
+        justify-content: flex-end;
+        /* Move text to bottom */
+        align-items: flex-start;
+        /* Align text to the left */
         text-align: left;
-        max-width: 400px;
-
+        max-width: 80%;
+        height: 150px;
         font-family: var(--font-primary);
     }
 
-    .card img {
-        width: 30px;
-        height: 30px;
-        margin: 0;
-        padding-top: 0;
-    }
-
-    /* Card Title */
-    .card-title {
-        font-size: var(--font-size-h5);
+    /* specialCard Title */
+    .specialCard-title {
+        font-size: var(--font-size-h4);
         font-weight: var(--font-weight-bold);
-        color: var(--color-dark);
+        color: var(--color-light);
         margin: 0;
         padding-top: var(--padding-lg) 0;
     }
 
-    /* Card Text */
-    .card-text {
+    /* specialCard Text */
+    .specialCard-text {
         font-size: var(--font-size-h6);
-        color: var(--color-dark);
+        color: var(--color-light);
         font-weight: var(--font-weight-regular);
         margin: 0;
         padding: var(--padding-md) 0;
-    }
-
-    /* Learn More Link */
-    .card-link {
-        display: inline-block;
-        margin-top: var(--padding-md);
-        text-decoration: none;
-        color: var(--color-primary);
-        letter-spacing: var(--letter-spacing-sm);
-        font-size: var(--font-size-h5);
-        color: var(--color-dark);
-    }
-
-
-    .card-link:hover {
-        text-decoration: underline;
     }
 
 }
@@ -170,56 +147,39 @@
         --letter-spacing-sm: 0.8px;
     }
 
-    /* Card Container */
-    .card {
+    /* specialCard Container */
+    .specialCard {
         background-color: var(--color-light);
-
         padding: var(--padding-xl) var(--padding-xl);
+        display: flex;
+        flex-direction: column;
+        /* Stack elements vertically */
+        justify-content: flex-end;
+        /* Move text to bottom */
+        align-items: flex-start;
+        /* Align text to the left */
         text-align: left;
-        max-width: 350px;
-
+        max-width: 80%;
+        height: 175px;
         font-family: var(--font-primary);
     }
 
-    .card img {
-        width: 30px;
-        height: 30px;
-        margin: 0;
-        padding-top: 0;
-    }
-
-    /* Card Title */
-    .card-title {
-        font-size: var(--font-size-h5);
+    /* specialCard Title */
+    .specialCard-title {
+        font-size: var(--font-size-h4);
         font-weight: var(--font-weight-bold);
-        color: var(--color-dark);
+        color: var(--color-light);
         margin: 0;
         padding-top: var(--padding-lg) 0;
     }
 
-    /* Card Text */
-    .card-text {
+    /* specialCard Text */
+    .specialCard-text {
         font-size: var(--font-size-h6);
-        color: var(--color-dark);
+        color: var(--color-light);
         font-weight: var(--font-weight-regular);
         margin: 0;
         padding: var(--padding-md) 0;
-    }
-
-    /* Learn More Link */
-    .card-link {
-        display: inline-block;
-        margin-top: var(--padding-md);
-        text-decoration: none;
-        color: var(--color-primary);
-        letter-spacing: var(--letter-spacing-sm);
-        font-size: var(--font-size-h5);
-        color: var(--color-dark);
-    }
-
-
-    .card-link:hover {
-        text-decoration: underline;
     }
 
 }
@@ -242,56 +202,39 @@
         --letter-spacing-sm: 0.9px;
     }
 
-    /* Card Container */
-    .card {
+    /* specialCard Container */
+    .specialCard {
         background-color: var(--color-light);
-
         padding: var(--padding-xl) var(--padding-xl);
+        display: flex;
+        flex-direction: column;
+        /* Stack elements vertically */
+        justify-content: flex-end;
+        /* Move text to bottom */
+        align-items: flex-start;
+        /* Align text to the left */
         text-align: left;
-        max-width: 375px;
-
+        max-width: 80%;
+        height: 200px;
         font-family: var(--font-primary);
     }
 
-    .card img {
-        width: 40px;
-        height: 40px;
-        margin: 0;
-        padding-top: 0;
-    }
-
-    /* Card Title */
-    .card-title {
-        font-size: var(--font-size-h5);
+    /* specialCard Title */
+    .specialCard-title {
+        font-size: var(--font-size-h4);
         font-weight: var(--font-weight-bold);
-        color: var(--color-dark);
+        color: var(--color-light);
         margin: 0;
         padding-top: var(--padding-lg) 0;
     }
 
-    /* Card Text */
-    .card-text {
+    /* specialCard Text */
+    .specialCard-text {
         font-size: var(--font-size-h6);
-        color: var(--color-dark);
+        color: var(--color-light);
         font-weight: var(--font-weight-regular);
         margin: 0;
         padding: var(--padding-md) 0;
-    }
-
-    /* Learn More Link */
-    .card-link {
-        display: inline-block;
-        margin-top: var(--padding-md);
-        text-decoration: none;
-        color: var(--color-primary);
-        letter-spacing: var(--letter-spacing-sm);
-        font-size: var(--font-size-h5);
-        color: var(--color-dark);
-    }
-
-
-    .card-link:hover {
-        text-decoration: underline;
     }
 
 }
@@ -314,56 +257,39 @@
         --letter-spacing-sm: 1px;
     }
 
-    /* Card Container */
-    .card {
+    /* specialCard Container */
+    .specialCard {
         background-color: var(--color-light);
-
         padding: var(--padding-xl) var(--padding-xl);
+        display: flex;
+        flex-direction: column;
+        /* Stack elements vertically */
+        justify-content: flex-end;
+        /* Move text to bottom */
+        align-items: flex-start;
+        /* Align text to the left */
         text-align: left;
-        max-width: 315px;
-
+        max-width: 80%;
+        height: 215px;
         font-family: var(--font-primary);
     }
 
-    .card img {
-        width: 40px;
-        height: 40px;
-        margin: 0;
-        padding-top: 0;
-    }
-
-    /* Card Title */
-    .card-title {
-        font-size: var(--font-size-h5);
+    /* specialCard Title */
+    .specialCard-title {
+        font-size: var(--font-size-h4);
         font-weight: var(--font-weight-bold);
-        color: var(--color-dark);
+        color: var(--color-light);
         margin: 0;
         padding-top: var(--padding-lg) 0;
     }
 
-    /* Card Text */
-    .card-text {
+    /* specialCard Text */
+    .specialCard-text {
         font-size: var(--font-size-h6);
-        color: var(--color-dark);
+        color: var(--color-light);
         font-weight: var(--font-weight-regular);
         margin: 0;
         padding: var(--padding-md) 0;
-    }
-
-    /* Learn More Link */
-    .card-link {
-        display: inline-block;
-        margin-top: var(--padding-md);
-        text-decoration: none;
-        color: var(--color-primary);
-        letter-spacing: var(--letter-spacing-sm);
-        font-size: var(--font-size-h5);
-        color: var(--color-dark);
-    }
-
-
-    .card-link:hover {
-        text-decoration: underline;
     }
 
 }
@@ -386,56 +312,39 @@
         --letter-spacing-sm: 0.8px;
     }
 
-    /* Card Container */
-    .card {
+    /* specialCard Container */
+    .specialCard {
         background-color: var(--color-light);
-
         padding: var(--padding-xl) var(--padding-xl);
+        display: flex;
+        flex-direction: column;
+        /* Stack elements vertically */
+        justify-content: flex-end;
+        /* Move text to bottom */
+        align-items: flex-start;
+        /* Align text to the left */
         text-align: left;
-        max-width: 300px;
-
+        max-width: 80%;
+        height: 250px;
         font-family: var(--font-primary);
     }
 
-    .card img {
-        width: 40px;
-        height: 40px;
-        margin: 0;
-        padding-top: 0;
-    }
-
-    /* Card Title */
-    .card-title {
-        font-size: var(--font-size-h5);
+    /* specialCard Title */
+    .specialCard-title {
+        font-size: var(--font-size-h4);
         font-weight: var(--font-weight-bold);
-        color: var(--color-dark);
+        color: var(--color-light);
         margin: 0;
         padding-top: var(--padding-lg) 0;
     }
 
-    /* Card Text */
-    .card-text {
+    /* specialCard Text */
+    .specialCard-text {
         font-size: var(--font-size-h6);
-        color: var(--color-dark);
+        color: var(--color-light);
         font-weight: var(--font-weight-regular);
         margin: 0;
         padding: var(--padding-md) 0;
-    }
-
-    /* Learn More Link */
-    .card-link {
-        display: inline-block;
-        margin-top: var(--padding-md);
-        text-decoration: none;
-        color: var(--color-primary);
-        letter-spacing: var(--letter-spacing-sm);
-        font-size: var(--font-size-h5);
-        color: var(--color-dark);
-    }
-
-
-    .card-link:hover {
-        text-decoration: underline;
     }
 
 
@@ -459,56 +368,38 @@
         --letter-spacing-sm: 0.9px;
     }
 
-    /* Card Container */
-    .card {
+    /* specialCard Container */
+    .specialCard {
         background-color: var(--color-light);
-
         padding: var(--padding-xl) var(--padding-xl);
-        text-align: left;
-        max-width: 300px;
-
+        display: flex;
+        flex-direction: column;
+        /* Stack elements vertically */
+        justify-content: flex-end;
+        /* Move text to bottom */
+        align-items: flex-start;
+        /* Align text to the left */
+        max-width: 80%;
+        height: 300px;
         font-family: var(--font-primary);
     }
 
-    .card img {
-        width: 40px;
-        height: 40px;
-        margin: 0;
-        padding-top: 0;
-    }
-
-    /* Card Title */
-    .card-title {
-        font-size: var(--font-size-h5);
+    /* specialCard Title */
+    .specialCard-title {
+        font-size: var(--font-size-h4);
         font-weight: var(--font-weight-bold);
-        color: var(--color-dark);
+        color: var(--color-light);
         margin: 0;
         padding-top: var(--padding-lg) 0;
     }
 
-    /* Card Text */
-    .card-text {
+    /* specialCard Text */
+    .specialCard-text {
         font-size: var(--font-size-h6);
-        color: var(--color-dark);
+        color: var(--color-light);
         font-weight: var(--font-weight-regular);
         margin: 0;
         padding: var(--padding-md) 0;
-    }
-
-    /* Learn More Link */
-    .card-link {
-        display: inline-block;
-        margin-top: var(--padding-md);
-        text-decoration: none;
-        color: var(--color-primary);
-        letter-spacing: var(--letter-spacing-sm);
-        font-size: var(--font-size-h5);
-        color: var(--color-dark);
-    }
-
-
-    .card-link:hover {
-        text-decoration: underline;
     }
 
 }

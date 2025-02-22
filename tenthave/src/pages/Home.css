@@ -84,16 +84,23 @@
     padding-left: var(--padding-lg);
 }
 
-.weeklyServices h2{
+.weeklyServices {
+    padding: var(--padding-xl) var(--padding-md);
+    text-align: center;
+}
+
+.weeklyServices h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
     color: var(--color-dark);
 }
 
-.weeklyServices {
-    padding: var(--padding-xl) var(--padding-md);
-    text-align: center;
+.weeklyServices p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
 }
+
 
 .weeklyServicesCard {
     display: flex;
@@ -104,6 +111,71 @@
     /* Makes it responsive */
     padding: var(--padding-lg);
 }
+
+.specialServices {
+    padding: var(--padding-xl) var(--padding-md);
+    margin: var(--padding-xl) var(--padding-md);
+    text-align: center;
+    background-color: var(--color-light);
+}
+
+.specialServices img {
+    width: 60%;
+    height: auto;
+}
+
+.specialServices h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    color: var(--color-dark);
+}
+
+.textServices {
+    width: 75%;
+    margin: auto;
+}
+
+
+.textJohn {
+    width: 75%;
+    margin: auto;
+}
+
+.textJohn p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    letter-spacing: var(--letter-spacing-lg);
+    color: var(--color-dark);
+}
+
+.learnAboutUs {
+    width: 45%;
+    margin: auto;
+    text-align: center;
+}
+
+.learnAboutUs h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    color: var(--color-dark);
+}
+
+.learnAboutUs p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
+}
+
+.specialServicesCard {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    /* Space between cards */
+    flex-wrap: wrap;
+    /* Makes it responsive */
+    padding: var(--padding-lg);
+}
+
 
 /* Responsive Media Queries */
 
@@ -189,6 +261,17 @@
         /* Makes it responsive */
         padding: var(--padding-lg);
     }
+
+    .specialServices img {
+        width: 80%;
+        height: auto;
+    }
+
+    .learnAboutUs {
+        width: 90%;
+        margin: auto;
+        text-align: center;
+    }
 }
 
 /* Extra Small Devices (376px to 575.98px) */
@@ -270,6 +353,17 @@
         flex-wrap: wrap;
         /* Makes it responsive */
         padding: var(--padding-lg);
+    }
+
+    .specialServices img {
+        width: 80%;
+        height: auto;
+    }
+
+    .learnAboutUs {
+        width: 90%;
+        margin: auto;
+        text-align: center;
     }
 }
 
@@ -353,6 +447,17 @@
         /* Makes it responsive */
         padding: var(--padding-lg);
     }
+
+    .specialServices img {
+        width: 80%;
+        height: auto;
+    }
+
+    .learnAboutUs {
+        width: 90%;
+        margin: auto;
+        text-align: center;
+    }
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
@@ -434,6 +539,12 @@
         flex-wrap: wrap;
         /* Makes it responsive */
         padding: var(--padding-lg);
+    }
+
+    .learnAboutUs {
+        width: 90%;
+        margin: auto;
+        text-align: center;
     }
 }
 
@@ -517,6 +628,12 @@
         /* Makes it responsive */
         padding: var(--padding-lg);
     }
+
+    .learnAboutUs {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+    }
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -598,5 +715,11 @@
         flex-wrap: wrap;
         /* Makes it responsive */
         padding: var(--padding-lg);
+    }
+
+    .learnAboutUs {
+        width: 75%;
+        margin: auto;
+        text-align: center;
     }
 }
