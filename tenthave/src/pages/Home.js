@@ -13,7 +13,6 @@ import sundaySchool from '../assets/sundaySchool.png'
 import spanishStudy from '../assets/spanishBible.png'
 import eslPNG from '../assets/ESL.png'
 
-
 function HeroSection() {
   return (
     <>
