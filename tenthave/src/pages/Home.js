@@ -28,6 +28,7 @@ function HeroSection() {
         </div>
       </section>
 
+
       <section className="weeklyServices">
         <div className="textServices">
           <h2>WEEKLEY SERVICES</h2>
