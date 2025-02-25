@@ -28,19 +28,26 @@ function Footer() {
 
             {/* Middle Section: Quick Links */}
             <div className="footer-links">
-                <h4>Quicklinks</h4>
+                <h4>QUICKLINKS</h4>
                 <ul>
                     <li>
-                        <Link to="/about" closeButton>About Us</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/sermon" closeButton>Sermons</Link>
+                        <Link to="/bulletin">Bulletin</Link>
                     </li>
                     <li>
-                        <Link to="/prayers" closeButton>Prayers</Link>
+                        <Link to="/sermon">Sermons</Link>
                     </li>
                     <li>
-                        <Link to="/contact" closeButton>Contact Us</Link> </li>
+                        <Link to="/prayers">Members</Link>
+                    </li>
+                    <li>
+                        <Link to="/contact">Contact Us</Link>
+                    </li>
+                    <li>
+                        <Link to="/about">About Us</Link>
+                    </li>
                 </ul>
             </div>
 

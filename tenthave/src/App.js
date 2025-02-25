@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Sermon from "./pages/Sermon";
 import Prayers from "./pages/Prayers";
 import Contact from "./pages/Contact";
+import Bulletin from "./pages/Bulletin";
 import Header from "./components/Header";
 import Footer from "./components/Footer"
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/bulletin" element={<Bulletin />} />
         <Route path="/sermon" element={<Sermon />} />
         <Route path="/prayers" element={<Prayers />} />
         <Route path="/contact" element={<Contact />} />

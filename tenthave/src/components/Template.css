@@ -21,6 +21,8 @@
     /* Font Weights */
     --font-weight-bold: 600;
     --font-weight-regular: 400;
+    
+    --margin-in-between: 10%;
 
     /* Spacing (Padding & Margins) */
     --padding-xs: 4px;
@@ -35,6 +37,28 @@
     --letter-spacing-md: 2px;
     --letter-spacing-lg: 4px;
 
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Initial state before scrolling */
+.scroll-reveal {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Class added by JavaScript when element is in viewport */
+.scroll-reveal.visible {
+    opacity: 1;
 }
 
 /* Responsive Media Queries */

@@ -77,7 +77,7 @@
 .navLinks {
     list-style: none;
     display: flex;
-    gap: var(--padding-xl);
+    gap: var(--padding-md);
     padding: 0 var(--padding-xl);
     margin: 0;
     border-left: 1px solid var(--color-dark);

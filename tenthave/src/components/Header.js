@@ -22,26 +22,28 @@ function Header() {
                     </Link>
                 </div>
 
-                <div className="rightSide">
+                <div>
                     <button className="burger" onClick={toggleMenu}>
                         <img src={BurgerIcon} alt="Menu" />
                     </button>
-                    {/* Combine the original styling with the new "navLinks" class for mobile */}
                     <ul className={`navLinks ${menuActive ? "open" : ""}`}>
                         <li>
                             <Link to="/" onClick={toggleMenu}>HOME</Link>
                         </li>
                         <li>
-                            <Link to="/about" onClick={toggleMenu}>ABOUT US</Link>
+                            <Link to="/bulletin" onClick={toggleMenu}>BULLETIN</Link>
                         </li>
                         <li>
-                            <Link to="/sermon" onClick={toggleMenu}>SERMON</Link>
+                            <Link to="/sermon" onClick={toggleMenu}>SERMONS</Link>
                         </li>
                         <li>
-                            <Link to="/prayers" onClick={toggleMenu}>PRAYERS</Link>
+                            <Link to="/prayers" onClick={toggleMenu}>MEMBERS</Link>
                         </li>
                         <li>
                             <Link to="/contact" onClick={toggleMenu}>CONTACT US</Link>
+                        </li>
+                        <li>
+                            <Link to="/about" onClick={toggleMenu}>ABOUT US</Link>
                         </li>
                         <li className="closeButton" onClick={toggleMenu}>
                             <img src={CloseIcon} alt="Menu" />

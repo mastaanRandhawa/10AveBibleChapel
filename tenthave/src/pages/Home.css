@@ -17,6 +17,7 @@
     --font-size-h4: 32px;
     --font-size-h5: 24px;
     --font-size-h6: 16px;
+    --margin-in-between: 10%;
 
     /* Font Weights */
     --font-weight-bold: 600;
@@ -138,7 +139,10 @@
 
 .textJohn {
     width: 75%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--margin-in-between);
+    margin-bottom: var(--margin-in-between);
 }
 
 .textJohn p {
@@ -174,11 +178,38 @@
     flex-wrap: wrap;
     /* Makes it responsive */
     padding: var(--padding-lg);
+    margin-bottom: var(--margin-in-between);
+}
+
+.specialMinistriesHeading {
+    margin-top: var(--margin-in-between);
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Initial state before scrolling */
+.scroll-reveal {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Class added by JavaScript when element is in viewport */
+.scroll-reveal.visible {
+    opacity: 1;
 }
 
 
-/* Responsive Media Queries */
 
+/* Responsive Media Queries */
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
     :root {
@@ -195,6 +226,7 @@
         --padding-xl: 16px;
         --letter-spacing-lg: 2px;
         --letter-spacing-sm: 0.5px;
+        --margin-in-between: 15%;
     }
 
     .hero {
@@ -290,6 +322,7 @@
         --padding-xl: 24px;
         --letter-spacing-lg: 3px;
         --letter-spacing-sm: 0.8px;
+        --margin-in-between: 15%;
     }
 
     .hero {
@@ -383,6 +416,7 @@
         --padding-xl: 24px;
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.9px;
+        --margin-in-between: 15%;
     }
 
     .hero {
@@ -476,6 +510,7 @@
         --padding-xl: 28px;
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 1px;
+        --margin-in-between: 15%;
     }
 
     .hero {
@@ -564,6 +599,7 @@
         --padding-xl: 28px;
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.8px;
+
     }
 
     .hero {
@@ -652,6 +688,7 @@
         --padding-xl: 30px;
         --letter-spacing-lg: 3.8px;
         --letter-spacing-sm: 0.9px;
+
     }
 
     .hero {
