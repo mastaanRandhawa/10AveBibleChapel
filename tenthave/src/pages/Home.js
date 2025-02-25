@@ -31,7 +31,7 @@ function HeroSection() {
 
       <section className="weeklyServices">
         <div className="textServices">
-          <h2>WEEKLEY SERVICES</h2>
+          <h2>WEEKLY SERVICES</h2>
           <p>Services at the chapel are at the times and days indicated below. You can also join virtually by clicking on the desired service at the day and time indicated to be connected via Zoom. All are welcome. If you have any further questions please contact us.</p>
         </div>
 
