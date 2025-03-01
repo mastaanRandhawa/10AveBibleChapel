@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Button from "../components/Button"
 import Card from "../components/Card"
 import SpecialCard from "../components/SpecialCard";
+import SermonCard from "../components/SermonCard";
 
 import "./Home.css";
 
@@ -13,6 +14,7 @@ import churchTriPicture from '../assets/churchTriPhoto.svg'
 import sundaySchool from '../assets/sundaySchool.png'
 import spanishStudy from '../assets/spanishBible.png'
 import eslPNG from '../assets/ESL.png'
+import sermonCardImg from '../assets/sermonCardImg.svg'
 
 function HeroSection() {
   // Effect to handle scrolling animations
@@ -33,7 +35,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <>
+    <div className="wrapperMAIN">
       <section className="hero scroll-reveal">
         <div className="hero-overlay">
           <h2 className="hero-subtitle ">WELCOME TO OUR CHURCH</h2>
@@ -50,7 +52,7 @@ function HeroSection() {
       <section className="weeklyServices">
         <div className="textServices scroll-reveal">
           <h2>WEEKLY SERVICES</h2>
-          <p>Services at the chapel are at the times and days indicated below. You can also join virtually by clicking on the desired service at the day and time indicated to be connected via Zoom. All are welcome. If you have any further questions please contact us.</p>
+          {/* <p>Services at the chapel are at the times and days indicated below. You can also join virtually by clicking on the desired service at the day and time indicated to be connected via Zoom. All are welcome. If you have any further questions please contact us.</p> */}
         </div>
 
         <div className="weeklyServicesCard scroll-reveal">
@@ -113,9 +115,21 @@ function HeroSection() {
           />
         </div>
       </section>
+      <section className="recordedSermon scroll-reveal">
+
+        <SermonCard
+          image={sermonCardImg}
+          link="https://www.yourchurchwebsite.com/sermon"
+          title="Watch and Listen to Our Sermons"
+          description="Join us in person or online through our sermons."
+          time={{ day: "Sunday", start: "11:30 AM", end: "12:30 PM" }}
+          location={{ address: "7103 - 10th Ave.", city: "Burnaby, BC", zip: "V3N 2R5" }}
+        />
+
+      </section>
 
 
-    </>
+    </div>
 
 
 

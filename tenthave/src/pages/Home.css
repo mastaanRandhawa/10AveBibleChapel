@@ -42,12 +42,14 @@
     width: 100%;
     height: auto;
     min-height: 80vh;
-    /* Change this to lower for lower device queries */
     background: url(../assets/churchPicture.svg) no-repeat center center/cover;
+    background-attachment: fixed;
+    /* This enables the parallax effect */
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
+
 
 .hero-overlay {
     padding: var(--padding-sm) var(--padding-md);
