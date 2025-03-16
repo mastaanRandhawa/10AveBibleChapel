@@ -23,7 +23,7 @@ const SermonEvent = ({ image, link, title, description, time, location }) => {
                         </div>
                     </div>
                 </div>
-                <Button variant="button-secondary" buttonText="JOIN US" buttonLink={link} />
+                <Button variant="button-secondary" buttonText="WATCH" buttonLink={link} />
             </div>
             <div className="sermon-event-image">
                 <img src={image} alt="Sermon Event" />

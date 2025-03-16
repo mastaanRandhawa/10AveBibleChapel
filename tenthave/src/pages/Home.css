@@ -43,8 +43,6 @@
     height: auto;
     min-height: 80vh;
     background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-    background-attachment: fixed;
-    /* This enables the parallax effect */
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -138,7 +136,6 @@
     margin: auto;
 }
 
-
 .textJohn {
     width: 75%;
     margin-left: auto;
@@ -185,6 +182,18 @@
 
 .specialMinistriesHeading {
     margin-top: var(--margin-in-between);
+}
+
+.recordedSermon {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sermonRecordingHeading {
+    margin-top: var(--margin-in-between);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    color: var(--color-dark);
 }
 
 /* Fade-in animation */

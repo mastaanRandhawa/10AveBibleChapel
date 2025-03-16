@@ -116,11 +116,11 @@ function HeroSection() {
         </div>
       </section>
       <section className="recordedSermon scroll-reveal">
-
+        <h2 className="sermonRecordingHeading scroll-reveal">RECORDED SERMONS</h2>
         <SermonCard
           image={sermonCardImg}
           link="https://www.yourchurchwebsite.com/sermon"
-          title="Watch and Listen to Our Sermons"
+          title="WATCH AND LISTEN TO OUR SERMONS"
           description="Join us in person or online through our sermons."
           time={{ day: "Sunday", start: "11:30 AM", end: "12:30 PM" }}
           location={{ address: "7103 - 10th Ave.", city: "Burnaby, BC", zip: "V3N 2R5" }}

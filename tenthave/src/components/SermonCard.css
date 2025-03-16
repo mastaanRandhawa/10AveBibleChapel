@@ -22,7 +22,7 @@
     --font-weight-bold: 600;
     --font-weight-regular: 400;
 
-    --margin-in-between: 10%;
+    --margin-in-between: 5%;
 
     /* Spacing (Padding & Margins) */
     --padding-xs: 4px;
@@ -60,86 +60,88 @@
     opacity: 1;
 }
 
-/* -- Sermon Event Layout -- */
+
+
+
+/* ------------------------------
+   Layout for the Sermon Event Card
+   ------------------------------ */
 .sermon-event-container {
-    font-family: var(--font-primary);
     display: flex;
-    align-items: stretch;
-    /* Ensures the image can fill the container’s height */
-    justify-content: space-between;
-    background-color: var(--color-light);
-    border-radius: 8px;
-    width: 100%;
     max-width: 1400px;
-    /* Adjust if you want a narrower max width */
-    margin: var(--padding-xl) auto;
+    margin: 0 auto;
+    background-color: var(--color-bg);
+    border-radius: 8px;
     overflow: hidden;
-    /* Hides any overflow if image is bigger than container */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sermon-event-content {
-    flex: 1 1 50%;
-    padding: var(--padding-xl);
+    /* Left panel for text */
+    width: 30%;
+    background-color: var(--color-light);
+    padding: var(--padding-xl) var(--margin-in-between);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: var(--font-primary);
 }
 
-.event-label {
-    color: var(--color-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-    margin-bottom: var(--padding-sm);
-}
-
-.event-title {
-    font-size: var(--font-size-h3);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
-    text-transform: uppercase;
-    margin-bottom: var(--padding-sm);
-}
-
-.event-description {
-    font-size: var(--font-size-h5);
-    color: var(--color-dark);
-    font-weight: var(--font-weight-regular);
-    margin-bottom: var(--padding-md);
-}
-
-.event-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-sm);
-    margin-bottom: var(--padding-lg);
-}
-
-.event-detail {
-    display: flex;
-    align-items: center;
-    gap: var(--padding-sm);
-    margin-bottom: var(--padding-sm);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    font-weight: var(--font-weight-regular);
-}
-
-/* -- Right-Side Image -- */
 .sermon-event-image {
-    flex: 1 80%;
-    width: 100%;
-    height: 100%;
+    /* Right panel for the image */
+    width: 70%;
+    position: relative;
 }
 
 .sermon-event-image img {
     width: 100%;
     height: 100%;
-    /* Fills the entire area with the image, cropping if needed */
-    border-radius: 0;
-    /* Remove border-radius if you want square corners on right side */
+    object-fit: cover;
+    display: block;
 }
+
+/* ------------------------------
+   Typography & Spacing
+   ------------------------------ */
+.event-label {
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-sm);
+    margin-bottom: var(--padding-sm);
+}
+
+.event-title {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-md);
+    line-height: 1.2;
+}
+
+.event-description {
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-md);
+    line-height: 1.6;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-md);
+    margin-bottom: var(--padding-md);
+}
+
+.event-detail p {
+    margin: 0;
+    color: var(--color-dark);
+    font-size: var(--font-size-h6);
+    line-height: 1.4;
+}
+
 
 /* -- Responsive Media Queries (original breakpoints) -- */
 
@@ -160,21 +162,6 @@
         --letter-spacing-lg: 2px;
         --letter-spacing-sm: 0.5px;
     }
-
-    .sermon-event-container {
-        flex-direction: column;
-        border-radius: 8px;
-    }
-
-    .sermon-event-content {
-        padding: var(--padding-md);
-    }
-
-    .sermon-event-image {
-        width: 100%;
-        height: auto;
-        /* Let’s fix a smaller height on tiny screens */
-    }
 }
 
 /* Extra Small Devices (376px to 575.98px) */
@@ -193,18 +180,6 @@
         --padding-xl: 24px;
         --letter-spacing-lg: 3px;
         --letter-spacing-sm: 0.8px;
-    }
-
-    .sermon-event-container {
-        flex-direction: column;
-    }
-
-    .sermon-event-content {
-        padding: var(--padding-md);
-    }
-
-    .sermon-event-image {
-        height: 300px;
     }
 }
 
@@ -225,18 +200,6 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.9px;
     }
-
-    .sermon-event-container {
-        flex-direction: column;
-    }
-
-    .sermon-event-content {
-        padding: var(--padding-md);
-    }
-
-    .sermon-event-image {
-        height: 350px;
-    }
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
@@ -255,18 +218,6 @@
         --padding-xl: 28px;
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 1px;
-    }
-
-    .sermon-event-container {
-        flex-direction: row;
-    }
-
-    .sermon-event-content {
-        padding: var(--padding-lg);
-    }
-
-    .sermon-event-image {
-        height: auto;
     }
 }
 
@@ -287,14 +238,6 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.8px;
     }
-
-    .sermon-event-content {
-        padding: var(--padding-lg);
-    }
-
-    .sermon-event-image {
-        height: auto;
-    }
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -313,13 +256,5 @@
         --padding-xl: 30px;
         --letter-spacing-lg: 3.8px;
         --letter-spacing-sm: 0.9px;
-    }
-
-    .sermon-event-content {
-        padding: var(--padding-lg);
-    }
-
-    .sermon-event-image {
-        height: auto;
     }
 }
