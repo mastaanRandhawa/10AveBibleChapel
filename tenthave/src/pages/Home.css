@@ -48,7 +48,6 @@
     justify-content: flex-start;
 }
 
-
 .hero-overlay {
     padding: var(--padding-sm) var(--padding-md);
     color: var(--color-light);
