@@ -1,8 +1,8 @@
 import React from "react";
 import "../components/SermonCard.css";
-import Button from "../components/Button"
+import Button from "../components/Button2"
 
-const SermonEvent = ({ image, link, title, description, time}) => {
+const SermonEventExample = ({ image, link, title, description, time}) => {
     return (
         <div className="sermon-event-container">
             <div className="sermon-event-content">
@@ -16,7 +16,7 @@ const SermonEvent = ({ image, link, title, description, time}) => {
                             <p>{time.start} - {time.end}</p>
                         </div>
                     </div>
-                    <Button variant="button-secondary" buttonText="WATCH" buttonLink={link} />
+                    <Button variant="button-secondary" buttonText="VIEW ALL" buttonLink={link} />
                 </div>
             </div>
             <div className="sermon-event-image">
@@ -26,4 +26,4 @@ const SermonEvent = ({ image, link, title, description, time}) => {
     );
 };
 
-export default SermonEvent;
+export default SermonEventExample;

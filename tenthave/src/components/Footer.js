@@ -22,7 +22,7 @@ function Footer() {
                 <h4 className="footer-title">10TH AVE BIBLE CHAPEL</h4>
                 <p>© COPYRIGHT 10TH AVE 2025</p>
                 <p>(604) 524 - 5445</p>
-                <p>7103 - 10TH AVE., BURNABY, BC V3N 2R5</p>
+                <a href="https://maps.app.goo.gl/zK9QdwjhFSga1mCs9" target="_blank" rel="noreferrer"><p> 7103 - 10TH AVE., BURNABY, BC V3N 2R5</p></a>
                 <p>INFO@TENTHAVCHAPEL.COM</p>
             </div>
 

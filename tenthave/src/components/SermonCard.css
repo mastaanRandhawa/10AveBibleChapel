@@ -83,8 +83,6 @@
     width: 30%;
     background-color: var(--color-light);
     padding: var(--padding-sm) var(--margin-in-small);
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     font-family: var(--font-primary);
 }
@@ -108,26 +106,23 @@
 .event-label {
     text-transform: uppercase;
     color: var(--color-primary);
-    font-size: var(--font-size-h6);
+    font-size: var(--font-size-h5);
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing-sm);
-    margin-bottom: var(--padding-sm);
 }
 
 .event-title {
     font-size: var(--font-size-h4);
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
-    margin-bottom: 0;
     line-height: 1.2;
 }
 
 .event-description {
-    font-size: var(--font-size-h5);
+    font-size: var(--font-size-h4);
     font-weight: var(--font-weight-regular);
     color: var(--color-dark);
-    margin-bottom: var(--padding-md);
-    line-height: 1.6;
+    line-height: 1;
 }
 
 .event-details {
@@ -140,7 +135,7 @@
 .event-detail p {
     margin: 0;
     color: var(--color-dark);
-    font-size: var(--font-size-h5);
+    font-size: var(--font-size-h6);
     line-height: 1.4;
 }
 

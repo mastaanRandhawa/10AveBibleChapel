@@ -94,6 +94,15 @@
     color: var(--color-light);
 }
 
+a {
+    color: var(--color-light);
+}
+
+a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
 .subscribe-form {
     display: flex;
     align-items: start;

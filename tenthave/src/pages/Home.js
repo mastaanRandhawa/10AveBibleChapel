@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Button from "../components/Button"
 import Card from "../components/Card"
 import SpecialCard from "../components/SpecialCard";
-import SermonCard from "../components/SermonCard";
+import SermonCard from "../components/SermonCardExample";
 
 import "./Home.css";
 
@@ -79,7 +79,7 @@ function HeroSection() {
         </div>
         <div className="textJohn scroll-reveal">
           <h2>JOHN 3:16</h2>
-          <p>"FOR GOD SO LOVED THE WORLD THAT HE GAVE HIS ONLY BEGOTTEN SON, THAT WHOEVER BELIEVES IN HIM SHOULD NOT PERSIH BUT HAVE EVERLASTING LIFE."</p>
+          <p>"FOR GOD SO LOVED THE WORLD THAT HE GAVE HIS ONLY BEGOTTEN SON, THAT WHOEVER BELIEVES IN HIM SHOULD NOT PERISH BUT HAVE EVERLASTING LIFE."</p>
         </div>
       </section>
 
@@ -115,17 +115,16 @@ function HeroSection() {
           />
         </div>
       </section>
+
       <section className="recordedSermon scroll-reveal">
-        <h2 className="sermonRecordingHeading scroll-reveal">RECORDED SERMONS</h2>
+        <h2 className="sermonRecordingHeading scroll-reveal">RECENT SERMONS</h2>
         <SermonCard
           image={sermonCardImg}
-          link="https://www.yourchurchwebsite.com/sermon"
+          link="/sermon"
           title="WATCH AND LISTEN TO OUR SERMONS"
           description="Join us in person or online through our sermons."
           time={{ day: "Sunday", start: "11:30 AM", end: "12:30 PM" }}
-          location={{ address: "7103 - 10th Ave.", city: "Burnaby, BC", zip: "V3N 2R5" }}
         />
-
       </section>
 
 

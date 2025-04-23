@@ -4,6 +4,7 @@
     /* 🎨 Color Palette */
     --color-dark: #000000;
     --color-primary: #fbcb9c;
+    --color-lightish: #f6f0ea;
     --color-light: #f7f6f1;
     --color-bg: #ffffff;
 
@@ -115,9 +116,26 @@
 
 .specialServices {
     padding: var(--padding-xl) var(--padding-md);
+
     margin: var(--padding-xl) var(--padding-md);
+    padding-top: var(--margin-in-between);
     text-align: center;
-    background-color: var(--color-light);
+    /* background-color: var(--color-light);*/
+    /* stack a top and bottom gradient */
+    background-image:
+        /* top fade: white → light */
+        linear-gradient(to bottom, #ffffff, var(--color-lightish)),
+        /* bottom fade: white → light */
+        linear-gradient(to top, #ffffff, var(--color-lightish));
+    background-repeat: no-repeat;
+    background-position: top, bottom;
+    /* control the “thickness” of each fade */
+    background-size: 100% 80px,
+        /* top fade height */
+        100% 80px;
+    /* bottom fade height */
+    /* ensure the solid var color shows through the middle */
+    background-color: var(--color-lightish);
 }
 
 .specialServices img {
@@ -141,7 +159,6 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: var(--margin-in-between);
-    margin-bottom: var(--margin-in-between);
 }
 
 .textJohn p {
@@ -190,11 +207,14 @@
 }
 
 .sermonRecordingHeading {
+    /* margin-top: var(--margin-in-between); */
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
     color: var(--color-dark);
-    text-align: center; 
+    text-align: center;
 }
+
+
 
 /* Fade-in animation */
 @keyframes fadeInUp {
@@ -409,6 +429,7 @@
         margin: auto;
         text-align: center;
     }
+
 }
 
 /* Small Devices (576px to 767.98px) */
