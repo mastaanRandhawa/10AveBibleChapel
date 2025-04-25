@@ -6,7 +6,6 @@ const SermonEventExample = ({ image, link, title, description, time}) => {
     return (
         <div className="sermon-event-container">
             <div className="sermon-event-content">
-                <p className="event-label">UPCOMING EVENT</p>
                 <h2 className="event-title">{title}</h2>
                 <p className="event-description">{description}</p>
                 <div className="event-details">

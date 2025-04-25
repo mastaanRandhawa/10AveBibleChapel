@@ -3,8 +3,8 @@
 :root {
     /* 🎨 Color Palette */
     --color-dark: #000000;
-    --color-bl: #161722;
     --color-primary: #FBCB9C;
+    --color-lightish: #f6f0ea;
     --color-light: #F7F6F1;
     --color-bg: #FFFFFF;
 
@@ -23,6 +23,8 @@
     --font-weight-bold: 600;
     --font-weight-regular: 400;
 
+    --margin-in-between: 10%;
+
     /* Spacing (Padding & Margins) */
     --padding-xs: 4px;
     --padding-sm: 8px;
@@ -35,121 +37,125 @@
     --letter-spacing-sm: 1px;
     --letter-spacing-md: 2px;
     --letter-spacing-lg: 4px;
+
 }
 
 
-.footer {
-    background: var(--color-bl);
-    color: var(--color-light);
+.about-page-wrapper {
     font-family: var(--font-primary);
-    padding: var(--padding-lg) var(--padding-md);
-    gap: var(--padding-lg);
+    text-align: center;
 }
 
-/* Base Footer */
-.footerInside {
+.about-hero {
+    position: relative;
+    text-align: center;
+}
+
+.about-image {
+    margin-top: var(--padding-lg);
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+}
+
+.about-hero{
+    background: url(../assets/aboutus.avif) no-repeat center center/cover;
+    min-height: 80vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-dark);
 }
 
-/* Church Info */
-.footer-info .footer-title {
-    font-size: var(--font-size-h4);
-    color: var(--color-primary);
+.about-content {
+    padding: var(--padding-xl) var(--padding-lg);
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--color-dark);
+    margin-bottom: var(--margin-in-between);
 }
 
-.footer-info p,
-.footer-links p {
-    font-size: var(--font-size-h6);
+.who-we-are {
+    padding-bottom: var(--margin-in-between);
 }
 
-.footer-contact-item h3 {
+.section-heading {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+}
+
+.section-heading2 {
+    font-size: var(--font-size-h3);
+    padding-top: var(--margin-in-between);
+    font-weight: var(--font-weight-bold);
+}
+
+.about-content p {
     font-size: var(--font-size-h5);
+    line-height: 1.6;
+    margin-bottom: var(--padding-lg);
+
 }
 
-.footer-contact-item a {
-    display: block;
-    font-size: var(--font-size-h6);
-    color: var(--color-light);
-    text-decoration: none;
+.about-content blockquote {
+    margin: var(--padding-md) 0;
+    padding-left: var(--padding-md);
+    border-left: 4px solid var(--color-primary);
+    font-style: italic;
+    color: var(--color-dark);
 }
 
-.footer-contact-item a:hover {
-    color: var(--color-primary);
-    text-decoration: underline;
-}
-
-.footer-column {
-    margin: var(--padding-lg);
-}
-
-.social-icon {
-    width: 35px;
-    margin-right: var(--padding-sm);
-    vertical-align: middle;
-}
-
-.lineBreak {
-    width: 50%;
-    margin-left: 0;
-    margin-right: auto;
-    border: none;
-    border-bottom: 1px solid var(--color-light);
-}
-
-
-/* Quick Links */
-.footer-links h3 {
-    font-size: var(--font-size-h5);
-    margin-bottom: var(--padding-sm);
-}
-
-.footer-links ul {
-    list-style: none;
+.beliefs-list {
+    list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin-top: var(--padding-md);
 }
 
-.footer-links li {
-    margin: var(--padding-xs) 0;
+.beliefs-list li {
+    margin-bottom: var(--padding-lg);
+    margin-top: var(--padding-lg);
+    padding-bottom: var(--padding-lg);
+    padding-top: var(--padding-lg);
+    font-size: var(--font-size-h5);
 }
 
-.footer-links a {
-    font-size: var(--font-size-h6);
-    color: var(--color-light);
-    text-decoration: none;
+.beliefs-list li:nth-child(2n) {
+    background-color: var(--color-light);
 }
 
-.footer-links a:hover {
-    color: var(--color-primary);
-    text-decoration: underline;
+.about-content blockquote {
+    font-style: italic;
+    font-size: var(--font-size-h5);
+    border: none;
+    color: var(--color-dark);
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: var(--margin-in-between);
 }
 
-.lineBreak {
-    width: 60%;
-}
-
-/* Tablet (≥576px) */
-@media (min-width: 576px) {
-    .footer {
-        padding: var(--padding-lg) var(--padding-lg);
+/* Fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
     }
 
-    .footer-contact {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-}
-
-/* Desktop (≥992px) */
-@media (min-width: 992px) {
-    .footer {
-        padding: var(--padding-lg) 5%;
+    to {
+        opacity: 1;
     }
 }
+
+/* Initial state before scrolling */
+.scroll-reveal {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Class added by JavaScript when element is in viewport */
+.scroll-reveal.visible {
+    opacity: 1;
+}
+
+/* Responsive Media Queries */
 
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
@@ -169,9 +175,6 @@
         --letter-spacing-sm: 0.5px;
     }
 
-    .social-icon {
-        width: 22px;
-    }
 }
 
 /* Extra Small Devices (376px to 575.98px) */
@@ -192,9 +195,6 @@
         --letter-spacing-sm: 0.8px;
     }
 
-    .social-icon {
-        width: 24px;
-    }
 }
 
 /* Small Devices (576px to 767.98px) */
@@ -215,9 +215,6 @@
         --letter-spacing-sm: 0.9px;
     }
 
-    .social-icon {
-        width: 26px;
-    }
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
@@ -236,10 +233,6 @@
         --padding-xl: 28px;
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 1px;
-    }
-
-    .social-icon {
-        width: 24px;
     }
 
 }
@@ -262,9 +255,7 @@
         --letter-spacing-sm: 0.8px;
     }
 
-    .social-icon {
-        width: 26px;
-    }
+
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -283,10 +274,6 @@
         --padding-xl: 30px;
         --letter-spacing-lg: 3.8px;
         --letter-spacing-sm: 0.9px;
-    }
-
-    .social-icon {
-        width: 30px;
     }
 
 }
