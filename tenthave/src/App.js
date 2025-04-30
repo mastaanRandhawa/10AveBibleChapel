@@ -7,13 +7,13 @@ import Contact from "./pages/Contact";
 import Bulletin from "./pages/Bulletin";
 import Header from "./components/Header";
 import Footer from "./components/Footer"
+import ScrollToTop from "./pages/scrollToTop"; // Import the ScrollToTop component
 
 function App() {
   return (
     <Router>
+    <ScrollToTop /> {/* This will scroll to the top on every route change */}
       <Header /> {/* Navigation bar stays on all pages */}
-
-
 
       <Routes>
         <Route path="/" element={<Home />} />
