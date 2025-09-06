@@ -292,17 +292,71 @@ const PrayerRequestForm: React.FC = () => {
   );
 };
 
+// Prayer Statistics Component
+const PrayerStats: React.FC<{ requests: PrayerRequest[] }> = ({ requests }) => {
+  const totalRequests = requests.length;
+  const answeredRequests = requests.filter((r) => r.isAnswered).length;
+  const urgentRequests = requests.filter(
+    (r) => r.priority === "urgent" && !r.isAnswered
+  ).length;
+  const answeredPercentage =
+    totalRequests > 0
+      ? Math.round((answeredRequests / totalRequests) * 100)
+      : 0;
+
+  return (
+    <div className="prayer-stats">
+      <h2>Prayer Statistics</h2>
+      <div className="stats-grid">
+        <div className="stat-item">
+          <div className="stat-number">{totalRequests}</div>
+          <div className="stat-label">Total Requests</div>
+        </div>
+        <div className="stat-item">
+          <div className="stat-number">{answeredRequests}</div>
+          <div className="stat-label">Answered Prayers</div>
+        </div>
+        <div className="stat-item">
+          <div className="stat-number">{urgentRequests}</div>
+          <div className="stat-label">Urgent Requests</div>
+        </div>
+        <div className="stat-item">
+          <div className="stat-number">{answeredPercentage}%</div>
+          <div className="stat-label">Answered Rate</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Prayer Verses Component
 const PrayerVerses: React.FC = () => {
+  const verses = [
+    {
+      reference: "Matthew 18:20",
+      text: "For where two or three are gathered together in my name, there am I in the midst of them.",
+    },
+    {
+      reference: "Philippians 4:6-7",
+      text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+    },
+    {
+      reference: "James 5:16",
+      text: "Confess your faults one to another, and pray one for another, that ye may be healed. The effectual fervent prayer of a righteous man availeth much.",
+    },
+  ];
+
   return (
     <div className="prayer-verses">
-      <ScrollReveal className="textJohn">
-        <h2>MATTHEW 18:20</h2>
-        <p>
-          "For where two or three are gathered together in My name, I am there
-          in the midst of them."
-        </p>
-      </ScrollReveal>
+      <h2>Scripture for Prayer</h2>
+      <div className="verses-grid">
+        {verses.map((verse, index) => (
+          <div key={index} className="verse-card">
+            <blockquote>"{verse.text}"</blockquote>
+            <cite>— {verse.reference}</cite>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -339,6 +393,10 @@ const Prayers: React.FC = () => {
       <div className="prayers-content">
         <ScrollReveal className="prayer-form-section">
           <PrayerRequestForm />
+        </ScrollReveal>
+
+        <ScrollReveal className="prayer-stats-section">
+          <PrayerStats requests={prayerRequests} />
         </ScrollReveal>
 
         <ScrollReveal className="prayer-requests-section">

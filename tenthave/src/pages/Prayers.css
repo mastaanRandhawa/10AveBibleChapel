@@ -261,6 +261,57 @@
     font-style: italic;
 }
 
+/* Prayer Statistics Section */
+.prayer-stats-section {
+    margin: var(--padding-xl) 0;
+}
+
+.prayer-stats {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.prayer-stats h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-xl);
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--padding-lg);
+}
+
+.stat-item {
+    background: var(--color-light);
+    padding: var(--padding-lg);
+    border: 2px solid var(--color-primary);
+    text-align: center;
+}
+
+.stat-number {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--padding-sm);
+}
+
+.stat-label {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
 
 /* Prayer Verses Section */
 .prayer-verses-section {
@@ -268,32 +319,54 @@
 }
 
 .prayer-verses {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.textJohn {
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: var(--margin-in-between);
-}
-
-.textJohn h2 {
+.prayer-verses h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h3);
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
-    margin-bottom: var(--padding-lg);
+    margin-bottom: var(--padding-xl);
     text-align: center;
 }
 
-.textJohn p {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    letter-spacing: var(--letter-spacing-lg);
-    color: var(--color-dark);
+.verses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--padding-lg);
+}
+
+.verse-card {
+    background: var(--color-light);
+    padding: var(--padding-lg);
+    border: 2px solid var(--color-primary);
     text-align: center;
+}
+
+.verse-card blockquote {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: var(--padding-md);
+    border: none;
+    padding: 0;
+}
+
+.verse-card cite {
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
 }
 
 /* Filters and Search */
@@ -531,6 +604,13 @@
         min-width: auto;
     }
 
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .verses-grid {
+        grid-template-columns: 1fr;
+    }
 
     .prayer-badges {
         flex-direction: column;
