@@ -1,41 +1,61 @@
-/* Template-specific variables */
-:root {
-    --margin-in-between: 10%;
+/* Bulletin-specific variables */
+
+.bulletin-page-wrapper {
+    min-height: 100vh;
+    background-color: var(--color-light);
+    padding: var(--padding-xl) var(--padding-md);
 }
 
-/* Fade-in animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.bulletin-hero {
+    text-align: center;
+    margin-bottom: var(--padding-xl);
 }
 
-/* Initial state before scrolling */
-.scroll-reveal {
-    opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+.bulletin-hero h1 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-md);
 }
 
-/* Class added by JavaScript when element is in viewport */
-.scroll-reveal.visible {
-    opacity: 1;
+.bulletin-hero p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
 }
+
+.bulletin-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Calendar Section */
+.bulletin-calendar-section {
+    margin-bottom: var(--padding-xl);
+}
+
+.bulletin-calendar-section h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-xl);
+    text-align: center;
+}
+
 
 /* Responsive Media Queries */
 
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
     :root {
-        --font-size-h1: 28px;
-        --font-size-h2: 22px;
-        --font-size-h3: 18px;
-        --font-size-h4: 12px;
-        --font-size-h5: 10px;
-        --font-size-h6: 8px;
+        --font-size-h1: 32px;
+        --font-size-h2: 28px;
+        --font-size-h3: 24px;
+        --font-size-h4: 20px;
+        --font-size-h5: 16px;
+        --font-size-h6: 14px;
         --padding-xs: 2px;
         --padding-sm: 4px;
         --padding-md: 8px;
@@ -53,9 +73,9 @@
         --font-size-h1: 48px;
         --font-size-h2: 40px;
         --font-size-h3: 32px;
-        --font-size-h4: 24px;
-        --font-size-h5: 20px;
-        --font-size-h6: 14px;
+        --font-size-h4: 28px;
+        --font-size-h5: 22px;
+        --font-size-h6: 16px;
         --padding-xs: 3px;
         --padding-sm: 6px;
         --padding-md: 12px;
@@ -71,11 +91,11 @@
 @media (min-width: 576px) and (max-width: 767.98px) {
     :root {
         --font-size-h1: 56px;
-        --font-size-h2: 42px;
+        --font-size-h2: 44px;
         --font-size-h3: 36px;
-        --font-size-h4: 28px;
-        --font-size-h5: 22px;
-        --font-size-h6: 15px;
+        --font-size-h4: 30px;
+        --font-size-h5: 24px;
+        --font-size-h6: 18px;
         --padding-xs: 3px;
         --padding-sm: 6px;
         --padding-md: 12px;
@@ -91,11 +111,11 @@
 @media (min-width: 768px) and (max-width: 991.98px) {
     :root {
         --font-size-h1: 60px;
-        --font-size-h2: 44px;
-        --font-size-h3: 36px;
-        --font-size-h4: 30px;
+        --font-size-h2: 46px;
+        --font-size-h3: 38px;
+        --font-size-h4: 32px;
         --font-size-h5: 26px;
-        --font-size-h6: 18px;
+        --font-size-h6: 20px;
         --padding-xs: 3px;
         --padding-sm: 7px;
         --padding-md: 14px;
@@ -104,18 +124,17 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 1px;
     }
-
 }
 
 /* iPad Landscape (992px to 1199.98px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     :root {
         --font-size-h1: 62px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
+        --font-size-h2: 48px;
+        --font-size-h3: 40px;
+        --font-size-h4: 32px;
+        --font-size-h5: 24px;
+        --font-size-h6: 18px;
         --padding-xs: 3px;
         --padding-sm: 6px;
         --padding-md: 14px;
@@ -124,19 +143,17 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.8px;
     }
-
-
 }
 
 /* Laptops (1200px to 1399.98px) */
 @media (min-width: 1200px) and (max-width: 1399.98px) {
     :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
+        --font-size-h1: 64px;
+        --font-size-h2: 48px;
+        --font-size-h3: 40px;
+        --font-size-h4: 32px;
+        --font-size-h5: 24px;
+        --font-size-h6: 16px;
         --padding-xs: 3px;
         --padding-sm: 7px;
         --padding-md: 14px;
@@ -145,5 +162,4 @@
         --letter-spacing-lg: 3.8px;
         --letter-spacing-sm: 0.9px;
     }
-
 }

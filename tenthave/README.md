@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# 10th Avenue Bible Chapel Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive website for 10th Avenue Bible Chapel built with React and TypeScript.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **TypeScript**: Full TypeScript implementation for better type safety and developer experience
+- **Modular Architecture**: Clean, organized code structure with reusable components
+- **Responsive Design**: Mobile-first approach with modern UI/UX
+- **Scroll Animations**: Smooth scroll reveal animations throughout the site
+- **Modern React**: Built with React 19 and latest best practices
+- **Custom Hooks**: Reusable logic with custom hooks for scroll detection and animations
 
-### `npm start`
+## 📁 Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Button.tsx      # Button component with multiple variants
+│   ├── Card.tsx        # Service card component
+│   ├── Header.tsx      # Navigation header
+│   ├── Footer.tsx      # Site footer
+│   ├── ScrollReveal.tsx # Scroll animation wrapper
+│   └── ...
+├── pages/              # Page components
+│   ├── Home.tsx        # Homepage with modular sections
+│   ├── About.tsx       # About page with beliefs
+│   ├── Contact.tsx     # Contact form and information
+│   ├── Sermon.tsx      # Sermon listings
+│   ├── Prayers.tsx     # Prayer requests
+│   └── Bulletin.tsx    # Church announcements
+├── hooks/              # Custom React hooks
+│   ├── useScrollReveal.ts # Scroll animation hook
+│   └── useScrollPosition.ts # Scroll position tracking
+├── types/              # TypeScript type definitions
+│   └── index.ts        # Common interfaces and types
+├── constants/          # Application constants
+│   └── index.ts        # Static data and configuration
+└── assets/             # Images and static assets
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Key Improvements
 
-### `npm test`
+### TypeScript Conversion
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Converted all JavaScript files to TypeScript
+- Added comprehensive type definitions
+- Improved type safety and IntelliSense support
+- Better error catching at compile time
 
-### `npm run build`
+### Modularization
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Component Separation**: Broke down large components into smaller, focused ones
+- **Custom Hooks**: Extracted reusable logic into custom hooks
+- **Constants**: Centralized static data and configuration
+- **Type Definitions**: Organized interfaces and types
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Code Quality
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Consistent Naming**: Standardized component and file naming
+- **Props Interfaces**: Clear type definitions for all component props
+- **Error Handling**: Better error boundaries and validation
+- **Performance**: Optimized re-renders and animations
 
-### `npm run eject`
+### New Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Scroll Animations**: Smooth reveal animations using Intersection Observer
+- **Form Handling**: Proper form state management with TypeScript
+- **Filtering**: Interactive filtering for bulletin and prayer requests
+- **Responsive Design**: Improved mobile experience
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🚀 Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Node.js (v16 or higher)
+- npm or yarn
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+# Install dependencies
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Start development server
+npm start
 
-### Code Splitting
+# Build for production
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Development
 
-### Analyzing the Bundle Size
+```bash
+# Run tests
+npm test
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Type checking
+npx tsc --noEmit
+```
 
-### Making a Progressive Web App
+## 📦 Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Core Dependencies
 
-### Advanced Configuration
+- React 19
+- React Router DOM 7
+- TypeScript 5
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Development Dependencies
 
-### Deployment
+- @types/react
+- @types/react-dom
+- @types/node
+- TypeScript ESLint
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🎨 Styling
 
-### `npm run build` fails to minify
+The project uses CSS modules and custom CSS with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Modern CSS Grid and Flexbox
+- Responsive design patterns
+- Smooth animations and transitions
+- Consistent color scheme and typography
+
+## 🔧 Configuration
+
+### TypeScript Configuration
+
+- Strict type checking enabled
+- React JSX support
+- Modern ES6+ features
+- Path mapping for clean imports
+
+### Build Configuration
+
+- Optimized for production builds
+- Asset optimization
+- Code splitting support
+
+## 📱 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🙏 Acknowledgments
+
+- 10th Avenue Bible Chapel community
+- React and TypeScript communities
+- All contributors and supporters

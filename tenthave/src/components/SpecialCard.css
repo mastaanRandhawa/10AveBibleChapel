@@ -1,41 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
-
-:root {
-    /* 🎨 Color Palette */
-    --color-dark: #000000;
-    --color-primary: #FBCB9C;
-    --color-light: #F7F6F1;
-    --color-bg: #FFFFFF;
-
-    /* Font Styles */
-    --font-primary: 'Roboto Condensed', sans-serif;
-
-    /* Font Sizes (Desktop Default for 1400px and up) */
-    --font-size-h1: 64px;
-    --font-size-h2: 48px;
-    --font-size-h3: 40px;
-    --font-size-h4: 32px;
-    --font-size-h5: 24px;
-    --font-size-h6: 16px;
-
-    /* Font Weights */
-    --font-weight-bold: 600;
-    --font-weight-regular: 400;
-
-    /* Spacing (Padding & Margins) */
-    --padding-xs: 4px;
-    --padding-sm: 8px;
-    --padding-md: 16px;
-    --padding-lg: 24px;
-    --padding-xl: 32px;
-
-    /* Letter Spacing */
-    --letter-spacing-xsm: 0.5px;
-    --letter-spacing-sm: 1px;
-    --letter-spacing-md: 2px;
-    --letter-spacing-lg: 4px;
-
-}
+/* SpecialCard-specific variables */
 
 /* specialCard Container */
 .specialCard {

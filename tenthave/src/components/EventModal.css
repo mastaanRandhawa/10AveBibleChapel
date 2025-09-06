@@ -1,0 +1,285 @@
+/* Event Modal Styles */
+.event-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--padding-lg);
+    backdrop-filter: blur(2px);
+}
+
+.event-modal {
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: auto;
+}
+
+.event-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-xl);
+    border-bottom: 2px solid var(--color-light);
+    background: var(--color-light);
+}
+
+.event-modal-header h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+}
+
+.event-modal-close {
+    background: none;
+    border: none;
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.event-modal-close:hover {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.event-modal-date {
+    padding: var(--padding-lg) var(--padding-xl);
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm);
+}
+
+.event-modal-date-label {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.event-modal-date-value {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+}
+
+.event-modal-form {
+    padding: var(--padding-xl);
+}
+
+.form-group {
+    margin-bottom: var(--padding-lg);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--padding-lg);
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--padding-md);
+    border: 2px solid var(--color-light);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    background: var(--color-bg);
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(251, 203, 156, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+    opacity: 0.7;
+}
+
+.event-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--padding-md);
+    margin-top: var(--padding-xl);
+    padding-top: var(--padding-lg);
+    border-top: 2px solid var(--color-light);
+}
+
+.btn-cancel,
+.btn-save {
+    padding: var(--padding-md) var(--padding-xl);
+    border: 2px solid;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.btn-cancel {
+    background: var(--color-bg);
+    border-color: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.btn-cancel:hover {
+    background: var(--color-light);
+    border-color: var(--color-dark);
+}
+
+.btn-save {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.btn-save:hover {
+    background: var(--color-dark);
+    border-color: var(--color-dark);
+    color: var(--color-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 767.98px) {
+    .event-modal-overlay {
+        padding: var(--padding-md);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .event-modal {
+        max-height: 95vh;
+        width: calc(100% - var(--padding-md) * 2);
+        margin: auto;
+    }
+
+    .event-modal-header {
+        padding: var(--padding-lg);
+    }
+
+    .event-modal-header h2 {
+        font-size: var(--font-size-h4);
+    }
+
+    .event-modal-date {
+        padding: var(--padding-md) var(--padding-lg);
+    }
+
+    .event-modal-form {
+        padding: var(--padding-lg);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--padding-md);
+    }
+
+    .event-modal-actions {
+        flex-direction: column;
+        gap: var(--padding-sm);
+    }
+
+    .btn-cancel,
+    .btn-save {
+        width: 100%;
+        padding: var(--padding-lg);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .event-modal-overlay {
+        padding: var(--padding-sm);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .event-modal {
+        width: calc(100% - var(--padding-sm) * 2);
+        max-height: 95vh;
+        margin: auto;
+    }
+
+    .event-modal-header {
+        padding: var(--padding-md);
+    }
+
+    .event-modal-header h2 {
+        font-size: var(--font-size-h5);
+    }
+
+    .event-modal-date {
+        padding: var(--padding-sm) var(--padding-md);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-xs);
+    }
+
+    .event-modal-form {
+        padding: var(--padding-md);
+    }
+
+    .form-group {
+        margin-bottom: var(--padding-md);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: var(--padding-sm);
+        font-size: calc(var(--font-size-h6) - 1px);
+    }
+}

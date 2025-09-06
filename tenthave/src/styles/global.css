@@ -1,31 +1,42 @@
-/* Template-specific variables */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
 :root {
-    --margin-in-between: 10%;
+    /* 🎨 Color Palette */
+    --color-dark: #000000;
+    --color-primary: #FBCB9C;
+    --color-light: #F7F6F1;
+    --color-bg: #FFFFFF;
+
+    /* Font Styles */
+    --font-primary: 'Roboto Condensed', sans-serif;
+
+    /* Font Sizes (Desktop Default for 1400px and up) */
+    --font-size-h1: 64px;
+    --font-size-h2: 48px;
+    --font-size-h3: 40px;
+    --font-size-h4: 32px;
+    --font-size-h5: 24px;
+    --font-size-h6: 16px;
+
+    /* Font Weights */
+    --font-weight-bold: 600;
+    --font-weight-regular: 400;
+
+    /* Spacing (Padding & Margins) */
+    --padding-xs: 4px;
+    --padding-sm: 8px;
+    --padding-md: 16px;
+    --padding-lg: 24px;
+    --padding-xl: 32px;
+
+    /* Letter Spacing */
+    --letter-spacing-xsm: 0.5px;
+    --letter-spacing-sm: 1px;
+    --letter-spacing-md: 2px;
+    --letter-spacing-lg: 4px;
 }
 
-/* Fade-in animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* Initial state before scrolling */
-.scroll-reveal {
-    opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* Class added by JavaScript when element is in viewport */
-.scroll-reveal.visible {
-    opacity: 1;
-}
-
-/* Responsive Media Queries */
+/* Responsive Media Queries - Consistent across all components */
 
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
@@ -33,9 +44,9 @@
         --font-size-h1: 28px;
         --font-size-h2: 22px;
         --font-size-h3: 18px;
-        --font-size-h4: 12px;
-        --font-size-h5: 10px;
-        --font-size-h6: 8px;
+        --font-size-h4: 14px;
+        --font-size-h5: 12px;
+        --font-size-h6: 10px;
         --padding-xs: 2px;
         --padding-sm: 4px;
         --padding-md: 8px;
@@ -44,17 +55,16 @@
         --letter-spacing-lg: 2px;
         --letter-spacing-sm: 0.5px;
     }
-
 }
 
 /* Extra Small Devices (376px to 575.98px) */
 @media (min-width: 376px) and (max-width: 575.98px) {
     :root {
-        --font-size-h1: 48px;
-        --font-size-h2: 40px;
-        --font-size-h3: 32px;
-        --font-size-h4: 24px;
-        --font-size-h5: 20px;
+        --font-size-h1: 36px;
+        --font-size-h2: 28px;
+        --font-size-h3: 24px;
+        --font-size-h4: 20px;
+        --font-size-h5: 16px;
         --font-size-h6: 14px;
         --padding-xs: 3px;
         --padding-sm: 6px;
@@ -64,18 +74,17 @@
         --letter-spacing-lg: 3px;
         --letter-spacing-sm: 0.8px;
     }
-
 }
 
 /* Small Devices (576px to 767.98px) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     :root {
-        --font-size-h1: 56px;
-        --font-size-h2: 42px;
-        --font-size-h3: 36px;
-        --font-size-h4: 28px;
-        --font-size-h5: 22px;
-        --font-size-h6: 15px;
+        --font-size-h1: 48px;
+        --font-size-h2: 36px;
+        --font-size-h3: 30px;
+        --font-size-h4: 24px;
+        --font-size-h5: 20px;
+        --font-size-h6: 16px;
         --padding-xs: 3px;
         --padding-sm: 6px;
         --padding-md: 12px;
@@ -84,17 +93,16 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.9px;
     }
-
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
 @media (min-width: 768px) and (max-width: 991.98px) {
     :root {
-        --font-size-h1: 60px;
-        --font-size-h2: 44px;
+        --font-size-h1: 56px;
+        --font-size-h2: 42px;
         --font-size-h3: 36px;
-        --font-size-h4: 30px;
-        --font-size-h5: 26px;
+        --font-size-h4: 28px;
+        --font-size-h5: 22px;
         --font-size-h6: 18px;
         --padding-xs: 3px;
         --padding-sm: 7px;
@@ -104,18 +112,17 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 1px;
     }
-
 }
 
 /* iPad Landscape (992px to 1199.98px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 46px;
+        --font-size-h1: 60px;
+        --font-size-h2: 44px;
         --font-size-h3: 38px;
         --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
+        --font-size-h5: 24px;
+        --font-size-h6: 18px;
         --padding-xs: 3px;
         --padding-sm: 6px;
         --padding-md: 14px;
@@ -124,8 +131,6 @@
         --letter-spacing-lg: 3.5px;
         --letter-spacing-sm: 0.8px;
     }
-
-
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -133,10 +138,10 @@
     :root {
         --font-size-h1: 62px;
         --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
+        --font-size-h3: 40px;
+        --font-size-h4: 32px;
+        --font-size-h5: 24px;
+        --font-size-h6: 18px;
         --padding-xs: 3px;
         --padding-sm: 7px;
         --padding-md: 14px;
@@ -145,5 +150,4 @@
         --letter-spacing-lg: 3.8px;
         --letter-spacing-sm: 0.9px;
     }
-
 }

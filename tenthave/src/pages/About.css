@@ -1,49 +1,205 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
-
+/* About-specific variables */
 :root {
-    /* 🎨 Color Palette */
-    --color-dark: #000000;
-    --color-primary: #FBCB9C;
     --color-lightish: #f6f0ea;
-    --color-light: #F7F6F1;
-    --color-bg: #FFFFFF;
-
-    /* Font Styles */
-    --font-primary: 'Roboto Condensed', sans-serif;
-
-    /* Font Sizes (Desktop Default for 1400px and up) */
-    --font-size-h1: 64px;
-    --font-size-h2: 48px;
-    --font-size-h3: 40px;
-    --font-size-h4: 32px;
-    --font-size-h5: 24px;
-    --font-size-h6: 16px;
-
-    /* Font Weights */
-    --font-weight-bold: 600;
-    --font-weight-regular: 400;
-
     --margin-in-between: 10%;
-
-    /* Spacing (Padding & Margins) */
-    --padding-xs: 4px;
-    --padding-sm: 8px;
-    --padding-md: 16px;
-    --padding-lg: 24px;
-    --padding-xl: 32px;
-
-    /* Letter Spacing */
-    --letter-spacing-xsm: 0.5px;
-    --letter-spacing-sm: 1px;
-    --letter-spacing-md: 2px;
-    --letter-spacing-lg: 4px;
-
+    --section-padding: 80px 0;
+    --container-max-width: 1200px;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
 
 .about-page-wrapper {
     font-family: var(--font-primary);
     text-align: center;
+    background-color: var(--color-light);
+    min-height: 100vh;
+}
+
+/* Professional styling additions */
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-light);
+    text-align: center;
+    padding: var(--padding-xl);
+}
+
+.hero-overlay h1 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--padding-md);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-overlay p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    max-width: 600px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.about-content {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--section-padding);
+}
+
+.section-divider {
+    width: 100px;
+    height: 3px;
+    background: var(--color-primary);
+    margin: var(--padding-xl) auto;
+}
+
+.section-content {
+    padding: var(--padding-xl) 0;
+}
+
+.content-grid {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.content-text p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    line-height: 1.8;
+    color: var(--color-dark);
+    margin-bottom: var(--padding-lg);
+}
+
+.verse-highlight {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    margin: var(--padding-xl) 0;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.verse-highlight blockquote {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-style: italic;
+    color: var(--color-dark);
+    margin: 0 0 var(--padding-md) 0;
+    border: none;
+    padding: 0;
+}
+
+.verse-highlight cite {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+.beliefs-section {
+    margin-top: var(--padding-xl);
+}
+
+.beliefs-header {
+    text-align: center;
+    margin-bottom: var(--padding-xl);
+}
+
+.section-subtitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin-top: var(--padding-sm);
+    opacity: 0.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.beliefs-container {
+    margin-top: var(--padding-xl);
+}
+
+.beliefs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: var(--padding-lg);
+}
+
+.belief-card {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    display: flex;
+    gap: var(--padding-lg);
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+}
+
+.belief-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.belief-number {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+}
+
+.belief-content {
+    flex: 1;
+}
+
+.belief-text {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    line-height: 1.6;
+    color: var(--color-dark);
+    margin-bottom: var(--padding-md);
+}
+
+.belief-reference {
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 1px);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    text-align: right;
 }
 
 .about-hero {
@@ -58,7 +214,7 @@
     object-fit: cover;
 }
 
-.about-hero{
+.about-hero {
     background: url(../assets/aboutus.avif) no-repeat center center/cover;
     min-height: 80vh;
     display: flex;

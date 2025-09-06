@@ -1,0 +1,435 @@
+/* Sermon-specific variables */
+
+.sermon-page-wrapper {
+    min-height: 100vh;
+    background-color: var(--color-light);
+    padding: var(--padding-xl) var(--padding-md);
+}
+
+.sermon-hero {
+    text-align: center;
+    margin-bottom: var(--padding-xl);
+}
+
+.sermon-hero h1 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-md);
+}
+
+.sermon-hero p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
+}
+
+.sermon-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sermon-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xl);
+    margin-top: var(--padding-xl);
+}
+
+/* Search and Filter Controls */
+.sermon-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-lg);
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--padding-xl);
+    padding: var(--padding-lg);
+    background: var(--color-light);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.sermon-controls__search {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+}
+
+.sermon-search-input {
+    width: 100%;
+    padding: var(--padding-md) var(--padding-lg);
+    padding-right: 40px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    background: var(--color-bg);
+    transition: border-color 0.3s ease;
+}
+
+.sermon-search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(251, 203, 156, 0.1);
+}
+
+.sermon-search-icon {
+    position: absolute;
+    right: var(--padding-md);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-h6);
+    color: #666;
+    pointer-events: none;
+}
+
+.sermon-controls__filters {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm);
+}
+
+.sermon-controls__filters label {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+}
+
+.sermon-group-select {
+    padding: var(--padding-md);
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.sermon-group-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.sermon-controls__results {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    opacity: 0.7;
+}
+
+/* Pagination */
+.sermon-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-sm);
+    margin-top: var(--padding-xl);
+    padding: var(--padding-lg) 0;
+}
+
+.sermon-pagination__btn {
+    padding: var(--padding-sm) var(--padding-md);
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    background: var(--color-bg);
+    color: var(--color-dark);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    text-align: center;
+}
+
+.sermon-pagination__btn:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.sermon-pagination__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sermon-pagination__btn--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-dark);
+    font-weight: var(--font-weight-bold);
+}
+
+.sermon-pagination__numbers {
+    display: flex;
+    gap: var(--padding-xs);
+}
+
+/* Group Headers */
+.sermon-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--padding-xl) 0 var(--padding-lg) 0;
+    padding: var(--padding-md) 0;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.sermon-group-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+}
+
+.sermon-group-count {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    opacity: 0.7;
+    background: var(--color-primary);
+    padding: var(--padding-xs) var(--padding-sm);
+    border-radius: 4px;
+}
+
+/* No Results */
+.sermon-no-results {
+    text-align: center;
+    padding: var(--padding-xl);
+    margin: var(--padding-xl) 0;
+}
+
+.sermon-no-results p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
+    opacity: 0.7;
+    margin: 0;
+}
+
+/* Responsive Media Queries */
+
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    :root {
+        --font-size-h1: 32px;
+        --font-size-h2: 28px;
+        --font-size-h3: 24px;
+        --font-size-h4: 20px;
+        --font-size-h5: 16px;
+        --font-size-h6: 14px;
+        --padding-xs: 2px;
+        --padding-sm: 4px;
+        --padding-md: 8px;
+        --padding-lg: 12px;
+        --padding-xl: 16px;
+        --letter-spacing-lg: 2px;
+        --letter-spacing-sm: 0.5px;
+    }
+
+    .sermon-page-wrapper {
+        padding: var(--padding-lg) var(--padding-sm);
+    }
+
+    .sermon-grid {
+        gap: var(--padding-lg);
+    }
+
+    /* Search and Filter Controls - Mobile */
+    .sermon-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--padding-md);
+        padding: var(--padding-md);
+    }
+
+    .sermon-controls__search {
+        min-width: auto;
+    }
+
+    .sermon-controls__filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-xs);
+    }
+
+    .sermon-controls__results {
+        text-align: center;
+    }
+
+    /* Pagination - Mobile */
+    .sermon-pagination {
+        flex-wrap: wrap;
+        gap: var(--padding-xs);
+    }
+
+    .sermon-pagination__btn {
+        padding: var(--padding-xs) var(--padding-sm);
+        font-size: calc(var(--font-size-h6) - 1px);
+    }
+
+    .sermon-pagination__numbers {
+        order: -1;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: var(--padding-sm);
+    }
+
+    /* Group Headers - Mobile */
+    .sermon-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-xs);
+    }
+
+    .sermon-group-title {
+        font-size: var(--font-size-h5);
+    }
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    :root {
+        --font-size-h1: 48px;
+        --font-size-h2: 40px;
+        --font-size-h3: 32px;
+        --font-size-h4: 28px;
+        --font-size-h5: 22px;
+        --font-size-h6: 16px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 12px;
+        --padding-lg: 18px;
+        --padding-xl: 24px;
+        --letter-spacing-lg: 3px;
+        --letter-spacing-sm: 0.8px;
+    }
+
+    .sermon-page-wrapper {
+        padding: var(--padding-lg) var(--padding-sm);
+    }
+
+    .sermon-grid {
+        gap: var(--padding-lg);
+    }
+
+    /* Search and Filter Controls - Tablet */
+    .sermon-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--padding-md);
+    }
+
+    .sermon-controls__filters {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Pagination - Tablet */
+    .sermon-pagination {
+        flex-wrap: wrap;
+        gap: var(--padding-sm);
+    }
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    :root {
+        --font-size-h1: 56px;
+        --font-size-h2: 44px;
+        --font-size-h3: 36px;
+        --font-size-h4: 30px;
+        --font-size-h5: 24px;
+        --font-size-h6: 18px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 12px;
+        --padding-lg: 18px;
+        --padding-xl: 24px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 0.9px;
+    }
+
+    .sermon-page-wrapper {
+        padding: var(--padding-lg) var(--padding-sm);
+    }
+
+    .sermon-grid {
+        gap: var(--padding-lg);
+    }
+}
+
+/* Medium Devices / iPad Portrait (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    :root {
+        --font-size-h1: 60px;
+        --font-size-h2: 46px;
+        --font-size-h3: 38px;
+        --font-size-h4: 32px;
+        --font-size-h5: 26px;
+        --font-size-h6: 20px;
+        --padding-xs: 3px;
+        --padding-sm: 7px;
+        --padding-md: 14px;
+        --padding-lg: 21px;
+        --padding-xl: 28px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 1px;
+    }
+
+    .sermon-grid {
+        gap: var(--padding-xl);
+    }
+}
+
+/* iPad Landscape (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    :root {
+        --font-size-h1: 62px;
+        --font-size-h2: 48px;
+        --font-size-h3: 40px;
+        --font-size-h4: 32px;
+        --font-size-h5: 24px;
+        --font-size-h6: 18px;
+        --padding-xs: 3px;
+        --padding-sm: 6px;
+        --padding-md: 14px;
+        --padding-lg: 22px;
+        --padding-xl: 28px;
+        --letter-spacing-lg: 3.5px;
+        --letter-spacing-sm: 0.8px;
+    }
+
+    .sermon-grid {
+        gap: var(--padding-xl);
+    }
+}
+
+/* Laptops (1200px to 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    :root {
+        --font-size-h1: 64px;
+        --font-size-h2: 48px;
+        --font-size-h3: 40px;
+        --font-size-h4: 32px;
+        --font-size-h5: 24px;
+        --font-size-h6: 16px;
+        --padding-xs: 3px;
+        --padding-sm: 7px;
+        --padding-md: 14px;
+        --padding-lg: 22px;
+        --padding-xl: 30px;
+        --letter-spacing-lg: 3.8px;
+        --letter-spacing-sm: 0.9px;
+    }
+
+    .sermon-grid {
+        gap: var(--padding-xl);
+    }
+}
