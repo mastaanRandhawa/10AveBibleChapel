@@ -33,124 +33,88 @@
     margin: 0 auto;
 }
 
-/* Announcements Section */
-.announcements-section {
+/* Prayer Form Section */
+.prayer-form-section {
     margin-bottom: var(--padding-xl);
 }
 
-.member-announcements {
+.prayer-form {
     background: var(--color-bg);
     padding: var(--padding-xl);
     border: 2px solid var(--color-primary);
     border-bottom: 15px solid var(--color-primary);
 }
 
-.member-announcements h2 {
+.prayer-form h3 {
     font-family: var(--font-primary);
-    font-size: var(--font-size-h3);
+    font-size: var(--font-size-h4);
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
-    margin-bottom: var(--padding-xl);
-    text-align: center;
-}
-
-.announcement-filters {
     margin-bottom: var(--padding-lg);
-    text-align: center;
 }
 
-.category-filter {
-    padding: var(--padding-sm) var(--padding-md);
-    border: 2px solid var(--color-primary);
+.form-group {
+    margin-bottom: var(--padding-lg);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--padding-md);
+    border: 1px solid var(--color-primary);
     font-family: var(--font-primary);
     font-size: var(--font-size-h6);
-    background: var(--color-bg);
-    color: var(--color-dark);
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
 }
 
-.announcements-list {
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-dark);
+}
+
+.checkbox-group {
     display: flex;
-    flex-direction: column;
-    gap: var(--padding-lg);
+    align-items: center;
+    gap: var(--padding-sm);
 }
 
-.announcement-card {
-    background: var(--color-light);
-    padding: var(--padding-lg);
-    border: 2px solid var(--color-primary);
-    transition: all 0.3s ease;
-}
-
-.announcement-card.priority-high {
-    border-left: 5px solid var(--color-dark);
-}
-
-.announcement-card.priority-medium {
-    border-left: 5px solid var(--color-primary);
-}
-
-.announcement-card.priority-low {
-    border-left: 5px solid var(--color-light);
-}
-
-.announcement-header {
+.checkbox-group label {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: var(--padding-sm);
-}
-
-.announcement-header h3 {
+    align-items: center;
+    gap: var(--padding-sm);
     font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-h6);
     color: var(--color-dark);
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
     margin: 0;
-    flex: 1;
 }
 
-.priority-badge {
-    padding: var(--padding-xs) var(--padding-sm);
+.submit-btn {
+    width: 100%;
+    padding: var(--padding-md);
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
     font-family: var(--font-primary);
-    font-size: calc(var(--font-size-h6) - 2px);
+    font-size: var(--font-size-h6);
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
-    margin-left: var(--padding-md);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.priority-badge.priority-high {
+.submit-btn:hover {
     background: var(--color-dark);
     color: var(--color-primary);
-}
-
-.priority-badge.priority-medium {
-    background: var(--color-primary);
-    color: var(--color-dark);
-}
-
-.priority-badge.priority-low {
-    background: var(--color-light);
-    color: var(--color-dark);
-    border: 1px solid var(--color-primary);
-}
-
-.announcement-content {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    margin-bottom: var(--padding-md);
-    line-height: 1.6;
-}
-
-.announcement-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-primary);
-    font-size: calc(var(--font-size-h6) - 1px);
-    color: var(--color-dark);
-    opacity: 0.7;
 }
 
 /* Member Directory Section */
@@ -262,79 +226,201 @@
     color: var(--color-primary);
 }
 
-/* Resources Section */
-.resources-section {
+/* Prayer Requests Section */
+.prayer-requests-section {
     margin-bottom: var(--padding-xl);
 }
 
-.member-resources {
+.prayer-requests-section h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-xl);
+}
+
+.prayer-grid {
+    display: grid;
+    gap: var(--padding-lg);
+}
+
+.prayer-card {
     background: var(--color-bg);
     padding: var(--padding-xl);
     border: 2px solid var(--color-primary);
     border-bottom: 15px solid var(--color-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.member-resources h2 {
+.prayer-card.priority-urgent {
+    border-left: 5px solid #ff4444;
+}
+
+.prayer-card.priority-high {
+    border-left: 5px solid #ff8800;
+}
+
+.prayer-card.priority-normal {
+    border-left: 5px solid var(--color-primary);
+}
+
+.prayer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.prayer-card.answered {
+    border-color: var(--color-dark);
+    background: var(--color-light);
+}
+
+.prayer-header {
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-title-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-sm);
+}
+
+.prayer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-sm);
+}
+
+.prayer-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+    flex: 1;
+}
+
+.category-badge {
+    background: var(--color-light);
+    color: var(--color-dark);
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    border: 1px solid var(--color-primary);
+}
+
+.priority-badge {
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.priority-badge.priority-urgent {
+    background: #ff4444;
+    color: white;
+}
+
+.priority-badge.priority-high {
+    background: #ff8800;
+    color: white;
+}
+
+.priority-badge.priority-normal {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.answered-badge {
+    background: var(--color-dark);
+    color: var(--color-primary);
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.prayer-description {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    line-height: 1.6;
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+}
+
+.answered-date {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+.prayer-date {
+    font-weight: var(--font-weight-bold);
+}
+
+.prayer-requester {
+    font-style: italic;
+}
+
+/* Filters and Search */
+.requests-header {
+    margin-bottom: var(--padding-xl);
+}
+
+.requests-header h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h3);
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
-    margin-bottom: var(--padding-xl);
+    margin-bottom: var(--padding-lg);
     text-align: center;
 }
 
-.resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--padding-lg);
+.filters {
+    display: flex;
+    gap: var(--padding-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-.resource-card {
-    background: var(--color-light);
-    padding: var(--padding-lg);
-    border: 2px solid var(--color-primary);
-    transition: all 0.3s ease;
-}
-
-.resource-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.resource-card h3 {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
-    margin-bottom: var(--padding-sm);
-}
-
-.resource-card p {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    margin-bottom: var(--padding-md);
-}
-
-.resource-link {
-    display: inline-block;
-    background: var(--color-primary);
-    color: var(--color-dark);
+.category-filter,
+.status-filter {
     padding: var(--padding-sm) var(--padding-md);
-    text-decoration: none;
+    border: 2px solid var(--color-primary);
     font-family: var(--font-primary);
     font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
+    background: var(--color-bg);
+    color: var(--color-dark);
+    min-width: 150px;
 }
 
-.resource-link:hover {
-    background: var(--color-dark);
-    color: var(--color-primary);
+.no-requests {
+    text-align: center;
+    padding: var(--padding-xl);
+    background: var(--color-light);
+    border: 2px solid var(--color-primary);
+}
+
+.no-requests p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin: 0;
 }
 
 /* Service Schedule Section */
@@ -511,19 +597,18 @@
         min-width: auto;
     }
 
-    .announcement-header {
+    .filters {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
     }
 
-    .priority-badge {
-        margin-left: 0;
-        margin-top: var(--padding-sm);
+    .category-filter,
+    .status-filter {
+        min-width: auto;
     }
 
-    .announcement-meta {
+    .prayer-badges {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--padding-xs);
     }
 }

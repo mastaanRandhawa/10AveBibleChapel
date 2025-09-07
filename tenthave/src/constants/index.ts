@@ -5,8 +5,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { path: "/", label: "HOME" },
   { path: "/bulletin", label: "BULLETIN" },
   { path: "/sermon", label: "SERMONS" },
-  { path: "/prayers", label: "PRAYERS" },
-  { path: "/members", label: "MEMBERS" },
+  { path: "/members", label: "MEMBERS & PRAYER" },
   { path: "/contact", label: "CONTACT US" },
   { path: "/about", label: "ABOUT US" },
 ];

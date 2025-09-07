@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Sermon from "./pages/Sermon";
-import Prayers from "./pages/Prayers";
 import Members from "./pages/Members";
 import Contact from "./pages/Contact";
 import Bulletin from "./pages/Bulletin";
@@ -22,7 +21,6 @@ const App: React.FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/bulletin" element={<Bulletin />} />
         <Route path="/sermon" element={<Sermon />} />
-        <Route path="/prayers" element={<Prayers />} />
         <Route path="/members" element={<Members />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
