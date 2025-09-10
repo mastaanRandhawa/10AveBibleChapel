@@ -1,0 +1,228 @@
+/* Hero Section Styles */
+.hero {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: calc(-1 * var(--padding-xl));
+    height: auto;
+    min-height: 80vh;
+    background: url(../assets/churchPicture.svg) no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hero-overlay {
+    padding: var(--padding-sm) var(--padding-md) var(--padding-sm) var(--padding-xl);
+    color: var(--color-light);
+    max-width: 100%;
+    text-align: left;
+}
+
+.hero-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    color: var(--color-light);
+}
+
+.hero-subtitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.hero-description {
+    display: flex;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+    margin: var(--padding-md) 0;
+}
+
+.text-hero-description {
+    padding-left: var(--padding-lg);
+}
+
+/* Responsive Media Queries */
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    .hero {
+        min-height: 15vh;
+        margin-top: calc(-1 * var(--padding-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--padding-md) 0;
+    }
+
+    .text-hero-description {
+        padding-left: var(--padding-lg);
+    }
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    .hero {
+        min-height: 20vh;
+        margin-top: calc(-1 * var(--padding-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--padding-md) 0;
+    }
+
+    .text-hero-description {
+        padding-left: var(--padding-lg);
+    }
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .hero {
+        min-height: 25vh;
+        margin-top: calc(-1 * var(--padding-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--padding-md) 0;
+    }
+
+    .text-hero-description {
+        padding-left: var(--padding-lg);
+    }
+}
+
+/* Medium Devices / iPad Portrait (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .hero {
+        min-height: 35vh;
+        margin-top: calc(-1 * var(--padding-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--padding-md) 0;
+    }
+
+    .text-hero-description {
+        padding-left: var(--padding-lg);
+    }
+}
+
+/* iPad Landscape (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .hero {
+        min-height: 45vh;
+        margin-top: calc(-1 * var(--padding-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--padding-md) 0;
+    }
+
+    .text-hero-description {
+        padding-left: var(--padding-lg);
+    }
+}
+
+/* Laptops (1200px to 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    .hero {
+        min-height: 60vh;
+        margin-top: calc(-1 * var(--padding-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--padding-md) 0;
+    }
+
+    .text-hero-description {
+        padding-left: var(--padding-lg);
+    }
+}

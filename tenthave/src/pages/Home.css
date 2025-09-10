@@ -5,52 +5,7 @@
 }
 
 
-.hero {
-    position: relative;
-    width: 100%;
-    height: auto;
-    min-height: 80vh;
-    background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.hero-overlay {
-    padding: var(--padding-sm) var(--padding-md);
-    color: var(--color-light);
-    max-width: 100%;
-    margin-left: 5%;
-    text-align: left;
-}
-
-.hero-title {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.2;
-    color: var(--color-light);
-}
-
-.hero-subtitle {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    font-weight: var(--font-weight-regular);
-    letter-spacing: var(--letter-spacing-sm);
-}
-
-.hero-description {
-    display: flex;
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-regular);
-    letter-spacing: var(--letter-spacing-sm);
-    margin: var(--padding-md) 0;
-}
-
-.text-hero-description {
-    padding-left: var(--padding-lg);
-}
+/* Hero section styles moved to HeroSection.css component */
 
 .weeklyServices {
     padding: var(--padding-xl) var(--padding-md);
@@ -235,55 +190,7 @@
         --margin-in-between: 15%;
     }
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 15vh;
-        /* Change this to lower for lower device queries */
-        background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg);
-        color: var(--color-light);
-        max-width: 100%;
-        margin-left: 5%;
-        text-align: left;
-    }
-
-    .hero-title {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h1);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        color: var(--color-light);
-        margin: 0;
-        padding: 0;
-    }
-
-    .hero-subtitle {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h5);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .hero-description {
-        display: flex;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h6);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-        margin: var(--padding-md) 0;
-    }
-
-    .text-hero-description {
-        padding-left: var(--padding-lg);
-    }
+    /* Hero section styles moved to HeroSection.css component */
 
     .weeklyServices {
         padding: var(--padding-xl) var(--padding-md);
@@ -331,53 +238,7 @@
         --margin-in-between: 15%;
     }
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 20vh;
-        /* Change this to lower for lower device queries */
-        background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg);
-        color: var(--color-light);
-        max-width: 100%;
-        margin-left: 5%;
-        text-align: left;
-    }
-
-    .hero-title {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h1);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        color: var(--color-light);
-    }
-
-    .hero-subtitle {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h5);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .hero-description {
-        display: flex;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h6);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-        margin: var(--padding-md) 0;
-    }
-
-    .text-hero-description {
-        padding-left: var(--padding-lg);
-    }
+    /* Hero section styles moved to HeroSection.css component */
 
     .weeklyServices {
         padding: var(--padding-xl) var(--padding-md);
@@ -426,53 +287,7 @@
         --margin-in-between: 15%;
     }
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 25vh;
-        /* Change this to lower for lower device queries */
-        background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg);
-        color: var(--color-light);
-        max-width: 100%;
-        margin-left: 5%;
-        text-align: left;
-    }
-
-    .hero-title {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h1);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        color: var(--color-light);
-    }
-
-    .hero-subtitle {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h5);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .hero-description {
-        display: flex;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h6);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-        margin: var(--padding-md) 0;
-    }
-
-    .text-hero-description {
-        padding-left: var(--padding-lg);
-    }
+    /* Hero section styles moved to HeroSection.css component */
 
     .weeklyServices {
         padding: var(--padding-xl) var(--padding-md);
@@ -520,53 +335,7 @@
         --margin-in-between: 15%;
     }
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 35vh;
-        /* Change this to lower for lower device queries */
-        background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg);
-        color: var(--color-light);
-        max-width: 100%;
-        margin-left: 5%;
-        text-align: left;
-    }
-
-    .hero-title {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h1);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        color: var(--color-light);
-    }
-
-    .hero-subtitle {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h5);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .hero-description {
-        display: flex;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h6);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-        margin: var(--padding-md) 0;
-    }
-
-    .text-hero-description {
-        padding-left: var(--padding-lg);
-    }
+    /* Hero section styles moved to HeroSection.css component */
 
     .weeklyServices {
         padding: var(--padding-xl) var(--padding-md);
@@ -609,53 +378,7 @@
 
     }
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 45vh;
-        /* Change this to lower for lower device queries */
-        background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg);
-        color: var(--color-light);
-        max-width: 100%;
-        margin-left: 5%;
-        text-align: left;
-    }
-
-    .hero-title {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h1);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        color: var(--color-light);
-    }
-
-    .hero-subtitle {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h5);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .hero-description {
-        display: flex;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h6);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-        margin: var(--padding-md) 0;
-    }
-
-    .text-hero-description {
-        padding-left: var(--padding-lg);
-    }
+    /* Hero section styles moved to HeroSection.css component */
 
     .weeklyServices {
         padding: var(--padding-xl) var(--padding-md);
@@ -677,6 +400,7 @@
         margin: auto;
         text-align: center;
     }
+
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -698,53 +422,7 @@
 
     }
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 60vh;
-        /* Change this to lower for lower device queries */
-        background: url(../assets/churchPicture.svg) no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg);
-        color: var(--color-light);
-        max-width: 100%;
-        margin-left: 5%;
-        text-align: left;
-    }
-
-    .hero-title {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h1);
-        font-weight: var(--font-weight-bold);
-        line-height: 1.2;
-        color: var(--color-light);
-    }
-
-    .hero-subtitle {
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h5);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .hero-description {
-        display: flex;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-h6);
-        font-weight: var(--font-weight-regular);
-        letter-spacing: var(--letter-spacing-sm);
-        margin: var(--padding-md) 0;
-    }
-
-    .text-hero-description {
-        padding-left: var(--padding-lg);
-    }
+    /* Hero section styles moved to HeroSection.css component */
 
     .weeklyServices {
         padding: var(--padding-xl) var(--padding-md);

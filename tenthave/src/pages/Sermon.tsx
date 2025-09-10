@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
+import HeroSection from "../components/HeroSection";
 import SermonCard from "../components/SermonCard";
 import "./Sermon.css";
 
@@ -397,10 +398,11 @@ const SermonPage: React.FC = () => {
 
   return (
     <div className="sermon-page-wrapper">
-      <ScrollReveal className="sermon-hero">
-        <h1>Recent Sermons</h1>
-        <p>Watch and listen to our latest messages</p>
-      </ScrollReveal>
+      <HeroSection
+        title="Recent Sermons"
+        subtitle="WELCOME TO OUR CHURCH"
+        description="Watch and listen to our latest messages"
+      />
 
       <div className="sermon-content">
         <SearchAndFilter

@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import SpecialCard from "../components/SpecialCard";
 import SermonCard from "../components/SermonCard";
+import HeroSection from "../components/HeroSection";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES, CHURCH_INFO } from "../constants";
 import "./Home.css";
@@ -12,21 +13,16 @@ import "./Home.css";
 import churchTriPicture from "../assets/churchTriPhoto.svg";
 import sermonCardImg from "../assets/sermonCardImg.svg";
 
-// Hero Section Component
-const HeroSection: React.FC = () => (
-  <ScrollReveal className="hero">
-    <div className="hero-overlay">
-      <h2 className="hero-subtitle">{CHURCH_INFO.welcomeMessage}</h2>
-      <h1 className="hero-title">
-        10TH AVENUE <br /> BIBLE CHAPEL
-      </h1>
-      <div className="hero-description">
-        <h3>—</h3>
-        <h3 className="text-hero-description">{CHURCH_INFO.tagline}</h3>
-      </div>
-      <Button variant="button-primary" buttonText="JOIN US" buttonLink="#" />
-    </div>
-  </ScrollReveal>
+// Home Hero Section Component
+const HomeHeroSection: React.FC = () => (
+  <HeroSection
+    title="10TH AVENUE BIBLE CHAPEL"
+    subtitle={CHURCH_INFO.welcomeMessage}
+    description={CHURCH_INFO.tagline}
+    showButton={true}
+    buttonText="JOIN US"
+    buttonLink="#"
+  />
 );
 
 // Weekly Services Section Component
@@ -113,7 +109,7 @@ const RecentSermonsSection: React.FC = () => (
 const Home: React.FC = () => {
   return (
     <div className="wrapperMAIN">
-      <HeroSection />
+      <HomeHeroSection />
       <WeeklyServicesSection />
       <SpecialServicesSection />
       <RecentSermonsSection />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
+import HeroSection from "../components/HeroSection";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES } from "../constants";
 import "./Members.css";
 
@@ -497,13 +498,11 @@ const Members: React.FC = () => {
 
   return (
     <div className="members-page-wrapper">
-      <ScrollReveal className="members-hero">
-        <h1>Members & Prayer</h1>
-        <p>
-          Welcome to the members area. Access resources, connect with your
-          church family, and join us in prayer.
-        </p>
-      </ScrollReveal>
+      <HeroSection
+        title="Members & Prayer"
+        subtitle="WELCOME TO OUR CHURCH"
+        description="Welcome to the members area. Access resources, connect with your church family, and join us in prayer."
+      />
 
       <div className="members-content">
         <ScrollReveal className="prayer-form-section">

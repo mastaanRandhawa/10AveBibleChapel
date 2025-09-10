@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
+import HeroSection from "../components/HeroSection";
 import "./About.css";
-import aboutImage from "../assets/aboutus.avif";
 
 // Belief item interface
 interface BeliefItem {
@@ -104,22 +104,11 @@ const BeliefsList: React.FC = () => (
 const About: React.FC = () => {
   return (
     <div className="about-page-wrapper">
-      <ScrollReveal className="about-hero">
-        <div className="hero-container">
-          <img
-            src={aboutImage}
-            alt="Inside the Church"
-            className="about-image"
-          />
-          <div className="hero-overlay">
-            <h1>About Our Church</h1>
-            <p>
-              Discover our faith, mission, and the community that makes us who
-              we are
-            </p>
-          </div>
-        </div>
-      </ScrollReveal>
+      <HeroSection
+        title="About Our Church"
+        subtitle="WELCOME TO OUR CHURCH"
+        description="Discover our faith, mission, and the community that makes us who we are"
+      />
 
       <div className="about-content">
         <ScrollReveal className="who-we-are-section">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
+import HeroSection from "../components/HeroSection";
 import {
   CONTACT_INFO,
   WEEKLY_SERVICES,
@@ -207,10 +208,11 @@ const VisitInfo: React.FC = () => (
 const Contact: React.FC = () => {
   return (
     <div className="contact-page-wrapper">
-      <ScrollReveal className="contact-hero">
-        <h1>Contact Us</h1>
-        <p>We'd love to hear from you. Get in touch with us!</p>
-      </ScrollReveal>
+      <HeroSection
+        title="Contact Us"
+        subtitle="WELCOME TO OUR CHURCH"
+        description="We'd love to hear from you. Get in touch with us!"
+      />
 
       <div className="contact-content">
         <ScrollReveal className="contact-info">

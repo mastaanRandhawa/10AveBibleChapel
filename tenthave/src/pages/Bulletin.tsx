@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
+import HeroSection from "../components/HeroSection";
 import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import EventDetailsModal from "../components/EventDetailsModal";
@@ -106,10 +107,11 @@ const Bulletin: React.FC = () => {
 
   return (
     <div className="bulletin-page-wrapper">
-      <ScrollReveal className="bulletin-hero">
-        <h1>Church Calendar</h1>
-        <p>View and manage church events and activities</p>
-      </ScrollReveal>
+      <HeroSection
+        title="Church Calendar"
+        subtitle="WELCOME TO OUR CHURCH"
+        description="View and manage church events and activities"
+      />
 
       <div className="bulletin-content">
         {/* Calendar Section */}
