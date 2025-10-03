@@ -1,0 +1,92 @@
+/* Sermon Hero Section Styles - Matching Image Design */
+.sermon-hero-section {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e5e5e5 0%, #d0d0d0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sermon-hero-section__background {
+    display: none;
+    /* Hide background image for clean gradient look */
+}
+
+.sermon-hero-section__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sermon-hero-section__content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.sermon-hero-section__title {
+    font-family: var(--font-primary);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sermon-hero-section__title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sermon-hero-section {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .sermon-hero-section__title {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+    .sermon-hero-section__content {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sermon-hero-section {
+        height: 40vh;
+        min-height: 250px;
+    }
+
+    .sermon-hero-section__title {
+        font-size: 2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .sermon-hero-section__content {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .sermon-hero-section__title {
+        font-size: 1.75rem;
+    }
+}

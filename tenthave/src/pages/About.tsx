@@ -84,14 +84,84 @@ const WhoWeAreSection: React.FC = () => (
 // Beliefs List Component
 const BeliefsList: React.FC = () => (
   <div className="beliefs-container">
-    <div className="beliefs-grid">
-      {BELIEFS.map((belief, index) => (
-        <div key={index} className="belief-card">
-          <div className="belief-number">{index + 1}</div>
-          <div className="belief-content">
-            <p className="belief-text">{belief.text}</p>
-            <div className="belief-reference">
-              <strong>{belief.reference}</strong>
+    <div className="beliefs-two-column">
+      <div className="beliefs-column">
+        {BELIEFS.slice(0, 4).map((belief, index) => (
+          <div key={index} className="belief-item">
+            <div className="belief-bullet"></div>
+            <div className="belief-content">
+              <p className="belief-text">{belief.text}</p>
+              <div className="belief-reference">
+                <strong>{belief.reference}</strong>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="beliefs-column">
+        {BELIEFS.slice(4).map((belief, index) => (
+          <div key={index + 4} className="belief-item">
+            <div className="belief-bullet"></div>
+            <div className="belief-content">
+              <p className="belief-text">{belief.text}</p>
+              <div className="belief-reference">
+                <strong>{belief.reference}</strong>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+// Elders data
+const ELDERS = [
+  {
+    name: "DANIELLE WATKINS",
+    title: "Pastor, Church",
+    image: "/assets/prayingiconround.svg", // Using existing asset as placeholder
+    social: {
+      facebook: "#",
+      twitter: "#",
+      linkedin: "#",
+    },
+  },
+  {
+    name: "NAOMI CRAIG",
+    title: "Pastor, Church",
+    image: "/assets/bible.svg", // Using existing asset as placeholder
+    social: {
+      facebook: "#",
+      twitter: "#",
+      linkedin: "#",
+    },
+  },
+];
+
+// Elders Section Component
+const EldersSection: React.FC = () => (
+  <div className="elders-section">
+    <h2 className="section-heading">ELDERS</h2>
+    <div className="elders-grid">
+      {ELDERS.map((elder, index) => (
+        <div key={index} className="elder-card">
+          <div className="elder-image">
+            <img src={elder.image} alt={elder.name} />
+          </div>
+          <div className="elder-info">
+            <h3 className="elder-name">{elder.name}</h3>
+            <p className="elder-title">{elder.title}</p>
+            <div className="elder-social">
+              <a href={elder.social.facebook} className="social-icon">
+                📘
+              </a>
+              <a href={elder.social.twitter} className="social-icon">
+                🐦
+              </a>
+              <a href={elder.social.linkedin} className="social-icon">
+                💼
+              </a>
             </div>
           </div>
         </div>
@@ -104,11 +174,7 @@ const BeliefsList: React.FC = () => (
 const About: React.FC = () => {
   return (
     <div className="about-page-wrapper">
-      <HeroSection
-        title="About Our Church"
-        subtitle="WELCOME TO OUR CHURCH"
-        description="Discover our faith, mission, and the community that makes us who we are"
-      />
+      <HeroSection title="ABOUT US" variant="simple" />
 
       <div className="about-content">
         <ScrollReveal className="who-we-are-section">
@@ -116,13 +182,29 @@ const About: React.FC = () => {
         </ScrollReveal>
 
         <ScrollReveal className="beliefs-section">
+          <div className="beliefs-images">
+            <div className="belief-image">
+              <img
+                src="/assets/prayingiconround.svg"
+                alt="Man praying with Bible"
+              />
+            </div>
+            <div className="belief-image">
+              <img src="/assets/bible.svg" alt="People reading Bible" />
+            </div>
+            <div className="belief-image">
+              <img src="/assets/breakingofbread.svg" alt="Baptism ceremony" />
+            </div>
+          </div>
           <div className="beliefs-header">
+            <h3 className="mission-subtitle">OUR MISSION & VISION</h3>
             <h2 className="section-heading2">What Do We Believe?</h2>
-            <p className="section-subtitle">
-              Our core beliefs and biblical foundations
-            </p>
           </div>
           <BeliefsList />
+        </ScrollReveal>
+
+        <ScrollReveal className="elders-section-wrapper">
+          <EldersSection />
         </ScrollReveal>
       </div>
     </div>

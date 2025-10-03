@@ -1,14 +1,15 @@
-/* Bulletin-specific variables */
+/* Bulletin Page - Professional Styling */
 
 .bulletin-page-wrapper {
     min-height: 100vh;
-    background-color: var(--color-light);
-    padding: var(--padding-xl) var(--padding-md);
+    background: linear-gradient(135deg, var(--color-light) 0%, #f9f8f5 100%);
+    font-family: var(--font-primary);
 }
 
 .bulletin-hero {
     text-align: center;
     margin-bottom: var(--padding-xl);
+    padding: var(--padding-xl) var(--padding-lg);
 }
 
 .bulletin-hero h1 {
@@ -17,17 +18,37 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
     margin-bottom: var(--padding-md);
+    letter-spacing: var(--letter-spacing-sm);
+    position: relative;
+}
+
+.bulletin-hero h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), #f0d4a8);
+    border-radius: 2px;
 }
 
 .bulletin-hero p {
     font-family: var(--font-primary);
     font-size: var(--font-size-h5);
     color: var(--color-dark);
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .bulletin-content {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 var(--padding-lg) var(--padding-xl);
+    margin-top: var(--padding-xl);
 }
 
 /* Calendar Section */
@@ -37,129 +58,662 @@
 
 .bulletin-calendar-section h2 {
     font-family: var(--font-primary);
-    font-size: var(--font-size-h2);
+    font-size: var(--font-size-h3);
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
     margin-bottom: var(--padding-xl);
     text-align: center;
+    letter-spacing: var(--letter-spacing-sm);
+    position: relative;
 }
 
+.bulletin-calendar-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), #f0d4a8);
+    border-radius: 1px;
+}
 
-/* Responsive Media Queries */
+/* Professional Calendar Container */
+.calendar-container {
+    background: var(--color-bg);
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(251, 203, 156, 0.2);
+    position: relative;
+}
 
-/* Very Small Devices (up to 375px) */
-@media (max-width: 375px) {
-    :root {
-        --font-size-h1: 32px;
-        --font-size-h2: 28px;
-        --font-size-h3: 24px;
-        --font-size-h4: 20px;
-        --font-size-h5: 16px;
-        --font-size-h6: 14px;
-        --padding-xs: 2px;
-        --padding-sm: 4px;
-        --padding-md: 8px;
-        --padding-lg: 12px;
-        --padding-xl: 16px;
-        --letter-spacing-lg: 2px;
-        --letter-spacing-sm: 0.5px;
+.calendar-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), #f0d4a8, var(--color-primary));
+}
+
+/* Calendar Header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-xl);
+    background: linear-gradient(135deg, var(--color-light), #f9f8f5);
+    border-bottom: 1px solid rgba(251, 203, 156, 0.3);
+}
+
+.calendar-nav-btn {
+    background: var(--color-primary);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(251, 203, 156, 0.3);
+}
+
+.calendar-nav-btn:hover {
+    background: var(--color-dark);
+    color: var(--color-primary);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--padding-sm);
+}
+
+.calendar-title h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.calendar-today-btn {
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    padding: var(--padding-sm) var(--padding-lg);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.calendar-today-btn:hover {
+    background: var(--color-primary);
+    border-color: var(--color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 203, 156, 0.3);
+}
+
+/* Calendar Grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: var(--color-light);
+    overflow: hidden;
+}
+
+.calendar-day-header {
+    background: linear-gradient(135deg, var(--color-primary), #f0d4a8);
+    padding: var(--padding-lg);
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    position: relative;
+}
+
+.calendar-day {
+    background: var(--color-bg);
+    min-height: 120px;
+    padding: var(--padding-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+}
+
+.calendar-day:hover {
+    background: linear-gradient(135deg, var(--color-light), #f9f8f5);
+    border-color: var(--color-primary);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(251, 203, 156, 0.2);
+}
+
+.calendar-day--empty {
+    background: #fafafa;
+    cursor: default;
+}
+
+.calendar-day--empty:hover {
+    background: #fafafa;
+    transform: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.calendar-day--today {
+    background: linear-gradient(135deg, rgba(251, 203, 156, 0.3), rgba(240, 212, 168, 0.2));
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 2px 8px rgba(251, 203, 156, 0.3);
+}
+
+.calendar-day--today .calendar-day-number {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    font-weight: var(--font-weight-bold);
+    box-shadow: 0 2px 6px rgba(251, 203, 156, 0.4);
+}
+
+.calendar-day-number {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-sm);
+    align-self: flex-start;
+    padding: 4px 8px;
+    min-width: 24px;
+    text-align: center;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* Event Indicators */
+.calendar-events {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-bottom: var(--padding-sm);
+    flex: 1;
+    align-items: flex-start;
+}
+
+.calendar-event-indicator {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-event-indicator:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-event-indicator.event-high {
+    background: var(--color-dark);
+    color: var(--color-primary);
+}
+
+.calendar-event-indicator.event-medium {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.calendar-event-indicator.event-low {
+    background: var(--color-light);
+    color: var(--color-dark);
+    border: 1px solid var(--color-primary);
+}
+
+.calendar-event-more {
+    font-family: var(--font-primary);
+    font-size: 9px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    background: var(--color-primary);
+    padding: 2px 6px;
+    min-width: 18px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Add Event Button */
+.calendar-add-btn {
+    position: absolute;
+    top: var(--padding-sm);
+    right: var(--padding-sm);
+    background: var(--color-primary);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(251, 203, 156, 0.3);
+}
+
+.calendar-day:hover .calendar-add-btn {
+    opacity: 1;
+}
+
+.calendar-add-btn:hover {
+    background: var(--color-dark);
+    color: var(--color-primary);
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .bulletin-content {
+        padding: 0 var(--padding-md) var(--padding-xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .bulletin-hero {
+        padding: var(--padding-lg) var(--padding-md);
     }
 
-}
-
-/* Extra Small Devices (376px to 575.98px) */
-@media (min-width: 376px) and (max-width: 575.98px) {
-    :root {
-        --font-size-h1: 48px;
-        --font-size-h2: 40px;
-        --font-size-h3: 32px;
-        --font-size-h4: 28px;
-        --font-size-h5: 22px;
-        --font-size-h6: 16px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3px;
-        --letter-spacing-sm: 0.8px;
+    .bulletin-hero h1 {
+        font-size: var(--font-size-h3);
     }
 
-}
-
-/* Small Devices (576px to 767.98px) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-    :root {
-        --font-size-h1: 56px;
-        --font-size-h2: 44px;
-        --font-size-h3: 36px;
-        --font-size-h4: 30px;
-        --font-size-h5: 24px;
-        --font-size-h6: 18px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.9px;
+    .bulletin-hero p {
+        font-size: var(--font-size-h6);
     }
 
-}
+    .bulletin-content {
+        padding: 0 var(--padding-sm) var(--padding-lg);
+    }
 
-/* Medium Devices / iPad Portrait (768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    :root {
-        --font-size-h1: 60px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 32px;
-        --font-size-h5: 26px;
-        --font-size-h6: 20px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 21px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 1px;
+    .calendar-header {
+        flex-direction: column;
+        gap: var(--padding-md);
+        padding: var(--padding-lg);
+    }
+
+    .calendar-title h2 {
+        font-size: var(--font-size-h3);
+    }
+
+    .calendar-day {
+        min-height: 100px;
+        padding: var(--padding-sm);
+    }
+
+    .calendar-day-number {
+        font-size: calc(var(--font-size-h6) - 1px);
+    }
+
+    .calendar-event-indicator {
+        width: 14px;
+        height: 14px;
+        font-size: 8px;
+    }
+
+    .calendar-event-more {
+        font-size: 7px;
+        padding: 1px 4px;
+        min-width: 14px;
+    }
+
+    .calendar-add-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
     }
 }
 
-/* iPad Landscape (992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 48px;
-        --font-size-h3: 40px;
-        --font-size-h4: 32px;
-        --font-size-h5: 24px;
-        --font-size-h6: 18px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.8px;
+@media (max-width: 576px) {
+    .bulletin-hero {
+        padding: var(--padding-md) var(--padding-sm);
+    }
+
+    .bulletin-hero h1 {
+        font-size: var(--font-size-h4);
+    }
+
+    .calendar-header {
+        padding: var(--padding-md);
+    }
+
+    .calendar-title h2 {
+        font-size: var(--font-size-h4);
+    }
+
+    .calendar-day {
+        min-height: 80px;
+        padding: var(--padding-xs);
+    }
+
+    .calendar-day-header {
+        padding: var(--padding-sm);
+        font-size: calc(var(--font-size-h6) - 1px);
+    }
+
+    .calendar-nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-h5);
+    }
+
+    .calendar-event-indicator {
+        width: 12px;
+        height: 12px;
+        font-size: 6px;
+    }
+
+    .calendar-event-more {
+        font-size: 6px;
+        padding: 1px 3px;
+        min-width: 12px;
+    }
+
+    .calendar-add-btn {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
     }
 }
 
-/* Laptops (1200px to 1399.98px) */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
-    :root {
-        --font-size-h1: 64px;
-        --font-size-h2: 48px;
-        --font-size-h3: 40px;
-        --font-size-h4: 32px;
-        --font-size-h5: 24px;
-        --font-size-h6: 16px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 30px;
-        --letter-spacing-lg: 3.8px;
-        --letter-spacing-sm: 0.9px;
+/* Prayer Request Section Styles */
+.prayer-form-section {
+    margin-bottom: var(--padding-xl);
+}
+
+.prayer-form-header {
+    text-align: center;
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-form-header h3 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.prayer-form-subtitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+.prayer-form {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.prayer-form-footer {
+    margin-top: var(--padding-lg);
+    text-align: center;
+    padding-top: var(--padding-lg);
+    border-top: 1px solid var(--color-light);
+}
+
+.login-prompt {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin: 0;
+    opacity: 0.8;
+}
+
+.login-link-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: var(--padding-xs);
+    transition: color 0.3s ease;
+}
+
+.login-link-btn:hover {
+    color: var(--color-dark);
+}
+
+.form-group {
+    margin-bottom: var(--padding-lg);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--padding-md);
+    border: 1px solid var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-dark);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: var(--padding-md);
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--color-dark);
+    color: var(--color-primary);
+}
+
+/* Prayer Request Cards */
+.prayer-card {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-card.priority-urgent {
+    border-left: 5px solid #ff4444;
+}
+
+.prayer-card.priority-high {
+    border-left: 5px solid #ff8800;
+}
+
+.prayer-card.priority-normal {
+    border-left: 5px solid var(--color-primary);
+}
+
+.prayer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.prayer-card.answered {
+    border-color: var(--color-dark);
+    background: var(--color-light);
+}
+
+.prayer-header {
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-title-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-sm);
+}
+
+.prayer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-sm);
+}
+
+.prayer-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+    flex: 1;
+}
+
+.category-badge {
+    background: var(--color-light);
+    color: var(--color-dark);
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    border: 1px solid var(--color-primary);
+}
+
+.priority-badge {
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.priority-badge.priority-urgent {
+    background: #ff4444;
+    color: white;
+}
+
+.priority-badge.priority-high {
+    background: #ff8800;
+    color: white;
+}
+
+.priority-badge.priority-normal {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.answered-badge {
+    background: var(--color-dark);
+    color: var(--color-primary);
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.prayer-description {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    line-height: 1.6;
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+}
+
+.answered-date {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+.prayer-date {
+    font-weight: var(--font-weight-bold);
+}
+
+.prayer-requester {
+    font-style: italic;
+}
+
+/* Responsive Prayer Section */
+@media (max-width: 768px) {
+    .prayer-form {
+        padding: var(--padding-lg);
+    }
+
+    .prayer-form-header h3 {
+        font-size: var(--font-size-h4);
+    }
+
+    .prayer-badges {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

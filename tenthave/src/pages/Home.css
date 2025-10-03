@@ -144,6 +144,11 @@
     color: var(--color-dark);
 }
 
+.view-all-sermons {
+    text-align: center;
+    margin-top: var(--padding-xl);
+}
+
 
 
 /* Fade-in animation */

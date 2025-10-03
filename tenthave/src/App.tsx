@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Sermon from "./pages/Sermon";
-import Members from "./pages/Members";
 import Contact from "./pages/Contact";
 import Bulletin from "./pages/Bulletin";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./pages/scrollToTop";
+import Login from "./pages/Login";
 
 const App: React.FC = () => {
   return (
@@ -21,8 +21,8 @@ const App: React.FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/bulletin" element={<Bulletin />} />
         <Route path="/sermon" element={<Sermon />} />
-        <Route path="/members" element={<Members />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
 
       <Footer />

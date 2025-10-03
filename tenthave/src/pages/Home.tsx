@@ -17,10 +17,10 @@ import sermonCardImg from "../assets/sermonCardImg.svg";
 const HomeHeroSection: React.FC = () => (
   <HeroSection
     title="10TH AVENUE BIBLE CHAPEL"
-    subtitle={CHURCH_INFO.welcomeMessage}
-    description={CHURCH_INFO.tagline}
+    subtitle="WELCOME TO OUR CHURCH"
+    description="A SMALL BIBLE BELIEVING CHRISTIAN FELLOWSHIP"
     showButton={true}
-    buttonText="JOIN US"
+    buttonText="LEARN MORE"
     buttonLink="#"
   />
 );
@@ -85,23 +85,28 @@ const SpecialServicesSection: React.FC = () => (
   </section>
 );
 
-// Recent Sermons Section Component
-const RecentSermonsSection: React.FC = () => (
+// Recorded Sermons Section Component
+const RecordedSermonsSection: React.FC = () => (
   <section className="recordedSermon">
     <ScrollReveal className="recentSermonsHeading">
-      <h2>RECENT SERMONS</h2>
+      <h2>RECORDED SERMONS</h2>
     </ScrollReveal>
     <SermonCard
-      name="Recent Sermons"
+      name="UPCOMING EVENT"
       image={sermonCardImg}
       link="/sermon"
       title="WATCH AND LISTEN TO OUR SERMONS"
       description="Join us in person or online through our sermons."
       time={{ day: "Sunday", start: "11:30 AM", end: "12:30 PM" }}
       location="7103 - 10th Ave., Burnaby, BC V3N 2R5"
-      buttonText="VIEW SERMONS"
+      buttonText="WATCH"
       variant="featured"
     />
+    <div className="view-all-sermons">
+      <Link to="/sermon">
+        <Button variant="button-primary" buttonText="VIEW ALL SERMONS" />
+      </Link>
+    </div>
   </section>
 );
 
@@ -112,7 +117,7 @@ const Home: React.FC = () => {
       <HomeHeroSection />
       <WeeklyServicesSection />
       <SpecialServicesSection />
-      <RecentSermonsSection />
+      <RecordedSermonsSection />
     </div>
   );
 };

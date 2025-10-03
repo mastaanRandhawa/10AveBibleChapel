@@ -12,6 +12,7 @@ interface HeroSectionProps {
   buttonLink?: string;
   backgroundImage?: string;
   className?: string;
+  variant?: "default" | "simple";
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
@@ -19,28 +20,36 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   subtitle,
   description,
   showButton = false,
-  buttonText = "JOIN US",
+  buttonText = "LEARN MORE",
   buttonLink = "#",
   backgroundImage = "url(../assets/churchPicture.svg)",
   className = "",
+  variant = "default",
 }) => {
+  if (variant === "simple") {
+    return (
+      <ScrollReveal className={`hero hero--simple ${className}`}>
+        <div className="hero-overlay hero-overlay--simple">
+          <h1 className="hero-title hero-title--simple">{title}</h1>
+        </div>
+      </ScrollReveal>
+    );
+  }
+
   return (
     <ScrollReveal className={`hero ${className}`}>
       <div className="hero-overlay">
         {subtitle && <h2 className="hero-subtitle">{subtitle}</h2>}
         <h1 className="hero-title">{title}</h1>
-        {description && (
-          <div className="hero-description">
-            <h3>—</h3>
-            <h3 className="text-hero-description">{description}</h3>
-          </div>
-        )}
+        {description && <p className="hero-description">{description}</p>}
         {showButton && (
-          <Button
-            variant="button-primary"
-            buttonText={buttonText}
-            buttonLink={buttonLink}
-          />
+          <div className="hero-button">
+            <Button
+              variant="button-primary"
+              buttonText={buttonText}
+              buttonLink={buttonLink}
+            />
+          </div>
         )}
       </div>
     </ScrollReveal>

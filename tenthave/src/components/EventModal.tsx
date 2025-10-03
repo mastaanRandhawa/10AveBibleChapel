@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { CalendarEvent } from "./Calendar";
+import {
+  EVENT_CATEGORIES,
+  DEFAULT_EVENT_COLOR,
+  EVENT_COLORS,
+} from "../constants";
 import "./EventModal.css";
 
 interface EventModalProps {
@@ -22,19 +27,19 @@ const EventModal: React.FC<EventModalProps> = ({
     description: string;
     date: string;
     time: string;
-    type: "announcement" | "event" | "reminder";
-    priority: "high" | "medium" | "low";
     location: string;
     speaker: string;
+    category: string;
+    color: string;
   }>({
     title: "",
     description: "",
     date: selectedDate,
     time: "",
-    type: "event",
-    priority: "medium",
     location: "",
     speaker: "",
+    category: "",
+    color: DEFAULT_EVENT_COLOR,
   });
 
   // Update form data when editing event or selected date changes
@@ -45,10 +50,10 @@ const EventModal: React.FC<EventModalProps> = ({
         description: editingEvent.description,
         date: editingEvent.date,
         time: editingEvent.time || "",
-        type: editingEvent.type,
-        priority: editingEvent.priority,
         location: editingEvent.location || "",
         speaker: editingEvent.speaker || "",
+        category: editingEvent.category || "",
+        color: editingEvent.color || DEFAULT_EVENT_COLOR,
       });
     } else {
       setFormData((prev) => ({
@@ -57,10 +62,10 @@ const EventModal: React.FC<EventModalProps> = ({
         title: "",
         description: "",
         time: "",
-        type: "event",
-        priority: "medium",
         location: "",
         speaker: "",
+        category: "",
+        color: DEFAULT_EVENT_COLOR,
       }));
     }
   }, [editingEvent, selectedDate]);
@@ -71,10 +76,21 @@ const EventModal: React.FC<EventModalProps> = ({
     >
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+    // If category is selected, automatically set the color
+    if (name === "category" && value) {
+      const selectedCategory = EVENT_CATEGORIES.find((cat) => cat.id === value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        color: selectedCategory ? selectedCategory.color : prev.color,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -90,10 +106,10 @@ const EventModal: React.FC<EventModalProps> = ({
       description: formData.description.trim(),
       date: formData.date,
       time: formData.time || undefined,
-      type: formData.type,
-      priority: formData.priority,
       location: formData.location.trim() || undefined,
       speaker: formData.speaker.trim() || undefined,
+      category: formData.category || undefined,
+      color: formData.color,
     };
 
     onSave(eventData);
@@ -106,10 +122,10 @@ const EventModal: React.FC<EventModalProps> = ({
       description: "",
       date: selectedDate,
       time: "",
-      type: "event",
-      priority: "medium",
       location: "",
       speaker: "",
+      category: "",
+      color: DEFAULT_EVENT_COLOR,
     });
     onClose();
   };
@@ -178,37 +194,7 @@ const EventModal: React.FC<EventModalProps> = ({
                 onChange={handleInputChange}
               />
             </div>
-
-            <div className="form-group">
-              <label htmlFor="type">Type</label>
-              <select
-                id="type"
-                name="type"
-                value={formData.type}
-                onChange={handleInputChange}
-              >
-                <option value="event">Event</option>
-                <option value="announcement">Announcement</option>
-                <option value="reminder">Reminder</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="priority">Priority</label>
-              <select
-                id="priority"
-                name="priority"
-                value={formData.priority}
-                onChange={handleInputChange}
-              >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-
+            ``{" "}
             <div className="form-group">
               <label htmlFor="location">Location</label>
               <input
@@ -232,6 +218,41 @@ const EventModal: React.FC<EventModalProps> = ({
               onChange={handleInputChange}
               placeholder="Speaker or organizer name"
             />
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
+              >
+                <option value="">Select a category</option>
+                {EVENT_CATEGORIES.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="color">Color</label>
+              <select
+                id="color"
+                name="color"
+                value={formData.color}
+                onChange={handleInputChange}
+              >
+                {EVENT_COLORS.map((color) => (
+                  <option key={color.id} value={color.value}>
+                    {color.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className="event-modal-actions">

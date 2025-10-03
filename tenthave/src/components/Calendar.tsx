@@ -1,6 +1,23 @@
 import React, { useState, useMemo } from "react";
 import "./Calendar.css";
 
+// Helper function to get contrasting text color
+const getContrastColor = (hexColor: string): string => {
+  // Remove # if present
+  const hex = hexColor.replace("#", "");
+
+  // Convert to RGB
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+
+  // Calculate luminance
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  // Return black for light colors, white for dark colors
+  return luminance > 0.5 ? "#000000" : "#FFFFFF";
+};
+
 // Event interface
 export interface CalendarEvent {
   id: string;
@@ -8,10 +25,10 @@ export interface CalendarEvent {
   description: string;
   date: string; // YYYY-MM-DD format
   time?: string; // HH:MM format
-  type: "announcement" | "event" | "reminder";
-  priority: "high" | "medium" | "low";
   location?: string;
   speaker?: string;
+  category?: string; // Event category for color coding
+  color?: string; // Custom color for the event
 }
 
 interface CalendarProps {
@@ -93,32 +110,6 @@ const Calendar: React.FC<CalendarProps> = ({
     "December",
   ];
 
-  const getEventTypeIcon = (type: string) => {
-    switch (type) {
-      case "announcement":
-        return "📢";
-      case "event":
-        return "📅";
-      case "reminder":
-        return "⏰";
-      default:
-        return "📄";
-    }
-  };
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "high":
-        return "event-high";
-      case "medium":
-        return "event-medium";
-      case "low":
-        return "event-low";
-      default:
-        return "";
-    }
-  };
-
   return (
     <div className="calendar-container">
       {/* Calendar Header */}
@@ -184,20 +175,27 @@ const Calendar: React.FC<CalendarProps> = ({
               {/* Event indicators */}
               {day.events.length > 0 && (
                 <div className="calendar-events">
-                  {day.events.slice(0, 3).map((event, eventIndex) => (
+                  {day.events.slice(0, 2).map((event, eventIndex) => (
                     <div
                       key={event.id}
-                      className={`calendar-event-indicator ${getPriorityColor(
-                        event.priority
-                      )}`}
-                      title={`${getEventTypeIcon(event.type)} ${event.title}`}
+                      className="calendar-event-item"
+                      style={{
+                        backgroundColor: event.color || "#FBCB9C",
+                        color: getContrastColor(event.color || "#FBCB9C"),
+                      }}
+                      title={`${event.title}${
+                        event.time ? ` at ${event.time}` : ""
+                      }`}
                     >
-                      {getEventTypeIcon(event.type)}
+                      <span className="event-title-text">{event.title}</span>
                     </div>
                   ))}
-                  {day.events.length > 3 && (
-                    <div className="calendar-event-more">
-                      +{day.events.length - 3}
+                  {day.events.length > 2 && (
+                    <div
+                      className="calendar-event-more"
+                      title={`${day.events.length - 2} more events`}
+                    >
+                      +{day.events.length - 2}
                     </div>
                   )}
                 </div>

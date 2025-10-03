@@ -38,11 +38,69 @@
     margin-bottom: var(--padding-xl);
 }
 
+.prayer-form-header {
+    text-align: center;
+    margin-bottom: var(--padding-lg);
+}
+
+.prayer-form-header h3 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.prayer-form-subtitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
 .prayer-form {
     background: var(--color-bg);
     padding: var(--padding-xl);
     border: 2px solid var(--color-primary);
     border-bottom: 15px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.prayer-form-footer {
+    margin-top: var(--padding-lg);
+    text-align: center;
+    padding-top: var(--padding-lg);
+    border-top: 1px solid var(--color-light);
+}
+
+.login-prompt {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin: 0;
+    opacity: 0.8;
+}
+
+.login-link-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: var(--padding-xs);
+    transition: color 0.3s ease;
+}
+
+.login-link-btn:hover {
+    color: var(--color-dark);
 }
 
 .prayer-form h3 {

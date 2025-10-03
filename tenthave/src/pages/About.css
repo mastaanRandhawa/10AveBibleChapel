@@ -1,243 +1,426 @@
-/* About-specific variables */
-:root {
-    --color-lightish: #f6f0ea;
-    --margin-in-between: 10%;
-}
-
+/* About Page Styling - Professional Design */
 
 .about-page-wrapper {
     font-family: var(--font-primary);
-    text-align: center;
+    background-color: var(--color-bg);
+    min-height: 100vh;
 }
 
-.about-hero {
-    position: relative;
-    text-align: center;
-}
-
-.about-image {
-    margin-top: var(--padding-lg);
-    width: 40%;
-    height: auto;
-    object-fit: cover;
-}
-
-.about-hero {
-    background: url(../assets/aboutus.avif) no-repeat center center/cover;
-    min-height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Content Container */
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--padding-xl) var(--padding-lg);
     color: var(--color-dark);
 }
 
-.about-content {
-    padding: var(--padding-xl) var(--padding-lg);
+/* Section Dividers */
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    margin: var(--padding-xl) 0;
+    border: none;
+}
+
+/* Who We Are Section */
+.who-we-are {
+    margin: var(--padding-xl) 0;
+}
+
+.who-we-are .section-content {
     max-width: 900px;
     margin: 0 auto;
-    color: var(--color-dark);
-    margin-bottom: var(--margin-in-between);
-}
-
-.who-we-are {
-    padding-bottom: var(--margin-in-between);
+    text-align: left;
 }
 
 .section-heading {
-    font-size: var(--font-size-h3);
+    font-size: var(--font-size-h2);
     font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    text-align: center;
+    margin-bottom: var(--padding-xl);
+    letter-spacing: var(--letter-spacing-sm);
+    position: relative;
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.content-grid {
+    display: grid;
+    gap: var(--padding-lg);
+}
+
+.content-text {
+    line-height: 1.8;
+}
+
+.content-text p {
+    font-size: var(--font-size-h5);
+    margin-bottom: var(--padding-lg);
+    color: var(--color-dark);
+    text-align: justify;
+}
+
+/* Verse Highlight */
+.verse-highlight {
+    background: linear-gradient(135deg, var(--color-light), #f9f8f5);
+    border-left: 4px solid var(--color-primary);
+    padding: var(--padding-lg);
+    margin: var(--padding-lg) 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.verse-highlight blockquote {
+    font-size: var(--font-size-h4);
+    font-style: italic;
+    color: var(--color-dark);
+    margin: 0 0 var(--padding-sm) 0;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.verse-highlight cite {
+    display: block;
+    text-align: center;
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    font-style: normal;
+    opacity: 0.8;
+}
+
+/* Beliefs Section */
+.beliefs-section {
+    margin: var(--padding-xl) 0;
+}
+
+/* Beliefs Images */
+.beliefs-images {
+    display: flex;
+    justify-content: center;
+    gap: var(--padding-lg);
+    margin-bottom: var(--padding-xl);
+    flex-wrap: wrap;
+}
+
+.belief-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.belief-image:hover {
+    transform: translateY(-5px);
+}
+
+.belief-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.beliefs-header {
+    text-align: center;
+    margin-bottom: var(--padding-xl);
+}
+
+.mission-subtitle {
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    margin-bottom: var(--padding-sm);
+    opacity: 0.8;
 }
 
 .section-heading2 {
-    font-size: var(--font-size-h3);
-    padding-top: var(--margin-in-between);
+    font-size: var(--font-size-h2);
     font-weight: var(--font-weight-bold);
-}
-
-.about-content p {
-    font-size: var(--font-size-h5);
-    line-height: 1.6;
-    margin-bottom: var(--padding-lg);
-
-}
-
-.about-content blockquote {
-    margin: var(--padding-md) 0;
-    padding-left: var(--padding-md);
-    border-left: 4px solid var(--color-primary);
-    font-style: italic;
     color: var(--color-dark);
+    margin-bottom: var(--padding-md);
+    letter-spacing: var(--letter-spacing-sm);
+    position: relative;
 }
 
-.beliefs-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: var(--padding-md);
+.section-heading2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
 }
 
-.beliefs-list li {
-    margin-bottom: var(--padding-lg);
+.section-subtitle {
+    font-size: var(--font-size-h5);
+    color: var(--color-dark);
+    opacity: 0.8;
     margin-top: var(--padding-lg);
-    padding-bottom: var(--padding-lg);
-    padding-top: var(--padding-lg);
-    font-size: var(--font-size-h5);
 }
 
-.beliefs-list li:nth-child(2n) {
-    background-color: var(--color-light);
+/* Beliefs Container */
+.beliefs-container {
+    margin-top: var(--padding-xl);
 }
 
-.about-content blockquote {
-    font-style: italic;
+/* Two Column Layout */
+.beliefs-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--padding-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.beliefs-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-lg);
+}
+
+/* Belief Items */
+.belief-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--padding-md);
+    padding: var(--padding-md);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.belief-item:hover {
+    background-color: rgba(251, 203, 156, 0.05);
+}
+
+.belief-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-dark);
+    border-radius: 50%;
+    margin-top: var(--padding-sm);
+    flex-shrink: 0;
+}
+
+.belief-content {
+    flex: 1;
+}
+
+.belief-text {
     font-size: var(--font-size-h5);
-    border: none;
+    line-height: 1.7;
     color: var(--color-dark);
-    padding-top: 0;
-    margin-top: 0;
-    margin-bottom: var(--margin-in-between);
+    margin-bottom: var(--padding-sm);
+    text-align: left;
 }
 
-/* Fade-in animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.belief-reference {
+    margin-top: var(--padding-xs);
 }
 
-/* Initial state before scrolling */
+.belief-reference strong {
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-xsm);
+}
+
+/* Elders Section */
+.elders-section {
+    margin: var(--padding-xl) 0;
+    text-align: center;
+}
+
+.elders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--padding-xl);
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: var(--padding-xl);
+}
+
+.elder-card {
+    background: var(--color-bg);
+    border-radius: 12px;
+    padding: var(--padding-xl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.elder-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.elder-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--padding-lg) auto;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.elder-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.elder-info {
+    text-align: center;
+}
+
+.elder-name {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-sm);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.elder-title {
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-lg);
+    opacity: 0.8;
+}
+
+.elder-social {
+    display: flex;
+    justify-content: center;
+    gap: var(--padding-md);
+}
+
+.social-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Scroll Reveal Animation */
 .scroll-reveal {
     opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-/* Class added by JavaScript when element is in viewport */
 .scroll-reveal.visible {
     opacity: 1;
+    transform: translateY(0);
 }
 
-/* Responsive Media Queries */
-
-/* Very Small Devices (up to 375px) */
-@media (max-width: 375px) {
-    :root {
-        --font-size-h1: 28px;
-        --font-size-h2: 22px;
-        --font-size-h3: 18px;
-        --font-size-h4: 12px;
-        --font-size-h5: 10px;
-        --font-size-h6: 8px;
-        --padding-xs: 2px;
-        --padding-sm: 4px;
-        --padding-md: 8px;
-        --padding-lg: 12px;
-        --padding-xl: 16px;
-        --letter-spacing-lg: 2px;
-        --letter-spacing-sm: 0.5px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content {
+        padding: var(--padding-lg) var(--padding-md);
     }
 
+    .beliefs-two-column {
+        grid-template-columns: 1fr;
+        gap: var(--padding-lg);
+    }
+
+    .beliefs-images {
+        gap: var(--padding-md);
+    }
+
+    .belief-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .elders-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-lg);
+    }
+
+    .elder-card {
+        padding: var(--padding-lg);
+    }
+
+    .elder-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .section-heading,
+    .section-heading2 {
+        font-size: var(--font-size-h3);
+    }
+
+    .content-text p {
+        text-align: left;
+    }
+
+    .verse-highlight {
+        padding: var(--padding-md);
+    }
+
+    .verse-highlight blockquote {
+        font-size: var(--font-size-h5);
+    }
 }
 
-/* Extra Small Devices (376px to 575.98px) */
-@media (min-width: 376px) and (max-width: 575.98px) {
-    :root {
-        --font-size-h1: 48px;
-        --font-size-h2: 40px;
-        --font-size-h3: 32px;
-        --font-size-h4: 24px;
-        --font-size-h5: 20px;
-        --font-size-h6: 14px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3px;
-        --letter-spacing-sm: 0.8px;
+@media (max-width: 480px) {
+    .about-content {
+        padding: var(--padding-md) var(--padding-sm);
     }
 
-}
-
-/* Small Devices (576px to 767.98px) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-    :root {
-        --font-size-h1: 56px;
-        --font-size-h2: 42px;
-        --font-size-h3: 36px;
-        --font-size-h4: 28px;
-        --font-size-h5: 22px;
-        --font-size-h6: 15px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.9px;
+    .beliefs-images {
+        flex-direction: column;
+        align-items: center;
     }
 
-}
-
-/* Medium Devices / iPad Portrait (768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    :root {
-        --font-size-h1: 60px;
-        --font-size-h2: 44px;
-        --font-size-h3: 36px;
-        --font-size-h4: 30px;
-        --font-size-h5: 26px;
-        --font-size-h6: 18px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 21px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 1px;
+    .belief-image {
+        width: 120px;
+        height: 120px;
     }
 
-}
-
-/* iPad Landscape (992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.8px;
+    .elder-card {
+        padding: var(--padding-md);
     }
 
-
-}
-
-/* Laptops (1200px to 1399.98px) */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
-    :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 30px;
-        --letter-spacing-lg: 3.8px;
-        --letter-spacing-sm: 0.9px;
+    .elder-image {
+        width: 80px;
+        height: 80px;
     }
 
+    .elder-name {
+        font-size: var(--font-size-h5);
+    }
+
+    .section-heading,
+    .section-heading2 {
+        font-size: var(--font-size-h4);
+    }
+
+    .belief-text {
+        font-size: var(--font-size-h6);
+    }
 }

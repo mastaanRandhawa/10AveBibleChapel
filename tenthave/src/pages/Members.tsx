@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
+import LoginModal from "../components/LoginModal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES } from "../constants";
 import "./Members.css";
 
@@ -192,7 +193,7 @@ const MemberDirectory: React.FC = () => {
         </select>
       </div>
 
-      <div className="members-grid">
+      {/* <div className="members-grid">
         {filteredMembers.map((member) => (
           <div key={member.id} className="member-card">
             <h3>{member.name}</h3>
@@ -214,7 +215,7 @@ const MemberDirectory: React.FC = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -303,7 +304,9 @@ const PrayerRequestCard: React.FC<{ request: PrayerRequest }> = ({
 };
 
 // Prayer Request Form Component
-const PrayerRequestForm: React.FC = () => {
+const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
+  onLoginClick,
+}) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -342,137 +345,61 @@ const PrayerRequestForm: React.FC = () => {
   };
 
   return (
-    <form className="prayer-form" onSubmit={handleSubmit}>
-      <h3>Submit a Prayer Request</h3>
-      <div className="form-group">
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          placeholder="Prayer Request Title"
-          required
-        />
+    <div className="prayer-form-section">
+      <div className="prayer-form-header">
+        <h3>Submit a Prayer Request</h3>
+        <p className="prayer-form-subtitle">
+          Share your prayer needs with our community. All requests are kept
+          confidential and prayed for by our church family.
+        </p>
       </div>
-      <div className="form-group">
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Describe your prayer request"
-          rows={4}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="text"
-          name="requester"
-          value={formData.requester}
-          onChange={handleChange}
-          placeholder="Your Name (optional)"
-        />
-      </div>
-      <div className="form-group">
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="health">🏥 Health & Healing</option>
-          <option value="family">👨‍👩‍👧‍👦 Family</option>
-          <option value="work">💼 Work & Career</option>
-          <option value="spiritual">🙏 Spiritual Growth</option>
-          <option value="community">🌍 Community & Outreach</option>
-          <option value="other">💭 Other</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <select
-          name="priority"
-          value={formData.priority}
-          onChange={handleChange}
-          required
-        >
-          <option value="normal">Normal Priority</option>
-          <option value="high">High Priority</option>
-          <option value="urgent">Urgent</option>
-        </select>
-      </div>
-      <div className="form-group checkbox-group">
-        <label>
+
+      <form className="prayer-form" onSubmit={handleSubmit}>
+        <div className="form-group">
           <input
-            type="checkbox"
-            name="isPrivate"
-            checked={formData.isPrivate}
+            type="text"
+            name="title"
+            value={formData.title}
             onChange={handleChange}
+            placeholder="Prayer Request Title"
+            required
           />
-          Keep this request private (only visible to church leadership)
-        </label>
+        </div>
+        <div className="form-group">
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Describe your prayer request"
+            rows={4}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="requester"
+            value={formData.requester}
+            onChange={handleChange}
+            placeholder="Your Name (optional)"
+          />
+        </div>
+        <button type="submit" className="submit-btn">
+          Submit Prayer Request
+        </button>
+      </form>
+
+      <div className="prayer-form-footer">
+        <p className="login-prompt">
+          Want to view and pray for others?
+          <button className="login-link-btn" onClick={onLoginClick}>
+            Sign in to access prayer requests
+          </button>
+        </p>
       </div>
-      <button type="submit" className="submit-btn">
-        Submit Prayer Request
-      </button>
-    </form>
+    </div>
   );
 };
-
-// Service Schedule Component
-const ServiceSchedule: React.FC = () => (
-  <div className="service-schedule">
-    <h2>Service Schedule</h2>
-    <div className="schedule-grid">
-      {WEEKLY_SERVICES.map((service) => (
-        <div key={service.id} className="schedule-item">
-          <h3>{service.name}</h3>
-          <p className="schedule-time">
-            {service.time.day} {service.time.start} - {service.time.end}
-          </p>
-          <p className="schedule-description">{service.description}</p>
-          {service.zoomLink && (
-            <a
-              href={service.zoomLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="zoom-link"
-            >
-              Join Online
-            </a>
-          )}
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-// Ministry Opportunities Component
-const MinistryOpportunities: React.FC = () => (
-  <div className="ministry-opportunities">
-    <h2>Ministry Opportunities</h2>
-    <div className="opportunities-grid">
-      {SPECIAL_MINISTRIES.map((ministry) => (
-        <div
-          key={ministry.id}
-          className={`opportunity-card ${!ministry.isActive ? "inactive" : ""}`}
-        >
-          <h3>{ministry.name}</h3>
-          <p>{ministry.description}</p>
-          {ministry.isActive ? (
-            <button
-              className="volunteer-link"
-              onClick={() => alert("Contact the church office to volunteer!")}
-            >
-              Volunteer Here
-            </button>
-          ) : (
-            <span className="inactive-badge">Currently Inactive</span>
-          )}
-        </div>
-      ))}
-    </div>
-  </div>
-);
 
 // Main Members Component
 const Members: React.FC = () => {
@@ -480,6 +407,7 @@ const Members: React.FC = () => {
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const filteredRequests = prayerRequests.filter((request) => {
     const matchesCategory =
@@ -496,78 +424,35 @@ const Members: React.FC = () => {
     return matchesCategory && matchesStatus && matchesSearch;
   });
 
+  const handleLoginClick = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const handleLoginModalClose = () => {
+    setIsLoginModalOpen(false);
+  };
+
+  const handleLoginSuccess = (userData: any) => {
+    console.log("User logged in:", userData);
+    // Handle successful login - could redirect to prayer requests view
+    setIsLoginModalOpen(false);
+  };
+
   return (
     <div className="members-page-wrapper">
-      <HeroSection
-        title="Members & Prayer"
-        subtitle="WELCOME TO OUR CHURCH"
-        description="Welcome to the members area. Access resources, connect with your church family, and join us in prayer."
-      />
+      <HeroSection title="MEMBERS & PRAYER" variant="simple" />
 
       <div className="members-content">
         <ScrollReveal className="prayer-form-section">
-          <PrayerRequestForm />
-        </ScrollReveal>
-
-        <ScrollReveal className="directory-section">
-          <MemberDirectory />
-        </ScrollReveal>
-
-        <ScrollReveal className="prayer-requests-section">
-          <div className="requests-header">
-            <h2>Current Prayer Requests</h2>
-            <div className="filters">
-              <input
-                type="text"
-                placeholder="Search requests..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
-              <select
-                value={filterCategory}
-                onChange={(e) => setFilterCategory(e.target.value)}
-                className="category-filter"
-              >
-                <option value="all">All Categories</option>
-                <option value="health">Health & Healing</option>
-                <option value="family">Family</option>
-                <option value="work">Work & Career</option>
-                <option value="spiritual">Spiritual Growth</option>
-                <option value="community">Community & Outreach</option>
-                <option value="other">Other</option>
-              </select>
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="status-filter"
-              >
-                <option value="all">All Requests</option>
-                <option value="pending">Pending</option>
-                <option value="answered">Answered</option>
-              </select>
-            </div>
-          </div>
-          <div className="prayer-grid">
-            {filteredRequests.map((request) => (
-              <PrayerRequestCard key={request.id} request={request} />
-            ))}
-            {filteredRequests.length === 0 && (
-              <div className="no-requests">
-                <p>No prayer requests found matching your criteria.</p>
-              </div>
-            )}
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal className="schedule-section">
-          <ServiceSchedule />
-        </ScrollReveal>
-
-        <ScrollReveal className="ministry-section">
-          <MinistryOpportunities />
+          <PrayerRequestForm onLoginClick={handleLoginClick} />
         </ScrollReveal>
       </div>
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={handleLoginModalClose}
+        onLogin={handleLoginSuccess}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { CalendarEvent } from "./Calendar";
+import { EVENT_CATEGORIES } from "../constants";
 import "./EventDetailsModal.css";
 
 interface EventDetailsModalProps {
@@ -37,38 +38,18 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
     return `${displayHour}:${minutes} ${ampm}`;
   };
 
-  const getEventTypeIcon = (type: string) => {
-    switch (type) {
-      case "announcement":
-        return "📢";
-      case "event":
-        return "📅";
-      case "reminder":
-        return "⏰";
-      default:
-        return "📄";
-    }
+  const getCategoryName = (categoryId: string) => {
+    const category = EVENT_CATEGORIES.find((cat) => cat.id === categoryId);
+    return category ? category.name : "Uncategorized";
   };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "high":
-        return "priority-high";
-      case "medium":
-        return "priority-medium";
-      case "low":
-        return "priority-low";
-      default:
-        return "";
-    }
-  };
-
-  const getPriorityLabel = (priority: string) => {
-    return priority.charAt(0).toUpperCase() + priority.slice(1);
-  };
-
-  const getTypeLabel = (type: string) => {
-    return type.charAt(0).toUpperCase() + type.slice(1);
+  const getContrastColor = (hexColor: string): string => {
+    const hex = hexColor.replace("#", "");
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.5 ? "#000000" : "#FFFFFF";
   };
 
   return (
@@ -84,37 +65,31 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
         <div className="event-details-content">
           {events.length === 0 ? (
             <div className="no-events">
-              <div className="no-events-icon">📅</div>
+              <div className="no-events-icon">•</div>
               <h3>No events scheduled</h3>
               <p>There are no events scheduled for this date.</p>
             </div>
           ) : (
             <div className="events-list">
               {events.map((event) => (
-                <div
-                  key={event.id}
-                  className={`event-details-card ${getPriorityColor(
-                    event.priority
-                  )}`}
-                >
+                <div key={event.id} className="event-details-card">
                   <div className="event-details-card-header">
-                    <div className="event-type-icon">
-                      {getEventTypeIcon(event.type)}
+                    <div
+                      className="event-type-icon"
+                      style={{
+                        backgroundColor: event.color || "#FBCB9C",
+                        color: getContrastColor(event.color || "#FBCB9C"),
+                      }}
+                    >
+                      •
                     </div>
                     <div className="event-title-section">
                       <h3 className="event-title">{event.title}</h3>
-                      <div className="event-meta">
-                        <span
-                          className={`priority-badge ${getPriorityColor(
-                            event.priority
-                          )}`}
-                        >
-                          {getPriorityLabel(event.priority)}
+                      {event.category && (
+                        <span className="event-category">
+                          {getCategoryName(event.category)}
                         </span>
-                        <span className="type-badge">
-                          {getTypeLabel(event.type)}
-                        </span>
-                      </div>
+                      )}
                     </div>
                     <div className="event-actions">
                       <button
@@ -122,7 +97,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                         onClick={() => onEditEvent(event)}
                         title="Edit event"
                       >
-                        ✏️
+                        Edit
                       </button>
                       <button
                         className="delete-btn"
@@ -137,7 +112,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                         }}
                         title="Delete event"
                       >
-                        🗑️
+                        Delete
                       </button>
                     </div>
                   </div>
@@ -151,7 +126,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                   <div className="event-details-info">
                     {event.time && (
                       <div className="event-detail-item">
-                        <span className="event-detail-icon">🕐</span>
+                        <span className="event-detail-icon">Time</span>
                         <span className="event-detail-label">Time:</span>
                         <span className="event-detail-value">
                           {formatTime(event.time)}
@@ -161,7 +136,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
                     {event.location && (
                       <div className="event-detail-item">
-                        <span className="event-detail-icon">📍</span>
+                        <span className="event-detail-icon">Location</span>
                         <span className="event-detail-label">Location:</span>
                         <span className="event-detail-value">
                           {event.location}
@@ -171,7 +146,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
                     {event.speaker && (
                       <div className="event-detail-item">
-                        <span className="event-detail-icon">👤</span>
+                        <span className="event-detail-icon">Speaker</span>
                         <span className="event-detail-label">Speaker:</span>
                         <span className="event-detail-value">
                           {event.speaker}

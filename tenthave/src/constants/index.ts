@@ -3,9 +3,8 @@ import { NavigationItem, Service, Ministry } from "../types";
 // Navigation items
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { path: "/", label: "HOME" },
-  { path: "/bulletin", label: "BULLETIN" },
+  { path: "/bulletin", label: "BULLETIN & PRAYER" },
   { path: "/sermon", label: "SERMONS" },
-  { path: "/members", label: "MEMBERS & PRAYER" },
   { path: "/contact", label: "CONTACT US" },
   { path: "/about", label: "ABOUT US" },
 ];
@@ -93,3 +92,67 @@ export const SCROLL_REVEAL_CONFIG = {
   threshold: 0.1,
   rootMargin: "0px 0px -50px 0px",
 };
+
+// Event categories and colors
+export const EVENT_CATEGORIES = [
+  {
+    id: "worship",
+    name: "Worship Service",
+    color: "#8B4513", // Saddle Brown
+    description: "Regular worship services and church meetings",
+  },
+  {
+    id: "prayer",
+    name: "Prayer Meeting",
+    color: "#4B0082", // Indigo
+    description: "Prayer meetings and spiritual gatherings",
+  },
+  {
+    id: "youth",
+    name: "Youth Group",
+    color: "#FF6347", // Tomato
+    description: "Youth activities and meetings",
+  },
+  {
+    id: "bible-study",
+    name: "Bible Study",
+    color: "#2E8B57", // Sea Green
+    description: "Bible study sessions and classes",
+  },
+  {
+    id: "fellowship",
+    name: "Fellowship",
+    color: "#FF8C00", // Dark Orange
+    description: "Social gatherings and fellowship events",
+  },
+  {
+    id: "ministry",
+    name: "Ministry",
+    color: "#4169E1", // Royal Blue
+    description: "Ministry activities and outreach",
+  },
+  {
+    id: "special",
+    name: "Special Event",
+    color: "#DC143C", // Crimson
+    description: "Special occasions and celebrations",
+  },
+  {
+    id: "meeting",
+    name: "Meeting",
+    color: "#696969", // Dim Gray
+    description: "Administrative and planning meetings",
+  },
+];
+
+// Default event color
+export const DEFAULT_EVENT_COLOR = "#FBCB9C"; // Light orange from your theme
+
+// Predefined color options for events
+export const EVENT_COLORS = [
+  { id: "default", name: "Default", value: "#FBCB9C" },
+  { id: "blue", name: "Blue", value: "#4169E1" },
+  { id: "green", name: "Green", value: "#2E8B57" },
+  { id: "red", name: "Red", value: "#DC143C" },
+  { id: "purple", name: "Purple", value: "#4B0082" },
+];
