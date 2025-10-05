@@ -51,23 +51,23 @@
     margin-top: var(--padding-xl);
 }
 
-/* Calendar Section */
-.bulletin-calendar-section {
+/* Section Headers */
+.section-header {
+    text-align: center;
     margin-bottom: var(--padding-xl);
 }
 
-.bulletin-calendar-section h2 {
+.section-header h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h3);
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
-    margin-bottom: var(--padding-xl);
-    text-align: center;
+    margin-bottom: var(--padding-md);
     letter-spacing: var(--letter-spacing-sm);
     position: relative;
 }
 
-.bulletin-calendar-section h2::after {
+.section-header h2::after {
     content: '';
     position: absolute;
     bottom: -8px;
@@ -77,6 +77,21 @@
     height: 2px;
     background: linear-gradient(90deg, var(--color-primary), #f0d4a8);
     border-radius: 1px;
+}
+
+.section-header p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Calendar Section */
+.bulletin-calendar-section {
+    margin-bottom: var(--padding-xl);
 }
 
 /* Professional Calendar Container */
@@ -635,6 +650,23 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
     border: 1px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--padding-xs);
+}
+
+.category-badge::before {
+    content: attr(data-icon);
+    background: var(--color-primary);
+    color: var(--color-dark);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
 }
 
 .priority-badge {
@@ -702,6 +734,194 @@
     font-style: italic;
 }
 
+/* Prayer Requests Section */
+.prayer-requests-section {
+    margin-bottom: var(--padding-xl);
+}
+
+.prayer-login-prompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.prayer-login-card {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.prayer-login-icon {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--padding-md);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.prayer-login-card h3 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--padding-md);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.prayer-login-card p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    line-height: 1.6;
+    margin-bottom: var(--padding-lg);
+    opacity: 0.8;
+}
+
+.prayer-login-btn {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
+    padding: var(--padding-md) var(--padding-xl);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(251, 203, 156, 0.3);
+}
+
+.prayer-login-btn:hover {
+    background: var(--color-dark);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.prayer-requests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--padding-lg);
+    margin-bottom: var(--padding-xl);
+}
+
+.view-all-prayers {
+    text-align: center;
+    margin-top: var(--padding-xl);
+}
+
+.view-all-btn {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
+    padding: var(--padding-md) var(--padding-xl);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(251, 203, 156, 0.3);
+}
+
+.view-all-btn:hover {
+    background: var(--color-dark);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Announcements Section */
+.announcements-section {
+    margin-bottom: var(--padding-xl);
+}
+
+.announcements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--padding-lg);
+}
+
+.announcement-card {
+    background: var(--color-bg);
+    padding: var(--padding-xl);
+    border: 2px solid var(--color-primary);
+    border-bottom: 15px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.announcement-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.announcement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--padding-md);
+    gap: var(--padding-md);
+}
+
+.announcement-header h3 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0;
+    flex: 1;
+}
+
+.announcement-date {
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 1px);
+    color: var(--color-dark);
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.announcement-card p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-dark);
+    line-height: 1.6;
+    margin-bottom: var(--padding-md);
+}
+
+.announcement-meta {
+    display: flex;
+    gap: var(--padding-sm);
+    flex-wrap: wrap;
+}
+
+.announcement-category {
+    background: var(--color-light);
+    color: var(--color-dark);
+    padding: var(--padding-xs) var(--padding-sm);
+    font-family: var(--font-primary);
+    font-size: calc(var(--font-size-h6) - 2px);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    border: 1px solid var(--color-primary);
+}
+
+
 /* Responsive Prayer Section */
 @media (max-width: 768px) {
     .prayer-form {
@@ -715,5 +935,38 @@
     .prayer-badges {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .prayer-requests-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-md);
+    }
+
+    .announcements-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-md);
+    }
+
+    .announcement-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-sm);
+    }
+
+    .announcement-date {
+        align-self: flex-end;
+    }
+
+    .prayer-login-card {
+        padding: var(--padding-lg);
+        margin: 0 var(--padding-md);
+    }
+
+    .prayer-login-icon {
+        font-size: 1.25rem;
+    }
+
+    .prayer-login-card h3 {
+        font-size: var(--font-size-h5);
     }
 }

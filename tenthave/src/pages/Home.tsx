@@ -101,6 +101,7 @@ const RecordedSermonsSection: React.FC = () => (
       location="7103 - 10th Ave., Burnaby, BC V3N 2R5"
       buttonText="WATCH"
       variant="featured"
+      showImage={true}
     />
     <div className="view-all-sermons">
       <Link to="/sermon">

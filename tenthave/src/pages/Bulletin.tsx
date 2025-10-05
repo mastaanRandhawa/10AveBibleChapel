@@ -28,7 +28,7 @@ const MOCK_PRAYER_REQUESTS: PrayerRequest[] = [
     title: "Health and Healing",
     description:
       "Praying for strength and recovery during this difficult time. Please pray for complete healing and restoration.",
-    requester: "Anonymous",
+    requester: "Sarah M.",
     date: "2024-01-15",
     isAnswered: false,
     category: "health",
@@ -40,7 +40,7 @@ const MOCK_PRAYER_REQUESTS: PrayerRequest[] = [
     title: "Family Unity",
     description:
       "Praying for reconciliation and peace within our family. We need God's intervention to heal broken relationships.",
-    requester: "Anonymous",
+    requester: "Michael R.",
     date: "2024-01-14",
     isAnswered: false,
     category: "family",
@@ -52,13 +52,74 @@ const MOCK_PRAYER_REQUESTS: PrayerRequest[] = [
     title: "Job Opportunities",
     description:
       "Seeking God's guidance for new employment opportunities. Praying for the right doors to open.",
-    requester: "Anonymous",
+    requester: "Jennifer L.",
     date: "2024-01-13",
     isAnswered: true,
     category: "work",
     priority: "normal",
     isPrivate: false,
     answeredDate: "2024-01-20",
+  },
+  {
+    id: "4",
+    title: "Spiritual Growth",
+    description:
+      "Praying for deeper understanding of God's word and stronger faith during this season of growth.",
+    requester: "David K.",
+    date: "2024-01-12",
+    isAnswered: false,
+    category: "spiritual",
+    priority: "normal",
+    isPrivate: false,
+  },
+  {
+    id: "5",
+    title: "Community Outreach",
+    description:
+      "Praying for our church's outreach programs and that we may reach more people in our community.",
+    requester: "Pastor John",
+    date: "2024-01-11",
+    isAnswered: false,
+    category: "community",
+    priority: "high",
+    isPrivate: false,
+  },
+  {
+    id: "6",
+    title: "Mission Trip Safety",
+    description:
+      "Praying for safety and success for our upcoming mission trip to Guatemala next month.",
+    requester: "Mission Team",
+    date: "2024-01-10",
+    isAnswered: false,
+    category: "community",
+    priority: "urgent",
+    isPrivate: false,
+  },
+  {
+    id: "7",
+    title: "Financial Provision",
+    description:
+      "Praying for God's provision during this challenging financial season for our family.",
+    requester: "Anonymous",
+    date: "2024-01-09",
+    isAnswered: true,
+    category: "work",
+    priority: "high",
+    isPrivate: true,
+    answeredDate: "2024-01-18",
+  },
+  {
+    id: "8",
+    title: "Youth Ministry",
+    description:
+      "Praying for our youth group to grow in faith and for more young people to join our community.",
+    requester: "Youth Leaders",
+    date: "2024-01-08",
+    isAnswered: false,
+    category: "community",
+    priority: "normal",
+    isPrivate: false,
   },
 ];
 
@@ -77,17 +138,17 @@ const PrayerRequestCard: React.FC<{ request: PrayerRequest }> = ({
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "health":
-        return "🏥";
+        return "H";
       case "family":
-        return "👨‍👩‍👧‍👦";
+        return "F";
       case "work":
-        return "💼";
+        return "W";
       case "spiritual":
-        return "🙏";
+        return "S";
       case "community":
-        return "🌍";
+        return "C";
       default:
-        return "💭";
+        return "O";
     }
   };
 
@@ -114,8 +175,10 @@ const PrayerRequestCard: React.FC<{ request: PrayerRequest }> = ({
         <div className="prayer-title-section">
           <h3 className="prayer-title">{request.title}</h3>
           <div className="prayer-badges">
-            <span className="category-badge">
-              {getCategoryIcon(request.category)}{" "}
+            <span
+              className="category-badge"
+              data-icon={getCategoryIcon(request.category)}
+            >
               {request.category.toUpperCase()}
             </span>
             <span
@@ -188,14 +251,6 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
 
   return (
     <div className="prayer-form-section">
-      <div className="prayer-form-header">
-        <h3>Submit a Prayer Request</h3>
-        <p className="prayer-form-subtitle">
-          Share your prayer needs with our community. All requests are kept
-          confidential and prayed for by our church family.
-        </p>
-      </div>
-
       <form className="prayer-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <input
@@ -247,6 +302,7 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
 const Bulletin: React.FC = () => {
   // Calendar and event management state
   const [events, setEvents] = useState<CalendarEvent[]>([
+    // January 2024 Events
     {
       id: "1",
       title: "Sunday Service",
@@ -278,6 +334,172 @@ const Bulletin: React.FC = () => {
       category: "prayer",
       color: "#4B0082",
     },
+    {
+      id: "4",
+      title: "Bible Study",
+      description: "Adult Bible study on the Book of Romans",
+      date: "2024-01-18",
+      time: "19:30",
+      location: "Fellowship Hall",
+      speaker: "Elder Mary Johnson",
+      category: "study",
+      color: "#228B22",
+    },
+    {
+      id: "5",
+      title: "Men's Fellowship",
+      description: "Men's breakfast and fellowship meeting",
+      date: "2024-01-20",
+      time: "08:00",
+      location: "Church Kitchen",
+      category: "fellowship",
+      color: "#8B4513",
+    },
+    {
+      id: "6",
+      title: "Women's Ministry",
+      description: "Women's ministry meeting and craft session",
+      date: "2024-01-22",
+      time: "14:00",
+      location: "Activity Room",
+      category: "ministry",
+      color: "#FF69B4",
+    },
+    {
+      id: "7",
+      title: "Children's Sunday School",
+      description: "Sunday School for children ages 5-12",
+      date: "2024-01-21",
+      time: "10:00",
+      location: "Children's Wing",
+      category: "education",
+      color: "#FFD700",
+    },
+    {
+      id: "8",
+      title: "Board Meeting",
+      description: "Monthly church board meeting",
+      date: "2024-01-23",
+      time: "19:00",
+      location: "Pastor's Office",
+      category: "administration",
+      color: "#696969",
+    },
+    {
+      id: "9",
+      title: "Community Outreach",
+      description: "Food bank volunteer day",
+      date: "2024-01-24",
+      time: "09:00",
+      location: "Community Center",
+      category: "outreach",
+      color: "#32CD32",
+    },
+    {
+      id: "10",
+      title: "Choir Practice",
+      description: "Weekly choir rehearsal",
+      date: "2024-01-25",
+      time: "19:30",
+      location: "Sanctuary",
+      category: "music",
+      color: "#9370DB",
+    },
+    {
+      id: "11",
+      title: "Mission Trip Planning",
+      description: "Planning meeting for Guatemala mission trip",
+      date: "2024-01-26",
+      time: "18:00",
+      location: "Conference Room",
+      category: "missions",
+      color: "#FF4500",
+    },
+    {
+      id: "12",
+      title: "New Member Class",
+      description: "Introduction class for new church members",
+      date: "2024-01-27",
+      time: "10:00",
+      location: "Fellowship Hall",
+      speaker: "Pastor John Smith",
+      category: "education",
+      color: "#20B2AA",
+    },
+    {
+      id: "13",
+      title: "Sunday Service",
+      description: "Weekly worship service with special guest speaker",
+      date: "2024-01-28",
+      time: "11:30",
+      location: "Main Sanctuary",
+      speaker: "Rev. Dr. Sarah Williams",
+      category: "worship",
+      color: "#FBCB9C",
+    },
+    {
+      id: "14",
+      title: "Prayer Walk",
+      description: "Community prayer walk around the neighborhood",
+      date: "2024-01-29",
+      time: "17:00",
+      location: "Church Parking Lot",
+      category: "prayer",
+      color: "#4B0082",
+    },
+    {
+      id: "15",
+      title: "Youth Game Night",
+      description: "Fun games and activities for youth group",
+      date: "2024-01-30",
+      time: "19:00",
+      location: "Youth Room",
+      category: "youth",
+      color: "#4169E1",
+    },
+    // February 2024 Events
+    {
+      id: "16",
+      title: "Ash Wednesday Service",
+      description: "Ash Wednesday service marking the beginning of Lent",
+      date: "2024-02-14",
+      time: "19:00",
+      location: "Main Sanctuary",
+      speaker: "Pastor John Smith",
+      category: "worship",
+      color: "#8B4513",
+    },
+    {
+      id: "17",
+      title: "Valentine's Day Fellowship",
+      description: "Couples fellowship and dinner",
+      date: "2024-02-14",
+      time: "18:00",
+      location: "Fellowship Hall",
+      category: "fellowship",
+      color: "#FF69B4",
+    },
+    {
+      id: "18",
+      title: "Mission Trip Departure",
+      description: "Guatemala mission trip departure",
+      date: "2024-02-15",
+      time: "06:00",
+      location: "Church Parking Lot",
+      category: "missions",
+      color: "#FF4500",
+    },
+    {
+      id: "19",
+      title: "Lenten Study Series",
+      description: "Weekly Lenten study on spiritual disciplines",
+      date: "2024-02-16",
+      time: "19:30",
+      location: "Fellowship Hall",
+      speaker: "Elder Mary Johnson",
+      category: "study",
+      color: "#228B22",
+    },
   ]);
 
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
@@ -291,6 +513,7 @@ const Bulletin: React.FC = () => {
   // Prayer request state
   const [prayerRequests] = useState<PrayerRequest[]>(MOCK_PRAYER_REQUESTS);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Prayer request handlers
   const handleLoginClick = () => {
@@ -303,6 +526,7 @@ const Bulletin: React.FC = () => {
 
   const handleLoginSuccess = (userData: any) => {
     console.log("User logged in:", userData);
+    setIsLoggedIn(true);
     setIsLoginModalOpen(false);
   };
 
@@ -367,6 +591,13 @@ const Bulletin: React.FC = () => {
       <div className="bulletin-content">
         {/* Calendar Section */}
         <ScrollReveal className="bulletin-calendar-section">
+          <div className="section-header">
+            <h2>UPCOMING EVENTS & CALENDAR</h2>
+            <p>
+              Stay connected with our church community through our comprehensive
+              event calendar
+            </p>
+          </div>
           <Calendar
             events={events}
             onDateClick={handleDateClick}
@@ -374,9 +605,63 @@ const Bulletin: React.FC = () => {
           />
         </ScrollReveal>
 
-        {/* Prayer Request Section */}
+        {/* Prayer Request Form Section */}
         <ScrollReveal className="prayer-form-section">
+          <div className="section-header">
+            <h2>SUBMIT A PRAYER REQUEST</h2>
+            <p>Share your prayer needs with our caring church community</p>
+          </div>
           <PrayerRequestForm onLoginClick={handleLoginClick} />
+        </ScrollReveal>
+
+        {/* Church Announcements Section */}
+        <ScrollReveal className="announcements-section">
+          <div className="section-header">
+            <h2>CHURCH ANNOUNCEMENTS</h2>
+            <p>Important updates and news from our church leadership</p>
+          </div>
+          <div className="announcements-grid">
+            <div className="announcement-card">
+              <div className="announcement-header">
+                <h3>Mission Trip Fundraiser</h3>
+                <span className="announcement-date">January 15, 2024</span>
+              </div>
+              <p>
+                Join us for our annual bake sale to support our upcoming mission
+                trip to Guatemala. All proceeds will help fund our community
+                outreach efforts.
+              </p>
+              <div className="announcement-meta">
+                <span className="announcement-category">Missions</span>
+              </div>
+            </div>
+            <div className="announcement-card">
+              <div className="announcement-header">
+                <h3>New Member Welcome</h3>
+                <span className="announcement-date">January 12, 2024</span>
+              </div>
+              <p>
+                We're excited to welcome 5 new families to our church community
+                this month. Please join us in making them feel at home.
+              </p>
+              <div className="announcement-meta">
+                <span className="announcement-category">Community</span>
+              </div>
+            </div>
+            <div className="announcement-card">
+              <div className="announcement-header">
+                <h3>Building Maintenance</h3>
+                <span className="announcement-date">January 10, 2024</span>
+              </div>
+              <p>
+                Our sanctuary will be closed for maintenance on February 1st.
+                Services will be held in the fellowship hall that day.
+              </p>
+              <div className="announcement-meta">
+                <span className="announcement-category">Facilities</span>
+              </div>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
 

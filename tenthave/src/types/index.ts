@@ -49,6 +49,7 @@ export interface SermonCardProps {
   showLocation?: boolean;
   showSpeaker?: boolean;
   showDate?: boolean;
+  showImage?: boolean;
 
   // Button customization
   buttonText?: string;

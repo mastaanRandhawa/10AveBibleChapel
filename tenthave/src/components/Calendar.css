@@ -218,7 +218,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    line-height: 1.2;
+    line-height: 1.1;
+}
+
+.event-time-text {
+    font-family: var(--font-primary);
+    font-size: 7px;
+    font-weight: var(--font-weight-regular);
+    opacity: 0.9;
+    display: block;
+    line-height: 1;
+    margin-top: 1px;
 }
 
 .calendar-event-more {
@@ -311,6 +321,10 @@
         font-size: 8px;
     }
 
+    .event-time-text {
+        font-size: 6px;
+    }
+
     .calendar-event-more {
         font-size: 7px;
         padding: 1px 4px;
@@ -359,6 +373,10 @@
 
     .event-title-text {
         font-size: 7px;
+    }
+
+    .event-time-text {
+        font-size: 5px;
     }
 
     .calendar-event-more {

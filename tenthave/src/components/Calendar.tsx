@@ -185,9 +185,12 @@ const Calendar: React.FC<CalendarProps> = ({
                       }}
                       title={`${event.title}${
                         event.time ? ` at ${event.time}` : ""
-                      }`}
+                      }${event.location ? ` - ${event.location}` : ""}`}
                     >
                       <span className="event-title-text">{event.title}</span>
+                      {event.time && (
+                        <span className="event-time-text">{event.time}</span>
+                      )}
                     </div>
                   ))}
                   {day.events.length > 2 && (

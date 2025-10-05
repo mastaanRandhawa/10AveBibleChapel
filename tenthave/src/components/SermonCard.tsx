@@ -1,6 +1,7 @@
 import React from "react";
 import { SermonCardProps } from "../types";
-import Button from "./ButtonSecondary";
+import homeIcon from "../assets/home.svg";
+import locationIcon from "../assets/location.svg";
 import "./SermonCard.css";
 
 /**
@@ -57,6 +58,7 @@ const SermonCard: React.FC<SermonCardProps> = ({
   showLocation = true,
   showSpeaker = false,
   showDate = false,
+  showImage = true,
 
   // Button customization
   buttonText = "WATCH",
@@ -84,13 +86,28 @@ const SermonCard: React.FC<SermonCardProps> = ({
     (showDate && date);
 
   return (
-    <div className={`sermon-card sermon-card--${variant} ${className}`.trim()}>
+    <div
+      className={`sermon-card sermon-card--${variant} ${
+        showImage ? "" : "sermon-card--no-image"
+      } ${className}`.trim()}
+    >
       <div className="sermon-card__content">
+        {/* Date in top right corner */}
+        {date && (
+          <div className="sermon-card__date">
+            <span className="sermon-card__date-day">
+              {new Date(date).getDate()}
+            </span>
+            <span className="sermon-card__date-month">
+              {new Date(date)
+                .toLocaleDateString("en-US", { month: "long" })
+                .toUpperCase()}
+            </span>
+          </div>
+        )}
+
         {/* Header Section */}
-        <div className="sermon-card__header">
-          {name && <div className="sermon-card__label">{name}</div>}
-          {category && <div className="sermon-card__category">{category}</div>}
-        </div>
+        {name && <div className="sermon-card__label">{name}</div>}
 
         {/* Title and Description */}
         <div className="sermon-card__body">
@@ -103,7 +120,9 @@ const SermonCard: React.FC<SermonCardProps> = ({
           <div className="sermon-card__details">
             {showTime && time && (
               <div className="sermon-card__detail-item">
-                <span className="sermon-card__icon">🕐</span>
+                <div className="sermon-card__icon">
+                  <img src={homeIcon} alt="Time" width="12" height="12" />
+                </div>
                 <div className="sermon-card__detail-content">
                   <span className="sermon-card__detail-label">Time</span>
                   <span className="sermon-card__detail-value">
@@ -115,7 +134,14 @@ const SermonCard: React.FC<SermonCardProps> = ({
 
             {showLocation && location && (
               <div className="sermon-card__detail-item">
-                <span className="sermon-card__icon">📍</span>
+                <div className="sermon-card__icon">
+                  <img
+                    src={locationIcon}
+                    alt="Location"
+                    width="12"
+                    height="12"
+                  />
+                </div>
                 <div className="sermon-card__detail-content">
                   <span className="sermon-card__detail-label">Location</span>
                   <span className="sermon-card__detail-value">{location}</span>
@@ -125,7 +151,9 @@ const SermonCard: React.FC<SermonCardProps> = ({
 
             {showSpeaker && speaker && (
               <div className="sermon-card__detail-item">
-                <span className="sermon-card__icon">👤</span>
+                <div className="sermon-card__icon">
+                  <span style={{ fontSize: "12px" }}>👤</span>
+                </div>
                 <div className="sermon-card__detail-content">
                   <span className="sermon-card__detail-label">Speaker</span>
                   <span className="sermon-card__detail-value">{speaker}</span>
@@ -135,7 +163,9 @@ const SermonCard: React.FC<SermonCardProps> = ({
 
             {showDate && date && (
               <div className="sermon-card__detail-item">
-                <span className="sermon-card__icon">📅</span>
+                <div className="sermon-card__icon">
+                  <span style={{ fontSize: "12px" }}>📅</span>
+                </div>
                 <div className="sermon-card__detail-content">
                   <span className="sermon-card__detail-label">Date</span>
                   <span className="sermon-card__detail-value">
@@ -150,22 +180,23 @@ const SermonCard: React.FC<SermonCardProps> = ({
         {/* Action Button */}
         {link && (
           <div className="sermon-card__actions">
-            <Button
-              variant={buttonVariant}
-              buttonText={buttonText}
-              buttonLink={link}
-            />
+            <a
+              href={link}
+              className="sermon-card__button"
+              rel="noopener noreferrer"
+            >
+              {buttonText}
+            </a>
           </div>
         )}
       </div>
 
       {/* Image Section */}
-      <div className="sermon-card__image">
-        <img src={image} alt={title} />
-        {category && (
-          <div className="sermon-card__image-overlay">{category}</div>
-        )}
-      </div>
+      {showImage && (
+        <div className="sermon-card__image">
+          <img src={image} alt={title} />
+        </div>
+      )}
     </div>
   );
 };

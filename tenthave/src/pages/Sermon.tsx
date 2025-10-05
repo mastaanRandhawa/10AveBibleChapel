@@ -1,56 +1,52 @@
 import React from "react";
 import SermonHeroSection from "../components/SermonHeroSection";
-import UpcomingSermonCard from "../components/UpcomingSermonCard";
-import RecentSermonCard from "../components/RecentSermonCard";
+import SermonCard from "../components/SermonCard";
 import ShowAllButton from "../components/ShowAllButton";
+import sermonCardImg from "../assets/sermonCardImg.svg";
 import "./Sermon.css";
 
 // Mock data for upcoming sermon
 const UPCOMING_SERMON = {
   title: "WATCH AND LISTEN TO OUR SERMONS",
   description: "Join us in person or online through our sermons.",
-  time: "Sunday 11:30 AM - 12:30 PM",
+  time: { day: "Sunday", start: "11:30 AM", end: "12:30 PM" },
   location: "7103 - 10th Ave., Burnaby, BC V3N 2R5",
+  date: "2024-01-21",
 };
 
 // Mock data for recent sermons
 const RECENT_SERMONS = [
   {
-    date: "20 JULY",
     title: "100 RANDOM ACTS OF KINDNESS",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: "Friday 23:39 IST Saturday 11:20 ISD",
+    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
     location: "No 233 Main St. New York, United States",
+    date: "2024-07-20",
   },
   {
-    date: "20 JULY",
     title: "FAITH IS A PROCESS, NOT A DESTINATION",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: "Friday 23:39 IST Saturday 11:20 ISD",
+    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
     location: "No 233 Main St. New York, United States",
+    date: "2024-07-20",
   },
   {
-    date: "20 JULY",
     title: "THERE IS NOTHING IMPOSSIBLE",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: "Friday 23:39 IST Saturday 11:20 ISD",
+    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
     location: "No 233 Main St. New York, United States",
+    date: "2024-07-20",
   },
   {
-    date: "20 JULY",
     title: "WATCH AND LISTEN TO OUR SERMONS",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: "Friday 23:39 IST Saturday 11:20 ISD",
+    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
     location: "No 233 Main St. New York, United States",
+    date: "2024-07-20",
   },
 ];
 
 const SermonPage: React.FC = () => {
-  const handleWatchClick = () => {
-    // Handle watch button click
-    console.log("Watch button clicked");
-  };
-
   const handleShowAllClick = () => {
     // Handle show all sermons click
     console.log("Show all sermons clicked");
@@ -71,28 +67,21 @@ const SermonPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="upcoming-sermons-content">
-            <div className="upcoming-sermons-left">
-              <UpcomingSermonCard
-                title={UPCOMING_SERMON.title}
-                description={UPCOMING_SERMON.description}
-                time={UPCOMING_SERMON.time}
-                location={UPCOMING_SERMON.location}
-                buttonText="WATCH"
-                onButtonClick={handleWatchClick}
-              />
-            </div>
-
-            <div className="upcoming-sermons-right">
-              <div className="bible-image">
-                <img
-                  src="/assets/bible.svg"
-                  alt="Hands holding Bible"
-                  className="bible-image__img"
-                />
-              </div>
-            </div>
-          </div>
+          <SermonCard
+            name="UPCOMING EVENT"
+            image={sermonCardImg}
+            title={UPCOMING_SERMON.title}
+            description={UPCOMING_SERMON.description}
+            time={UPCOMING_SERMON.time}
+            location={UPCOMING_SERMON.location}
+            date={UPCOMING_SERMON.date}
+            buttonText="WATCH"
+            link="#"
+            variant="featured"
+            showTime={true}
+            showLocation={true}
+            showImage={true}
+          />
 
           <div className="show-all-container">
             <ShowAllButton
@@ -110,14 +99,23 @@ const SermonPage: React.FC = () => {
 
           <div className="recent-sermons-grid">
             {RECENT_SERMONS.map((sermon, index) => (
-              <RecentSermonCard
-                key={index}
-                date={sermon.date}
-                title={sermon.title}
-                description={sermon.description}
-                time={sermon.time}
-                location={sermon.location}
-              />
+              <div key={index} className="recent-sermon-item">
+                <SermonCard
+                  image={sermonCardImg}
+                  title={sermon.title}
+                  description={sermon.description}
+                  time={sermon.time}
+                  location={sermon.location}
+                  date={sermon.date}
+                  buttonText="WATCH"
+                  link="#"
+                  variant="compact"
+                  showTime={true}
+                  showLocation={true}
+                  showDate={false}
+                  showImage={false}
+                />
+              </div>
             ))}
           </div>
         </div>

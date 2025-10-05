@@ -7,8 +7,6 @@
 /* Card Container */
 .card {
     /* background-color: var(--color-light); */
-    border: 2px solid var(--color-primary);
-    border-bottom: 15px solid var(--color-primary);
     padding: var(--padding-xl) var(--padding-xl);
     text-align: left;
     max-width: 400px;
