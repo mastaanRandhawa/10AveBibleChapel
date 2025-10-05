@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useScrollPosition } from "../hooks/useScrollPosition";
 import { NAVIGATION_ITEMS } from "../constants";
+import Button from "./Button";
 import "./Header.css";
 import BurgerIcon from "../assets/burger.svg";
 import CloseIcon from "../assets/closeButton.svg";

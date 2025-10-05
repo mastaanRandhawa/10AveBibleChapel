@@ -1,0 +1,135 @@
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-xl) 0;
+    font-family: var(--font-primary);
+}
+
+.pagination__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: var(--spacing-sm);
+    background: var(--sermon-card-bg);
+    border: 1px solid var(--sermon-card-border);
+    border-radius: 4px;
+    color: var(--sermon-card-text);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.pagination__button:hover:not(.disabled):not(.ellipsis) {
+    background: var(--sermon-card-border);
+    color: var(--sermon-card-text);
+    transform: translateY(-1px);
+}
+
+.pagination__button.active {
+    background: var(--sermon-card-border);
+    color: var(--sermon-card-text);
+    font-weight: var(--font-weight-bold);
+}
+
+.pagination__button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--sermon-card-bg);
+    color: var(--sermon-card-text-muted);
+}
+
+.pagination__button.ellipsis {
+    cursor: default;
+    background: transparent;
+    border: none;
+    color: var(--sermon-card-text-muted);
+}
+
+.pagination__button.ellipsis:hover {
+    background: transparent;
+    transform: none;
+}
+
+.pagination__pages {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.pagination__button--prev,
+.pagination__button--next {
+    min-width: 40px;
+}
+
+.pagination__button--page {
+    min-width: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pagination {
+        gap: var(--spacing-xs);
+        margin: var(--spacing-lg) 0;
+    }
+
+    .pagination__button {
+        min-width: 36px;
+        height: 36px;
+        font-size: calc(var(--font-size-h6) - 1px);
+    }
+
+    .pagination__button--prev,
+    .pagination__button--next {
+        min-width: 36px;
+    }
+
+    .pagination__button--page {
+        min-width: 36px;
+    }
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        gap: 2px;
+    }
+
+    .pagination__button {
+        min-width: 32px;
+        height: 32px;
+        font-size: calc(var(--font-size-h6) - 2px);
+        padding: var(--spacing-xs);
+    }
+
+    .pagination__button--prev,
+    .pagination__button--next {
+        min-width: 32px;
+    }
+
+    .pagination__button--page {
+        min-width: 32px;
+    }
+}
+
+@media (max-width: 375px) {
+    .pagination__button {
+        min-width: 28px;
+        height: 28px;
+        font-size: calc(var(--font-size-h6) - 3px);
+    }
+
+    .pagination__button--prev,
+    .pagination__button--next {
+        min-width: 28px;
+    }
+
+    .pagination__button--page {
+        min-width: 28px;
+    }
+}

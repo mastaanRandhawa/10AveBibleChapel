@@ -1,123 +1,222 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SermonHeroSection from "../components/SermonHeroSection";
-import SermonCard from "../components/SermonCard";
-import ShowAllButton from "../components/ShowAllButton";
+import SermonSeriesCard from "../components/SermonSeriesCard";
+import Pagination from "../components/Pagination";
 import sermonCardImg from "../assets/sermonCardImg.svg";
 import "./Sermon.css";
 
-// Mock data for upcoming sermon
-const UPCOMING_SERMON = {
-  title: "WATCH AND LISTEN TO OUR SERMONS",
-  description: "Join us in person or online through our sermons.",
-  time: { day: "Sunday", start: "11:30 AM", end: "12:30 PM" },
-  location: "7103 - 10th Ave., Burnaby, BC V3N 2R5",
-  date: "2024-01-21",
-};
-
-// Mock data for recent sermons
-const RECENT_SERMONS = [
+// Mock data for sermon series
+const SERMON_SERIES = [
   {
-    title: "100 RANDOM ACTS OF KINDNESS",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
-    location: "No 233 Main St. New York, United States",
-    date: "2024-07-20",
+    id: "relationships-anonymous",
+    title: "Relationships Anonymous",
+    episodeCount: 4,
+    image: sermonCardImg,
+    link: "/sermon/relationships-anonymous",
   },
   {
-    title: "FAITH IS A PROCESS, NOT A DESTINATION",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
-    location: "No 233 Main St. New York, United States",
-    date: "2024-07-20",
+    id: "romans",
+    title: "Romans",
+    episodeCount: 11,
+    image: sermonCardImg,
+    link: "/sermon/romans",
   },
   {
-    title: "THERE IS NOTHING IMPOSSIBLE",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
-    location: "No 233 Main St. New York, United States",
-    date: "2024-07-20",
+    id: "bigger-than-us",
+    title: "Bigger Than Us",
+    episodeCount: 12,
+    image: sermonCardImg,
+    link: "/sermon/bigger-than-us",
   },
   {
-    title: "WATCH AND LISTEN TO OUR SERMONS",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    time: { day: "Friday", start: "23:39 IST", end: "Saturday 11:20 ISD" },
-    location: "No 233 Main St. New York, United States",
-    date: "2024-07-20",
+    id: "follow-me",
+    title: "Follow Me",
+    episodeCount: 4,
+    image: sermonCardImg,
+    link: "/sermon/follow-me",
+  },
+  {
+    id: "a-great-light",
+    title: "A Great Light",
+    episodeCount: 3,
+    image: sermonCardImg,
+    link: "/sermon/a-great-light",
+  },
+  {
+    id: "the-exodus",
+    title: "The Exodus",
+    episodeCount: 8,
+    image: sermonCardImg,
+    link: "/sermon/the-exodus",
+  },
+  {
+    id: "beyond",
+    title: "Beyond",
+    episodeCount: 6,
+    image: sermonCardImg,
+    link: "/sermon/beyond",
+  },
+  {
+    id: "recapturing-humanity",
+    title: "Recapturing Humanity",
+    episodeCount: 7,
+    image: sermonCardImg,
+    link: "/sermon/recapturing-humanity",
+  },
+  {
+    id: "faith-journey",
+    title: "Faith Journey",
+    episodeCount: 9,
+    image: sermonCardImg,
+    link: "/sermon/faith-journey",
+  },
+  {
+    id: "hope-restored",
+    title: "Hope Restored",
+    episodeCount: 5,
+    image: sermonCardImg,
+    link: "/sermon/hope-restored",
+  },
+  {
+    id: "love-unconditional",
+    title: "Love Unconditional",
+    episodeCount: 6,
+    image: sermonCardImg,
+    link: "/sermon/love-unconditional",
+  },
+  {
+    id: "grace-abundant",
+    title: "Grace Abundant",
+    episodeCount: 8,
+    image: sermonCardImg,
+    link: "/sermon/grace-abundant",
+  },
+  {
+    id: "peace-that-passes",
+    title: "Peace That Passes",
+    episodeCount: 4,
+    image: sermonCardImg,
+    link: "/sermon/peace-that-passes",
+  },
+  {
+    id: "joy-unspeakable",
+    title: "Joy Unspeakable",
+    episodeCount: 7,
+    image: sermonCardImg,
+    link: "/sermon/joy-unspeakable",
+  },
+  {
+    id: "victory-assured",
+    title: "Victory Assured",
+    episodeCount: 10,
+    image: sermonCardImg,
+    link: "/sermon/victory-assured",
+  },
+  {
+    id: "eternal-life",
+    title: "Eternal Life",
+    episodeCount: 6,
+    image: sermonCardImg,
+    link: "/sermon/eternal-life",
+  },
+  {
+    id: "kingdom-come",
+    title: "Kingdom Come",
+    episodeCount: 5,
+    image: sermonCardImg,
+    link: "/sermon/kingdom-come",
+  },
+  {
+    id: "new-creation",
+    title: "New Creation",
+    episodeCount: 8,
+    image: sermonCardImg,
+    link: "/sermon/new-creation",
+  },
+  {
+    id: "divine-purpose",
+    title: "Divine Purpose",
+    episodeCount: 9,
+    image: sermonCardImg,
+    link: "/sermon/divine-purpose",
+  },
+  {
+    id: "heavenly-call",
+    title: "Heavenly Call",
+    episodeCount: 7,
+    image: sermonCardImg,
+    link: "/sermon/heavenly-call",
   },
 ];
 
 const SermonPage: React.FC = () => {
-  const handleShowAllClick = () => {
-    // Handle show all sermons click
-    console.log("Show all sermons clicked");
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8; // Show 8 series per page
+
+  // Calculate pagination
+  const totalPages = Math.ceil(SERMON_SERIES.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedSeries = SERMON_SERIES.slice(startIndex, endIndex);
+
+  const handleSeriesClick = (seriesId: string) => {
+    navigate(`/sermon/${seriesId}`);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of series grid when page changes
+    const gridElement = document.querySelector(
+      ".sermon-series-grid"
+    ) as HTMLElement;
+    if (gridElement) {
+      window.scrollTo({
+        top: gridElement.offsetTop,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
     <div className="sermon-page">
       {/* Hero Section */}
-      <SermonHeroSection title="SERMON RECORDINGS" />
+      <SermonHeroSection title="SERMON SERIES" />
 
-      {/* Upcoming Sermons Section */}
-      <section className="upcoming-sermons-section">
+      {/* Sermon Series Section */}
+      <section className="sermon-series-section">
         <div className="container">
           <div className="section-header">
-            <div className="section-label">UPCOMING SERMONS</div>
-            <h2 className="section-title">
-              JOIN US AND BECOME PART OF SOMETHING GREAT
-            </h2>
+            <div className="section-label">SERMON SERIES</div>
+            <h2 className="section-title">Browse Sermon Series</h2>
           </div>
 
-          <SermonCard
-            name="UPCOMING EVENT"
-            image={sermonCardImg}
-            title={UPCOMING_SERMON.title}
-            description={UPCOMING_SERMON.description}
-            time={UPCOMING_SERMON.time}
-            location={UPCOMING_SERMON.location}
-            date={UPCOMING_SERMON.date}
-            buttonText="WATCH"
-            link="#"
-            variant="featured"
-            showTime={true}
-            showLocation={true}
-            showImage={true}
-          />
-
-          <div className="show-all-container">
-            <ShowAllButton
-              text="SHOW ALL SERMONS"
-              onClick={handleShowAllClick}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Recent Sermons Section */}
-      <section className="recent-sermons-section">
-        <div className="container">
-          <h2 className="section-title">RECENT SERMONS</h2>
-
-          <div className="recent-sermons-grid">
-            {RECENT_SERMONS.map((sermon, index) => (
-              <div key={index} className="recent-sermon-item">
-                <SermonCard
-                  image={sermonCardImg}
-                  title={sermon.title}
-                  description={sermon.description}
-                  time={sermon.time}
-                  location={sermon.location}
-                  date={sermon.date}
-                  buttonText="WATCH"
-                  link="#"
-                  variant="compact"
-                  showTime={true}
-                  showLocation={true}
-                  showDate={false}
-                  showImage={false}
+          <div className="sermon-series-grid">
+            {paginatedSeries.map((series, index) => (
+              <div
+                key={startIndex + index}
+                onClick={() => handleSeriesClick(series.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <SermonSeriesCard
+                  image={series.image}
+                  title={series.title}
+                  episodeCount={series.episodeCount}
+                  link={series.link}
                 />
               </div>
             ))}
           </div>
+
+          {/* Pagination */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            showFirstLast={true}
+            maxVisiblePages={5}
+          />
         </div>
       </section>
     </div>

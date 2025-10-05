@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "./LoginModal.css";
 
-interface LoginModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onLogin?: (userData: any) => void;
-}
+import { LoginModalProps, User, LoginCredentials } from "../types";
 
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
@@ -13,7 +9,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
   onLogin,
 }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<
+    LoginCredentials & { confirmPassword: string }
+  >({
     email: "",
     password: "",
     confirmPassword: "",
@@ -32,6 +30,13 @@ const LoginModal: React.FC<LoginModalProps> = ({
     setLoading(true);
 
     try {
+      // Basic validation
+      if (!formData.email || !formData.password) {
+        alert("Please fill in all required fields.");
+        setLoading(false);
+        return;
+      }
+
       if (!isLogin && formData.password !== formData.confirmPassword) {
         alert("Passwords do not match!");
         setLoading(false);
@@ -42,13 +47,29 @@ const LoginModal: React.FC<LoginModalProps> = ({
       await new Promise((res) => setTimeout(res, 1000)); // mock API
 
       if (onLogin) {
-        onLogin(formData);
+        // Mock user data for demo purposes
+        const mockUser: User = {
+          id: "1",
+          email: formData.email,
+          name: formData.email.split("@")[0],
+          role: "member",
+          createdAt: new Date().toISOString(),
+        };
+        onLogin(mockUser);
       }
+
+      // Reset form
+      setFormData({
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
 
       alert(isLogin ? "Login successful!" : "Signup successful!");
       onClose();
     } catch (err) {
       console.error("Auth error:", err);
+      alert("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }

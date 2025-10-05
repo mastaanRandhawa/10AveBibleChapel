@@ -1,0 +1,152 @@
+/* ErrorBoundary Component Styles */
+.error-boundary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: var(--spacing-4xl);
+    background-color: var(--color-light);
+    border: 1px solid var(--color-muted-light);
+    border-radius: 8px;
+    margin: var(--spacing-lg);
+}
+
+.error-boundary-content {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.error-boundary-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.error-boundary-message {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-muted-gray);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
+.error-boundary-details {
+    text-align: left;
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-lg);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-muted-light);
+    border-radius: 4px;
+}
+
+.error-boundary-details summary {
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-dark);
+}
+
+.error-boundary-stack {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--color-error);
+    background-color: var(--color-bg);
+    padding: var(--spacing-md);
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.error-boundary-actions {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-boundary-retry-btn,
+.error-boundary-reload-btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    min-width: 120px;
+}
+
+.error-boundary-retry-btn {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.error-boundary-retry-btn:hover {
+    background-color: var(--color-dark);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.error-boundary-reload-btn {
+    background-color: var(--color-dark);
+    color: var(--color-primary);
+}
+
+.error-boundary-reload-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .error-boundary {
+        padding: var(--spacing-xl);
+        margin: var(--spacing-md);
+        min-height: 300px;
+    }
+
+    .error-boundary-title {
+        font-size: var(--font-size-h3);
+    }
+
+    .error-boundary-message {
+        font-size: var(--font-size-h6);
+    }
+
+    .error-boundary-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .error-boundary-retry-btn,
+    .error-boundary-reload-btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-boundary {
+        padding: var(--spacing-lg);
+        margin: var(--spacing-sm);
+    }
+
+    .error-boundary-title {
+        font-size: var(--font-size-h4);
+    }
+
+    .error-boundary-details {
+        padding: var(--spacing-md);
+    }
+
+    .error-boundary-stack {
+        font-size: 10px;
+    }
+}

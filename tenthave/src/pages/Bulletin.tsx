@@ -5,6 +5,7 @@ import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import EventDetailsModal from "../components/EventDetailsModal";
 import LoginModal from "../components/LoginModal";
+import Button from "../components/Button";
 import "./Bulletin.css";
 
 // Prayer request interface
@@ -123,7 +124,8 @@ const MOCK_PRAYER_REQUESTS: PrayerRequest[] = [
   },
 ];
 
-// Prayer Request Card Component
+// Prayer Request Card Component (currently unused but kept for future implementation)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PrayerRequestCard: React.FC<{ request: PrayerRequest }> = ({
   request,
 }) => {
@@ -281,9 +283,11 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
             placeholder="Your Name (optional)"
           />
         </div>
-        <button type="submit" className="submit-btn">
-          Submit Prayer Request
-        </button>
+        <Button
+          variant="button-primary"
+          buttonText="Submit Prayer Request"
+          onClick={() => {}}
+        />
       </form>
 
       <div className="prayer-form-footer">
@@ -312,7 +316,7 @@ const Bulletin: React.FC = () => {
       location: "Main Sanctuary",
       speaker: "Pastor John Smith",
       category: "worship",
-      color: "#FBCB9C",
+      color: "var(--color-primary)",
     },
     {
       id: "2",
@@ -322,7 +326,7 @@ const Bulletin: React.FC = () => {
       time: "19:00",
       location: "Youth Room",
       category: "youth",
-      color: "#4169E1",
+      color: "var(--color-primary)",
     },
     {
       id: "3",
@@ -332,7 +336,7 @@ const Bulletin: React.FC = () => {
       time: "18:30",
       location: "Prayer Room",
       category: "prayer",
-      color: "#4B0082",
+      color: "var(--color-primary)",
     },
     {
       id: "4",
@@ -343,7 +347,7 @@ const Bulletin: React.FC = () => {
       location: "Fellowship Hall",
       speaker: "Elder Mary Johnson",
       category: "study",
-      color: "#228B22",
+      color: "var(--color-success)",
     },
     {
       id: "5",
@@ -353,7 +357,7 @@ const Bulletin: React.FC = () => {
       time: "08:00",
       location: "Church Kitchen",
       category: "fellowship",
-      color: "#8B4513",
+      color: "var(--color-primary)",
     },
     {
       id: "6",
@@ -363,7 +367,7 @@ const Bulletin: React.FC = () => {
       time: "14:00",
       location: "Activity Room",
       category: "ministry",
-      color: "#FF69B4",
+      color: "var(--color-primary)",
     },
     {
       id: "7",
@@ -373,7 +377,7 @@ const Bulletin: React.FC = () => {
       time: "10:00",
       location: "Children's Wing",
       category: "education",
-      color: "#FFD700",
+      color: "var(--color-accent)",
     },
     {
       id: "8",
@@ -383,7 +387,7 @@ const Bulletin: React.FC = () => {
       time: "19:00",
       location: "Pastor's Office",
       category: "administration",
-      color: "#696969",
+      color: "var(--color-muted-gray)",
     },
     {
       id: "9",
@@ -393,7 +397,7 @@ const Bulletin: React.FC = () => {
       time: "09:00",
       location: "Community Center",
       category: "outreach",
-      color: "#32CD32",
+      color: "var(--color-success)",
     },
     {
       id: "10",
@@ -403,7 +407,7 @@ const Bulletin: React.FC = () => {
       time: "19:30",
       location: "Sanctuary",
       category: "music",
-      color: "#9370DB",
+      color: "var(--color-primary)",
     },
     {
       id: "11",
@@ -413,7 +417,7 @@ const Bulletin: React.FC = () => {
       time: "18:00",
       location: "Conference Room",
       category: "missions",
-      color: "#FF4500",
+      color: "var(--color-warning)",
     },
     {
       id: "12",
@@ -424,7 +428,7 @@ const Bulletin: React.FC = () => {
       location: "Fellowship Hall",
       speaker: "Pastor John Smith",
       category: "education",
-      color: "#20B2AA",
+      color: "var(--color-success)",
     },
     {
       id: "13",
@@ -435,7 +439,7 @@ const Bulletin: React.FC = () => {
       location: "Main Sanctuary",
       speaker: "Rev. Dr. Sarah Williams",
       category: "worship",
-      color: "#FBCB9C",
+      color: "var(--color-primary)",
     },
     {
       id: "14",
@@ -445,7 +449,7 @@ const Bulletin: React.FC = () => {
       time: "17:00",
       location: "Church Parking Lot",
       category: "prayer",
-      color: "#4B0082",
+      color: "var(--color-primary)",
     },
     {
       id: "15",
@@ -455,7 +459,7 @@ const Bulletin: React.FC = () => {
       time: "19:00",
       location: "Youth Room",
       category: "youth",
-      color: "#4169E1",
+      color: "var(--color-primary)",
     },
     // February 2024 Events
     {
@@ -467,7 +471,7 @@ const Bulletin: React.FC = () => {
       location: "Main Sanctuary",
       speaker: "Pastor John Smith",
       category: "worship",
-      color: "#8B4513",
+      color: "var(--color-primary)",
     },
     {
       id: "17",
@@ -477,7 +481,7 @@ const Bulletin: React.FC = () => {
       time: "18:00",
       location: "Fellowship Hall",
       category: "fellowship",
-      color: "#FF69B4",
+      color: "var(--color-primary)",
     },
     {
       id: "18",
@@ -487,7 +491,7 @@ const Bulletin: React.FC = () => {
       time: "06:00",
       location: "Church Parking Lot",
       category: "missions",
-      color: "#FF4500",
+      color: "var(--color-warning)",
     },
     {
       id: "19",
@@ -498,7 +502,7 @@ const Bulletin: React.FC = () => {
       location: "Fellowship Hall",
       speaker: "Elder Mary Johnson",
       category: "study",
-      color: "#228B22",
+      color: "var(--color-success)",
     },
   ]);
 
@@ -511,8 +515,10 @@ const Bulletin: React.FC = () => {
   const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
 
   // Prayer request state
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [prayerRequests] = useState<PrayerRequest[]>(MOCK_PRAYER_REQUESTS);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Prayer request handlers

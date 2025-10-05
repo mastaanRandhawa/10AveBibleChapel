@@ -1,22 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useRef } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import "./Calendar.css";
-
-// Helper function to get contrasting text color
-const getContrastColor = (hexColor: string): string => {
-  // Remove # if present
-  const hex = hexColor.replace("#", "");
-
-  // Convert to RGB
-  const r = parseInt(hex.substr(0, 2), 16);
-  const g = parseInt(hex.substr(2, 2), 16);
-  const b = parseInt(hex.substr(4, 2), 16);
-
-  // Calculate luminance
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-
-  // Return black for light colors, white for dark colors
-  return luminance > 0.5 ? "#000000" : "#FFFFFF";
-};
 
 // Event interface
 export interface CalendarEvent {
@@ -29,11 +15,12 @@ export interface CalendarEvent {
   speaker?: string;
   category?: string; // Event category for color coding
   color?: string; // Custom color for the event
+  completed?: boolean; // For task completion status
 }
 
 interface CalendarProps {
   events: CalendarEvent[];
-  onDateClick: (date: string, events: CalendarEvent[]) => void;
+  onDateClick?: (date: string, events: CalendarEvent[]) => void; // Made optional since popup is removed
   onAddEvent: (date: string) => void;
 }
 
@@ -42,182 +29,132 @@ const Calendar: React.FC<CalendarProps> = ({
   onDateClick,
   onAddEvent,
 }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const calendarRef = useRef<FullCalendar>(null);
 
-  // Get current month and year
-  const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
+  // Convert our events to FullCalendar format
+  const fullCalendarEvents = events.map((event) => ({
+    id: event.id,
+    title: event.title,
+    date: event.date,
+    backgroundColor: event.color || "var(--color-primary)",
+    borderColor: event.color || "var(--color-primary)",
+    textColor: "#1a1a1a",
+    extendedProps: {
+      description: event.description,
+      time: event.time,
+      location: event.location,
+      speaker: event.speaker,
+      category: event.category,
+      completed: event.completed,
+    },
+  }));
 
-  // Get first day of month and number of days
-  const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-  const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-  const daysInMonth = lastDayOfMonth.getDate();
-  const startingDayOfWeek = firstDayOfMonth.getDay();
+  // Get events for selected date
+  const selectedDateEvents = events.filter(
+    (event) => event.date === selectedDate
+  );
 
-  // Generate calendar days
-  const calendarDays = useMemo(() => {
-    const days = [];
+  // Handle date selection
+  const handleDateClick = (dateClickInfo: any) => {
+    const selectedDateStr = dateClickInfo.dateStr;
+    setSelectedDate(selectedDateStr);
 
-    // Add empty cells for days before the first day of the month
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      days.push(null);
+    // Get events for the selected date
+    const dayEvents = events.filter((event) => event.date === selectedDateStr);
+
+    // Call onDateClick if provided (though we're not using popup anymore)
+    if (onDateClick) {
+      onDateClick(selectedDateStr, dayEvents);
     }
+  };
 
-    // Add days of the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dateString = `${currentYear}-${String(currentMonth + 1).padStart(
-        2,
-        "0"
-      )}-${String(day).padStart(2, "0")}`;
-      const dayEvents = events.filter((event) => event.date === dateString);
-      days.push({
-        day,
-        date: dateString,
-        events: dayEvents,
-        isToday: dateString === new Date().toISOString().split("T")[0],
-      });
+  // Handle event click
+  const handleEventClick = (clickInfo: any) => {
+    const eventId = clickInfo.event.id;
+    const event = events.find((e) => e.id === eventId);
+    if (event) {
+      setSelectedDate(event.date);
     }
-
-    return days;
-  }, [currentMonth, currentYear, events, startingDayOfWeek, daysInMonth]);
-
-  // Navigation functions
-  const goToPreviousMonth = () => {
-    setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
   };
 
-  const goToNextMonth = () => {
-    setCurrentDate(new Date(currentYear, currentMonth + 1, 1));
-  };
-
-  const goToToday = () => {
-    setCurrentDate(new Date());
-  };
-
-  // Get month name
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+  // Get day name
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
   ];
 
-  return (
-    <div className="calendar-container">
-      {/* Calendar Header */}
-      <div className="calendar-header">
-        <button
-          className="calendar-nav-btn"
-          onClick={goToPreviousMonth}
-          aria-label="Previous month"
-        >
-          ←
-        </button>
+  const selectedDateObj = new Date(selectedDate);
+  const selectedDayName = dayNames[selectedDateObj.getDay()];
+  const selectedDayNumber = selectedDateObj.getDate();
+  const selectedMonth = selectedDateObj.toLocaleDateString("en-US", {
+    month: "long",
+  });
+  const selectedYear = selectedDateObj.getFullYear();
 
-        <div className="calendar-title">
-          <h2>
-            {monthNames[currentMonth]} {currentYear}
-          </h2>
-          <button className="calendar-today-btn" onClick={goToToday}>
-            Today
-          </button>
+  return (
+    <div className="calendar-split-container">
+      {/* Left Panel - Selected Date */}
+      <div className="calendar-left-panel">
+        <div className="calendar-date-header">
+          <div className="calendar-selected-date">
+            <div className="calendar-date-text">
+              {selectedDayName}, {selectedMonth} {selectedDayNumber},{" "}
+              {selectedYear}
+            </div>
+          </div>
         </div>
 
-        <button
-          className="calendar-nav-btn"
-          onClick={goToNextMonth}
-          aria-label="Next month"
-        >
-          →
-        </button>
-      </div>
-
-      {/* Calendar Grid */}
-      <div className="calendar-grid">
-        {/* Day headers */}
-        <div className="calendar-day-header">Sun</div>
-        <div className="calendar-day-header">Mon</div>
-        <div className="calendar-day-header">Tue</div>
-        <div className="calendar-day-header">Wed</div>
-        <div className="calendar-day-header">Thu</div>
-        <div className="calendar-day-header">Fri</div>
-        <div className="calendar-day-header">Sat</div>
-
-        {/* Calendar days */}
-        {calendarDays.map((day, index) => {
-          if (!day) {
-            return (
-              <div
-                key={index}
-                className="calendar-day calendar-day--empty"
-              ></div>
-            );
-          }
-
-          return (
-            <div
-              key={index}
-              className={`calendar-day ${
-                day.isToday ? "calendar-day--today" : ""
-              }`}
-              onClick={() => onDateClick(day.date, day.events)}
-            >
-              <div className="calendar-day-number">{day.day}</div>
-
-              {/* Event indicators */}
-              {day.events.length > 0 && (
-                <div className="calendar-events">
-                  {day.events.slice(0, 2).map((event, eventIndex) => (
-                    <div
-                      key={event.id}
-                      className="calendar-event-item"
-                      style={{
-                        backgroundColor: event.color || "#FBCB9C",
-                        color: getContrastColor(event.color || "#FBCB9C"),
-                      }}
-                      title={`${event.title}${
-                        event.time ? ` at ${event.time}` : ""
-                      }${event.location ? ` - ${event.location}` : ""}`}
-                    >
-                      <span className="event-title-text">{event.title}</span>
-                      {event.time && (
-                        <span className="event-time-text">{event.time}</span>
-                      )}
-                    </div>
-                  ))}
-                  {day.events.length > 2 && (
-                    <div
-                      className="calendar-event-more"
-                      title={`${day.events.length - 2} more events`}
-                    >
-                      +{day.events.length - 2}
-                    </div>
+        <div className="calendar-events-list">
+          {selectedDateEvents.length > 0 ? (
+            selectedDateEvents.map((event) => (
+              <div key={event.id} className="calendar-event-item">
+                <div className="event-status">
+                  {event.completed ? (
+                    <div className="event-status-completed">✓</div>
+                  ) : (
+                    <div className="event-status-pending">○</div>
                   )}
                 </div>
-              )}
+                <div className="event-details">
+                  <div className="event-title">{event.title}</div>
+                  {event.time && <div className="event-time">{event.time}</div>}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="calendar-no-events">No events scheduled</div>
+          )}
+        </div>
+      </div>
 
-              {/* Add event button */}
-              <button
-                className="calendar-add-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAddEvent(day.date);
-                }}
-                title="Add event"
-              >
-                +
-              </button>
-            </div>
-          );
-        })}
+      {/* Right Panel - FullCalendar */}
+      <div className="calendar-right-panel">
+        <div className="calendar-fullcalendar-container">
+          <FullCalendar
+            ref={calendarRef}
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            headerToolbar={{
+              left: "prev",
+              center: "title",
+              right: "next",
+            }}
+            dayMaxEvents={false}
+            moreLinkClick="popover"
+            events={fullCalendarEvents}
+            dateClick={handleDateClick}
+            eventClick={handleEventClick}
+            height="auto"
+          />
+        </div>
       </div>
     </div>
   );

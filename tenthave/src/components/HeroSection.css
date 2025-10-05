@@ -1,4 +1,4 @@
-/* Hero Section Styles */
+/* Enhanced Hero Section Styles */
 .hero {
     position: relative;
     width: 100vw;
@@ -6,71 +6,110 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    margin-top: calc(-1 * var(--padding-xl));
+    margin-top: calc(-1 * var(--spacing-xl));
     height: auto;
     min-height: 80vh;
     background: url(../assets/churchPicture.svg) no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 1;
 }
 
 /* Simple Hero Variant - Matching Image Design */
 .hero--simple {
-    background: linear-gradient(135deg, #e5e5e5 0%, #d0d0d0 100%);
+    background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-light) 100%);
     justify-content: center;
     min-height: 60vh;
+    position: relative;
+}
+
+.hero--simple::before {
+    background: linear-gradient(135deg, rgba(251, 203, 156, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
 }
 
 .hero-overlay {
-    padding: var(--padding-sm) var(--padding-md) var(--padding-sm) var(--padding-xl);
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-xl);
     color: var(--color-light);
     max-width: 100%;
     text-align: left;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-overlay--simple {
-    padding: 2rem;
+    padding: var(--spacing-2xl);
     text-align: center;
     max-width: 800px;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-title {
     font-family: var(--font-primary);
     font-size: var(--font-size-h1);
     font-weight: var(--font-weight-bold);
-    line-height: 1.2;
+    line-height: var(--line-height-tight);
     color: var(--color-light);
+    margin-bottom: var(--spacing-md);
 }
 
 .hero-title--simple {
-    font-size: 3.5rem;
-    color: white;
+    font-size: var(--font-size-h1);
+    color: var(--color-dark);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: var(--letter-spacing-wider);
     margin: 0;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    line-height: 1.2;
+    text-shadow: none;
+    line-height: var(--line-height-tight);
+    position: relative;
+}
+
+.hero-title--simple::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: var(--radius-sm);
 }
 
 .hero-subtitle {
     font-family: var(--font-primary);
     font-size: var(--font-size-h5);
-    font-weight: var(--font-weight-regular);
-    letter-spacing: var(--letter-spacing-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary-light);
+    margin-bottom: var(--spacing-sm);
 }
 
 .hero-description {
     font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-regular);
-    letter-spacing: var(--letter-spacing-sm);
-    margin: var(--padding-lg) 0;
-    line-height: 1.4;
+    letter-spacing: var(--letter-spacing-normal);
+    margin: var(--spacing-lg) 0;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-light);
+    max-width: 500px;
 }
 
 .hero-button {
-    margin-top: var(--padding-lg);
+    margin-top: var(--spacing-xl);
 }
 
 /* Responsive Media Queries */
@@ -78,11 +117,15 @@
 @media (max-width: 375px) {
     .hero {
         min-height: 15vh;
-        margin-top: calc(-1 * var(--padding-xl));
+        margin-top: calc(-1 * var(--spacing-xl));
     }
 
     .hero-overlay {
-        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-lg);
     }
 
     .hero-title {
@@ -97,7 +140,7 @@
 
     .hero-description {
         font-size: var(--font-size-h6);
-        margin: var(--padding-md) 0;
+        margin: var(--spacing-md) 0;
     }
 }
 
@@ -105,24 +148,19 @@
 @media (min-width: 376px) and (max-width: 575.98px) {
     .hero {
         min-height: 20vh;
-        margin-top: calc(-1 * var(--padding-xl));
+        margin-top: calc(-1 * var(--spacing-xl));
     }
 
     .hero-overlay {
-        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
     }
 
-    .hero-title {
-        font-size: var(--font-size-h1);
-    }
-
-    .hero-subtitle {
-        font-size: var(--font-size-h5);
+    .hero-overlay--simple {
+        padding: var(--spacing-xl);
     }
 
     .hero-description {
-        font-size: var(--font-size-h6);
-        margin: var(--padding-md) 0;
+        margin: var(--spacing-md) 0;
     }
 }
 
@@ -130,99 +168,45 @@
 @media (min-width: 576px) and (max-width: 767.98px) {
     .hero {
         min-height: 25vh;
-        margin-top: calc(-1 * var(--padding-xl));
+        margin-top: calc(-1 * var(--spacing-xl));
     }
 
     .hero-overlay {
-        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
     }
 
-    .hero-title {
-        font-size: var(--font-size-h1);
-    }
-
-    .hero-subtitle {
-        font-size: var(--font-size-h5);
-    }
-
-    .hero-description {
-        font-size: var(--font-size-h6);
-        margin: var(--padding-md) 0;
+    .hero-overlay--simple {
+        padding: var(--spacing-xl);
     }
 }
 
-/* Medium Devices / iPad Portrait (768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
+/* Medium Devices and up (768px+) */
+@media (min-width: 768px) {
     .hero {
         min-height: 35vh;
-        margin-top: calc(-1 * var(--padding-xl));
+        margin-top: calc(-1 * var(--spacing-xl));
     }
 
     .hero-overlay {
-        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
+        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
     }
 
-    .hero-title {
-        font-size: var(--font-size-h1);
-    }
-
-    .hero-subtitle {
-        font-size: var(--font-size-h5);
-    }
-
-    .hero-description {
-        font-size: var(--font-size-h6);
-        margin: var(--padding-md) 0;
+    .hero-overlay--simple {
+        padding: var(--spacing-2xl);
     }
 }
 
-/* iPad Landscape (992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
+/* Large Devices (992px+) */
+@media (min-width: 992px) {
     .hero {
         min-height: 45vh;
-        margin-top: calc(-1 * var(--padding-xl));
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
-    }
-
-    .hero-title {
-        font-size: var(--font-size-h1);
-    }
-
-    .hero-subtitle {
-        font-size: var(--font-size-h5);
-    }
-
-    .hero-description {
-        font-size: var(--font-size-h6);
-        margin: var(--padding-md) 0;
     }
 }
 
-/* Laptops (1200px to 1399.98px) */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
+/* Extra Large Devices (1200px+) */
+@media (min-width: 1200px) {
     .hero {
         min-height: 60vh;
-        margin-top: calc(-1 * var(--padding-xl));
-    }
-
-    .hero-overlay {
-        padding: var(--padding-lg) var(--padding-md) var(--padding-lg) var(--padding-xl);
-    }
-
-    .hero-title {
-        font-size: var(--font-size-h1);
-    }
-
-    .hero-subtitle {
-        font-size: var(--font-size-h5);
-    }
-
-    .hero-description {
-        font-size: var(--font-size-h6);
-        margin: var(--padding-md) 0;
     }
 }
 
@@ -244,7 +228,7 @@
     }
 
     .hero-overlay--simple {
-        padding: 1.5rem;
+        padding: var(--spacing-xl);
     }
 }
 
@@ -259,7 +243,7 @@
     }
 
     .hero-overlay--simple {
-        padding: 1rem;
+        padding: var(--spacing-lg);
     }
 }
 

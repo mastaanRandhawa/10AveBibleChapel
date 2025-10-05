@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import LoginModal from "../components/LoginModal";
+import Button from "../components/Button";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES } from "../constants";
 import "./Members.css";
 
@@ -354,47 +355,68 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
         </p>
       </div>
 
-      <form className="prayer-form" onSubmit={handleSubmit}>
+      <form className="prayer-form" onSubmit={handleSubmit} noValidate>
         <div className="form-group">
+          <label htmlFor="prayer-title" className="visually-hidden">
+            Prayer request title
+          </label>
           <input
+            id="prayer-title"
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
             placeholder="Prayer Request Title"
+            aria-label="Prayer request title"
+            aria-required="true"
             required
           />
         </div>
         <div className="form-group">
+          <label htmlFor="prayer-description" className="visually-hidden">
+            Describe your prayer request
+          </label>
           <textarea
+            id="prayer-description"
             name="description"
             value={formData.description}
             onChange={handleChange}
             placeholder="Describe your prayer request"
             rows={4}
+            aria-label="Describe your prayer request"
+            aria-required="true"
             required
           />
         </div>
         <div className="form-group">
+          <label htmlFor="prayer-requester" className="visually-hidden">
+            Your name (optional)
+          </label>
           <input
+            id="prayer-requester"
             type="text"
             name="requester"
             value={formData.requester}
             onChange={handleChange}
             placeholder="Your Name (optional)"
+            aria-label="Your name (optional)"
           />
         </div>
-        <button type="submit" className="submit-btn">
-          Submit Prayer Request
-        </button>
+        <Button
+          variant="button-primary"
+          buttonText="Submit Prayer Request"
+          onClick={() => {}}
+        />
       </form>
 
       <div className="prayer-form-footer">
         <p className="login-prompt">
           Want to view and pray for others?
-          <button className="login-link-btn" onClick={onLoginClick}>
-            Sign in to access prayer requests
-          </button>
+          <Button
+            variant="button-secondary"
+            buttonText="Sign in to access prayer requests"
+            onClick={onLoginClick}
+          />
         </p>
       </div>
     </div>

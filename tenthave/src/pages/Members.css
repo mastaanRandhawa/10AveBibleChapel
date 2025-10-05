@@ -311,11 +311,11 @@
 }
 
 .prayer-card.priority-urgent {
-    border-left: 5px solid #ff4444;
+    border-left: 5px solid var(--color-error);
 }
 
 .prayer-card.priority-high {
-    border-left: 5px solid #ff8800;
+    border-left: 5px solid var(--color-warning);
 }
 
 .prayer-card.priority-normal {
@@ -379,12 +379,12 @@
 }
 
 .priority-badge.priority-urgent {
-    background: #ff4444;
+    background: var(--color-error);
     color: white;
 }
 
 .priority-badge.priority-high {
-    background: #ff8800;
+    background: var(--color-warning);
     color: white;
 }
 
@@ -594,7 +594,7 @@
 
 .opportunity-card.inactive {
     opacity: 0.7;
-    background: #f5f5f5;
+    background: var(--color-bg-secondary);
 }
 
 .opportunity-card h3 {
@@ -645,28 +645,837 @@
     letter-spacing: var(--letter-spacing-sm);
 }
 
-/* Responsive Design */
-@media (max-width: 767.98px) {
+/* Responsive Design - Consistent with Home Page */
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    .members-page-wrapper {
+        padding: var(--padding-lg) var(--padding-sm);
+    }
+
+    .members-hero h1 {
+        font-size: var(--font-size-h3);
+    }
+
+    .members-hero p {
+        font-size: var(--font-size-h6);
+    }
+
     .directory-filters {
         flex-direction: column;
+        gap: var(--padding-sm);
     }
 
     .search-input {
         min-width: auto;
+        padding: var(--padding-sm);
+        font-size: var(--font-size-h6);
+    }
+
+    .role-filter {
+        padding: var(--padding-sm);
+        font-size: var(--font-size-h6);
     }
 
     .filters {
         flex-direction: column;
         align-items: stretch;
+        gap: var(--padding-sm);
     }
 
     .category-filter,
     .status-filter {
         min-width: auto;
+        padding: var(--padding-sm);
+        font-size: var(--font-size-h6);
     }
 
     .prayer-badges {
         flex-direction: column;
         align-items: flex-start;
+        gap: var(--padding-xs);
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-md);
+    }
+
+    .member-card {
+        padding: var(--padding-md);
+    }
+
+    .member-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-role {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-ministry {
+        font-size: var(--font-size-h6);
+    }
+
+    .contact-link {
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-grid {
+        gap: var(--padding-md);
+    }
+
+    .prayer-card {
+        padding: var(--padding-lg);
+    }
+
+    .prayer-title {
+        font-size: var(--font-size-h5);
+    }
+
+    .prayer-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-md);
+    }
+
+    .schedule-item {
+        padding: var(--padding-md);
+    }
+
+    .schedule-item h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-time {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .zoom-link {
+        padding: var(--padding-xs) var(--padding-sm);
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunities-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-md);
+    }
+
+    .opportunity-card {
+        padding: var(--padding-md);
+    }
+
+    .opportunity-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunity-card p {
+        font-size: var(--font-size-h6);
+    }
+
+    .volunteer-link {
+        padding: var(--padding-xs) var(--padding-sm);
+        font-size: var(--font-size-h6);
+    }
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    .members-page-wrapper {
+        padding: var(--padding-lg) var(--padding-md);
+    }
+
+    .members-hero h1 {
+        font-size: var(--font-size-h3);
+    }
+
+    .members-hero p {
+        font-size: var(--font-size-h6);
+    }
+
+    .directory-filters {
+        flex-direction: column;
+        gap: var(--padding-sm);
+    }
+
+    .search-input {
+        min-width: auto;
+        padding: var(--padding-sm);
+        font-size: var(--font-size-h6);
+    }
+
+    .role-filter {
+        padding: var(--padding-sm);
+        font-size: var(--font-size-h6);
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--padding-sm);
+    }
+
+    .category-filter,
+    .status-filter {
+        min-width: auto;
+        padding: var(--padding-sm);
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-badges {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-xs);
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-lg);
+    }
+
+    .member-card {
+        padding: var(--padding-lg);
+    }
+
+    .member-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-role {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-ministry {
+        font-size: var(--font-size-h6);
+    }
+
+    .contact-link {
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-grid {
+        gap: var(--padding-lg);
+    }
+
+    .prayer-card {
+        padding: var(--padding-xl);
+    }
+
+    .prayer-title {
+        font-size: var(--font-size-h5);
+    }
+
+    .prayer-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-lg);
+    }
+
+    .schedule-item {
+        padding: var(--padding-lg);
+    }
+
+    .schedule-item h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-time {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .zoom-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunities-grid {
+        grid-template-columns: 1fr;
+        gap: var(--padding-lg);
+    }
+
+    .opportunity-card {
+        padding: var(--padding-lg);
+    }
+
+    .opportunity-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunity-card p {
+        font-size: var(--font-size-h6);
+    }
+
+    .volunteer-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .members-page-wrapper {
+        padding: var(--padding-xl) var(--padding-md);
+    }
+
+    .members-hero h1 {
+        font-size: var(--font-size-h2);
+    }
+
+    .members-hero p {
+        font-size: var(--font-size-h5);
+    }
+
+    .directory-filters {
+        flex-direction: column;
+        gap: var(--padding-md);
+    }
+
+    .search-input {
+        min-width: auto;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .role-filter {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--padding-md);
+    }
+
+    .category-filter,
+    .status-filter {
+        min-width: auto;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-badges {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-sm);
+    }
+
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .member-card {
+        padding: var(--padding-lg);
+    }
+
+    .member-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-role {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-ministry {
+        font-size: var(--font-size-h6);
+    }
+
+    .contact-link {
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-grid {
+        gap: var(--padding-lg);
+    }
+
+    .prayer-card {
+        padding: var(--padding-xl);
+    }
+
+    .prayer-title {
+        font-size: var(--font-size-h5);
+    }
+
+    .prayer-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .schedule-item {
+        padding: var(--padding-lg);
+    }
+
+    .schedule-item h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-time {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .zoom-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .opportunity-card {
+        padding: var(--padding-lg);
+    }
+
+    .opportunity-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunity-card p {
+        font-size: var(--font-size-h6);
+    }
+
+    .volunteer-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+}
+
+/* Medium Devices / iPad Portrait (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .members-page-wrapper {
+        padding: var(--padding-xl) var(--padding-md);
+    }
+
+    .members-hero h1 {
+        font-size: var(--font-size-h2);
+    }
+
+    .members-hero p {
+        font-size: var(--font-size-h5);
+    }
+
+    .directory-filters {
+        flex-direction: row;
+        gap: var(--padding-md);
+    }
+
+    .search-input {
+        min-width: 200px;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .role-filter {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .filters {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--padding-md);
+    }
+
+    .category-filter,
+    .status-filter {
+        min-width: 150px;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-badges {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--padding-sm);
+    }
+
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .member-card {
+        padding: var(--padding-lg);
+    }
+
+    .member-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-role {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-ministry {
+        font-size: var(--font-size-h6);
+    }
+
+    .contact-link {
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-grid {
+        gap: var(--padding-lg);
+    }
+
+    .prayer-card {
+        padding: var(--padding-xl);
+    }
+
+    .prayer-title {
+        font-size: var(--font-size-h5);
+    }
+
+    .prayer-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .schedule-item {
+        padding: var(--padding-lg);
+    }
+
+    .schedule-item h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-time {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .zoom-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .opportunity-card {
+        padding: var(--padding-lg);
+    }
+
+    .opportunity-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunity-card p {
+        font-size: var(--font-size-h6);
+    }
+
+    .volunteer-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+}
+
+/* iPad Landscape (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .members-page-wrapper {
+        padding: var(--padding-xl) var(--padding-md);
+    }
+
+    .members-hero h1 {
+        font-size: var(--font-size-h2);
+    }
+
+    .members-hero p {
+        font-size: var(--font-size-h5);
+    }
+
+    .directory-filters {
+        flex-direction: row;
+        gap: var(--padding-md);
+    }
+
+    .search-input {
+        min-width: 200px;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .role-filter {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .filters {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--padding-md);
+    }
+
+    .category-filter,
+    .status-filter {
+        min-width: 150px;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-badges {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--padding-sm);
+    }
+
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .member-card {
+        padding: var(--padding-lg);
+    }
+
+    .member-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-role {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-ministry {
+        font-size: var(--font-size-h6);
+    }
+
+    .contact-link {
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-grid {
+        gap: var(--padding-lg);
+    }
+
+    .prayer-card {
+        padding: var(--padding-xl);
+    }
+
+    .prayer-title {
+        font-size: var(--font-size-h5);
+    }
+
+    .prayer-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .schedule-item {
+        padding: var(--padding-lg);
+    }
+
+    .schedule-item h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-time {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .zoom-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .opportunity-card {
+        padding: var(--padding-lg);
+    }
+
+    .opportunity-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunity-card p {
+        font-size: var(--font-size-h6);
+    }
+
+    .volunteer-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+}
+
+/* Laptops (1200px to 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    .members-page-wrapper {
+        padding: var(--padding-xl) var(--padding-md);
+    }
+
+    .members-hero h1 {
+        font-size: var(--font-size-h2);
+    }
+
+    .members-hero p {
+        font-size: var(--font-size-h5);
+    }
+
+    .directory-filters {
+        flex-direction: row;
+        gap: var(--padding-md);
+    }
+
+    .search-input {
+        min-width: 200px;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .role-filter {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .filters {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--padding-md);
+    }
+
+    .category-filter,
+    .status-filter {
+        min-width: 150px;
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-badges {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--padding-sm);
+    }
+
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .member-card {
+        padding: var(--padding-lg);
+    }
+
+    .member-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-role {
+        font-size: var(--font-size-h6);
+    }
+
+    .member-ministry {
+        font-size: var(--font-size-h6);
+    }
+
+    .contact-link {
+        font-size: var(--font-size-h6);
+    }
+
+    .prayer-grid {
+        gap: var(--padding-lg);
+    }
+
+    .prayer-card {
+        padding: var(--padding-xl);
+    }
+
+    .prayer-title {
+        font-size: var(--font-size-h5);
+    }
+
+    .prayer-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .schedule-item {
+        padding: var(--padding-lg);
+    }
+
+    .schedule-item h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-time {
+        font-size: var(--font-size-h6);
+    }
+
+    .schedule-description {
+        font-size: var(--font-size-h6);
+    }
+
+    .zoom-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--padding-lg);
+    }
+
+    .opportunity-card {
+        padding: var(--padding-lg);
+    }
+
+    .opportunity-card h3 {
+        font-size: var(--font-size-h6);
+    }
+
+    .opportunity-card p {
+        font-size: var(--font-size-h6);
+    }
+
+    .volunteer-link {
+        padding: var(--padding-sm) var(--padding-md);
+        font-size: var(--font-size-h6);
     }
 }

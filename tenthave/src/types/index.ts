@@ -56,6 +56,44 @@ export interface SermonCardProps {
   buttonVariant?: "button-primary" | "button-secondary";
 }
 
+export interface SermonSeriesCardProps {
+  image: string;
+  title: string;
+  episodeCount: number;
+  link?: string;
+  className?: string;
+}
+
+export interface FeaturedSermonCardProps {
+  image: string;
+  title: string;
+  subtitle: string;
+  passage: string;
+  speaker: string;
+  date: string;
+  link?: string;
+  className?: string;
+}
+
+export interface IndividualSermonCardProps {
+  image: string;
+  title: string;
+  subtitle: string;
+  speaker: string;
+  date: string;
+  link?: string;
+  className?: string;
+}
+
+export interface SermonSeries {
+  id: string;
+  title: string;
+  description: string;
+  featuredSermon: FeaturedSermonCardProps;
+  sermons: IndividualSermonCardProps[];
+  speakers: string[];
+}
+
 export interface ServiceTime {
   day: string;
   start: string;
@@ -107,3 +145,6 @@ export interface ScrollRevealProps {
   className?: string;
   threshold?: number;
 }
+
+// Re-export auth types
+export * from "./auth";

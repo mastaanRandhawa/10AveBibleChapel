@@ -1,152 +1,238 @@
-/* Home-specific variables */
-:root {
-    --color-lightish: #f6f0ea;
-    --margin-in-between: 10%;
-}
-
-
-/* Hero section styles moved to HeroSection.css component */
-
+/* Enhanced Home Page Styles */
 .weeklyServices {
-    padding: var(--padding-xl) var(--padding-md);
+    padding: var(--section-padding);
     text-align: center;
+    background-color: var(--color-bg);
 }
 
 .weeklyServices h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
     color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.weeklyServices h2::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: var(--radius-sm);
 }
 
 .weeklyServices p {
     font-family: var(--font-primary);
     font-size: var(--font-size-h5);
-    color: var(--color-dark);
+    color: var(--color-muted-gray);
+    margin-bottom: var(--spacing-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: var(--line-height-relaxed);
 }
 
-
 .weeklyServicesCard {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    /* Space between cards */
-    flex-wrap: wrap;
-    /* Makes it responsive */
-    padding: var(--padding-lg);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
 }
 
 .specialServices {
-    padding: var(--padding-xl) var(--padding-md);
-
-    margin: var(--padding-xl) var(--padding-md);
-    padding-top: var(--margin-in-between);
+    padding: var(--section-padding);
+    margin: var(--section-margin);
     text-align: center;
-    /* background-color: var(--color-light);*/
-    /* stack a top and bottom gradient */
-    background-image:
-        /* top fade: white → light */
-        linear-gradient(to bottom, #ffffff, var(--color-lightish)),
-        /* bottom fade: white → light */
-        linear-gradient(to top, #ffffff, var(--color-lightish));
-    background-repeat: no-repeat;
-    background-position: top, bottom;
-    /* control the “thickness” of each fade */
-    background-size: 100% 80px,
-        /* top fade height */
-        100% 80px;
-    /* bottom fade height */
-    /* ensure the solid var color shows through the middle */
-    background-color: var(--color-lightish);
+    background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-light) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.specialServices::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23FBCB9C" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
 }
 
 .specialServices img {
     width: 60%;
+    max-width: 500px;
     height: auto;
+    margin-bottom: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    transition: transform var(--transition-normal);
+}
+
+.specialServices img:hover {
+    transform: scale(1.02);
 }
 
 .specialServices h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
     color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.specialServices h2::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: var(--radius-sm);
 }
 
 .textServices {
-    width: 75%;
-    margin: auto;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-2xl);
 }
 
 .textJohn {
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: var(--margin-in-between);
+    max-width: 800px;
+    margin: var(--spacing-3xl) auto;
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
 }
 
 .textJohn p {
     font-family: var(--font-primary);
     font-size: var(--font-size-h5);
-    letter-spacing: var(--letter-spacing-lg);
+    font-style: italic;
+    letter-spacing: var(--letter-spacing-wide);
     color: var(--color-dark);
+    line-height: var(--line-height-relaxed);
+    text-align: center;
+    margin: 0;
 }
 
 .learnAboutUs {
-    width: 45%;
-    margin: auto;
+    max-width: 600px;
+    margin: var(--spacing-3xl) auto;
     text-align: center;
+    background: var(--color-bg);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
 }
 
 .learnAboutUs h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
     color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.learnAboutUs h2::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: var(--radius-sm);
 }
 
 .learnAboutUs p {
     font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    color: var(--color-dark);
+    font-size: var(--font-size-body);
+    color: var(--color-muted-gray);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
 }
 
 .specialServicesCard {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    /* Space between cards */
-    flex-wrap: wrap;
-    /* Makes it responsive */
-    padding: var(--padding-lg);
-    margin-bottom: var(--margin-in-between);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .specialMinistriesHeading {
-    margin-top: var(--margin-in-between);
+    margin: var(--spacing-3xl) 0 var(--spacing-2xl) 0;
     text-align: center;
 }
 
 .specialMinistriesHeading h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
     color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.specialMinistriesHeading h2::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: var(--radius-sm);
 }
 
 .recordedSermon {
-    margin-left: auto;
-    margin-right: auto;
+    margin: var(--section-margin);
+    padding: var(--section-padding);
+    background-color: var(--color-bg-secondary);
 }
 
 .recentSermonsHeading {
     text-align: center;
+    margin-bottom: var(--spacing-2xl);
 }
 
 .recentSermonsHeading h2 {
     font-family: var(--font-primary);
     font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
     color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.recentSermonsHeading h2::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: var(--radius-sm);
 }
 
 .view-all-sermons {
     text-align: center;
-    margin-top: var(--padding-xl);
+    margin-top: var(--spacing-xl);
 }
 
 
@@ -178,275 +264,104 @@
 /* Responsive Media Queries */
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
-    :root {
-        --font-size-h1: 32px;
-        --font-size-h2: 28px;
-        --font-size-h3: 24px;
-        --font-size-h4: 20px;
-        --font-size-h5: 16px;
-        --font-size-h6: 14px;
-        --padding-xs: 2px;
-        --padding-sm: 4px;
-        --padding-md: 8px;
-        --padding-lg: 12px;
-        --padding-xl: 16px;
-        --letter-spacing-lg: 2px;
-        --letter-spacing-sm: 0.5px;
-        --margin-in-between: 15%;
-    }
-
-    /* Hero section styles moved to HeroSection.css component */
-
-    .weeklyServices {
-        padding: var(--padding-xl) var(--padding-md);
-        text-align: center;
-    }
-
     .weeklyServicesCard {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        /* Space between cards */
-        flex-wrap: wrap;
-        /* Makes it responsive */
-        padding: var(--padding-lg);
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .specialServicesCard {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
     }
 
     .specialServices img {
         width: 80%;
         height: auto;
+        margin-bottom: var(--spacing-lg);
     }
 
     .learnAboutUs {
         width: 90%;
-        margin: auto;
-        text-align: center;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .textServices {
+        width: 90%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 90%;
+        margin: var(--spacing-xl) auto;
     }
 }
 
 /* Extra Small Devices (376px to 575.98px) */
 @media (min-width: 376px) and (max-width: 575.98px) {
-    :root {
-        --font-size-h1: 48px;
-        --font-size-h2: 40px;
-        --font-size-h3: 32px;
-        --font-size-h4: 28px;
-        --font-size-h5: 22px;
-        --font-size-h6: 16px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3px;
-        --letter-spacing-sm: 0.8px;
-        --margin-in-between: 15%;
-    }
-
-    /* Hero section styles moved to HeroSection.css component */
-
-    .weeklyServices {
-        padding: var(--padding-xl) var(--padding-md);
-        text-align: center;
-    }
-
     .weeklyServicesCard {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        /* Space between cards */
-        flex-wrap: wrap;
-        /* Makes it responsive */
-        padding: var(--padding-lg);
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .specialServicesCard {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
     }
 
     .specialServices img {
         width: 80%;
         height: auto;
+        margin-bottom: var(--spacing-lg);
     }
 
     .learnAboutUs {
         width: 90%;
-        margin: auto;
-        text-align: center;
+        margin: var(--spacing-xl) auto;
     }
 
+    .textServices {
+        width: 90%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 90%;
+        margin: var(--spacing-xl) auto;
+    }
 }
 
 /* Small Devices (576px to 767.98px) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-    :root {
-        --font-size-h1: 56px;
-        --font-size-h2: 44px;
-        --font-size-h3: 36px;
-        --font-size-h4: 30px;
-        --font-size-h5: 24px;
-        --font-size-h6: 18px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.9px;
-        --margin-in-between: 15%;
-    }
-
-    /* Hero section styles moved to HeroSection.css component */
-
-    .weeklyServices {
-        padding: var(--padding-xl) var(--padding-md);
-        text-align: center;
-    }
-
-    .weeklyServicesCard {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        /* Space between cards */
-        flex-wrap: wrap;
-        /* Makes it responsive */
-        padding: var(--padding-lg);
-    }
-
-    .specialServices img {
-        width: 80%;
-        height: auto;
-    }
-
-    .learnAboutUs {
-        width: 90%;
-        margin: auto;
-        text-align: center;
-    }
-}
-
-/* Medium Devices / iPad Portrait (768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    :root {
-        --font-size-h1: 60px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 32px;
-        --font-size-h5: 26px;
-        --font-size-h6: 20px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 21px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 1px;
-        --margin-in-between: 15%;
-    }
-
-    /* Hero section styles moved to HeroSection.css component */
-
-    .weeklyServices {
-        padding: var(--padding-xl) var(--padding-md);
-        text-align: center;
-    }
-
-    .weeklyServicesCard {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        /* Space between cards */
-        flex-wrap: wrap;
-        /* Makes it responsive */
-        padding: var(--padding-lg);
-    }
-
-    .learnAboutUs {
-        width: 90%;
-        margin: auto;
-        text-align: center;
-    }
-}
-
-/* iPad Landscape (992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 48px;
-        --font-size-h3: 40px;
-        --font-size-h4: 32px;
-        --font-size-h5: 24px;
-        --font-size-h6: 18px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.8px;
-
-    }
-
-    /* Hero section styles moved to HeroSection.css component */
-
-    .weeklyServices {
-        padding: var(--padding-xl) var(--padding-md);
-        text-align: center;
-    }
-
-    .weeklyServicesCard {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        /* Space between cards */
-        flex-wrap: wrap;
-        /* Makes it responsive */
-        padding: var(--padding-lg);
-    }
-
     .learnAboutUs {
         width: 80%;
-        margin: auto;
-        text-align: center;
+        margin: var(--spacing-xl) auto;
     }
 
+    .textServices {
+        width: 80%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 80%;
+        margin: var(--spacing-xl) auto;
+    }
 }
 
-/* Laptops (1200px to 1399.98px) */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
-    :root {
-        --font-size-h1: 64px;
-        --font-size-h2: 48px;
-        --font-size-h3: 40px;
-        --font-size-h4: 32px;
-        --font-size-h5: 24px;
-        --font-size-h6: 16px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 30px;
-        --letter-spacing-lg: 3.8px;
-        --letter-spacing-sm: 0.9px;
-
-    }
-
-    /* Hero section styles moved to HeroSection.css component */
-
-    .weeklyServices {
-        padding: var(--padding-xl) var(--padding-md);
-        text-align: center;
-    }
-
-    .weeklyServicesCard {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        /* Space between cards */
-        flex-wrap: wrap;
-        /* Makes it responsive */
-        padding: var(--padding-lg);
-    }
-
+/* Medium Devices and up (768px+) */
+@media (min-width: 768px) {
     .learnAboutUs {
-        width: 75%;
-        margin: auto;
-        text-align: center;
+        width: 60%;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .textServices {
+        width: 70%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 70%;
+        margin: var(--spacing-xl) auto;
     }
 }

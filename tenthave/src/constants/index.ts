@@ -98,61 +98,61 @@ export const EVENT_CATEGORIES = [
   {
     id: "worship",
     name: "Worship Service",
-    color: "#8B4513", // Saddle Brown
+    color: "var(--color-primary)", // Saddle Brown
     description: "Regular worship services and church meetings",
   },
   {
     id: "prayer",
     name: "Prayer Meeting",
-    color: "#4B0082", // Indigo
+    color: "var(--color-primary)", // Indigo
     description: "Prayer meetings and spiritual gatherings",
   },
   {
     id: "youth",
     name: "Youth Group",
-    color: "#FF6347", // Tomato
+    color: "var(--color-warning)", // Tomato
     description: "Youth activities and meetings",
   },
   {
     id: "bible-study",
     name: "Bible Study",
-    color: "#2E8B57", // Sea Green
+    color: "var(--color-success)", // Sea Green
     description: "Bible study sessions and classes",
   },
   {
     id: "fellowship",
     name: "Fellowship",
-    color: "#FF8C00", // Dark Orange
+    color: "var(--color-warning)", // Dark Orange
     description: "Social gatherings and fellowship events",
   },
   {
     id: "ministry",
     name: "Ministry",
-    color: "#4169E1", // Royal Blue
+    color: "var(--color-primary)", // Royal Blue
     description: "Ministry activities and outreach",
   },
   {
     id: "special",
     name: "Special Event",
-    color: "#DC143C", // Crimson
+    color: "var(--color-error)", // Crimson
     description: "Special occasions and celebrations",
   },
   {
     id: "meeting",
     name: "Meeting",
-    color: "#696969", // Dim Gray
+    color: "var(--color-muted-gray)", // Dim Gray
     description: "Administrative and planning meetings",
   },
 ];
 
 // Default event color
-export const DEFAULT_EVENT_COLOR = "#FBCB9C"; // Light orange from your theme
+export const DEFAULT_EVENT_COLOR = "var(--color-primary)"; // Light orange from your theme
 
 // Predefined color options for events
 export const EVENT_COLORS = [
-  { id: "default", name: "Default", value: "#FBCB9C" },
-  { id: "blue", name: "Blue", value: "#4169E1" },
-  { id: "green", name: "Green", value: "#2E8B57" },
-  { id: "red", name: "Red", value: "#DC143C" },
-  { id: "purple", name: "Purple", value: "#4B0082" },
+  { id: "default", name: "Default", value: "var(--color-primary)" },
+  { id: "blue", name: "Blue", value: "var(--color-primary)" },
+  { id: "green", name: "Green", value: "var(--color-success)" },
+  { id: "red", name: "Red", value: "var(--color-error)" },
+  { id: "purple", name: "Purple", value: "var(--color-primary)" },
 ];

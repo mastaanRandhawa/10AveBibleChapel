@@ -1,5 +1,6 @@
 import React from "react";
 import { CalendarEvent } from "./Calendar";
+import Button from "./Button";
 import { EVENT_CATEGORIES } from "../constants";
 import "./EventDetailsModal.css";
 
@@ -49,7 +50,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5 ? "#000000" : "#FFFFFF";
+    return luminance > 0.5 ? "var(--color-dark)" : "var(--color-white)";
   };
 
   return (
@@ -57,9 +58,12 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
       <div className="event-details-modal" onClick={(e) => e.stopPropagation()}>
         <div className="event-details-header">
           <h2>Events for {formatDate(selectedDate)}</h2>
-          <button className="event-details-close" onClick={onClose}>
-            ×
-          </button>
+          <Button
+            variant="button-secondary"
+            buttonText="×"
+            onClick={onClose}
+            className="event-details-close"
+          />
         </div>
 
         <div className="event-details-content">
@@ -77,8 +81,10 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                     <div
                       className="event-type-icon"
                       style={{
-                        backgroundColor: event.color || "#FBCB9C",
-                        color: getContrastColor(event.color || "#FBCB9C"),
+                        backgroundColor: event.color || "var(--color-primary)",
+                        color: getContrastColor(
+                          event.color || "var(--color-primary)"
+                        ),
                       }}
                     >
                       •
@@ -92,15 +98,15 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                       )}
                     </div>
                     <div className="event-actions">
-                      <button
-                        className="edit-btn"
+                      <Button
+                        variant="button-primary"
+                        buttonText="Edit"
                         onClick={() => onEditEvent(event)}
-                        title="Edit event"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="delete-btn"
+                        className="edit-btn"
+                      />
+                      <Button
+                        variant="button-secondary"
+                        buttonText="Delete"
                         onClick={() => {
                           if (
                             window.confirm(
@@ -110,10 +116,8 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                             onDeleteEvent(event.id);
                           }
                         }}
-                        title="Delete event"
-                      >
-                        Delete
-                      </button>
+                        className="delete-btn"
+                      />
                     </div>
                   </div>
 

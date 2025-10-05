@@ -115,61 +115,6 @@ const BeliefsList: React.FC = () => (
   </div>
 );
 
-// Elders data
-const ELDERS = [
-  {
-    name: "DANIELLE WATKINS",
-    title: "Pastor, Church",
-    image: "/assets/prayingiconround.svg", // Using existing asset as placeholder
-    social: {
-      facebook: "#",
-      twitter: "#",
-      linkedin: "#",
-    },
-  },
-  {
-    name: "NAOMI CRAIG",
-    title: "Pastor, Church",
-    image: "/assets/bible.svg", // Using existing asset as placeholder
-    social: {
-      facebook: "#",
-      twitter: "#",
-      linkedin: "#",
-    },
-  },
-];
-
-// Elders Section Component
-const EldersSection: React.FC = () => (
-  <div className="elders-section">
-    <h2 className="section-heading">ELDERS</h2>
-    <div className="elders-grid">
-      {ELDERS.map((elder, index) => (
-        <div key={index} className="elder-card">
-          <div className="elder-image">
-            <img src={elder.image} alt={elder.name} />
-          </div>
-          <div className="elder-info">
-            <h3 className="elder-name">{elder.name}</h3>
-            <p className="elder-title">{elder.title}</p>
-            <div className="elder-social">
-              <a href={elder.social.facebook} className="social-icon">
-                📘
-              </a>
-              <a href={elder.social.twitter} className="social-icon">
-                🐦
-              </a>
-              <a href={elder.social.linkedin} className="social-icon">
-                💼
-              </a>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
 // Main About Component
 const About: React.FC = () => {
   return (
@@ -201,10 +146,6 @@ const About: React.FC = () => {
             <h2 className="section-heading2">What Do We Believe?</h2>
           </div>
           <BeliefsList />
-        </ScrollReveal>
-
-        <ScrollReveal className="elders-section-wrapper">
-          <EldersSection />
         </ScrollReveal>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CalendarEvent } from "./Calendar";
+import Button from "./Button";
 import {
   EVENT_CATEGORIES,
   DEFAULT_EVENT_COLOR,
@@ -145,9 +146,12 @@ const EventModal: React.FC<EventModalProps> = ({
       <div className="event-modal" onClick={(e) => e.stopPropagation()}>
         <div className="event-modal-header">
           <h2>{editingEvent ? "Edit Event" : "Add New Event"}</h2>
-          <button className="event-modal-close" onClick={handleClose}>
-            ×
-          </button>
+          <Button
+            variant="button-secondary"
+            buttonText="×"
+            onClick={handleClose}
+            className="event-modal-close"
+          />
         </div>
 
         <div className="event-modal-date">
@@ -256,12 +260,18 @@ const EventModal: React.FC<EventModalProps> = ({
           </div>
 
           <div className="event-modal-actions">
-            <button type="button" className="btn-cancel" onClick={handleClose}>
-              Cancel
-            </button>
-            <button type="submit" className="btn-save">
-              {editingEvent ? "Update Event" : "Add Event"}
-            </button>
+            <Button
+              variant="button-secondary"
+              buttonText="Cancel"
+              onClick={handleClose}
+              className="btn-cancel"
+            />
+            <Button
+              variant="button-primary"
+              buttonText={editingEvent ? "Update Event" : "Add Event"}
+              onClick={() => {}}
+              className="btn-save"
+            />
           </div>
         </form>
       </div>

@@ -1,0 +1,142 @@
+/* SermonSeriesCard Styles */
+.sermon-series-card {
+    background: var(--sermon-card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    position: relative;
+    border-bottom: 4px solid var(--sermon-card-border);
+}
+
+.sermon-series-card:hover {
+    transform: translateY(-4px);
+}
+
+.sermon-series-card__image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.sermon-series-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.sermon-series-card:hover .sermon-series-card__image img {
+    transform: scale(1.05);
+}
+
+.sermon-series-card__content {
+    padding: 1.5rem;
+    text-align: left;
+    position: relative;
+}
+
+.sermon-series-card__title {
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-bold);
+    color: var(--sermon-card-text);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.sermon-series-card__episodes {
+    font-size: var(--font-size-h6);
+    color: var(--sermon-card-text-muted);
+    margin: 0 0 1rem 0;
+    font-weight: var(--font-weight-regular);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.sermon-series-card__button {
+    display: inline-block;
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    color: var(--sermon-card-border);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    transition: color 0.3s ease;
+}
+
+.sermon-series-card__button:hover {
+    color: var(--color-primary-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 767.98px) {
+    .sermon-series-card__image {
+        height: 160px;
+    }
+
+    .sermon-series-card__content {
+        padding: 1.25rem;
+    }
+
+    .sermon-series-card__title {
+        font-size: var(--font-size-h6);
+    }
+
+    .sermon-series-card__episodes {
+        font-size: calc(var(--font-size-h6) - 2px);
+    }
+
+    .sermon-series-card__button {
+        font-size: calc(var(--font-size-h6) - 2px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sermon-series-card__image {
+        height: 140px;
+    }
+
+    .sermon-series-card__content {
+        padding: 1rem;
+    }
+
+    .sermon-series-card__title {
+        font-size: calc(var(--font-size-h6) - 1px);
+        margin-bottom: 0.25rem;
+    }
+
+    .sermon-series-card__episodes {
+        font-size: calc(var(--font-size-h6) - 3px);
+        margin-bottom: 0.75rem;
+    }
+
+    .sermon-series-card__button {
+        font-size: calc(var(--font-size-h6) - 3px);
+    }
+}
+
+@media (max-width: 375px) {
+    .sermon-series-card__image {
+        height: 120px;
+    }
+
+    .sermon-series-card__content {
+        padding: 0.875rem;
+    }
+
+    .sermon-series-card__title {
+        font-size: calc(var(--font-size-h6) - 2px);
+    }
+
+    .sermon-series-card__episodes {
+        font-size: calc(var(--font-size-h6) - 4px);
+    }
+
+    .sermon-series-card__button {
+        font-size: calc(var(--font-size-h6) - 4px);
+    }
+}

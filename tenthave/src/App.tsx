@@ -1,32 +1,42 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Sermon from "./pages/Sermon";
-import Contact from "./pages/Contact";
-import Bulletin from "./pages/Bulletin";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./pages/scrollToTop";
-import Login from "./pages/Login";
+import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+// Lazy load pages for code splitting
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Sermon = lazy(() => import("./pages/Sermon"));
+const SermonSeriesDetail = lazy(() => import("./pages/SermonSeriesDetail"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Bulletin = lazy(() => import("./pages/Bulletin"));
+const Login = lazy(() => import("./pages/Login"));
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <Header />
+    <ErrorBoundary>
+      <Router>
+        <ScrollToTop />
+        <Header />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/bulletin" element={<Bulletin />} />
-        <Route path="/sermon" element={<Sermon />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/bulletin" element={<Bulletin />} />
+            <Route path="/sermon" element={<Sermon />} />
+            <Route path="/sermon/:seriesId" element={<SermonSeriesDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Suspense>
 
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </ErrorBoundary>
   );
 };
 

@@ -1,83 +1,106 @@
-/* Header-specific variables */
-:root {
-    /* Header & Navbar Specific */
-    --padding-header: var(--padding-md);
-    --margin-menu-items: 30px;
-}
-
+/* Enhanced Header Styles */
 .header {
     position: sticky;
     top: 0;
     z-index: 100;
-    /* sit above the rest */
     width: 100%;
-    background-color: var(--color-light);
-    padding: var(--padding-header) 0;
+    background-color: rgba(247, 246, 241, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: var(--spacing-md) 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.3s ease;
-    /* smooth fade */
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
 }
 
 .header.scrolled {
-    opacity: 0.2;
+    background-color: rgba(247, 246, 241, 0.98);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-sm) 0;
 }
 
 .header.scrolled:hover {
-    opacity: 1;
+    background-color: var(--color-light);
 }
 
 .nav-container {
     width: 100%;
+    max-width: var(--container-max-width);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--padding-md);
+    padding: 0 var(--container-padding);
 }
 
 .leftSide {
     font-family: var(--font-primary);
-    font-size: var(--font-size-h4);
+    font-size: var(--font-size-h5);
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-lg);
+    letter-spacing: var(--letter-spacing-wider);
     color: var(--color-dark);
-    padding-left: var(--padding-md);
+    transition: color var(--transition-fast);
 }
 
 .leftSide a {
     text-decoration: none;
     color: inherit;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.leftSide:hover {
+    color: var(--color-primary-dark);
 }
 
 /* Desktop Navigation Styles */
 .navLinks {
     list-style: none;
     display: flex;
-    gap: var(--padding-md);
-    padding: 0 var(--padding-xl);
+    gap: var(--spacing-lg);
+    padding: 0;
     margin: 0;
-    border-left: 1px solid var(--color-dark);
+    align-items: center;
 }
 
 .navLinks li {
     font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-medium);
 }
 
 .navLinks li a,
 .closeButton {
     text-decoration: none;
     color: var(--color-dark);
-    transition: all 0.3s ease-in-out;
-    padding: var(--padding-sm) var(--padding-md);
+    transition: all var(--transition-fast);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    position: relative;
+}
+
+.navLinks li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: all var(--transition-fast);
+    transform: translateX(-50%);
 }
 
 .navLinks li a:hover {
     color: var(--color-primary);
-    transition: all 0.3s ease-in-out;
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+.navLinks li a:hover::after {
+    width: 80%;
 }
 
 /* Burger Menu Icon - hidden on larger screens */
