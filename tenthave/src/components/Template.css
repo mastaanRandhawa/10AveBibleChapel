@@ -17,7 +17,7 @@
 /* Initial state before scrolling */
 .scroll-reveal {
     opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: opacity var(--interaction-slow), transform var(--interaction-slow);
 }
 
 /* Class added by JavaScript when element is in viewport */

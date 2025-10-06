@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useScrollPosition } from "../hooks/useScrollPosition";
 import { NAVIGATION_ITEMS } from "../constants";
-import Button from "./Button";
 import "./Header.css";
 import BurgerIcon from "../assets/burger.svg";
 import CloseIcon from "../assets/closeButton.svg";
@@ -10,12 +9,12 @@ import HomeIcon from "../assets/home.svg";
 
 const Header: React.FC = () => {
   const [menuActive, setMenuActive] = useState(false);
-  const scrolled = useScrollPosition();
+  const scrolled = useScrollPosition(100);
 
   const toggleMenu = () => setMenuActive((active) => !active);
 
   return (
-    <header className={`header${scrolled ? " scrolled" : ""}`}>
+    <header className={`header${!scrolled ? " header-visible" : ""}`}>
       <nav className="nav-container">
         <div className="leftSide">
           <Link to="/">

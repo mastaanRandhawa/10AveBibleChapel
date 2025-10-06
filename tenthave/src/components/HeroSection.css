@@ -1,11 +1,7 @@
 /* Enhanced Hero Section Styles */
 .hero {
     position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
     margin-top: calc(-1 * var(--spacing-xl));
     height: auto;
     min-height: 80vh;
@@ -40,7 +36,7 @@
 }
 
 .hero-overlay {
-    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
     color: var(--color-light);
     max-width: 100%;
     text-align: left;
@@ -121,7 +117,7 @@
     }
 
     .hero-overlay {
-        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
+        padding: var(--spacing-lg) var(--spacing-lg);
     }
 
     .hero-overlay--simple {
@@ -152,7 +148,7 @@
     }
 
     .hero-overlay {
-        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
+        padding: var(--spacing-lg) var(--spacing-lg);
     }
 
     .hero-overlay--simple {
@@ -172,7 +168,7 @@
     }
 
     .hero-overlay {
-        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
+        padding: var(--spacing-lg) var(--spacing-lg);
     }
 
     .hero-overlay--simple {
@@ -188,7 +184,7 @@
     }
 
     .hero-overlay {
-        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
+        padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
     }
 
     .hero-overlay--simple {

@@ -1,0 +1,380 @@
+/* ========================================
+   INTERACTION SYSTEM - CONSISTENT PATTERNS
+   ======================================== */
+
+/* Base interaction variables */
+:root {
+    /* Interaction timing */
+    --interaction-fast: 150ms ease-out;
+    --interaction-normal: 250ms ease-out;
+    --interaction-slow: 350ms ease-out;
+
+    /* Interaction distances */
+    --lift-distance: 4px;
+    --lift-distance-large: 8px;
+    --scale-factor: 1.02;
+    --scale-factor-large: 1.05;
+
+    /* Interaction colors */
+    --hover-overlay: rgba(251, 203, 156, 0.08);
+    --hover-overlay-strong: rgba(251, 203, 156, 0.12);
+    --focus-ring: 2px solid var(--color-primary);
+    --focus-ring-offset: 2px;
+}
+
+/* ========================================
+   UNIVERSAL INTERACTION PATTERNS
+   ======================================== */
+
+/* Subtle lift effect for cards and containers */
+.interactive-lift {
+    transition: transform var(--interaction-normal),
+        box-shadow var(--interaction-normal),
+        border-color var(--interaction-normal);
+}
+
+.interactive-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.interactive-lift:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Strong lift effect for primary interactive elements */
+.interactive-lift-strong {
+    transition: transform var(--interaction-normal),
+        box-shadow var(--interaction-normal),
+        border-color var(--interaction-normal);
+}
+
+.interactive-lift-strong:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.interactive-lift-strong:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Scale effect for buttons and clickable elements */
+.interactive-scale {
+    transition: transform var(--interaction-fast),
+        background-color var(--interaction-normal),
+        color var(--interaction-normal);
+}
+
+.interactive-scale:hover {
+    transform: scale(1.02);
+}
+
+.interactive-scale:active {
+    transform: scale(0.98);
+}
+
+/* Scale effect for images and media */
+.interactive-scale-image {
+    transition: transform var(--interaction-normal);
+}
+
+.interactive-scale-image:hover {
+    transform: scale(1.05);
+}
+
+/* Overlay effect for cards with background images */
+.interactive-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.interactive-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--hover-overlay);
+    opacity: 0;
+    transition: opacity var(--interaction-normal);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.interactive-overlay:hover::before {
+    opacity: 1;
+}
+
+/* Strong overlay effect */
+.interactive-overlay-strong::before {
+    background: var(--hover-overlay-strong);
+}
+
+/* ========================================
+   FOCUS MANAGEMENT
+   ======================================== */
+
+/* Consistent focus styles */
+.interactive-focus {
+    outline: none;
+    transition: box-shadow var(--interaction-fast);
+}
+
+.interactive-focus:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: 0 0 0 4px rgba(251, 203, 156, 0.2);
+}
+
+/* Focus styles for buttons */
+.interactive-button:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: 0 0 0 4px rgba(251, 203, 156, 0.2);
+}
+
+/* ========================================
+   ANIMATION UTILITIES
+   ======================================== */
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn var(--interaction-normal) ease-out;
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft var(--interaction-normal) ease-out;
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in-right {
+    animation: slideInRight var(--interaction-normal) ease-out;
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   COMPONENT-SPECIFIC INTERACTIONS
+   ======================================== */
+
+/* Navigation links */
+.nav-link-interactive {
+    position: relative;
+    transition: color var(--interaction-normal),
+        background-color var(--interaction-normal);
+}
+
+.nav-link-interactive::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all var(--interaction-normal);
+    transform: translateX(-50%);
+}
+
+.nav-link-interactive:hover::after {
+    width: 80%;
+}
+
+/* Icon interactions */
+.icon-interactive {
+    transition: transform var(--interaction-fast),
+        color var(--interaction-normal);
+}
+
+.icon-interactive:hover {
+    transform: scale(1.1);
+}
+
+/* Text link interactions */
+.text-link-interactive {
+    position: relative;
+    transition: color var(--interaction-normal);
+}
+
+.text-link-interactive::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--interaction-normal);
+}
+
+.text-link-interactive:hover::after {
+    width: 100%;
+}
+
+/* ========================================
+   RESPONSIVE INTERACTIONS
+   ======================================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    .interactive-lift,
+    .interactive-lift-strong,
+    .interactive-scale,
+    .interactive-scale-image,
+    .interactive-overlay::before,
+    .nav-link-interactive::after,
+    .icon-interactive,
+    .text-link-interactive::after {
+        transition: none;
+    }
+
+    .interactive-lift:hover,
+    .interactive-lift-strong:hover {
+        transform: none;
+    }
+
+    .interactive-scale:hover {
+        transform: none;
+    }
+
+    .interactive-scale-image:hover {
+        transform: none;
+    }
+
+    .interactive-overlay:hover::before {
+        opacity: 0;
+    }
+
+    .nav-link-interactive:hover::after {
+        width: 0;
+    }
+
+    .icon-interactive:hover {
+        transform: none;
+    }
+
+    .text-link-interactive:hover::after {
+        width: 0;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+
+    .interactive-lift:hover,
+    .interactive-lift-strong:hover {
+        transform: none;
+    }
+
+    .interactive-scale:hover {
+        transform: none;
+    }
+
+    .interactive-scale-image:hover {
+        transform: none;
+    }
+
+    .interactive-overlay:hover::before {
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ======================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .interactive-focus:focus-visible {
+        outline: 3px solid;
+        outline-offset: 2px;
+    }
+
+    .interactive-button:focus-visible {
+        outline: 3px solid;
+        outline-offset: 2px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --hover-overlay: rgba(255, 255, 255, 0.05);
+        --hover-overlay-strong: rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* ========================================
+   MOBILE SPACING UTILITIES
+   ======================================== */
+
+/* Mobile margin utilities */
+@media (max-width: 767.98px) {
+    .mobile-margin {
+        margin: 0 var(--spacing-sm) !important;
+    }
+
+    .mobile-padding {
+        padding: var(--spacing-lg) !important;
+    }
+
+    .mobile-container {
+        padding: 0 var(--spacing-lg) !important;
+    }
+}

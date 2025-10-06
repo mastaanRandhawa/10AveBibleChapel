@@ -423,25 +423,6 @@
         font-size: 10px;
     }
 
-    .prayer-form {
-        padding: var(--spacing-lg);
-    }
-
-    .prayer-form-header h3 {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-badges {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-xs);
-    }
-
-    .prayer-requests-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
-
     .announcements-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
@@ -455,19 +436,6 @@
 
     .announcement-date {
         align-self: flex-end;
-    }
-
-    .prayer-login-card {
-        padding: var(--spacing-lg);
-        margin: 0 var(--spacing-md);
-    }
-
-    .prayer-login-icon {
-        font-size: var(--font-size-h5);
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h5);
     }
 }
 
@@ -537,24 +505,6 @@
         font-size: 12px;
     }
 
-    .prayer-form {
-        padding: var(--spacing-lg);
-    }
-
-    .prayer-form-header h3 {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-badges {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-xs);
-    }
-
-    .prayer-requests-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
 
     .announcements-grid {
         grid-template-columns: 1fr;
@@ -571,18 +521,6 @@
         align-self: flex-end;
     }
 
-    .prayer-login-card {
-        padding: var(--spacing-lg);
-        margin: 0 var(--spacing-md);
-    }
-
-    .prayer-login-icon {
-        font-size: var(--font-size-h5);
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h5);
-    }
 }
 
 /* Small Devices (576px to 767.98px) */
@@ -651,24 +589,6 @@
         font-size: 12px;
     }
 
-    .prayer-form {
-        padding: var(--spacing-lg);
-    }
-
-    .prayer-form-header h3 {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-badges {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-xs);
-    }
-
-    .prayer-requests-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
 
     .announcements-grid {
         grid-template-columns: 1fr;
@@ -685,18 +605,6 @@
         align-self: flex-end;
     }
 
-    .prayer-login-card {
-        padding: var(--spacing-lg);
-        margin: 0 var(--spacing-md);
-    }
-
-    .prayer-login-icon {
-        font-size: var(--font-size-h5);
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h5);
-    }
 }
 
 /* Medium Devices / iPad Portrait (768px to 991.98px) */
@@ -773,16 +681,6 @@
         font-size: var(--font-size-h3);
     }
 
-    .prayer-badges {
-        flex-direction: row;
-        align-items: center;
-        gap: var(--spacing-sm);
-    }
-
-    .prayer-requests-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: var(--spacing-lg);
-    }
 
     .announcements-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -799,18 +697,6 @@
         align-self: flex-start;
     }
 
-    .prayer-login-card {
-        padding: var(--spacing-xl);
-        margin: 0 auto;
-    }
-
-    .prayer-login-icon {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h4);
-    }
 }
 
 /* iPad Landscape (992px to 1199.98px) */
@@ -893,10 +779,6 @@
         gap: var(--spacing-sm);
     }
 
-    .prayer-requests-grid {
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: var(--spacing-lg);
-    }
 
     .announcements-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -913,18 +795,6 @@
         align-self: flex-start;
     }
 
-    .prayer-login-card {
-        padding: var(--spacing-xl);
-        margin: 0 auto;
-    }
-
-    .prayer-login-icon {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h4);
-    }
 }
 
 /* Laptops (1200px to 1399.98px) */
@@ -1007,10 +877,6 @@
         gap: var(--spacing-sm);
     }
 
-    .prayer-requests-grid {
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: var(--spacing-lg);
-    }
 
     .announcements-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1027,393 +893,8 @@
         align-self: flex-start;
     }
 
-    .prayer-login-card {
-        padding: var(--spacing-xl);
-        margin: 0 auto;
-    }
-
-    .prayer-login-icon {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h4);
-    }
 }
 
-/* Prayer Request Section Styles */
-.prayer-form-section {
-    margin-bottom: var(--spacing-xl);
-}
-
-.prayer-form-header {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-}
-
-.prayer-form-header h3 {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h3);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
-    margin-bottom: var(--spacing-sm);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-}
-
-.prayer-form-subtitle {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    margin: 0;
-    opacity: 0.8;
-    line-height: 1.5;
-}
-
-.prayer-form {
-    background: var(--color-bg);
-    padding: var(--spacing-xl);
-    border: 2px solid var(--color-primary);
-    border-bottom: 15px solid var(--color-primary);
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.prayer-form-footer {
-    margin-top: var(--spacing-lg);
-    text-align: center;
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--color-light);
-}
-
-.login-prompt {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    margin: 0;
-    opacity: 0.8;
-}
-
-.login-link-btn {
-    background: none;
-    border: none;
-    color: var(--color-primary);
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-bold);
-    text-decoration: underline;
-    cursor: pointer;
-    margin-left: var(--spacing-xs);
-    transition: color 0.3s ease;
-}
-
-.login-link-btn:hover {
-    color: var(--color-dark);
-}
-
-.form-group {
-    margin-bottom: var(--spacing-lg);
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: var(--spacing-md);
-    border: 1px solid var(--color-primary);
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    transition: border-color 0.3s ease;
-    box-sizing: border-box;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: var(--color-dark);
-}
-
-.submit-btn {
-    width: 100%;
-    padding: var(--spacing-md);
-    background: var(--color-primary);
-    color: var(--color-dark);
-    border: none;
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-    background: var(--color-dark);
-    color: var(--color-primary);
-}
-
-/* Prayer Request Cards */
-.prayer-card {
-    background: var(--color-bg);
-    padding: var(--spacing-xl);
-    border: 2px solid var(--color-primary);
-    border-bottom: 15px solid var(--color-primary);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: var(--spacing-lg);
-}
-
-.prayer-card.priority-urgent {
-    border-left: 5px solid var(--color-error);
-}
-
-.prayer-card.priority-high {
-    border-left: 5px solid var(--color-warning);
-}
-
-.prayer-card.priority-normal {
-    border-left: 5px solid var(--color-primary);
-}
-
-.prayer-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.prayer-card.answered {
-    border-color: var(--color-dark);
-    background: var(--color-light);
-}
-
-.prayer-header {
-    margin-bottom: var(--spacing-lg);
-}
-
-.prayer-title-section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.prayer-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-}
-
-.prayer-title {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h4);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
-    margin: 0;
-    flex: 1;
-}
-
-.category-badge {
-    background: var(--color-light);
-    color: var(--color-dark);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-family: var(--font-primary);
-    font-size: calc(var(--font-size-h6) - 2px);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-    border: 1px solid var(--color-primary);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
-
-.category-badge::before {
-    content: attr(data-icon);
-    background: var(--color-primary);
-    color: var(--color-dark);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: var(--font-weight-bold);
-}
-
-.priority-badge {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-family: var(--font-primary);
-    font-size: calc(var(--font-size-h6) - 2px);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-}
-
-.priority-badge.priority-urgent {
-    background: var(--color-error);
-    color: white;
-}
-
-.priority-badge.priority-high {
-    background: var(--color-warning);
-    color: white;
-}
-
-.priority-badge.priority-normal {
-    background: var(--color-primary);
-    color: var(--color-dark);
-}
-
-.answered-badge {
-    background: var(--color-dark);
-    color: var(--color-primary);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-family: var(--font-primary);
-    font-size: calc(var(--font-size-h6) - 2px);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-}
-
-.prayer-description {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-lg);
-}
-
-.prayer-meta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-}
-
-.answered-date {
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-}
-
-.prayer-date {
-    font-weight: var(--font-weight-bold);
-}
-
-.prayer-requester {
-    font-style: italic;
-}
-
-/* Prayer Requests Section */
-.prayer-requests-section {
-    margin-bottom: var(--spacing-xl);
-}
-
-.prayer-login-prompt {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 300px;
-}
-
-.prayer-login-card {
-    background: var(--color-bg);
-    padding: var(--spacing-xl);
-    border: 2px solid var(--color-primary);
-    border-bottom: 15px solid var(--color-primary);
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    max-width: 500px;
-    width: 100%;
-}
-
-.prayer-login-icon {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-}
-
-.prayer-login-card h3 {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h4);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
-    margin-bottom: var(--spacing-md);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-}
-
-.prayer-login-card p {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    color: var(--color-dark);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.8;
-}
-
-.prayer-login-btn {
-    background: var(--color-primary);
-    color: var(--color-dark);
-    border: none;
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(251, 203, 156, 0.3);
-}
-
-.prayer-login-btn:hover {
-    background: var(--color-dark);
-    color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.prayer-requests-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
-}
-
-.view-all-prayers {
-    text-align: center;
-    margin-top: var(--spacing-xl);
-}
-
-.view-all-btn {
-    background: var(--color-primary);
-    color: var(--color-dark);
-    border: none;
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-sm);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(251, 203, 156, 0.3);
-}
-
-.view-all-btn:hover {
-    background: var(--color-dark);
-    color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
 
 /* Announcements Section */
 .announcements-section {
@@ -1490,54 +971,4 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
     border: 1px solid var(--color-primary);
-}
-
-
-/* Responsive Prayer Section */
-@media (max-width: 768px) {
-    .prayer-form {
-        padding: var(--spacing-lg);
-    }
-
-    .prayer-form-header h3 {
-        font-size: var(--font-size-h4);
-    }
-
-    .prayer-badges {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .prayer-requests-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
-
-    .announcements-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
-
-    .announcement-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
-    }
-
-    .announcement-date {
-        align-self: flex-end;
-    }
-
-    .prayer-login-card {
-        padding: var(--spacing-lg);
-        margin: 0 var(--spacing-md);
-    }
-
-    .prayer-login-icon {
-        font-size: 1.25rem;
-    }
-
-    .prayer-login-card h3 {
-        font-size: var(--font-size-h5);
-    }
 }

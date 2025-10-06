@@ -13,6 +13,7 @@ const Sermon = lazy(() => import("./pages/Sermon"));
 const SermonSeriesDetail = lazy(() => import("./pages/SermonSeriesDetail"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Bulletin = lazy(() => import("./pages/Bulletin"));
+const Prayer = lazy(() => import("./pages/Prayer"));
 const Login = lazy(() => import("./pages/Login"));
 
 const App: React.FC = () => {
@@ -27,6 +28,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/bulletin" element={<Bulletin />} />
+            <Route path="/prayer" element={<Prayer />} />
             <Route path="/sermon" element={<Sermon />} />
             <Route path="/sermon/:seriesId" element={<SermonSeriesDetail />} />
             <Route path="/contact" element={<Contact />} />

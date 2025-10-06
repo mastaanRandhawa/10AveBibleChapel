@@ -78,7 +78,7 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all var(--interaction-normal);
     min-width: 120px;
 }
 
@@ -91,6 +91,14 @@
     background-color: var(--color-dark);
     color: var(--color-primary);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-boundary-retry-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    background-color: var(--color-dark);
+    color: var(--color-primary);
 }
 
 .error-boundary-reload-btn {
@@ -102,6 +110,14 @@
     background-color: var(--color-primary);
     color: var(--color-dark);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-boundary-reload-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
 }
 
 /* Responsive adjustments */

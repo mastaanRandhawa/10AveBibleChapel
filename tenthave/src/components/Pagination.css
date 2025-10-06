@@ -22,14 +22,22 @@
     font-size: var(--font-size-h6);
     font-weight: var(--font-weight-regular);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--interaction-normal);
     text-decoration: none;
 }
 
 .pagination__button:hover:not(.disabled):not(.ellipsis) {
     background: var(--sermon-card-border);
     color: var(--sermon-card-text);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pagination__button:focus-visible:not(.disabled):not(.ellipsis) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    background: var(--sermon-card-border);
+    color: var(--sermon-card-text);
 }
 
 .pagination__button.active {

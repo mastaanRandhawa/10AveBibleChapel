@@ -32,17 +32,25 @@
     font-size: var(--font-size-h6);
     font-weight: var(--font-weight-regular);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--interaction-normal);
     min-width: 150px;
 }
 
 .sermon-filter__dropdown-button:hover {
     background: rgba(255, 193, 7, 0.1);
     border-color: var(--sermon-card-border);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sermon-filter__dropdown-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    background: rgba(255, 193, 7, 0.1);
 }
 
 .sermon-filter__dropdown-arrow {
-    transition: transform 0.3s ease;
+    transition: transform var(--interaction-normal);
     color: var(--sermon-card-border);
 }
 
@@ -74,10 +82,17 @@
     font-weight: var(--font-weight-regular);
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--interaction-normal), transform var(--interaction-fast);
 }
 
 .sermon-filter__dropdown-item:hover {
+    background: rgba(255, 193, 7, 0.1);
+    transform: translateX(4px);
+}
+
+.sermon-filter__dropdown-item:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
     background: rgba(255, 193, 7, 0.1);
 }
 
@@ -96,11 +111,20 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color var(--interaction-normal), transform var(--interaction-fast);
     white-space: nowrap;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
 }
 
 .sermon-filter__reset:hover {
+    color: var(--sermon-card-border);
+    transform: translateX(2px);
+}
+
+.sermon-filter__reset:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
     color: var(--sermon-card-border);
 }
 

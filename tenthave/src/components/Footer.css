@@ -64,14 +64,22 @@
     font-size: var(--font-size-small);
     color: var(--color-light);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: color var(--interaction-normal), transform var(--interaction-fast);
     margin-bottom: var(--spacing-xs);
     text-align: left;
+    position: relative;
 }
 
 .footer-contact-item a:hover {
     color: var(--color-primary);
     text-decoration: none;
+    transform: translateX(4px);
+}
+
+.footer-contact-item a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    color: var(--color-primary);
 }
 
 .footer-column {
@@ -85,12 +93,13 @@
     height: 24px;
     margin-right: var(--spacing-sm);
     vertical-align: middle;
-    transition: transform var(--transition-fast);
+    transition: transform var(--interaction-fast), filter var(--interaction-normal);
     display: inline-block;
 }
 
 .social-icon:hover {
     transform: scale(1.1);
+    filter: brightness(1.2);
 }
 
 .lineBreak {

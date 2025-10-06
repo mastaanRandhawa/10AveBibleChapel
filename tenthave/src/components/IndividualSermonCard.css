@@ -4,7 +4,7 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    transition: all var(--interaction-normal);
     cursor: pointer;
     font-family: var(--font-primary);
     position: relative;
@@ -14,6 +14,13 @@
 .individual-sermon-card:hover {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     transform: translateY(-4px);
+}
+
+.individual-sermon-card:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .individual-sermon-card__image {
@@ -26,7 +33,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform var(--interaction-normal);
 }
 
 .individual-sermon-card:hover .individual-sermon-card__image img {
@@ -85,6 +92,10 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .individual-sermon-card {
+        margin: 0 var(--spacing-sm);
+    }
+
     .individual-sermon-card__image {
         height: 160px;
     }
@@ -103,6 +114,10 @@
 }
 
 @media (max-width: 576px) {
+    .individual-sermon-card {
+        margin: 0 var(--spacing-sm);
+    }
+
     .individual-sermon-card__image {
         height: 140px;
     }
@@ -130,6 +145,10 @@
 }
 
 @media (max-width: 375px) {
+    .individual-sermon-card {
+        margin: 0 var(--spacing-sm);
+    }
+
     .individual-sermon-card__image {
         height: 120px;
     }

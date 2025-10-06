@@ -1,27 +1,35 @@
 /* Enhanced Header Styles */
 .header {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 100;
     width: 100%;
-    background-color: rgba(247, 246, 241, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
     padding: var(--spacing-md) 0;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all var(--transition-normal);
+    box-shadow: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+}
+
+.header.header-visible {
+    background-color: rgba(247, 246, 241, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: var(--shadow-sm);
-}
-
-.header.scrolled {
-    background-color: rgba(247, 246, 241, 0.98);
-    box-shadow: var(--shadow-md);
     padding: var(--spacing-sm) 0;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
-.header.scrolled:hover {
+.header.header-visible:hover {
     background-color: var(--color-light);
 }
 
@@ -50,9 +58,19 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    transition: color var(--interaction-normal), transform var(--interaction-fast);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs);
 }
 
-.leftSide:hover {
+.leftSide a:hover {
+    color: var(--color-primary-dark);
+    transform: scale(1.02);
+}
+
+.leftSide a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
     color: var(--color-primary-dark);
 }
 
@@ -76,7 +94,7 @@
 .closeButton {
     text-decoration: none;
     color: var(--color-dark);
-    transition: all var(--transition-fast);
+    transition: all var(--interaction-normal);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
     position: relative;
@@ -90,17 +108,25 @@
     width: 0;
     height: 2px;
     background-color: var(--color-primary);
-    transition: all var(--transition-fast);
+    transition: all var(--interaction-normal);
     transform: translateX(-50%);
 }
 
 .navLinks li a:hover {
     color: var(--color-primary);
     background-color: rgba(251, 203, 156, 0.1);
+    transform: translateY(-1px);
 }
 
 .navLinks li a:hover::after {
     width: 80%;
+}
+
+.navLinks li a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    color: var(--color-primary);
+    background-color: rgba(251, 203, 156, 0.1);
 }
 
 /* Burger Menu Icon - hidden on larger screens */

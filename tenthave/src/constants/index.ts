@@ -3,7 +3,8 @@ import { NavigationItem, Service, Ministry } from "../types";
 // Navigation items
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { path: "/", label: "HOME" },
-  { path: "/bulletin", label: "BULLETIN & PRAYER" },
+  { path: "/bulletin", label: "BULLETIN" },
+  { path: "/prayer", label: "PRAYER" },
   { path: "/sermon", label: "SERMONS" },
   { path: "/contact", label: "CONTACT US" },
   { path: "/about", label: "ABOUT US" },

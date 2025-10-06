@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap');
+@import './interactions.css';
 
 :root {
     /* 🎨 Enhanced Color Palette */
@@ -150,25 +151,25 @@
         --font-size-xs: 0.625rem;
         /* 10px */
 
-        /* Mobile spacing */
-        --spacing-xs: 0.125rem;
-        /* 2px */
-        --spacing-sm: 0.25rem;
+        /* Mobile spacing - increased for better touch targets */
+        --spacing-xs: 0.25rem;
         /* 4px */
-        --spacing-md: 0.5rem;
+        --spacing-sm: 0.5rem;
         /* 8px */
-        --spacing-lg: 0.75rem;
+        --spacing-md: 0.75rem;
         /* 12px */
-        --spacing-xl: 1rem;
+        --spacing-lg: 1rem;
         /* 16px */
-        --spacing-2xl: 1.5rem;
-        /* 24px */
-        --spacing-3xl: 2rem;
-        /* 32px */
-        --spacing-4xl: 2.5rem;
-        /* 40px */
-        --spacing-5xl: 3rem;
-        /* 48px */
+        --spacing-xl: 1.25rem;
+        /* 20px */
+        --spacing-2xl: 1.75rem;
+        /* 28px */
+        --spacing-3xl: 2.25rem;
+        /* 36px */
+        --spacing-4xl: 2.75rem;
+        /* 44px */
+        --spacing-5xl: 3.25rem;
+        /* 52px */
 
         /* Legacy variables */
         --padding-xs: var(--spacing-xs);
@@ -177,12 +178,12 @@
         --padding-lg: var(--spacing-lg);
         --padding-xl: var(--spacing-xl);
 
-        /* Section spacing for mobile */
-        --section-padding: var(--spacing-3xl) var(--spacing-md);
+        /* Section spacing for mobile - increased padding */
+        --section-padding: var(--spacing-3xl) var(--spacing-lg);
         --section-margin: var(--spacing-2xl) 0;
-        --container-padding: var(--spacing-md);
-        --card-padding: var(--spacing-lg);
-        --form-padding: var(--spacing-lg);
+        --container-padding: var(--spacing-lg);
+        --card-padding: var(--spacing-xl);
+        --form-padding: var(--spacing-xl);
     }
 }
 

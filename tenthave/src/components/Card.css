@@ -8,7 +8,7 @@
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     font-family: var(--font-primary);
-    transition: all var(--transition-normal);
+    transition: all var(--interaction-normal);
     border: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
@@ -23,7 +23,7 @@
     height: 4px;
     background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
     transform: scaleX(0);
-    transition: transform var(--transition-normal);
+    transition: transform var(--interaction-normal);
 }
 
 .card:hover {
@@ -41,7 +41,7 @@
     height: 48px;
     margin-bottom: var(--spacing-lg);
     display: block;
-    transition: transform var(--transition-normal);
+    transition: transform var(--interaction-normal);
 }
 
 .card:hover img {
@@ -55,7 +55,7 @@
     color: var(--color-dark);
     margin: 0 0 var(--spacing-md) 0;
     line-height: var(--line-height-tight);
-    transition: color var(--transition-fast);
+    transition: color var(--interaction-fast);
 }
 
 .card:hover .card-title {
