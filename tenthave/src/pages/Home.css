@@ -127,7 +127,6 @@
     max-width: 600px;
     margin: var(--spacing-3xl) auto;
     text-align: center;
-    background: var(--color-bg);
     padding: var(--spacing-2xl);
     border-radius: var(--radius-xl);
 }
