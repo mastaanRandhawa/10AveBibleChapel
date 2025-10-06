@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SermonHeroSection from "../components/SermonHeroSection";
+import HeroSection from "../components/HeroSection";
 import SermonSeriesCard from "../components/SermonSeriesCard";
 import Pagination from "../components/Pagination";
 import sermonCardImg from "../assets/sermonCardImg.svg";
@@ -182,7 +182,7 @@ const SermonPage: React.FC = () => {
   return (
     <div className="sermon-page">
       {/* Hero Section */}
-      <SermonHeroSection title="SERMON SERIES" />
+      <HeroSection title="SERMON SERIES" variant="simple" />
 
       {/* Sermon Series Section */}
       <section className="sermon-series-section">

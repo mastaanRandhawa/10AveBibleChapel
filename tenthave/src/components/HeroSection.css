@@ -4,7 +4,6 @@
     width: 100%;
     margin-top: calc(-1 * var(--spacing-xl));
     height: auto;
-    min-height: 80vh;
     background: url(../assets/churchPicture.svg) no-repeat center center/cover;
     display: flex;
     align-items: center;
@@ -19,7 +18,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
     z-index: 1;
 }
 
@@ -27,12 +25,8 @@
 .hero--simple {
     background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-light) 100%);
     justify-content: center;
-    min-height: 60vh;
+    min-height: 30vh;
     position: relative;
-}
-
-.hero--simple::before {
-    background: linear-gradient(135deg, rgba(251, 203, 156, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
 }
 
 .hero-overlay {
@@ -112,7 +106,7 @@
 /* Very Small Devices (up to 375px) */
 @media (max-width: 375px) {
     .hero {
-        min-height: 15vh;
+        min-height: 40vh;
         margin-top: calc(-1 * var(--spacing-xl));
     }
 
@@ -143,7 +137,7 @@
 /* Extra Small Devices (376px to 575.98px) */
 @media (min-width: 376px) and (max-width: 575.98px) {
     .hero {
-        min-height: 20vh;
+        min-height: 50vh;
         margin-top: calc(-1 * var(--spacing-xl));
     }
 
@@ -163,7 +157,7 @@
 /* Small Devices (576px to 767.98px) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     .hero {
-        min-height: 25vh;
+        min-height: 60vh;
         margin-top: calc(-1 * var(--spacing-xl));
     }
 
@@ -179,7 +173,7 @@
 /* Medium Devices and up (768px+) */
 @media (min-width: 768px) {
     .hero {
-        min-height: 35vh;
+        min-height: 70vh;
         margin-top: calc(-1 * var(--spacing-xl));
     }
 
@@ -195,14 +189,14 @@
 /* Large Devices (992px+) */
 @media (min-width: 992px) {
     .hero {
-        min-height: 45vh;
+        min-height: 80vh;
     }
 }
 
 /* Extra Large Devices (1200px+) */
 @media (min-width: 1200px) {
     .hero {
-        min-height: 60vh;
+        min-height: 90vh;
     }
 }
 
@@ -215,7 +209,7 @@
 
 @media (max-width: 768px) {
     .hero--simple {
-        min-height: 50vh;
+        min-height: 25vh;
     }
 
     .hero-title--simple {
@@ -230,7 +224,7 @@
 
 @media (max-width: 480px) {
     .hero--simple {
-        min-height: 40vh;
+        min-height: 20vh;
     }
 
     .hero-title--simple {
