@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import SermonSeriesCard from "../components/SermonSeriesCard";
 import Pagination from "../components/Pagination";
 import sermonCardImg from "../assets/sermonCardImg.svg";
+import crossMountain from "../assets/crosss-mountain.png";
 import "./Sermon.css";
 
 // Mock data for sermon series
@@ -182,7 +183,11 @@ const SermonPage: React.FC = () => {
   return (
     <div className="sermon-page">
       {/* Hero Section */}
-      <HeroSection title="SERMON SERIES" variant="simple" />
+      <HeroSection
+        title="SERMON SERIES"
+        backgroundImage={`url(${crossMountain})`}
+        variant="centered"
+      />
 
       {/* Sermon Series Section */}
       <section className="sermon-series-section">

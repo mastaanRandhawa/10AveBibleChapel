@@ -10,7 +10,7 @@ import "./Home.css";
 
 // Import assets
 import churchTriPicture from "../assets/churchTriPhoto.svg";
-
+import churchPicture from "../assets/churchPicture.svg";
 // Home Hero Section Component
 const HomeHeroSection: React.FC = () => (
   <HeroSection
@@ -20,6 +20,7 @@ const HomeHeroSection: React.FC = () => (
     showButton={true}
     buttonText="LEARN MORE"
     buttonLink="#"
+    backgroundImage={`url(${churchPicture})`}
   />
 );
 

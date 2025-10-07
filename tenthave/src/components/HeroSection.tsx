@@ -12,7 +12,7 @@ interface HeroSectionProps {
   buttonLink?: string;
   backgroundImage?: string;
   className?: string;
-  variant?: "default" | "simple";
+  variant?: "default" | "simple" | "centered";
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
@@ -36,8 +36,43 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     );
   }
 
+  if (variant === "centered") {
+    return (
+      <ScrollReveal
+        className={`hero hero--centered ${className}`}
+        style={{ backgroundImage: backgroundImage }}
+      >
+        <div className="hero-overlay hero-overlay--centered">
+          {subtitle && (
+            <h2 className="hero-subtitle hero-subtitle--centered">
+              {subtitle}
+            </h2>
+          )}
+          <h1 className="hero-title hero-title--centered">{title}</h1>
+          {description && (
+            <p className="hero-description hero-description--centered">
+              {description}
+            </p>
+          )}
+          {showButton && (
+            <div className="hero-button">
+              <Button
+                variant="button-primary"
+                buttonText={buttonText}
+                buttonLink={buttonLink}
+              />
+            </div>
+          )}
+        </div>
+      </ScrollReveal>
+    );
+  }
+
   return (
-    <ScrollReveal className={`hero ${className}`}>
+    <ScrollReveal
+      className={`hero ${className}`}
+      style={{ backgroundImage: backgroundImage }}
+    >
       <div className="hero-overlay">
         {subtitle && <h2 className="hero-subtitle">{subtitle}</h2>}
         <h1 className="hero-title">{title}</h1>
