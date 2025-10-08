@@ -19,6 +19,8 @@ body {
     overflow-x: hidden;
     /* Prevent horizontal scroll */
     -moz-osx-font-smoothing: grayscale;
+    /* Add top padding to account for fixed header */
+    padding-top: 80px;
 }
 
 /* Typography */
@@ -125,6 +127,36 @@ select {
 
     body {
         padding: 0 var(--spacing-sm);
+        /* Adjust top padding for mobile header height */
+        padding-top: 60px;
+    }
+}
+
+/* Very small devices - adjust header padding */
+@media (max-width: 375px) {
+    body {
+        padding-top: 50px;
+    }
+}
+
+/* Extra small devices */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    body {
+        padding-top: 55px;
+    }
+}
+
+/* Small devices */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    body {
+        padding-top: 60px;
+    }
+}
+
+/* Medium devices and up - use default padding */
+@media (min-width: 768px) {
+    body {
+        padding-top: 80px;
     }
 }
 
