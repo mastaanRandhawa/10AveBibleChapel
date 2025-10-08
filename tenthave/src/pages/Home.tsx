@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import SpecialCard from "../components/SpecialCard";
 import HeroSection from "../components/HeroSection";
+import LocationMap from "../components/LocationMap";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES, CHURCH_INFO } from "../constants";
 import "./Home.css";
@@ -120,6 +121,7 @@ const Home: React.FC = () => {
       <WeeklyServicesSection />
       <SpecialServicesSection />
       <RecordedSermonsSection />
+      <LocationMap />
     </main>
   );
 };

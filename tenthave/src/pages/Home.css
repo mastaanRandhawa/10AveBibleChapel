@@ -67,8 +67,7 @@
 }
 
 .specialServices img {
-    width: 60%;
-    max-width: 500px;
+    width: 50%;
     height: auto;
     margin-bottom: var(--spacing-2xl);
     border-radius: var(--radius-xl);

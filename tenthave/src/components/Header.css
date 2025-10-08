@@ -13,9 +13,9 @@
     align-items: center;
     transition: all var(--transition-normal);
     box-shadow: none;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-100%);
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .header.header-visible {
@@ -27,6 +27,13 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+/* Hide header when scrolling down */
+.header:not(.header-visible) {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
 }
 
 .header.header-visible:hover {

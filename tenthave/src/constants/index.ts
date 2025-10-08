@@ -1,5 +1,13 @@
 import { NavigationItem, Service, Ministry } from "../types";
 
+// Import assets
+import prayingIcon from "../assets/prayingiconround.svg";
+import bibleIcon from "../assets/bible.svg";
+import breakingOfBreadIcon from "../assets/breakingofbread.svg";
+import sundaySchoolIcon from "../assets/sundaySchool.png";
+import spanishBibleIcon from "../assets/spanishBible.png";
+import eslIcon from "../assets/ESL.png";
+
 // Navigation items
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { path: "/", label: "HOME" },
@@ -17,7 +25,7 @@ export const WEEKLY_SERVICES: Service[] = [
     name: "BREAKING OF BREAD",
     description:
       "Join us for our weekly breaking of bread service where we remember the Lord's death and resurrection.",
-    icon: "/assets/prayingiconround.svg",
+    icon: prayingIcon,
     time: { day: "Sunday", start: "9:30 AM", end: "10:30 AM" },
     zoomLink:
       "https://us02web.zoom.us/j/6042227777?pwd=R2tDVy92NGlsWVkyb1BEendaRllPQT09",
@@ -26,7 +34,7 @@ export const WEEKLY_SERVICES: Service[] = [
     id: "family-bible-hour",
     name: "FAMILY BIBLE HOUR",
     description: "A time for family Bible study and fellowship together.",
-    icon: "/assets/bible.svg",
+    icon: bibleIcon,
     time: { day: "Sunday", start: "11:00 AM", end: "12:00 PM" },
     zoomLink:
       "https://us02web.zoom.us/j/6042227777?pwd=R2tDVy92NGlsWVkyb1BEendaRllPQT09",
@@ -35,7 +43,7 @@ export const WEEKLY_SERVICES: Service[] = [
     id: "estudio-biblico",
     name: "ESTUDIO BÍBLICO",
     description: "Spanish Bible study for our Spanish-speaking community.",
-    icon: "/assets/breakingofbread.svg",
+    icon: breakingOfBreadIcon,
     time: { day: "Sunday", start: "12:30 PM", end: "1:30 PM" },
     zoomLink:
       "https://us02web.zoom.us/j/6042227777?pwd=R2tDVy92NGlsWVkyb1BEendaRllPQT09",
@@ -49,21 +57,21 @@ export const SPECIAL_MINISTRIES: Ministry[] = [
     name: "SUNDAY SCHOOL CLASS",
     description:
       "Weekly kids club, Sundays from 11:30 am to 12:30 pm, for children ages 8 through 14.",
-    icon: "/assets/sundaySchool.png",
+    icon: sundaySchoolIcon,
     isActive: true,
   },
   {
     id: "spanish-bible-study",
     name: "SPANISH BIBLE STUDY",
     description: "Weekly Spanish Bible study for adults and families.",
-    icon: "/assets/spanishBible.png",
+    icon: spanishBibleIcon,
     isActive: true,
   },
   {
     id: "esl",
     name: "ESL (CANCELLED)",
     description: "English as a Second Language classes - currently on hold.",
-    icon: "/assets/ESL.png",
+    icon: eslIcon,
     isActive: false,
   },
 ];
@@ -84,8 +92,12 @@ export const CHURCH_INFO = {
 export const CONTACT_INFO = {
   phone: "+1 (604) 222-7777",
   email: "info@10thavebiblechapel.com",
-  address: "123 10th Avenue, Vancouver, BC V5Y 1K8",
-  mapUrl: "https://maps.google.com/?q=10th+Avenue+Bible+Chapel",
+  address: "7103 - 10th Ave., Burnaby, BC V3N 2R5",
+  mapUrl: "https://maps.google.com/?q=7103+10th+Ave+Burnaby+BC",
+  hours: {
+    sunday: "10:00AM - 12:30 PM",
+    wednesday: "7PM - 8PM",
+  },
 };
 
 // Scroll reveal configuration
