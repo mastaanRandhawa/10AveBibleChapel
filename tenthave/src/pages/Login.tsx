@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import LoginModal from "../components/LoginModal";
+import HeroSection from "../components/HeroSection";
+import churchPicture from "../assets/churchPicture.svg";
 import "./Login.css";
 
 export default function Login() {
@@ -26,12 +28,15 @@ export default function Login() {
 
   return (
     <div className="login-page-wrapper">
-      <div className="login-page-content">
-        <h1 className="login-page-title">10TH AVE BIBLE CHAPEL</h1>
-        <p className="login-page-subtitle">
-          Welcome to our community. Please sign in to access member features.
-        </p>
+      <HeroSection
+        title="MEMBER LOGIN"
+        subtitle="WELCOME TO OUR COMMUNITY"
+        description="Sign in to access member features and connect with our church family"
+        backgroundImage={`url(${churchPicture})`}
+        variant="centered"
+      />
 
+      <div className="login-page-content">
         <button
           className="login-page-button"
           onClick={() => setIsModalOpen(true)}

@@ -3,6 +3,7 @@ import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import LoginModal from "../components/LoginModal";
 import Button from "../components/Button";
+import prayingImage from "../assets/praying.jpg";
 import "./Prayer.css";
 
 // Prayer Request Form Component
@@ -125,7 +126,13 @@ const Prayer: React.FC = () => {
 
   return (
     <div className="prayer-page-wrapper">
-      <HeroSection title="PRAYER REQUESTS" variant="simple" />
+      <HeroSection
+        title="PRAYER REQUESTS"
+        subtitle="SHARE YOUR PRAYER NEEDS"
+        description="Join our caring community in prayer and share your prayer requests with us"
+        backgroundImage={`url(${prayingImage})`}
+        variant="centered"
+      />
 
       <div className="prayer-content">
         {/* Prayer Request Form Section */}

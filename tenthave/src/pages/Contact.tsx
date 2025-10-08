@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import { CONTACT_INFO } from "../constants";
+import contactUsImage from "../assets/contact-us.jpg";
 import "./Contact.css";
 
 // Contact form interface
@@ -152,7 +153,13 @@ const ContactDetailsComponent: React.FC = () => {
 const Contact: React.FC = () => {
   return (
     <div className="contact-page-wrapper">
-      <HeroSection title="CONTACT US" variant="simple" />
+      <HeroSection
+        title="CONTACT US"
+        subtitle="GET IN TOUCH"
+        description="We'd love to hear from you. Reach out to us with any questions or prayer requests"
+        backgroundImage={`url(${contactUsImage})`}
+        variant="centered"
+      />
 
       <div className="contact-main-content">
         <div className="contact-content-container">

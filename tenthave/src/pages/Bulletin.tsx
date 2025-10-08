@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import EventDetailsModal from "../components/EventDetailsModal";
+import bulletinImage from "../assets/bulletin.jpg";
 import "./Bulletin.css";
 
 // Main Bulletin Component
@@ -274,7 +275,13 @@ const Bulletin: React.FC = () => {
 
   return (
     <div className="bulletin-page-wrapper">
-      <HeroSection title="BULLETIN" variant="simple" />
+      <HeroSection
+        title="BULLETIN"
+        subtitle="CHURCH EVENTS & ANNOUNCEMENTS"
+        description="Stay connected with our church community through upcoming events and important announcements"
+        backgroundImage={`url(${bulletinImage})`}
+        variant="centered"
+      />
 
       <div className="bulletin-content">
         {/* Calendar Section */}

@@ -185,6 +185,8 @@ const SermonPage: React.FC = () => {
       {/* Hero Section */}
       <HeroSection
         title="SERMON SERIES"
+        subtitle="EXPLORE GOD'S WORD"
+        description="Discover inspiring messages and biblical teachings from our weekly services and special series"
         backgroundImage={`url(${crossMountain})`}
         variant="centered"
       />
