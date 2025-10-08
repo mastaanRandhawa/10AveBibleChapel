@@ -228,6 +228,21 @@
     border-radius: var(--radius-sm);
 }
 
+.recentSermonsHeading p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-muted-gray);
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.featured-sermon-container {
+    max-width: 1000px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
 .view-all-sermons {
     text-align: center;
     margin-top: var(--spacing-xl);

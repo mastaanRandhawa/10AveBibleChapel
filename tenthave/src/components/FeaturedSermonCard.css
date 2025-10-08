@@ -117,7 +117,7 @@
 }
 
 .featured-sermon-card__subtitle {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-regular);
     font-size: var(--font-size-h5);
 }
 

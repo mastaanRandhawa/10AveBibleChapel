@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import SpecialCard from "../components/SpecialCard";
 import HeroSection from "../components/HeroSection";
 import LocationMap from "../components/LocationMap";
+import FeaturedSermonCard from "../components/FeaturedSermonCard";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES, CHURCH_INFO } from "../constants";
 import "./Home.css";
@@ -12,6 +13,7 @@ import "./Home.css";
 // Import assets
 import churchTriPicture from "../assets/churchTriPhoto.svg";
 import churchPicture from "../assets/churchPicture.svg";
+import crossMountain from "../assets/crosss-mountain.png";
 // Home Hero Section Component
 const HomeHeroSection: React.FC = () => (
   <HeroSection
@@ -106,6 +108,22 @@ const RecordedSermonsSection: React.FC = () => (
   <section className="recordedSermon">
     <ScrollReveal className="recentSermonsHeading">
       <h2>RECORDED SERMONS</h2>
+      <p>Join us in exploring God's word through our latest messages</p>
+    </ScrollReveal>
+
+    <ScrollReveal className="featured-sermon-container">
+      <FeaturedSermonCard
+        image={crossMountain}
+        title="BIGGER THAN US"
+        subtitle="Faith comes by hearing, and hearing by the word of God."
+        passage="Romans 10:17"
+        speaker=" "
+        date=" "
+        link="/sermon"
+      />
+    </ScrollReveal>
+
+    <ScrollReveal className="view-all-sermons">
       <Link to="/sermon">
         <Button variant="button-primary" buttonText="VIEW ALL SERMONS" />
       </Link>
