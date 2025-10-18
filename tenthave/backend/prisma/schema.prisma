@@ -1,0 +1,408 @@
+// 10th Avenue Bible Chapel Database Schema
+// This schema supports the complete backend data layer for the church website
+// Includes user management, content management, sermon organization, and prayer requests
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Can be changed to mysql, sqlite, etc.
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum UserRole {
+  ADMIN     // Full access to all features
+  MEMBER    // Can view private content and submit prayer requests
+  GUEST     // Limited access, can only view public content
+}
+
+enum PrayerCategory {
+  HEALTH
+  FAMILY
+  WORK
+  SPIRITUAL
+  COMMUNITY
+  OTHER
+}
+
+enum PrayerPriority {
+  URGENT
+  HIGH
+  NORMAL
+}
+
+enum PrayerStatus {
+  PENDING     // Awaiting approval
+  APPROVED    // Visible to authorized users
+  REJECTED    // Not approved for display
+  ANSWERED    // Prayer has been answered
+}
+
+enum ContentStatus {
+  DRAFT       // Not yet published
+  PUBLISHED   // Live on website
+  ARCHIVED    // No longer active
+}
+
+enum ServiceType {
+  WEEKLY      // Regular recurring service
+  SPECIAL     // One-time or seasonal service
+  MINISTRY    // Ministry-related gathering
+}
+
+// ============================================================================
+// USER MANAGEMENT
+// ============================================================================
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  passwordHash      String
+  name              String
+  role              UserRole  @default(GUEST)
+  
+  // Profile information
+  phone             String?
+  address           String?
+  dateOfBirth       DateTime?
+  memberSince       DateTime?
+  lastLoginAt       DateTime?
+  
+  // Account status
+  isEmailVerified   Boolean   @default(false)
+  isActive          Boolean   @default(true)
+  emailVerificationToken String?
+  passwordResetToken String?
+  passwordResetExpires DateTime?
+  
+  // Timestamps
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  // Relations
+  prayerRequests    PrayerRequest[]
+  prayerPermissions PrayerPermission[]
+  contentEdits      ContentEdit[]
+  
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
+  @@map("users")
+}
+
+// ============================================================================
+// PRAYER REQUEST SYSTEM
+// ============================================================================
+
+model PrayerRequest {
+  id          String          @id @default(cuid())
+  title       String
+  description String
+  requester   String?         // Optional name, can be anonymous
+  
+  // Classification
+  category    PrayerCategory  @default(OTHER)
+  priority    PrayerPriority  @default(NORMAL)
+  status      PrayerStatus    @default(PENDING)
+  isPrivate   Boolean         @default(false)
+  
+  // Response tracking
+  isAnswered  Boolean         @default(false)
+  answeredAt  DateTime?
+  answerNotes String?         // Admin notes about the answer
+  
+  // User association (optional for anonymous requests)
+  userId      String?
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  // Timestamps
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  // Relations
+  permissions PrayerPermission[]
+  
+  @@index([status])
+  @@index([category])
+  @@index([isPrivate])
+  @@index([createdAt])
+  @@index([userId])
+  @@map("prayer_requests")
+}
+
+// Controls who can view specific prayer requests
+model PrayerPermission {
+  id                String          @id @default(cuid())
+  prayerRequestId   String
+  userId            String
+  canView           Boolean         @default(true)
+  
+  // Relations
+  prayerRequest     PrayerRequest   @relation(fields: [prayerRequestId], references: [id], onDelete: Cascade)
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  @@unique([prayerRequestId, userId])
+  @@map("prayer_permissions")
+}
+
+// ============================================================================
+// SERVICES & MINISTRIES
+// ============================================================================
+
+model Service {
+  id          String      @id @default(cuid())
+  name        String
+  description String
+  icon        String?     // Path to icon image
+  
+  // Service details
+  type        ServiceType @default(WEEKLY)
+  isActive    Boolean     @default(true)
+  order       Int         @default(0) // For display ordering
+  
+  // Timing information
+  dayOfWeek   String?     // "Sunday", "Monday", etc.
+  startTime   String?     // "9:30 AM"
+  endTime     String?     // "10:30 AM"
+  
+  // Online meeting details
+  zoomLink    String?
+  meetingId   String?
+  passcode    String?
+  
+  // Timestamps
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@index([type])
+  @@index([isActive])
+  @@index([order])
+  @@map("services")
+}
+
+model Ministry {
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  icon        String?       // Path to icon image
+  
+  // Ministry details
+  isActive    Boolean       @default(true)
+  order       Int           @default(0) // For display ordering
+  
+  // Optional scheduling
+  schedule    String?       // "Sundays 11:30 AM - 12:30 PM"
+  location    String?       // "Main Hall", "Room 101", etc.
+  ageRange    String?       // "Ages 8-14", "Adults", etc.
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@map("ministries")
+}
+
+// ============================================================================
+// SERMON MANAGEMENT
+// ============================================================================
+
+model SermonSeries {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  image       String?       // Path to series image
+  
+  // Series metadata
+  isActive    Boolean       @default(true)
+  order       Int           @default(0) // For display ordering
+  startDate   DateTime?
+  endDate     DateTime?
+  
+  // SEO and content
+  slug        String        @unique // URL-friendly identifier
+  metaDescription String?
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  // Relations
+  sermons     Sermon[]
+  
+  @@map("sermon_series")
+}
+
+model Sermon {
+  id          String        @id @default(cuid())
+  title       String
+  subtitle    String?
+  description String?
+  
+  // Speaker and date information
+  speaker     String
+  date        DateTime
+  
+  // Media content
+  youtubeUrl  String?       // YouTube video URL
+  audioUrl    String?       // Audio file URL (if available)
+  thumbnail   String?       // Custom thumbnail image
+  
+  // Scripture reference
+  passage     String?       // "Romans 10:17", "John 3:16", etc.
+  
+  // Series association
+  seriesId    String?
+  series      SermonSeries? @relation(fields: [seriesId], references: [id], onDelete: SetNull)
+  
+  // Content status
+  status      ContentStatus @default(PUBLISHED)
+  isFeatured  Boolean       @default(false)
+  order       Int           @default(0) // Order within series
+  
+  // SEO
+  slug        String        @unique
+  metaDescription String?
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@index([date])
+  @@index([seriesId])
+  @@index([status])
+  @@index([isFeatured])
+  @@index([speaker])
+  @@map("sermons")
+}
+
+// ============================================================================
+// CONTENT MANAGEMENT
+// ============================================================================
+
+model AboutSection {
+  id          String        @id @default(cuid())
+  title       String        // "Who We Are", "What We Believe"
+  content     String        // HTML or markdown content
+  
+  // Content management
+  status      ContentStatus @default(PUBLISHED)
+  order       Int           @default(0)
+  
+  // SEO
+  slug        String        @unique
+  metaDescription String?
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@index([status])
+  @@index([order])
+  @@map("about_sections")
+}
+
+model ContactInfo {
+  id          String        @id @default(cuid())
+  
+  // Contact details
+  phone       String
+  email       String
+  address     String
+  mapUrl      String?       // Google Maps URL
+  
+  // Service hours
+  sundayHours String?       // "10:00 AM - 12:30 PM"
+  wednesdayHours String?    // "7:00 PM - 8:00 PM"
+  otherHours  String?       // Additional hours info
+  
+  // Social media and additional info
+  website     String?
+  facebook    String?
+  instagram   String?
+  additionalInfo String?    // Any other contact information
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@map("contact_info")
+}
+
+// ============================================================================
+// AUDIT TRAIL & CONTENT VERSIONING
+// ============================================================================
+
+model ContentEdit {
+  id          String        @id @default(cuid())
+  
+  // What was edited
+  entityType  String        // "AboutSection", "ContactInfo", "Service", etc.
+  entityId    String        // ID of the edited entity
+  
+  // Change details
+  fieldName   String        // Which field was changed
+  oldValue    String?       // Previous value
+  newValue    String?       // New value
+  
+  // Who made the change
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("content_edits")
+}
+
+// ============================================================================
+// MEDIA MANAGEMENT
+// ============================================================================
+
+model MediaFile {
+  id          String        @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int           // File size in bytes
+  path        String        // File system path
+  
+  // Usage tracking
+  entityType  String?       // What this file is used for
+  entityId    String?       // ID of the entity using this file
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@map("media_files")
+}
+
+// ============================================================================
+// SITE CONFIGURATION
+// ============================================================================
+
+model SiteConfig {
+  id          String        @id @default(cuid())
+  key         String        @unique
+  value       String
+  description String?
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@map("site_config")
+}
+
