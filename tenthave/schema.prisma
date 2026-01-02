@@ -1,25 +1,15 @@
-// 10th Avenue Bible Chapel Database Schema
-// This schema supports the complete backend data layer for the church website
-// Includes user management, content management, sermon organization, and prayer requests
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql" // Can be changed to mysql, sqlite, etc.
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 // ============================================================================
 // ENUMS
 // ============================================================================
-
-enum UserRole {
-  ADMIN     // Full access to all features
-  MEMBER    // Can view private content and submit prayer requests
-  GUEST     // Limited access, can only view public content
-}
 
 enum PrayerCategory {
   HEALTH
@@ -49,47 +39,77 @@ enum ContentStatus {
   ARCHIVED    // No longer active
 }
 
-enum ServiceType {
-  WEEKLY      // Regular recurring service
-  SPECIAL     // One-time or seasonal service
-  MINISTRY    // Ministry-related gathering
+// ============================================================================
+// CALENDAR & EVENTS
+// ============================================================================
+
+model CalendarEvent {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  
+  // Event timing
+  startDate   DateTime
+  endDate     DateTime?
+  isAllDay    Boolean       @default(false)
+  recurrence  String?       // "daily", "weekly", "monthly", "yearly", or null for one-time events
+  
+  // Event details
+  location    String?
+  category    String?       // "service", "ministry", "special", "meeting", etc.
+  color       String?       // Hex color for calendar display
+  
+  // Visibility and status
+  status      ContentStatus @default(PUBLISHED)
+  isPublic    Boolean       @default(true)
+  
+  // Optional links and attachments
+  link        String?       // External link (e.g., Zoom, registration)
+  image       String?       // Event image path
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@index([startDate])
+  @@index([status])
+  @@index([isPublic])
+  @@map("calendar_events")
 }
 
 // ============================================================================
-// USER MANAGEMENT
+// ANNOUNCEMENTS
 // ============================================================================
 
-model User {
-  id                String    @id @default(cuid())
-  email             String    @unique
-  passwordHash      String
-  name              String
-  role              UserRole  @default(GUEST)
+model Announcement {
+  id          String        @id @default(cuid())
+  title       String
+  content     String        // HTML or markdown content
   
-  // Profile information
-  phone             String?
-  address           String?
-  dateOfBirth       DateTime?
-  memberSince       DateTime?
-  lastLoginAt       DateTime?
+  // Announcement details
+  category    String?       // "general", "ministry", "event", "prayer", etc.
+  priority    String?       // "high", "normal", "low"
   
-  // Account status
-  isEmailVerified   Boolean   @default(false)
-  isActive          Boolean   @default(true)
-  emailVerificationToken String?
-  passwordResetToken String?
-  passwordResetExpires DateTime?
+  // Visibility and scheduling
+  status      ContentStatus @default(PUBLISHED)
+  isPublic    Boolean       @default(true)
+  startDate   DateTime?     // When to start showing
+  endDate     DateTime?     // When to stop showing
+  
+  // Optional attachments
+  image       String?       // Announcement image path
+  link        String?       // Related link
   
   // Timestamps
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   
-  // Relations
-  prayerRequests    PrayerRequest[]
-  prayerPermissions PrayerPermission[]
-  contentEdits      ContentEdit[]
-  
-  @@map("users")
+  @@index([status])
+  @@index([isPublic])
+  @@index([startDate])
+  @@index([endDate])
+  @@index([createdAt])
+  @@map("announcements")
 }
 
 // ============================================================================
@@ -113,312 +133,13 @@ model PrayerRequest {
   answeredAt  DateTime?
   answerNotes String?         // Admin notes about the answer
   
-  // User association (optional for anonymous requests)
-  userId      String?
-  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
-  
   // Timestamps
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   
-  // Relations
-  permissions PrayerPermission[]
-  
+  @@index([status])
+  @@index([category])
+  @@index([isPrivate])
+  @@index([createdAt])
   @@map("prayer_requests")
 }
-
-// Controls who can view specific prayer requests
-model PrayerPermission {
-  id                String          @id @default(cuid())
-  prayerRequestId   String
-  userId            String
-  canView           Boolean         @default(true)
-  
-  // Relations
-  prayerRequest     PrayerRequest   @relation(fields: [prayerRequestId], references: [id], onDelete: Cascade)
-  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  // Timestamps
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
-  
-  @@unique([prayerRequestId, userId])
-  @@map("prayer_permissions")
-}
-
-// ============================================================================
-// SERVICES & MINISTRIES
-// ============================================================================
-
-model Service {
-  id          String      @id @default(cuid())
-  name        String
-  description String
-  icon        String?     // Path to icon image
-  
-  // Service details
-  type        ServiceType @default(WEEKLY)
-  isActive    Boolean     @default(true)
-  order       Int         @default(0) // For display ordering
-  
-  // Timing information
-  dayOfWeek   String?     // "Sunday", "Monday", etc.
-  startTime   String?     // "9:30 AM"
-  endTime     String?     // "10:30 AM"
-  
-  // Online meeting details
-  zoomLink    String?
-  meetingId   String?
-  passcode    String?
-  
-  // Timestamps
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  
-  @@map("services")
-}
-
-model Ministry {
-  id          String        @id @default(cuid())
-  name        String
-  description String
-  icon        String?       // Path to icon image
-  
-  // Ministry details
-  isActive    Boolean       @default(true)
-  order       Int           @default(0) // For display ordering
-  
-  // Optional scheduling
-  schedule    String?       // "Sundays 11:30 AM - 12:30 PM"
-  location    String?       // "Main Hall", "Room 101", etc.
-  ageRange    String?       // "Ages 8-14", "Adults", etc.
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  @@map("ministries")
-}
-
-// ============================================================================
-// SERMON MANAGEMENT
-// ============================================================================
-
-model SermonSeries {
-  id          String        @id @default(cuid())
-  title       String
-  description String?
-  image       String?       // Path to series image
-  
-  // Series metadata
-  isActive    Boolean       @default(true)
-  order       Int           @default(0) // For display ordering
-  startDate   DateTime?
-  endDate     DateTime?
-  
-  // SEO and content
-  slug        String        @unique // URL-friendly identifier
-  metaDescription String?
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  // Relations
-  sermons     Sermon[]
-  
-  @@map("sermon_series")
-}
-
-model Sermon {
-  id          String        @id @default(cuid())
-  title       String
-  subtitle    String?
-  description String?
-  
-  // Speaker and date information
-  speaker     String
-  date        DateTime
-  
-  // Media content
-  youtubeUrl  String?       // YouTube video URL
-  audioUrl    String?       // Audio file URL (if available)
-  thumbnail   String?       // Custom thumbnail image
-  
-  // Scripture reference
-  passage     String?       // "Romans 10:17", "John 3:16", etc.
-  
-  // Series association
-  seriesId    String?
-  series      SermonSeries? @relation(fields: [seriesId], references: [id], onDelete: SetNull)
-  
-  // Content status
-  status      ContentStatus @default(PUBLISHED)
-  isFeatured  Boolean       @default(false)
-  order       Int           @default(0) // Order within series
-  
-  // SEO
-  slug        String        @unique
-  metaDescription String?
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  @@map("sermons")
-}
-
-// ============================================================================
-// CONTENT MANAGEMENT
-// ============================================================================
-
-model AboutSection {
-  id          String        @id @default(cuid())
-  title       String        // "Who We Are", "What We Believe"
-  content     String        // HTML or markdown content
-  
-  // Content management
-  status      ContentStatus @default(PUBLISHED)
-  order       Int           @default(0)
-  
-  // SEO
-  slug        String        @unique
-  metaDescription String?
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  // Relations
-  edits       ContentEdit[]
-  
-  @@map("about_sections")
-}
-
-model ContactInfo {
-  id          String        @id @default(cuid())
-  
-  // Contact details
-  phone       String
-  email       String
-  address     String
-  mapUrl      String?       // Google Maps URL
-  
-  // Service hours
-  sundayHours String?       // "10:00 AM - 12:30 PM"
-  wednesdayHours String?    // "7:00 PM - 8:00 PM"
-  otherHours  String?       // Additional hours info
-  
-  // Social media and additional info
-  website     String?
-  facebook    String?
-  instagram   String?
-  additionalInfo String?    // Any other contact information
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  @@map("contact_info")
-}
-
-// ============================================================================
-// AUDIT TRAIL & CONTENT VERSIONING
-// ============================================================================
-
-model ContentEdit {
-  id          String        @id @default(cuid())
-  
-  // What was edited
-  entityType  String        // "AboutSection", "ContactInfo", "Service", etc.
-  entityId    String        // ID of the edited entity
-  
-  // Change details
-  fieldName   String        // Which field was changed
-  oldValue    String?       // Previous value
-  newValue    String?       // New value
-  
-  // Who made the change
-  userId      String
-  user        User          @relation(fields: [userId], references: [id])
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  
-  @@map("content_edits")
-}
-
-// ============================================================================
-// MEDIA MANAGEMENT
-// ============================================================================
-
-model MediaFile {
-  id          String        @id @default(cuid())
-  filename    String
-  originalName String
-  mimeType    String
-  size        Int           // File size in bytes
-  path        String        // File system path
-  
-  // Usage tracking
-  entityType  String?       // What this file is used for
-  entityId    String?       // ID of the entity using this file
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  @@map("media_files")
-}
-
-// ============================================================================
-// SITE CONFIGURATION
-// ============================================================================
-
-model SiteConfig {
-  id          String        @id @default(cuid())
-  key         String        @unique
-  value       String
-  description String?
-  
-  // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  
-  @@map("site_config")
-}
-
-// ============================================================================
-// INDEXES FOR PERFORMANCE
-// ============================================================================
-
-// User indexes
-@@index([User.email])
-@@index([User.role])
-@@index([User.isActive])
-
-// Prayer request indexes
-@@index([PrayerRequest.status])
-@@index([PrayerRequest.category])
-@@index([PrayerRequest.isPrivate])
-@@index([PrayerRequest.createdAt])
-@@index([PrayerRequest.userId])
-
-// Sermon indexes
-@@index([Sermon.date])
-@@index([Sermon.seriesId])
-@@index([Sermon.status])
-@@index([Sermon.isFeatured])
-@@index([Sermon.speaker])
-
-// Service indexes
-@@index([Service.type])
-@@index([Service.isActive])
-@@index([Service.order])
-
-// Content indexes
-@@index([AboutSection.status])
-@@index([AboutSection.order])
-@@index([ContentEdit.entityType, ContentEdit.entityId])
-@@index([ContentEdit.userId])
-@@index([ContentEdit.createdAt])
