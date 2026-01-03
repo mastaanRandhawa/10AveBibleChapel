@@ -1,481 +1,730 @@
-import React, { useState } from "react";
-import { ScrollReveal } from "../components/ScrollReveal";
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
-import LoginModal from "../components/LoginModal";
-import Button from "../components/Button";
-import { WEEKLY_SERVICES, SPECIAL_MINISTRIES } from "../constants";
+import LoadingSpinner from "../components/LoadingSpinner";
+import {
+  announcementsAPI,
+  calendarAPI,
+  sermonsAPI,
+  prayerRequestsAPI,
+  usersAPI,
+  Announcement,
+  CalendarEvent,
+  Sermon,
+  PrayerRequest,
+  User,
+} from "../services/api";
 import "./Members.css";
 
-// Member interface
-interface Member {
-  id: string;
-  name: string;
-  role: string;
-  email?: string;
-  phone?: string;
-  ministry?: string;
-  isActive: boolean;
-}
-
-// Prayer request interface
-interface PrayerRequest {
-  id: string;
-  title: string;
-  description: string;
-  requester: string;
-  date: string;
-  isAnswered: boolean;
-  category: "health" | "family" | "work" | "spiritual" | "community" | "other";
-  priority: "urgent" | "high" | "normal";
-  isPrivate: boolean;
-  answeredDate?: string;
-}
-
-// Mock data for members
-const MOCK_MEMBERS: Member[] = [
-  {
-    id: "1",
-    name: "Pastor John Smith",
-    role: "Senior Pastor",
-    email: "pastor@10thavebiblechapel.com",
-    phone: "(604) 222-7777",
-    ministry: "Leadership",
-    isActive: true,
-  },
-  {
-    id: "2",
-    name: "Mary Johnson",
-    role: "Sunday School Director",
-    email: "sundayschool@10thavebiblechapel.com",
-    ministry: "Children's Ministry",
-    isActive: true,
-  },
-  {
-    id: "3",
-    name: "David Chen",
-    role: "Worship Leader",
-    phone: "(604) 333-8888",
-    ministry: "Worship",
-    isActive: true,
-  },
-  {
-    id: "4",
-    name: "Sarah Williams",
-    role: "ESL Coordinator",
-    email: "esl@10thavebiblechapel.com",
-    ministry: "ESL Ministry",
-    isActive: false,
-  },
-  {
-    id: "5",
-    name: "Robert Garcia",
-    role: "Spanish Ministry Leader",
-    phone: "(604) 444-9999",
-    ministry: "Spanish Ministry",
-    isActive: true,
-  },
-];
-
-// Mock prayer requests data
-const MOCK_PRAYER_REQUESTS: PrayerRequest[] = [
-  {
-    id: "1",
-    title: "Health and Healing",
-    description:
-      "Praying for strength and recovery during this difficult time. Please pray for complete healing and restoration.",
-    requester: "Anonymous",
-    date: "2024-01-15",
-    isAnswered: false,
-    category: "health",
-    priority: "urgent",
-    isPrivate: false,
-  },
-  {
-    id: "2",
-    title: "Family Unity",
-    description:
-      "Praying for reconciliation and peace within our family. We need God's intervention to heal broken relationships.",
-    requester: "Anonymous",
-    date: "2024-01-14",
-    isAnswered: false,
-    category: "family",
-    priority: "high",
-    isPrivate: false,
-  },
-  {
-    id: "3",
-    title: "Job Opportunities",
-    description:
-      "Seeking God's guidance for new employment opportunities. Praying for the right doors to open.",
-    requester: "Anonymous",
-    date: "2024-01-13",
-    isAnswered: true,
-    category: "work",
-    priority: "normal",
-    isPrivate: false,
-    answeredDate: "2024-01-20",
-  },
-  {
-    id: "4",
-    title: "Spiritual Growth",
-    description:
-      "Praying for deeper relationship with God and spiritual maturity in our walk with Christ.",
-    requester: "Anonymous",
-    date: "2024-01-12",
-    isAnswered: false,
-    category: "spiritual",
-    priority: "normal",
-    isPrivate: false,
-  },
-  {
-    id: "5",
-    title: "Community Outreach",
-    description:
-      "Praying for our church's outreach programs and that we may reach more people with the Gospel.",
-    requester: "Anonymous",
-    date: "2024-01-11",
-    isAnswered: false,
-    category: "community",
-    priority: "high",
-    isPrivate: false,
-  },
-  {
-    id: "6",
-    title: "Missionary Support",
-    description:
-      "Praying for our missionaries serving overseas, for their safety and effectiveness in ministry.",
-    requester: "Anonymous",
-    date: "2024-01-10",
-    isAnswered: false,
-    category: "community",
-    priority: "normal",
-    isPrivate: false,
-  },
-];
-
-// Member Directory Component
-const MemberDirectory: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterRole, setFilterRole] = useState("all");
-
-  const filteredMembers = MOCK_MEMBERS.filter((member) => {
-    const matchesSearch =
-      member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.ministry?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesRole =
-      filterRole === "all" ||
-      member.role.toLowerCase().includes(filterRole.toLowerCase());
-    return matchesSearch && matchesRole && member.isActive;
-  });
-
-  return (
-    <div className="member-directory">
-      <h2>Member Directory</h2>
-
-      <div className="directory-filters">
-        <input
-          type="text"
-          placeholder="Search members..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-        <select
-          value={filterRole}
-          onChange={(e) => setFilterRole(e.target.value)}
-          className="role-filter"
-        >
-          <option value="all">All Roles</option>
-          <option value="pastor">Pastor</option>
-          <option value="director">Director</option>
-          <option value="leader">Leader</option>
-          <option value="coordinator">Coordinator</option>
-        </select>
-      </div>
-
-      {/* <div className="members-grid">
-        {filteredMembers.map((member) => (
-          <div key={member.id} className="member-card">
-            <h3>{member.name}</h3>
-            <p className="member-role">{member.role}</p>
-            {member.ministry && (
-              <p className="member-ministry">{member.ministry}</p>
-            )}
-            <div className="member-contact">
-              {member.email && (
-                <a href={`mailto:${member.email}`} className="contact-link">
-                  📧 {member.email}
-                </a>
-              )}
-              {member.phone && (
-                <a href={`tel:${member.phone}`} className="contact-link">
-                  📞 {member.phone}
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div> */}
-    </div>
-  );
-};
-
-// Prayer Request Card Component
-const PrayerRequestCard: React.FC<{ request: PrayerRequest }> = ({
-  request,
-}) => {
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "health":
-        return "🏥";
-      case "family":
-        return "👨‍👩‍👧‍👦";
-      case "work":
-        return "💼";
-      case "spiritual":
-        return "🙏";
-      case "community":
-        return "🌍";
-      default:
-        return "💭";
-    }
-  };
-
-  const getPriorityClass = (priority: string) => {
-    switch (priority) {
-      case "urgent":
-        return "priority-urgent";
-      case "high":
-        return "priority-high";
-      case "normal":
-        return "priority-normal";
-      default:
-        return "";
-    }
-  };
-
-  return (
-    <div
-      className={`prayer-card ${
-        request.isAnswered ? "answered" : ""
-      } ${getPriorityClass(request.priority)}`}
-    >
-      <div className="prayer-header">
-        <div className="prayer-title-section">
-          <h3 className="prayer-title">{request.title}</h3>
-          <div className="prayer-badges">
-            <span className="category-badge">
-              {getCategoryIcon(request.category)}{" "}
-              {request.category.toUpperCase()}
-            </span>
-            <span
-              className={`priority-badge ${getPriorityClass(request.priority)}`}
-            >
-              {request.priority.toUpperCase()}
-            </span>
-            {request.isAnswered && (
-              <span className="answered-badge">Answered</span>
-            )}
-          </div>
-        </div>
-      </div>
-      <p className="prayer-description">{request.description}</p>
-      <div className="prayer-meta">
-        <span className="prayer-date">{formatDate(request.date)}</span>
-        {request.isAnswered && request.answeredDate && (
-          <span className="answered-date">
-            Answered: {formatDate(request.answeredDate)}
-          </span>
-        )}
-        <span className="prayer-requester">
-          Requested by: {request.requester}
-        </span>
-      </div>
-    </div>
-  );
-};
-
-// Prayer Request Form Component
-const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
-  onLoginClick,
-}) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    requester: "",
-    category: "other" as const,
-    priority: "normal" as const,
-    isPrivate: false,
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Prayer request submitted:", formData);
-    // Reset form
-    setFormData({
-      title: "",
-      description: "",
-      requester: "",
-      category: "other",
-      priority: "normal",
-      isPrivate: false,
-    });
-  };
-
-  return (
-    <div className="prayer-form-section">
-      <div className="prayer-form-header">
-        <h3>Submit a Prayer Request</h3>
-        <p className="prayer-form-subtitle">
-          Share your prayer needs with our community. All requests are kept
-          confidential and prayed for by our church family.
-        </p>
-      </div>
-
-      <form className="prayer-form" onSubmit={handleSubmit} noValidate>
-        <div className="form-group">
-          <label htmlFor="prayer-title" className="visually-hidden">
-            Prayer request title
-          </label>
-          <input
-            id="prayer-title"
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            placeholder="Prayer Request Title"
-            aria-label="Prayer request title"
-            aria-required="true"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="prayer-description" className="visually-hidden">
-            Describe your prayer request
-          </label>
-          <textarea
-            id="prayer-description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Describe your prayer request"
-            rows={4}
-            aria-label="Describe your prayer request"
-            aria-required="true"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="prayer-requester" className="visually-hidden">
-            Your name (optional)
-          </label>
-          <input
-            id="prayer-requester"
-            type="text"
-            name="requester"
-            value={formData.requester}
-            onChange={handleChange}
-            placeholder="Your Name (optional)"
-            aria-label="Your name (optional)"
-          />
-        </div>
-        <Button
-          variant="button-primary"
-          buttonText="Submit Prayer Request"
-          onClick={() => {}}
-        />
-      </form>
-
-      <div className="prayer-form-footer">
-        <p className="login-prompt">
-          Want to view and pray for others?
-          <Button
-            variant="button-secondary"
-            buttonText="Sign in to access prayer requests"
-            onClick={onLoginClick}
-          />
-        </p>
-      </div>
-    </div>
-  );
-};
-
-// Main Members Component
 const Members: React.FC = () => {
-  const [prayerRequests] = useState<PrayerRequest[]>(MOCK_PRAYER_REQUESTS);
-  const [filterCategory, setFilterCategory] = useState("all");
-  const [filterStatus, setFilterStatus] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const {
+    user,
+    isAuthenticated,
+    isAdmin,
+    isMember,
+    isLoading: authLoading,
+  } = useAuth();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<
+    "announcements" | "calendar" | "sermons" | "prayers" | "users"
+  >("prayers");
 
-  const filteredRequests = prayerRequests.filter((request) => {
-    const matchesCategory =
-      filterCategory === "all" || request.category === filterCategory;
-    const matchesStatus =
-      filterStatus === "all" ||
-      (filterStatus === "answered" && request.isAnswered) ||
-      (filterStatus === "pending" && !request.isAnswered);
-    const matchesSearch =
-      searchTerm === "" ||
-      request.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.description.toLowerCase().includes(searchTerm.toLowerCase());
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      navigate("/login");
+    }
+  }, [authLoading, isAuthenticated, navigate]);
 
-    return matchesCategory && matchesStatus && matchesSearch;
-  });
+  if (authLoading) {
+    return <LoadingSpinner />;
+  }
 
-  const handleLoginClick = () => {
-    setIsLoginModalOpen(true);
-  };
-
-  const handleLoginModalClose = () => {
-    setIsLoginModalOpen(false);
-  };
-
-  const handleLoginSuccess = (userData: any) => {
-    console.log("User logged in:", userData);
-    // Handle successful login - could redirect to prayer requests view
-    setIsLoginModalOpen(false);
-  };
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="members-page-wrapper">
-      <HeroSection title="MEMBERS & PRAYER" variant="simple" />
+      <HeroSection
+        title={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
+        subtitle={user?.name || ""}
+        variant="simple"
+      />
 
       <div className="members-content">
-        <ScrollReveal className="prayer-form-section">
-          <PrayerRequestForm onLoginClick={handleLoginClick} />
-        </ScrollReveal>
-      </div>
+        <div className="dashboard-tabs">
+          <button
+            className={`tab-button ${activeTab === "prayers" ? "active" : ""}`}
+            onClick={() => setActiveTab("prayers")}
+          >
+            Prayer Requests
+          </button>
+          {isAdmin && (
+            <>
+              <button
+                className={`tab-button ${
+                  activeTab === "announcements" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("announcements")}
+              >
+                Announcements
+              </button>
+              <button
+                className={`tab-button ${
+                  activeTab === "calendar" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("calendar")}
+              >
+                Calendar
+              </button>
+              <button
+                className={`tab-button ${
+                  activeTab === "sermons" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("sermons")}
+              >
+                Sermons
+              </button>
+              <button
+                className={`tab-button ${
+                  activeTab === "users" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("users")}
+              >
+                Users
+              </button>
+            </>
+          )}
+        </div>
 
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={handleLoginModalClose}
-        onLogin={handleLoginSuccess}
-      />
+        <div className="dashboard-content">
+          {activeTab === "prayers" && <PrayerRequestsTab />}
+          {activeTab === "announcements" && isAdmin && <AnnouncementsTab />}
+          {activeTab === "calendar" && isAdmin && <CalendarTab />}
+          {activeTab === "sermons" && isAdmin && <SermonsTab />}
+          {activeTab === "users" && isAdmin && <UsersTab />}
+        </div>
+      </div>
     </div>
+  );
+};
+
+// Prayer Requests Tab
+const PrayerRequestsTab: React.FC = () => {
+  const { isAdmin } = useAuth();
+  const [prayers, setPrayers] = useState<PrayerRequest[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadPrayers();
+  }, []);
+
+  const loadPrayers = async () => {
+    try {
+      setLoading(true);
+      const data = await prayerRequestsAPI.getAll({ status: "APPROVED" });
+      setPrayers(data);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateStatus = async (id: string, status: string) => {
+    try {
+      await prayerRequestsAPI.update(id, { status });
+      loadPrayers();
+    } catch (err: any) {
+      alert("Failed to update prayer request: " + err.message);
+    }
+  };
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div className="error-message">Error: {error}</div>;
+
+  return (
+    <div className="tab-content">
+      <h2>Prayer Requests</h2>
+      <div className="items-grid">
+        {prayers.length === 0 ? (
+          <p>No prayer requests found.</p>
+        ) : (
+          prayers.map((prayer) => (
+            <div key={prayer.id} className="prayer-card">
+              <h3>{prayer.title}</h3>
+              <p>{prayer.description}</p>
+              <div className="prayer-meta">
+                <span>Category: {prayer.category}</span>
+                <span>Priority: {prayer.priority}</span>
+                <span>Status: {prayer.status}</span>
+                {prayer.requester && <span>By: {prayer.requester}</span>}
+              </div>
+              {isAdmin && (
+                <div className="prayer-actions">
+                  {prayer.status !== "ANSWERED" && (
+                    <button
+                      onClick={() => handleUpdateStatus(prayer.id, "ANSWERED")}
+                    >
+                      Mark Answered
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+};
+
+// Announcements Tab
+const AnnouncementsTab: React.FC = () => {
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editingItem, setEditingItem] = useState<Announcement | null>(null);
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    loadAnnouncements();
+  }, []);
+
+  const loadAnnouncements = async () => {
+    try {
+      setLoading(true);
+      const data = await announcementsAPI.getAll();
+      setAnnouncements(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Delete this announcement?")) return;
+    try {
+      await announcementsAPI.delete(id);
+      loadAnnouncements();
+    } catch (err: any) {
+      alert("Failed to delete: " + err.message);
+    }
+  };
+
+  if (loading) return <LoadingSpinner />;
+
+  return (
+    <div className="tab-content">
+      <div className="tab-header">
+        <h2>Announcements</h2>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            setShowForm(true);
+            setEditingItem(null);
+          }}
+        >
+          Add New
+        </button>
+      </div>
+      {showForm && (
+        <AnnouncementForm
+          item={editingItem}
+          onSave={() => {
+            setShowForm(false);
+            loadAnnouncements();
+          }}
+          onCancel={() => setShowForm(false)}
+        />
+      )}
+      <div className="items-list">
+        {announcements.map((item) => (
+          <div key={item.id} className="item-card">
+            <h3>{item.title}</h3>
+            <p>{item.content}</p>
+            <div className="item-meta">
+              <span>{item.status}</span>
+              <span>{item.category}</span>
+            </div>
+            <div className="item-actions">
+              <button
+                onClick={() => {
+                  setEditingItem(item);
+                  setShowForm(true);
+                }}
+              >
+                Edit
+              </button>
+              <button onClick={() => handleDelete(item.id)}>Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Calendar Tab
+const CalendarTab: React.FC = () => {
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [editingItem, setEditingItem] = useState<CalendarEvent | null>(null);
+
+  useEffect(() => {
+    loadEvents();
+  }, []);
+
+  const loadEvents = async () => {
+    try {
+      setLoading(true);
+      const data = await calendarAPI.getAll();
+      setEvents(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Delete this event?")) return;
+    try {
+      await calendarAPI.delete(id);
+      loadEvents();
+    } catch (err: any) {
+      alert("Failed to delete: " + err.message);
+    }
+  };
+
+  if (loading) return <LoadingSpinner />;
+
+  return (
+    <div className="tab-content">
+      <div className="tab-header">
+        <h2>Calendar Events</h2>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            setShowForm(true);
+            setEditingItem(null);
+          }}
+        >
+          Add New
+        </button>
+      </div>
+      {showForm && (
+        <CalendarForm
+          item={editingItem}
+          onSave={() => {
+            setShowForm(false);
+            loadEvents();
+          }}
+          onCancel={() => setShowForm(false)}
+        />
+      )}
+      <div className="items-list">
+        {events.map((item) => (
+          <div key={item.id} className="item-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <div className="item-meta">
+              <span>{new Date(item.startDate).toLocaleDateString()}</span>
+              <span>{item.category}</span>
+              <span>{item.location}</span>
+            </div>
+            <div className="item-actions">
+              <button
+                onClick={() => {
+                  setEditingItem(item);
+                  setShowForm(true);
+                }}
+              >
+                Edit
+              </button>
+              <button onClick={() => handleDelete(item.id)}>Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Sermons Tab
+const SermonsTab: React.FC = () => {
+  const [sermons, setSermons] = useState<Sermon[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [editingItem, setEditingItem] = useState<Sermon | null>(null);
+
+  useEffect(() => {
+    loadSermons();
+  }, []);
+
+  const loadSermons = async () => {
+    try {
+      setLoading(true);
+      const data = await sermonsAPI.getAll();
+      setSermons(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Delete this sermon?")) return;
+    try {
+      await sermonsAPI.delete(id);
+      loadSermons();
+    } catch (err: any) {
+      alert("Failed to delete: " + err.message);
+    }
+  };
+
+  if (loading) return <LoadingSpinner />;
+
+  return (
+    <div className="tab-content">
+      <div className="tab-header">
+        <h2>Sermons</h2>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            setShowForm(true);
+            setEditingItem(null);
+          }}
+        >
+          Add New
+        </button>
+      </div>
+      {showForm && (
+        <SermonForm
+          item={editingItem}
+          onSave={() => {
+            setShowForm(false);
+            loadSermons();
+          }}
+          onCancel={() => setShowForm(false)}
+        />
+      )}
+      <div className="items-list">
+        {sermons.map((item) => (
+          <div key={item.id} className="item-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <div className="item-meta">
+              <span>Speaker: {item.speaker}</span>
+              <span>Date: {new Date(item.date).toLocaleDateString()}</span>
+              {item.series && <span>Series: {item.series}</span>}
+            </div>
+            <div className="item-actions">
+              <button
+                onClick={() => {
+                  setEditingItem(item);
+                  setShowForm(true);
+                }}
+              >
+                Edit
+              </button>
+              <button onClick={() => handleDelete(item.id)}>Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Users Tab
+const UsersTab: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  const loadUsers = async () => {
+    try {
+      setLoading(true);
+      const data = await usersAPI.getAll();
+      setUsers(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateRole = async (id: string, role: string) => {
+    try {
+      await usersAPI.update(id, { role });
+      loadUsers();
+    } catch (err: any) {
+      alert("Failed to update user: " + err.message);
+    }
+  };
+
+  if (loading) return <LoadingSpinner />;
+
+  return (
+    <div className="tab-content">
+      <h2>User Management</h2>
+      <div className="items-list">
+        {users.map((user) => (
+          <div key={user.id} className="item-card">
+            <h3>{user.name}</h3>
+            <p>{user.email}</p>
+            <div className="item-meta">
+              <span>Role: {user.role}</span>
+              <span>Status: {user.isActive ? "Active" : "Inactive"}</span>
+            </div>
+            <div className="item-actions">
+              <select
+                value={user.role}
+                onChange={(e) => handleUpdateRole(user.id, e.target.value)}
+              >
+                <option value="GUEST">Guest</option>
+                <option value="MEMBER">Member</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Simple forms for CRUD operations
+const AnnouncementForm: React.FC<{
+  item: Announcement | null;
+  onSave: () => void;
+  onCancel: () => void;
+}> = ({ item, onSave, onCancel }) => {
+  const [formData, setFormData] = useState({
+    title: item?.title || "",
+    content: item?.content || "",
+    category: item?.category || "",
+    priority: item?.priority || "normal",
+    status: item?.status || "PUBLISHED",
+    isPublic: item?.isPublic ?? true,
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (item) {
+        await announcementsAPI.update(item.id, formData);
+      } else {
+        await announcementsAPI.create(formData);
+      }
+      onSave();
+    } catch (err: any) {
+      alert("Failed to save: " + err.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="crud-form">
+      <input
+        type="text"
+        placeholder="Title"
+        value={formData.title}
+        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        required
+      />
+      <textarea
+        placeholder="Content"
+        value={formData.content}
+        onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Category"
+        value={formData.category}
+        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+      />
+      <div className="form-actions">
+        <button type="submit" className="btn-primary">
+          Save
+        </button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+};
+
+const CalendarForm: React.FC<{
+  item: CalendarEvent | null;
+  onSave: () => void;
+  onCancel: () => void;
+}> = ({ item, onSave, onCancel }) => {
+  const [formData, setFormData] = useState({
+    title: item?.title || "",
+    description: item?.description || "",
+    startDate: item?.startDate
+      ? new Date(item.startDate).toISOString().slice(0, 16)
+      : "",
+    location: item?.location || "",
+    category: item?.category || "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (item) {
+        await calendarAPI.update(item.id, {
+          ...formData,
+          startDate: new Date(formData.startDate).toISOString(),
+        });
+      } else {
+        await calendarAPI.create({
+          ...formData,
+          startDate: new Date(formData.startDate).toISOString(),
+        });
+      }
+      onSave();
+    } catch (err: any) {
+      alert("Failed to save: " + err.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="crud-form">
+      <input
+        type="text"
+        placeholder="Title"
+        value={formData.title}
+        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        required
+      />
+      <textarea
+        placeholder="Description"
+        value={formData.description}
+        onChange={(e) =>
+          setFormData({ ...formData, description: e.target.value })
+        }
+      />
+      <input
+        type="datetime-local"
+        value={formData.startDate}
+        onChange={(e) =>
+          setFormData({ ...formData, startDate: e.target.value })
+        }
+        required
+      />
+      <input
+        type="text"
+        placeholder="Location"
+        value={formData.location}
+        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+      />
+      <div className="form-actions">
+        <button type="submit" className="btn-primary">
+          Save
+        </button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+};
+
+const SermonForm: React.FC<{
+  item: Sermon | null;
+  onSave: () => void;
+  onCancel: () => void;
+}> = ({ item, onSave, onCancel }) => {
+  const [formData, setFormData] = useState({
+    title: item?.title || "",
+    description: item?.description || "",
+    speaker: item?.speaker || "",
+    date: item?.date ? new Date(item.date).toISOString().slice(0, 10) : "",
+    passage: item?.passage || "",
+    series: item?.series || "",
+    videoUrl: item?.videoUrl || "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (item) {
+        await sermonsAPI.update(item.id, {
+          ...formData,
+          date: new Date(formData.date).toISOString(),
+        });
+      } else {
+        await sermonsAPI.create({
+          ...formData,
+          date: new Date(formData.date).toISOString(),
+        });
+      }
+      onSave();
+    } catch (err: any) {
+      alert("Failed to save: " + err.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="crud-form">
+      <input
+        type="text"
+        placeholder="Title"
+        value={formData.title}
+        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        required
+      />
+      <textarea
+        placeholder="Description"
+        value={formData.description}
+        onChange={(e) =>
+          setFormData({ ...formData, description: e.target.value })
+        }
+      />
+      <input
+        type="text"
+        placeholder="Speaker"
+        value={formData.speaker}
+        onChange={(e) => setFormData({ ...formData, speaker: e.target.value })}
+        required
+      />
+      <input
+        type="date"
+        value={formData.date}
+        onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Bible Passage"
+        value={formData.passage}
+        onChange={(e) => setFormData({ ...formData, passage: e.target.value })}
+      />
+      <input
+        type="text"
+        placeholder="Series Name"
+        value={formData.series}
+        onChange={(e) => setFormData({ ...formData, series: e.target.value })}
+      />
+      <input
+        type="url"
+        placeholder="Video URL"
+        value={formData.videoUrl}
+        onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
+      />
+      <div className="form-actions">
+        <button type="submit" className="btn-primary">
+          Save
+        </button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
+    </form>
   );
 };
 

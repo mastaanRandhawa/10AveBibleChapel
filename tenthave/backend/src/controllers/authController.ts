@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { prisma } from "../index";
 import { AuthRequest } from "../middleware/auth";
@@ -37,15 +36,11 @@ export const register = async (req: Request, res: Response) => {
         .json({ error: "User with this email already exists" });
     }
 
-    // Hash password
-    const saltRounds = 10;
-    const passwordHash = await bcrypt.hash(password, saltRounds);
-
-    // Create user (default role is MEMBER)
+    // Create user (default role is MEMBER) - storing password as plain text
     const user = await prisma.user.create({
       data: {
         email,
-        passwordHash,
+        passwordHash: password, // Storing as plain text per user request
         name,
         role: "MEMBER", // Default role
       },
@@ -94,10 +89,8 @@ export const login = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Account is deactivated" });
     }
 
-    // Verify password
-    const isValidPassword = await bcrypt.compare(password, user.passwordHash);
-
-    if (!isValidPassword) {
+    // Verify password (plain text comparison per user request)
+    if (password !== user.passwordHash) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 

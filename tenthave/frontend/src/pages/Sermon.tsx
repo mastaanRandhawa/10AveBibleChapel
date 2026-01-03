@@ -1,166 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import SermonSeriesCard from "../components/SermonSeriesCard";
 import Pagination from "../components/Pagination";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { sermonsAPI, Sermon } from "../services/api";
 import sermonCardImg from "../assets/sermonCardImg.svg";
 import crossMountain from "../assets/crosss-mountain.png";
 import "./Sermon.css";
 
-// Mock data for sermon series
-const SERMON_SERIES = [
-  {
-    id: "relationships-anonymous",
-    title: "Relationships Anonymous",
-    episodeCount: 4,
-    image: sermonCardImg,
-    link: "/sermon/relationships-anonymous",
-  },
-  {
-    id: "romans",
-    title: "Romans",
-    episodeCount: 11,
-    image: sermonCardImg,
-    link: "/sermon/romans",
-  },
-  {
-    id: "bigger-than-us",
-    title: "Bigger Than Us",
-    episodeCount: 12,
-    image: sermonCardImg,
-    link: "/sermon/bigger-than-us",
-  },
-  {
-    id: "follow-me",
-    title: "Follow Me",
-    episodeCount: 4,
-    image: sermonCardImg,
-    link: "/sermon/follow-me",
-  },
-  {
-    id: "a-great-light",
-    title: "A Great Light",
-    episodeCount: 3,
-    image: sermonCardImg,
-    link: "/sermon/a-great-light",
-  },
-  {
-    id: "the-exodus",
-    title: "The Exodus",
-    episodeCount: 8,
-    image: sermonCardImg,
-    link: "/sermon/the-exodus",
-  },
-  {
-    id: "beyond",
-    title: "Beyond",
-    episodeCount: 6,
-    image: sermonCardImg,
-    link: "/sermon/beyond",
-  },
-  {
-    id: "recapturing-humanity",
-    title: "Recapturing Humanity",
-    episodeCount: 7,
-    image: sermonCardImg,
-    link: "/sermon/recapturing-humanity",
-  },
-  {
-    id: "faith-journey",
-    title: "Faith Journey",
-    episodeCount: 9,
-    image: sermonCardImg,
-    link: "/sermon/faith-journey",
-  },
-  {
-    id: "hope-restored",
-    title: "Hope Restored",
-    episodeCount: 5,
-    image: sermonCardImg,
-    link: "/sermon/hope-restored",
-  },
-  {
-    id: "love-unconditional",
-    title: "Love Unconditional",
-    episodeCount: 6,
-    image: sermonCardImg,
-    link: "/sermon/love-unconditional",
-  },
-  {
-    id: "grace-abundant",
-    title: "Grace Abundant",
-    episodeCount: 8,
-    image: sermonCardImg,
-    link: "/sermon/grace-abundant",
-  },
-  {
-    id: "peace-that-passes",
-    title: "Peace That Passes",
-    episodeCount: 4,
-    image: sermonCardImg,
-    link: "/sermon/peace-that-passes",
-  },
-  {
-    id: "joy-unspeakable",
-    title: "Joy Unspeakable",
-    episodeCount: 7,
-    image: sermonCardImg,
-    link: "/sermon/joy-unspeakable",
-  },
-  {
-    id: "victory-assured",
-    title: "Victory Assured",
-    episodeCount: 10,
-    image: sermonCardImg,
-    link: "/sermon/victory-assured",
-  },
-  {
-    id: "eternal-life",
-    title: "Eternal Life",
-    episodeCount: 6,
-    image: sermonCardImg,
-    link: "/sermon/eternal-life",
-  },
-  {
-    id: "kingdom-come",
-    title: "Kingdom Come",
-    episodeCount: 5,
-    image: sermonCardImg,
-    link: "/sermon/kingdom-come",
-  },
-  {
-    id: "new-creation",
-    title: "New Creation",
-    episodeCount: 8,
-    image: sermonCardImg,
-    link: "/sermon/new-creation",
-  },
-  {
-    id: "divine-purpose",
-    title: "Divine Purpose",
-    episodeCount: 9,
-    image: sermonCardImg,
-    link: "/sermon/divine-purpose",
-  },
-  {
-    id: "heavenly-call",
-    title: "Heavenly Call",
-    episodeCount: 7,
-    image: sermonCardImg,
-    link: "/sermon/heavenly-call",
-  },
-];
+interface SermonSeries {
+  id: string;
+  title: string;
+  episodeCount: number;
+  image: string;
+  link: string;
+}
 
 const SermonPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+  const [sermonSeries, setSermonSeries] = useState<SermonSeries[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const itemsPerPage = 8; // Show 8 series per page
 
+  const loadSermons = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const sermons = await sermonsAPI.getAll({
+        status: "PUBLISHED",
+        isPublic: "true",
+      });
+
+      // Group sermons by series
+      const seriesMap = new Map<string, Sermon[]>();
+      sermons.forEach((sermon) => {
+        const seriesName = sermon.series || "Standalone Sermons";
+        if (!seriesMap.has(seriesName)) {
+          seriesMap.set(seriesName, []);
+        }
+        seriesMap.get(seriesName)!.push(sermon);
+      });
+
+      // Convert to series array
+      const seriesArray: SermonSeries[] = Array.from(seriesMap.entries()).map(
+        ([seriesName, seriesSermons]) => {
+          // Create a clean ID from series name
+          const seriesId =
+            seriesName === "Standalone Sermons"
+              ? "standalone-sermons"
+              : seriesName
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")
+                  .replace(/[^a-z0-9-]/g, "");
+          return {
+            id: seriesId,
+            title: seriesName,
+            episodeCount: seriesSermons.length,
+            image: sermonCardImg,
+            link: `/sermon/${seriesId}`,
+          };
+        }
+      );
+
+      // Sort by episode count (most sermons first)
+      seriesArray.sort((a, b) => b.episodeCount - a.episodeCount);
+
+      setSermonSeries(seriesArray);
+    } catch (err: any) {
+      console.error("Error loading sermons:", err);
+      setError(err.message || "Failed to load sermons");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadSermons();
+  }, [loadSermons]);
+
   // Calculate pagination
-  const totalPages = Math.ceil(SERMON_SERIES.length / itemsPerPage);
+  const totalPages = Math.ceil(sermonSeries.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedSeries = SERMON_SERIES.slice(startIndex, endIndex);
+  const paginatedSeries = sermonSeries.slice(startIndex, endIndex);
 
   const handleSeriesClick = (seriesId: string) => {
     navigate(`/sermon/${seriesId}`);
@@ -179,6 +104,40 @@ const SermonPage: React.FC = () => {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="sermon-page">
+        <HeroSection
+          title="SERMON SERIES"
+          subtitle="EXPLORE GOD'S WORD"
+          description="Discover inspiring messages and biblical teachings from our weekly services and special series"
+          backgroundImage={`url(${crossMountain})`}
+          variant="centered"
+        />
+        <div style={{ padding: "4rem", textAlign: "center" }}>
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="sermon-page">
+        <HeroSection
+          title="SERMON SERIES"
+          subtitle="EXPLORE GOD'S WORD"
+          description="Discover inspiring messages and biblical teachings from our weekly services and special series"
+          backgroundImage={`url(${crossMountain})`}
+          variant="centered"
+        />
+        <div style={{ padding: "4rem", textAlign: "center" }}>
+          <p style={{ color: "red" }}>Error: {error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="sermon-page">
@@ -199,31 +158,41 @@ const SermonPage: React.FC = () => {
             <h2 className="section-title">Browse Sermon Series</h2>
           </div>
 
-          <div className="sermon-series-grid">
-            {paginatedSeries.map((series, index) => (
-              <div
-                key={startIndex + index}
-                onClick={() => handleSeriesClick(series.id)}
-                style={{ cursor: "pointer" }}
-              >
-                <SermonSeriesCard
-                  image={series.image}
-                  title={series.title}
-                  episodeCount={series.episodeCount}
-                  link={series.link}
-                />
+          {sermonSeries.length === 0 ? (
+            <p style={{ textAlign: "center", padding: "2rem" }}>
+              No sermon series found.
+            </p>
+          ) : (
+            <>
+              <div className="sermon-series-grid">
+                {paginatedSeries.map((series, index) => (
+                  <div
+                    key={series.id}
+                    onClick={() => handleSeriesClick(series.id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <SermonSeriesCard
+                      image={series.image}
+                      title={series.title}
+                      episodeCount={series.episodeCount}
+                      link={series.link}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Pagination */}
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            showFirstLast={true}
-            maxVisiblePages={5}
-          />
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                  showFirstLast={true}
+                  maxVisiblePages={5}
+                />
+              )}
+            </>
+          )}
         </div>
       </section>
     </div>

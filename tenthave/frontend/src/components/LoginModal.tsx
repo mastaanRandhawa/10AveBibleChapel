@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LoginModal.css";
-
+import { useAuth } from "../context/AuthContext";
 import { LoginModalProps, User, LoginCredentials } from "../types";
 
 const LoginModal: React.FC<LoginModalProps> = ({
@@ -8,54 +8,57 @@ const LoginModal: React.FC<LoginModalProps> = ({
   onClose,
   onLogin,
 }) => {
+  const { login, register } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState<
-    LoginCredentials & { confirmPassword: string }
+    LoginCredentials & { confirmPassword: string; name: string }
   >({
     email: "",
     password: "",
     confirmPassword: "",
+    name: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     try {
       // Basic validation
       if (!formData.email || !formData.password) {
-        alert("Please fill in all required fields.");
+        setError("Please fill in all required fields.");
         setLoading(false);
         return;
       }
 
-      if (!isLogin && formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
-        setLoading(false);
-        return;
+      if (!isLogin) {
+        if (!formData.name) {
+          setError("Please enter your name.");
+          setLoading(false);
+          return;
+        }
+        if (formData.password !== formData.confirmPassword) {
+          setError("Passwords do not match!");
+          setLoading(false);
+          return;
+        }
       }
 
-      console.log(isLogin ? "Logging in:" : "Signing up:", formData);
-      await new Promise((res) => setTimeout(res, 1000)); // mock API
-
-      if (onLogin) {
-        // Mock user data for demo purposes
-        const mockUser: User = {
-          id: "1",
-          email: formData.email,
-          name: formData.email.split("@")[0],
-          role: "member",
-          createdAt: new Date().toISOString(),
-        };
-        onLogin(mockUser);
+      if (isLogin) {
+        await login(formData.email, formData.password);
+      } else {
+        await register(formData.name, formData.email, formData.password);
       }
 
       // Reset form
@@ -63,13 +66,24 @@ const LoginModal: React.FC<LoginModalProps> = ({
         email: "",
         password: "",
         confirmPassword: "",
+        name: "",
       });
 
-      alert(isLogin ? "Login successful!" : "Signup successful!");
+      if (onLogin) {
+        const userData: User = {
+          id: "",
+          email: formData.email,
+          name: formData.name || formData.email.split("@")[0],
+          role: "member",
+          createdAt: new Date().toISOString(),
+        };
+        onLogin(userData);
+      }
+
       onClose();
-    } catch (err) {
+    } catch (err: any) {
       console.error("Auth error:", err);
-      alert("An error occurred. Please try again.");
+      setError(err.message || "Authentication failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -117,6 +131,33 @@ const LoginModal: React.FC<LoginModalProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
+          {error && (
+            <div
+              className="form-error"
+              style={{ color: "red", marginBottom: "1rem" }}
+            >
+              {error}
+            </div>
+          )}
+
+          {!isLogin && (
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">
+                FULL NAME
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                className="form-input"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your full name"
+                required
+              />
+            </div>
+          )}
+
           <div className="form-group">
             <label htmlFor="email" className="form-label">
               EMAIL ADDRESS

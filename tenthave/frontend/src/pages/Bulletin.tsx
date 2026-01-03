@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import EventDetailsModal from "../components/EventDetailsModal";
+import { announcementsAPI, calendarAPI, Announcement } from "../services/api";
 import bulletinImage from "../assets/bulletin.jpg";
 import "./Bulletin.css";
 
 // Main Bulletin Component
 const Bulletin: React.FC = () => {
   // Calendar and event management state
-  const [events, setEvents] = useState<CalendarEvent[]>([
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  // Old hardcoded events for fallback
+  const [hardcodedEvents] = useState<CalendarEvent[]>([
     // January 2024 Events
     {
       id: "1",
@@ -219,6 +225,41 @@ const Bulletin: React.FC = () => {
   );
   const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
 
+  // Load data from API
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        // Fetch calendar events
+        const calendarData = await calendarAPI.getAll({ status: "PUBLISHED", isPublic: "true" });
+        // Transform API data to match CalendarEvent interface
+        const transformedEvents = calendarData.map((event) => ({
+          id: event.id,
+          title: event.title,
+          description: event.description || "",
+          date: new Date(event.startDate).toISOString().split("T")[0],
+          time: new Date(event.startDate).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }),
+          location: event.location || "",
+          category: event.category || "general",
+          color: event.color || "var(--color-primary)",
+        }));
+        setEvents(transformedEvents.length > 0 ? transformedEvents : hardcodedEvents);
+
+        // Fetch announcements
+        const announcementData = await announcementsAPI.getAll({ status: "PUBLISHED", isPublic: "true" });
+        setAnnouncements(announcementData);
+      } catch (error) {
+        console.error("Error loading bulletin data:", error);
+        // Use hardcoded events as fallback
+        setEvents(hardcodedEvents);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [hardcodedEvents]);
+
   // Calendar event handlers
   const handleDateClick = (date: string, dateEvents: CalendarEvent[]) => {
     setSelectedDate(date);
@@ -306,48 +347,30 @@ const Bulletin: React.FC = () => {
             <h2>CHURCH ANNOUNCEMENTS</h2>
             <p>Important updates and news from our church leadership</p>
           </div>
-          <div className="announcements-grid">
-            <div className="announcement-card">
-              <div className="announcement-header">
-                <h3>Mission Trip Fundraiser</h3>
-                <span className="announcement-date">January 15, 2024</span>
-              </div>
-              <p>
-                Join us for our annual bake sale to support our upcoming mission
-                trip to Guatemala. All proceeds will help fund our community
-                outreach efforts.
-              </p>
-              <div className="announcement-meta">
-                <span className="announcement-category">Missions</span>
-              </div>
+          {loading ? (
+            <p style={{ textAlign: "center" }}>Loading announcements...</p>
+          ) : announcements.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No announcements at this time.</p>
+          ) : (
+            <div className="announcements-grid">
+              {announcements.slice(0, 6).map((announcement) => (
+                <div key={announcement.id} className="announcement-card">
+                  <div className="announcement-header">
+                    <h3>{announcement.title}</h3>
+                    <span className="announcement-date">
+                      {new Date(announcement.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <p>{announcement.content}</p>
+                  {announcement.category && (
+                    <div className="announcement-meta">
+                      <span className="announcement-category">{announcement.category}</span>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-            <div className="announcement-card">
-              <div className="announcement-header">
-                <h3>New Member Welcome</h3>
-                <span className="announcement-date">January 12, 2024</span>
-              </div>
-              <p>
-                We're excited to welcome 5 new families to our church community
-                this month. Please join us in making them feel at home.
-              </p>
-              <div className="announcement-meta">
-                <span className="announcement-category">Community</span>
-              </div>
-            </div>
-            <div className="announcement-card">
-              <div className="announcement-header">
-                <h3>Building Maintenance</h3>
-                <span className="announcement-date">January 10, 2024</span>
-              </div>
-              <p>
-                Our sanctuary will be closed for maintenance on February 1st.
-                Services will be held in the fellowship hall that day.
-              </p>
-              <div className="announcement-meta">
-                <span className="announcement-category">Facilities</span>
-              </div>
-            </div>
-          </div>
+          )}
         </ScrollReveal>
       </div>
 

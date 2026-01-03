@@ -61,6 +61,23 @@ export const requireAdmin = (
   next();
 };
 
+// Check if user is member or admin
+export const requireMemberOrAdmin = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  if (!req.user) {
+    return res.status(401).json({ error: "Authentication required" });
+  }
+
+  if (req.user.role !== "ADMIN" && req.user.role !== "MEMBER") {
+    return res.status(403).json({ error: "Member or Admin access required" });
+  }
+
+  next();
+};
+
 // Optional authentication - doesn't fail if no token
 export const optionalAuth = (
   req: AuthRequest,
@@ -91,4 +108,3 @@ export const optionalAuth = (
     next();
   }
 };
-

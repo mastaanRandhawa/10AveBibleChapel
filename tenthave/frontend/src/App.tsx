@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./pages/scrollToTop";
@@ -15,29 +16,36 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Bulletin = lazy(() => import("./pages/Bulletin"));
 const Prayer = lazy(() => import("./pages/Prayer"));
 const Login = lazy(() => import("./pages/Login"));
+const Members = lazy(() => import("./pages/Members"));
 
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
-      <Router>
-        <ScrollToTop />
-        <Header />
+      <AuthProvider>
+        <Router>
+          <ScrollToTop />
+          <Header />
 
-        <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/bulletin" element={<Bulletin />} />
-            <Route path="/prayer" element={<Prayer />} />
-            <Route path="/sermon" element={<Sermon />} />
-            <Route path="/sermon/:seriesId" element={<SermonSeriesDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Suspense>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/bulletin" element={<Bulletin />} />
+              <Route path="/prayer" element={<Prayer />} />
+              <Route path="/sermon" element={<Sermon />} />
+              <Route
+                path="/sermon/:seriesId"
+                element={<SermonSeriesDetail />}
+              />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/members" element={<Members />} />
+            </Routes>
+          </Suspense>
 
-        <Footer />
-      </Router>
+          <Footer />
+        </Router>
+      </AuthProvider>
     </ErrorBoundary>
   );
 };

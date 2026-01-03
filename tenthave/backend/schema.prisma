@@ -113,7 +113,7 @@ model CalendarEvent {
 model Announcement {
   id          String        @id @default(cuid())
   title       String
-  content     String        // HTML or markdown content
+  content     String        @db.Text // HTML or markdown content
   
   // Announcement details
   category    String?       // "general", "ministry", "event", "prayer", etc.
@@ -171,4 +171,41 @@ model PrayerRequest {
   @@index([isPrivate])
   @@index([createdAt])
   @@map("prayer_requests")
+}
+
+// ============================================================================
+// SERMONS
+// ============================================================================
+
+model Sermon {
+  id          String        @id @default(cuid())
+  title       String
+  description String?       @db.Text
+  
+  // Sermon details
+  speaker     String
+  date        DateTime
+  passage     String?       // Bible passage reference
+  series      String?       // Sermon series name
+  
+  // Media links
+  videoUrl    String?       // YouTube, Vimeo, etc.
+  audioUrl    String?       // Direct audio file or streaming link
+  thumbnail   String?       // Image/thumbnail URL
+  
+  // Visibility and status
+  status      ContentStatus @default(PUBLISHED)
+  isPublic    Boolean       @default(true)
+  isFeatured  Boolean       @default(false)
+  
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@index([status])
+  @@index([isPublic])
+  @@index([isFeatured])
+  @@index([date])
+  @@index([series])
+  @@map("sermons")
 }
