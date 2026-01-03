@@ -3,8 +3,12 @@ import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import LoginModal from "../components/LoginModal";
 import Button from "../components/Button";
+import PageContainer from "../components/PageContainer";
+import { Skeleton } from "../components/SkeletonLoader";
+import { useToast } from "../context/ToastContext";
 import { prayerRequestsAPI, PrayerRequest } from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
 import prayingImage from "../assets/praying.jpg";
 import "./Prayer.css";
 
@@ -12,6 +16,7 @@ import "./Prayer.css";
 const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
   onLoginClick,
 }) => {
+  const toast = useToast();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -58,9 +63,12 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
         isPrivate: false,
       });
       setSuccess(true);
+      toast.showSuccess("Prayer request submitted successfully");
       setTimeout(() => setSuccess(false), 5000);
     } catch (err: any) {
-      setError(err.message || "Failed to submit prayer request");
+      const errorMessage = getUserFriendlyErrorMessage(err);
+      setError(errorMessage);
+      toast.showError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -389,6 +397,7 @@ const Prayer: React.FC = () => {
   };
 
   return (
+    <PageContainer>
     <div className="prayer-page-wrapper">
       <HeroSection
         title="PRAYER REQUESTS"
@@ -421,6 +430,7 @@ const Prayer: React.FC = () => {
         onLogin={handleLoginSuccess}
       />
     </div>
+    </PageContainer>
   );
 };
 

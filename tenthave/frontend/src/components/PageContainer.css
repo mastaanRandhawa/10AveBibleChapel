@@ -1,0 +1,10 @@
+/* PageContainer - Adds consistent page transitions */
+
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page transition styles are defined in motion.css */
+

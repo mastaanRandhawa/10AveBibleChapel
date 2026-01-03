@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
+import PageContainer from "../components/PageContainer";
 import { CONTACT_INFO } from "../constants";
 import contactUsImage from "../assets/contact-us.jpg";
 import "./Contact.css";
@@ -43,13 +44,13 @@ const ContactFormComponent: React.FC = () => {
     try {
       // Simulate API call - replace with actual backend integration
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       console.log("Form submitted:", formData);
-      
+
       // Reset form on success
       setFormData({ name: "", email: "", message: "" });
       setSuccess(true);
-      
+
       // Clear success message after 5 seconds
       setTimeout(() => setSuccess(false), 5000);
     } catch (err: any) {
@@ -68,7 +69,7 @@ const ContactFormComponent: React.FC = () => {
         SEND US A MESSAGE
       </h3>
       <p className="contact-form-description">
-        Have a question or prayer request? We'd love to hear from you.
+        Have a question? We'd love to hear from you.
       </p>
 
       {success && (
@@ -141,7 +142,8 @@ const ContactFormComponent: React.FC = () => {
           {loading ? "SENDING..." : "SEND MESSAGE"}
         </button>
         <p className="form-privacy-note">
-          Your information will be kept private and used only to respond to your inquiry.
+          Your information will be kept private and used only to respond to your
+          inquiry.
         </p>
       </form>
     </section>
@@ -193,27 +195,29 @@ const ContactDetailsComponent: React.FC = () => {
 // Main Contact Component
 const Contact: React.FC = () => {
   return (
-    <div className="contact-page-wrapper">
-      <HeroSection
-        title="CONTACT US"
-        subtitle="GET IN TOUCH"
-        description="We'd love to hear from you. Reach out to us with any questions or prayer requests"
-        backgroundImage={`url(${contactUsImage})`}
-        variant="centered"
-      />
+    <PageContainer>
+      <div className="contact-page-wrapper">
+        <HeroSection
+          title="CONTACT US"
+          subtitle="GET IN TOUCH"
+          description="We'd love to hear from you. Reach out to us with any questions or prayer requests"
+          backgroundImage={`url(${contactUsImage})`}
+          variant="centered"
+        />
 
-      <div className="contact-main-content">
-        <div className="contact-content-container">
-          <ScrollReveal className="contact-form-wrapper">
-            <ContactFormComponent />
-          </ScrollReveal>
+        <div className="contact-main-content">
+          <div className="contact-content-container">
+            <ScrollReveal className="contact-form-wrapper">
+              <ContactFormComponent />
+            </ScrollReveal>
 
-          <ScrollReveal className="contact-details-wrapper">
-            <ContactDetailsComponent />
-          </ScrollReveal>
+            <ScrollReveal className="contact-details-wrapper">
+              <ContactDetailsComponent />
+            </ScrollReveal>
+          </div>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

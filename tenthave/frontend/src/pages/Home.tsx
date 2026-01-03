@@ -6,6 +6,7 @@ import SpecialCard from "../components/SpecialCard";
 import HeroSection from "../components/HeroSection";
 import LocationMap from "../components/LocationMap";
 import FeaturedSermonCard from "../components/FeaturedSermonCard";
+import PageContainer from "../components/PageContainer";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES, CHURCH_INFO } from "../constants";
 import "./Home.css";
@@ -134,6 +135,7 @@ const RecordedSermonsSection: React.FC = () => (
 // Main Home Component
 const Home: React.FC = () => {
   return (
+    <PageContainer>
     <main className="wrapperMAIN">
       <HomeHeroSection />
       <WeeklyServicesSection />
@@ -141,6 +143,7 @@ const Home: React.FC = () => {
       <RecordedSermonsSection />
       <LocationMap />
     </main>
+    </PageContainer>
   );
 };
 

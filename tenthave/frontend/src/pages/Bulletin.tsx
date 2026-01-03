@@ -5,6 +5,7 @@ import HeroSection from "../components/HeroSection";
 import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import EventDetailsModal from "../components/EventDetailsModal";
+import PageContainer from "../components/PageContainer";
 import { announcementsAPI, calendarAPI, Announcement } from "../services/api";
 import bulletinImage from "../assets/bulletin.jpg";
 import "./Bulletin.css";
@@ -318,6 +319,7 @@ const Bulletin: React.FC = () => {
   };
 
   return (
+    <PageContainer>
     <div className="bulletin-page-wrapper">
       <HeroSection
         title="BULLETIN"
@@ -399,6 +401,7 @@ const Bulletin: React.FC = () => {
         isAdmin={false}
       />
     </div>
+    </PageContainer>
   );
 };
 

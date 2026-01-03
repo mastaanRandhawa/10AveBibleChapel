@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
+import PageContainer from "../components/PageContainer";
 import mountainsImage from "../assets/mountains.jpg";
 import "./About.css";
 
@@ -119,6 +120,7 @@ const BeliefsList: React.FC = () => (
 // Main About Component
 const About: React.FC = () => {
   return (
+    <PageContainer>
     <div className="about-page-wrapper">
       <HeroSection
         title="ABOUT US"
@@ -156,6 +158,7 @@ const About: React.FC = () => {
         </ScrollReveal>
       </div>
     </div>
+    </PageContainer>
   );
 };
 

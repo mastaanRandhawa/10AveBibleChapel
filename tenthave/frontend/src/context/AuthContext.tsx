@@ -1,5 +1,12 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import { authAPI, AuthResponse } from "../services/api";
+import { useToast } from "./ToastContext";
 
 export interface User {
   id: string;
@@ -39,6 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
 
   // Check for existing token on mount
   useEffect(() => {
@@ -68,6 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem("token", response.token);
       setToken(response.token);
       setUser(response.user);
+      toast.showSuccess(`Welcome back, ${response.user.name}`);
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
@@ -88,6 +97,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem("token", response.token);
       setToken(response.token);
       setUser(response.user);
+      toast.showSuccess(
+        `Account created successfully. Welcome, ${response.user.name}`
+      );
     } catch (error) {
       console.error("Registration failed:", error);
       throw error;
@@ -95,9 +107,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = (): void => {
+    const userName = user?.name;
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
+    toast.showInfo(
+      `Logged out successfully${userName ? `. Goodbye, ${userName}` : ""}`
+    );
   };
 
   const refreshUser = async (): Promise<void> => {
@@ -107,6 +123,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(userData as User);
       } catch (error) {
         console.error("Failed to refresh user:", error);
+        toast.showError("Your session has expired. Please log in again.");
         logout();
       }
     }
@@ -131,4 +148,3 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-

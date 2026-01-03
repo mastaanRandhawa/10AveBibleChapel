@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import SermonSeriesCard from "../components/SermonSeriesCard";
 import Pagination from "../components/Pagination";
 import LoadingSpinner from "../components/LoadingSpinner";
+import PageContainer from "../components/PageContainer";
 import { sermonsAPI, Sermon } from "../services/api";
 import sermonCardImg from "../assets/sermonCardImg.svg";
 import crossMountain from "../assets/crosss-mountain.png";
@@ -156,6 +157,7 @@ const SermonPage: React.FC = () => {
   }
 
   return (
+    <PageContainer>
     <div className="sermon-page">
       {/* Hero Section */}
       <HeroSection
@@ -243,6 +245,7 @@ const SermonPage: React.FC = () => {
         </div>
       </section>
     </div>
+    </PageContainer>
   );
 };
 

@@ -1,3 +1,5 @@
+import { parseAPIError } from "./apiErrorHandler";
+
 // API base URL - adjust for production
 const API_BASE_URL =
   process.env.REACT_APP_API_URL || "http://localhost:5000/api";
@@ -23,7 +25,7 @@ const getHeaders = (includeAuth = false): HeadersInit => {
   return headers;
 };
 
-// Generic fetch wrapper
+// Generic fetch wrapper with enhanced error handling
 async function fetchAPI<T>(
   endpoint: string,
   options: RequestInit = {}
@@ -31,10 +33,13 @@ async function fetchAPI<T>(
   const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({
+    const errorData = await response.json().catch(() => ({
       error: "An error occurred",
     }));
-    throw new Error(error.error || `HTTP ${response.status}`);
+    
+    // Parse and throw enhanced error
+    const error = parseAPIError(response, errorData);
+    throw error;
   }
 
   return response.json();

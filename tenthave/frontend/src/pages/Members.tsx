@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 import { useNavigate } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import LoadingSpinner from "../components/LoadingSpinner";
+import PageContainer from "../components/PageContainer";
+import { SkeletonTable } from "../components/SkeletonLoader";
 import {
   announcementsAPI,
   calendarAPI,
@@ -15,6 +18,7 @@ import {
   PrayerRequest,
   User,
 } from "../services/api";
+import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
 import "./Members.css";
 import "./AdminDashboard.css";
 
@@ -26,6 +30,7 @@ const Members: React.FC = () => {
     isMember,
     isLoading: authLoading,
   } = useAuth();
+  const toast = useToast();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<
     "announcements" | "calendar" | "sermons" | "prayers" | "users"
@@ -34,9 +39,10 @@ const Members: React.FC = () => {
   // Redirect if not authenticated
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
+      toast.showInfo("Please log in to access the members area");
       navigate("/login");
     }
-  }, [authLoading, isAuthenticated, navigate]);
+  }, [authLoading, isAuthenticated, navigate, toast]);
 
   if (authLoading) {
     return <LoadingSpinner />;
@@ -47,6 +53,7 @@ const Members: React.FC = () => {
   }
 
   return (
+    <PageContainer>
     <div className="members-page-wrapper">
       <HeroSection
         title={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
@@ -109,6 +116,7 @@ const Members: React.FC = () => {
         </div>
       </div>
     </div>
+    </PageContainer>
   );
 };
 

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 import PasswordInput from "../components/PasswordInput";
+import PageContainer from "../components/PageContainer";
 import "./Login.css";
 
 export default function Login() {
   const { login, register } = useAuth();
+  const toast = useToast();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -65,16 +68,22 @@ export default function Login() {
         name: "",
       });
       
-      navigate("/members");
+      // Navigate after a brief delay to let toast show
+      setTimeout(() => {
+        navigate("/members");
+      }, 300);
     } catch (err: any) {
       console.error("Auth error:", err);
-      setError(err.message || "Authentication failed. Please try again.");
+      const errorMessage = err.message || "Authentication failed. Please try again.";
+      setError(errorMessage);
+      toast.showError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <PageContainer>
     <div className="login-page-wrapper">
       <div className="login-page-container">
         {/* Left side - Branding */}
@@ -220,5 +229,6 @@ export default function Login() {
         </div>
       </div>
     </div>
+    </PageContainer>
   );
 }
