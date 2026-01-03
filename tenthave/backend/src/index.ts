@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 
 // Import routes
+import authRoutes from "./routes/auth";
 import calendarRoutes from "./routes/calendar";
 import announcementRoutes from "./routes/announcements";
 import prayerRequestRoutes from "./routes/prayerRequests";
@@ -28,6 +29,7 @@ app.get("/api/health", (req, res) => {
 });
 
 // API Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
 app.use("/api/announcements", announcementRoutes);
 app.use("/api/prayer-requests", prayerRequestRoutes);

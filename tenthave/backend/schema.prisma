@@ -11,6 +11,12 @@ datasource db {
 // ENUMS
 // ============================================================================
 
+enum UserRole {
+  ADMIN     // Full access - can update calendar and announcements
+  MEMBER    // Regular member access
+  GUEST     // Limited access
+}
+
 enum PrayerCategory {
   HEALTH
   FAMILY
@@ -37,6 +43,29 @@ enum ContentStatus {
   DRAFT       // Not yet published
   PUBLISHED   // Live on website
   ARCHIVED    // No longer active
+}
+
+// ============================================================================
+// USER MANAGEMENT
+// ============================================================================
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  passwordHash      String
+  name              String
+  role              UserRole  @default(MEMBER)
+  
+  // Account status
+  isActive          Boolean   @default(true)
+  
+  // Timestamps
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([email])
+  @@index([role])
+  @@map("users")
 }
 
 // ============================================================================
