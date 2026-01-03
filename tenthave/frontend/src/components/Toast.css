@@ -1,0 +1,115 @@
+/* Toast Notification Styles */
+.toast {
+    position: fixed;
+    bottom: var(--spacing-2xl);
+    right: var(--spacing-2xl);
+    min-width: 320px;
+    max-width: 480px;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    animation: slideIn 0.3s ease-out;
+    z-index: 9999;
+    font-family: var(--font-primary);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-success {
+    background: var(--color-success);
+    color: var(--color-white);
+    border: 2px solid #059669;
+}
+
+.toast-error {
+    background: var(--color-error);
+    color: var(--color-white);
+    border: 2px solid #DC2626;
+}
+
+.toast-info {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: 2px solid var(--color-primary-dark);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex: 1;
+}
+
+.toast-icon {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+}
+
+.toast-message {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+}
+
+.toast-close {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    line-height: 1;
+}
+
+.toast-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.toast-close:active {
+    transform: scale(0.9);
+}
+
+/* Mobile responsive */
+@media (max-width: 767.98px) {
+    .toast {
+        bottom: var(--spacing-lg);
+        right: var(--spacing-md);
+        left: var(--spacing-md);
+        min-width: auto;
+        max-width: none;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
