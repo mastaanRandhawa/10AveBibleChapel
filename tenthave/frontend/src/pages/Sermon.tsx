@@ -21,6 +21,8 @@ const SermonPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [sermonSeries, setSermonSeries] = useState<SermonSeries[]>([]);
+  const [filteredSeries, setFilteredSeries] = useState<SermonSeries[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const itemsPerPage = 8; // Show 8 series per page
@@ -69,6 +71,7 @@ const SermonPage: React.FC = () => {
       seriesArray.sort((a, b) => b.episodeCount - a.episodeCount);
 
       setSermonSeries(seriesArray);
+      setFilteredSeries(seriesArray);
     } catch (err: any) {
       console.error("Error loading sermons:", err);
       setError(err.message || "Failed to load sermons");
@@ -81,11 +84,24 @@ const SermonPage: React.FC = () => {
     loadSermons();
   }, [loadSermons]);
 
+  // Filter series based on search query
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredSeries(sermonSeries);
+    } else {
+      const filtered = sermonSeries.filter((series) =>
+        series.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredSeries(filtered);
+    }
+    setCurrentPage(1); // Reset to first page when filtering
+  }, [searchQuery, sermonSeries]);
+
   // Calculate pagination
-  const totalPages = Math.ceil(sermonSeries.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredSeries.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedSeries = sermonSeries.slice(startIndex, endIndex);
+  const paginatedSeries = filteredSeries.slice(startIndex, endIndex);
 
   const handleSeriesClick = (seriesId: string) => {
     navigate(`/sermon/${seriesId}`);
@@ -156,12 +172,43 @@ const SermonPage: React.FC = () => {
           <div className="section-header">
             <div className="section-label">SERMON SERIES</div>
             <h2 className="section-title">Browse Sermon Series</h2>
+            <p className="section-description">
+              Explore our collection of {sermonSeries.length} sermon series
+            </p>
           </div>
 
-          {sermonSeries.length === 0 ? (
-            <p style={{ textAlign: "center", padding: "2rem" }}>
-              No sermon series found.
-            </p>
+          {sermonSeries.length > 0 && (
+            <div className="sermon-search-container">
+              <input
+                type="text"
+                className="sermon-search-input"
+                placeholder="Search sermon series..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search sermon series"
+              />
+              {searchQuery && (
+                <button
+                  className="sermon-search-clear"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          )}
+
+          {filteredSeries.length === 0 ? (
+            <div className="sermon-empty-state">
+              <p>No sermon series match your search.</p>
+              <button
+                className="btn-primary"
+                onClick={() => setSearchQuery("")}
+              >
+                Clear Search
+              </button>
+            </div>
           ) : (
             <>
               <div className="sermon-series-grid">

@@ -25,6 +25,42 @@
     --sermon-card-text: var(--color-dark);
     --sermon-card-text-muted: var(--color-muted-gray);
 
+    /* Badge & Status colors */
+    --badge-draft-bg: #F3F4F6;
+    --badge-draft-text: #4B5563;
+    --badge-published-bg: #D1FAE5;
+    --badge-published-text: #065F46;
+    --badge-pinned-bg: #FEF3C7;
+    --badge-pinned-text: #92400E;
+    --badge-archived-bg: #F3F4F6;
+    --badge-archived-text: #6B7280;
+    --badge-pending-bg: #FEF3C7;
+    --badge-pending-text: #92400E;
+    --badge-approved-bg: #D1FAE5;
+    --badge-approved-text: #065F46;
+    --badge-rejected-bg: #FEE2E2;
+    --badge-rejected-text: #991B1B;
+    --badge-answered-bg: #DBEAFE;
+    --badge-answered-text: #1E40AF;
+
+    /* Border colors */
+    --border-color: #E5E7EB;
+    --border-color-light: #F3F4F6;
+    --border-color-dark: #D1D5DB;
+
+    /* Input states */
+    --input-bg: #FFFFFF;
+    --input-border: #D1D5DB;
+    --input-border-focus: var(--color-primary);
+    --input-border-error: var(--color-error);
+    --input-text: var(--color-dark);
+    --input-placeholder: #9CA3AF;
+
+    /* Table colors */
+    --table-header-bg: #F9FAFB;
+    --table-row-hover: #F9FAFB;
+    --table-border: #E5E7EB;
+
     /* Typography */
     --font-primary: 'Roboto Condensed', sans-serif;
     --font-weight-light: 300;

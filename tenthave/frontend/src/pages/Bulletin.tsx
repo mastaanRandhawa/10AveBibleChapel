@@ -338,6 +338,9 @@ const Bulletin: React.FC = () => {
             events={events}
             onDateClick={handleDateClick}
             onAddEvent={handleAddEvent}
+            onEditEvent={handleEditEvent}
+            onDeleteEvent={handleDeleteEvent}
+            isAdmin={false}
           />
         </ScrollReveal>
 
@@ -390,6 +393,7 @@ const Bulletin: React.FC = () => {
         selectedDate={selectedDate}
         onEditEvent={handleEditEvent}
         onDeleteEvent={handleDeleteEvent}
+        isAdmin={false}
       />
     </div>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { CalendarEvent } from "./Calendar";
-import Button from "./Button";
 import { EVENT_CATEGORIES } from "../constants";
 import "./EventDetailsModal.css";
 
@@ -11,6 +10,7 @@ interface EventDetailsModalProps {
   selectedDate: string;
   onEditEvent: (event: CalendarEvent) => void;
   onDeleteEvent: (eventId: string) => void;
+  isAdmin?: boolean;
 }
 
 const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
@@ -20,6 +20,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
   selectedDate,
   onEditEvent,
   onDeleteEvent,
+  isAdmin = false,
 }) => {
   if (!isOpen) return null;
 
@@ -44,69 +45,88 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
     return category ? category.name : "Uncategorized";
   };
 
-  const getContrastColor = (hexColor: string): string => {
-    const hex = hexColor.replace("#", "");
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5 ? "var(--color-dark)" : "var(--color-white)";
-  };
-
   return (
-    <div className="event-details-overlay" onClick={onClose}>
-      <div className="event-details-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="event-details-header">
-          <h2>Events for {formatDate(selectedDate)}</h2>
-          <Button
-            variant="button-secondary"
-            buttonText="×"
+    <div className="event-modal-overlay" onClick={onClose}>
+      <div className="event-modal" onClick={(e) => e.stopPropagation()}>
+        {/* Modal Header */}
+        <div className="event-modal-header">
+          <h2 className="event-modal-title">Events for {formatDate(selectedDate)}</h2>
+          <button
+            className="event-modal-close"
             onClick={onClose}
-            className="event-details-close"
-          />
+            aria-label="Close modal"
+          >
+            ×
+          </button>
         </div>
 
-        <div className="event-details-content">
+        {/* Modal Content */}
+        <div className="event-modal-content">
           {events.length === 0 ? (
-            <div className="no-events">
-              <div className="no-events-icon">•</div>
+            <div className="event-modal-empty">
+              <div className="empty-icon">📅</div>
               <h3>No events scheduled</h3>
               <p>There are no events scheduled for this date.</p>
             </div>
           ) : (
-            <div className="events-list">
+            <div className="event-modal-list">
               {events.map((event) => (
-                <div key={event.id} className="event-details-card">
-                  <div className="event-details-card-header">
-                    <div
-                      className="event-type-icon"
-                      style={{
-                        backgroundColor: event.color || "var(--color-primary)",
-                        color: getContrastColor(
-                          event.color || "var(--color-primary)"
-                        ),
-                      }}
-                    >
-                      •
-                    </div>
-                    <div className="event-title-section">
-                      <h3 className="event-title">{event.title}</h3>
+                <div key={event.id} className="event-modal-card">
+                  {/* Event Header: Title + Category Badge */}
+                  <div className="event-modal-card-header">
+                    <div className="event-header-left">
+                      <h3 className="event-modal-card-title">{event.title}</h3>
                       {event.category && (
-                        <span className="event-category">
+                        <span className="event-category-badge">
                           {getCategoryName(event.category)}
                         </span>
                       )}
                     </div>
-                    <div className="event-actions">
-                      <Button
-                        variant="button-primary"
-                        buttonText="Edit"
+                  </div>
+
+                  {/* Event Description */}
+                  {event.description && (
+                    <p className="event-modal-description">{event.description}</p>
+                  )}
+
+                  {/* Event Meta Info: Time + Location */}
+                  <div className="event-modal-meta">
+                    {event.time && (
+                      <div className="event-meta-item">
+                        <span className="meta-icon">🕐</span>
+                        <span className="meta-label">Time:</span>
+                        <span className="meta-value">{formatTime(event.time)}</span>
+                      </div>
+                    )}
+
+                    {event.location && (
+                      <div className="event-meta-item">
+                        <span className="meta-icon">📍</span>
+                        <span className="meta-label">Location:</span>
+                        <span className="meta-value">{event.location}</span>
+                      </div>
+                    )}
+
+                    {event.speaker && (
+                      <div className="event-meta-item">
+                        <span className="meta-icon">👤</span>
+                        <span className="meta-label">Speaker:</span>
+                        <span className="meta-value">{event.speaker}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Admin Actions */}
+                  {isAdmin && (
+                    <div className="event-modal-actions">
+                      <button
+                        className="event-action-btn edit-btn"
                         onClick={() => onEditEvent(event)}
-                        className="edit-btn"
-                      />
-                      <Button
-                        variant="button-secondary"
-                        buttonText="Delete"
+                      >
+                        Edit Event
+                      </button>
+                      <button
+                        className="event-action-btn delete-btn"
                         onClick={() => {
                           if (
                             window.confirm(
@@ -116,48 +136,11 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
                             onDeleteEvent(event.id);
                           }
                         }}
-                        className="delete-btn"
-                      />
-                    </div>
-                  </div>
-
-                  {event.description && (
-                    <div className="event-description">
-                      <p>{event.description}</p>
+                      >
+                        Delete
+                      </button>
                     </div>
                   )}
-
-                  <div className="event-details-info">
-                    {event.time && (
-                      <div className="event-detail-item">
-                        <span className="event-detail-icon">Time</span>
-                        <span className="event-detail-label">Time:</span>
-                        <span className="event-detail-value">
-                          {formatTime(event.time)}
-                        </span>
-                      </div>
-                    )}
-
-                    {event.location && (
-                      <div className="event-detail-item">
-                        <span className="event-detail-icon">Location</span>
-                        <span className="event-detail-label">Location:</span>
-                        <span className="event-detail-value">
-                          {event.location}
-                        </span>
-                      </div>
-                    )}
-
-                    {event.speaker && (
-                      <div className="event-detail-item">
-                        <span className="event-detail-icon">Speaker</span>
-                        <span className="event-detail-label">Speaker:</span>
-                        <span className="event-detail-value">
-                          {event.speaker}
-                        </span>
-                      </div>
-                    )}
-                  </div>
                 </div>
               ))}
             </div>

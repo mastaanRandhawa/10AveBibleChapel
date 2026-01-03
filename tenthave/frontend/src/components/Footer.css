@@ -1,11 +1,12 @@
-/* Enhanced Footer Styles */
+/* Modern Footer Styles */
 .footer {
     background: var(--color-dark);
     color: var(--color-light);
     font-family: var(--font-primary);
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-4xl) 0 var(--spacing-2xl);
     position: relative;
     overflow: hidden;
+    border-top: 3px solid var(--color-primary);
 }
 
 .footer::before {
@@ -14,8 +15,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--color-dark);
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
 }
 
 /* Base Footer */

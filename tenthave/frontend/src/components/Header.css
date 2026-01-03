@@ -1,116 +1,126 @@
-/* Enhanced Header Styles */
+/* ===========================
+   MODERN NAVBAR STYLES
+   3-Column Layout: Logo | Nav Links | User Menu
+   =========================== */
+
 .header {
     position: fixed;
     top: 0;
     z-index: 100;
     width: 100%;
-    background-color: transparent;
-    backdrop-filter: none;
-    border-bottom: none;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
     padding: var(--spacing-md) 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: all var(--transition-normal);
-    box-shadow: none;
-    opacity: 1;
-    visibility: visible;
+    box-shadow: var(--shadow-sm);
     transform: translateY(0);
 }
 
 .header.header-visible {
-    background-color: rgba(247, 246, 241, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     padding: var(--spacing-sm) 0;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 /* Hide header when scrolling down */
 .header:not(.header-visible) {
-    opacity: 0;
-    visibility: hidden;
     transform: translateY(-100%);
 }
 
-.header.header-visible:hover {
-    background-color: var(--color-light);
-}
-
+/* ===========================
+   NAV CONTAINER - 3 Columns
+   =========================== */
 .nav-container {
     width: 100%;
     max-width: var(--container-max-width);
-    display: flex;
-    justify-content: space-between;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    gap: var(--spacing-lg);
     padding: 0 var(--container-padding);
 }
 
-.leftSide {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h5);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wider);
-    color: var(--color-dark);
-    transition: color var(--transition-fast);
+/* ===========================
+   LEFT: Logo + Church Name
+   =========================== */
+.nav-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-.leftSide a {
+.logo-link {
     text-decoration: none;
-    color: inherit;
+    color: var(--color-dark);
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    transition: color var(--interaction-normal), transform var(--interaction-fast);
-    border-radius: var(--radius-md);
+    transition: all var(--interaction-normal);
     padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
 }
 
-.leftSide a:hover {
+.logo-link:hover {
     color: var(--color-primary-dark);
-    transform: scale(1.02);
+    transform: translateX(2px);
 }
 
-.leftSide a:focus-visible {
+.logo-link:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
-    color: var(--color-primary-dark);
 }
 
-/* Desktop Navigation Styles */
-.navLinks {
+.church-name {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.church-icon-mobile {
+    display: none;
+}
+
+/* ===========================
+   CENTER: Main Navigation Links
+   =========================== */
+.nav-center {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-main-links {
     list-style: none;
     display: flex;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     padding: 0;
     margin: 0;
     align-items: center;
 }
 
-.navLinks li {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
-    font-weight: var(--font-weight-medium);
+.nav-main-links li {
+    margin: 0;
 }
 
-.navLinks li a,
-.closeButton {
+.nav-main-links li a {
     text-decoration: none;
     color: var(--color-dark);
-    transition: all var(--interaction-normal);
+    font-family: var(--font-primary);
+    font-size: 15px;
+    font-weight: var(--font-weight-medium);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
+    transition: all var(--interaction-normal);
     position: relative;
+    display: inline-block;
 }
 
-.navLinks li a::after {
+.nav-main-links li a::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: 50%;
     width: 0;
     height: 2px;
@@ -119,353 +129,406 @@
     transform: translateX(-50%);
 }
 
-.navLinks li a:hover {
+.nav-main-links li a:hover {
     color: var(--color-primary);
     background-color: rgba(251, 203, 156, 0.1);
-    transform: translateY(-1px);
 }
 
-.navLinks li a:hover::after {
-    width: 80%;
+.nav-main-links li a:hover::after {
+    width: 75%;
 }
 
-.navLinks li a:focus-visible {
+.nav-main-links li a.active {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    background-color: rgba(251, 203, 156, 0.15);
+}
+
+.nav-main-links li a.active::after {
+    width: 75%;
+}
+
+.nav-main-links li a:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
     color: var(--color-primary);
     background-color: rgba(251, 203, 156, 0.1);
 }
 
-/* Burger Menu Icon - hidden on larger screens */
-.burger,
-.closeButton,
-.churchIcon {
-    display: none;
+/* ===========================
+   RIGHT: User Menu / Login
+   =========================== */
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* User Menu Wrapper */
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
     cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    transition: all var(--interaction-normal);
 }
 
-/* Responsive Media Queries */
-
-/* Very Small Devices (up to 375px) */
-@media (max-width: 375px) {
-    :root {
-        --font-size-h1: 28px;
-        --font-size-h2: 22px;
-        --font-size-h3: 18px;
-        --font-size-h4: 12px;
-        --font-size-h5: 10px;
-        --font-size-h6: 8px;
-        --padding-xs: 2px;
-        --padding-sm: 4px;
-        --padding-md: 8px;
-        --padding-lg: 12px;
-        --padding-xl: 16px;
-        --letter-spacing-lg: 2px;
-        --letter-spacing-sm: 0.5px;
-    }
-
-    .header {
-        padding: var(--padding-sm) 0;
-    }
-
-    .nav-container {
-        padding: var(--padding-sm);
-    }
-
-    .leftSide {
-        font-size: var(--font-size-h4);
-        padding-left: var(--padding-sm);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    /* Nav links stack vertically if not using burger logic */
-    .navLinks {
-        gap: var(--padding-lg);
-        padding: 0 var(--padding-md);
-        flex-direction: column;
-        align-items: center;
-        border-left: none;
-    }
-
-    .navLinks li a,
-    .closeButton {
-        padding: var(--padding-xs) var(--padding-sm);
-    }
-
-    .burger img,
-    li img,
-    .churchIcon {
-        width: 15px;
-        height: auto;
-    }
+.user-menu-trigger:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+    border-color: var(--color-primary);
 }
 
-/* Extra Small Devices (376px to 575.98px) */
-@media (min-width: 376px) and (max-width: 575.98px) {
-    :root {
-        --font-size-h1: 48px;
-        --font-size-h2: 40px;
-        --font-size-h3: 32px;
-        --font-size-h4: 24px;
-        --font-size-h5: 20px;
-        --font-size-h6: 14px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3px;
-        --letter-spacing-sm: 0.8px;
-    }
+.user-menu-trigger:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
 
-    .header {
-        padding: var(--padding-sm) 0;
-    }
+.user-name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-    .nav-container {
-        padding: var(--padding-sm);
-    }
+.user-menu-arrow {
+    font-size: 10px;
+    transition: transform var(--interaction-fast);
+}
 
-    .leftSide {
-        font-size: var(--font-size-h4);
-        padding-left: var(--padding-sm);
-        letter-spacing: var(--letter-spacing-sm);
-    }
+.user-menu-arrow.open {
+    transform: rotate(180deg);
+}
 
-    .navLinks {
-        gap: var(--padding-lg);
-        padding: 0 var(--padding-md);
-        flex-direction: column;
-        align-items: center;
-        border-left: none;
-    }
+/* User Menu Dropdown */
+.user-menu-dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-xs));
+    right: 0;
+    min-width: 200px;
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xs);
+    z-index: 1000;
+    animation: slideDown 0.2s ease-out;
+}
 
-    .navLinks li a,
-    .closeButton {
-        padding: var(--padding-xs) var(--padding-sm);
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
     }
-
-    .burger img,
-    li img,
-    .churchIcon {
-        width: 20px;
-        height: auto;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Small Devices (576px to 767.98px) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-    :root {
-        --font-size-h1: 56px;
-        --font-size-h2: 42px;
-        --font-size-h3: 36px;
-        --font-size-h4: 28px;
-        --font-size-h5: 22px;
-        --font-size-h6: 15px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 12px;
-        --padding-lg: 18px;
-        --padding-xl: 24px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.9px;
-    }
-
-    .header {
-        padding: var(--padding-sm) 0;
-    }
-
-    .nav-container {
-        padding: var(--padding-sm);
-    }
-
-    .leftSide {
-        font-size: var(--font-size-h4);
-        padding-left: var(--padding-sm);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .navLinks {
-        gap: var(--padding-lg);
-        padding: 0 var(--padding-md);
-        flex-direction: column;
-        align-items: center;
-        border-left: none;
-    }
-
-    .navLinks li a,
-    .closeButton {
-        padding: var(--padding-xs) var(--padding-sm);
-    }
-
-    .burger img,
-    li img,
-    .churchIcon {
-        width: 25px;
-        height: auto;
-    }
+.user-menu-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: all var(--interaction-fast);
 }
 
-/* Medium Devices / iPad Portrait (768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    :root {
-        --font-size-h1: 60px;
-        --font-size-h2: 44px;
-        --font-size-h3: 36px;
-        --font-size-h4: 30px;
-        --font-size-h5: 26px;
-        --font-size-h6: 18px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 21px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 1px;
-    }
-
-    .header {
-        padding: var(--padding-sm) 0;
-    }
-
-    .nav-container {
-        padding: var(--padding-sm);
-    }
-
-    .leftSide {
-        font-size: var(--font-size-h4);
-        padding-left: var(--padding-sm);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .burger img,
-    li img,
-    .churchIcon {
-        width: 55px;
-        height: auto;
-    }
+.user-menu-item:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+    color: var(--color-primary);
 }
 
-/* iPad Landscape (992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
-        --padding-xs: 3px;
-        --padding-sm: 6px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 28px;
-        --letter-spacing-lg: 3.5px;
-        --letter-spacing-sm: 0.8px;
-    }
-
-    .header {
-        padding: var(--padding-sm) 0;
-    }
-
-    .nav-container {
-        padding: var(--padding-sm);
-    }
-
-    .leftSide {
-        font-size: var(--font-size-h4);
-        padding-left: var(--padding-sm);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .navLinks {
-        gap: var(--padding-lg);
-        padding: 0 var(--padding-md);
-    }
-
-    .navLinks li a,
-    .closeButton {
-        padding: var(--padding-xs) var(--padding-sm);
-    }
-
+.user-menu-item:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
 }
 
-/* Laptops (1200px to 1399.98px) */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
-    :root {
-        --font-size-h1: 62px;
-        --font-size-h2: 46px;
-        --font-size-h3: 38px;
-        --font-size-h4: 30px;
-        --font-size-h5: 22px;
-        --font-size-h6: 14px;
-        --padding-xs: 3px;
-        --padding-sm: 7px;
-        --padding-md: 14px;
-        --padding-lg: 22px;
-        --padding-xl: 30px;
-        --letter-spacing-lg: 3.8px;
-        --letter-spacing-sm: 0.9px;
-    }
-
-    .header {
-        padding: var(--padding-sm) 0;
-    }
-
-    .nav-container {
-        padding: var(--padding-sm);
-    }
-
-    .leftSide {
-        font-size: var(--font-size-h4);
-        padding-left: var(--padding-sm);
-        letter-spacing: var(--letter-spacing-sm);
-    }
-
-    .navLinks {
-        gap: var(--padding-lg);
-        padding: 0 var(--padding-md);
-    }
-
-    .navLinks li a,
-    .closeButton {
-        padding: var(--padding-xs) var(--padding-sm);
-    }
+.user-menu-item.logout {
+    color: var(--color-error);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-md);
 }
 
-/* --- Burger Menu Logic for Mobile Devices --- */
-/* This block ensures that on very small screens (max-width: 575.98px):
-   - The burger icon is displayed.
-   - The nav links (with class .navLinks) are hidden by default.
-   - When toggled (i.e. when the .open class is added), the nav links display as a vertical menu.
-*/
+.user-menu-item.logout:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Login Button */
+.login-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-md);
+    transition: all var(--interaction-normal);
+}
+
+.login-button:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.login-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ===========================
+   MOBILE: Burger Menu + Slide-out
+   =========================== */
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: background-color var(--interaction-normal);
+}
+
+.burger-menu:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+.burger-menu:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.burger-menu img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--color-bg);
+    box-shadow: var(--shadow-xl);
+    z-index: 1001;
+    transition: left var(--interaction-normal);
+    overflow-y: auto;
+    padding: var(--spacing-xl);
+}
+
+.mobile-menu.open {
+    left: 0;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: background-color var(--interaction-normal);
+}
+
+.mobile-menu-close:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+.mobile-menu-close img {
+    width: 24px;
+    height: 24px;
+}
+
+.mobile-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-3xl) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.mobile-menu-links li {
+    margin: 0;
+}
+
+.mobile-menu-links li a,
+.mobile-logout-btn,
+.mobile-login-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: all var(--interaction-normal);
+}
+
+.mobile-menu-links li a:hover,
+.mobile-logout-btn:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+    color: var(--color-primary);
+}
+
+.mobile-menu-links li a.active {
+    background-color: rgba(251, 203, 156, 0.15);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.mobile-logout-btn {
+    color: var(--color-error);
+    margin-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-lg);
+}
+
+.mobile-logout-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.mobile-login-link {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    font-weight: var(--font-weight-semibold);
+}
+
+.mobile-login-link:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+/* Tablet and below: Show burger menu, hide desktop nav */
 @media (max-width: 991.98px) {
+    .nav-container {
+        grid-template-columns: 1fr auto;
+        gap: var(--spacing-md);
+    }
 
-    .burger,
-    .closeButton,
-    .churchIcon {
+    .nav-center {
+        display: none;
+    }
+
+    .nav-right {
+        display: none;
+    }
+
+    .burger-menu {
         display: block;
     }
 
-    .churchIconName {
+    .church-name {
         display: none;
     }
 
-    .navLinks {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background-color: var(--color-bg);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: var(--padding-md);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+    .church-icon-mobile {
+        display: block;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 575.98px) {
+    .header {
+        padding: var(--spacing-sm) 0;
     }
 
-    .navLinks.open {
-        display: flex;
+    .nav-container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .church-icon-mobile {
+        width: 28px;
+        height: 28px;
+    }
+
+    .mobile-menu {
+        width: 90%;
+        max-width: 100%;
+        padding: var(--spacing-lg);
+    }
+
+    .mobile-menu-links li a,
+    .mobile-logout-btn {
+        font-size: 15px;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+/* Large desktop: Increase spacing */
+@media (min-width: 1400px) {
+    .nav-main-links {
+        gap: var(--spacing-lg);
+    }
+
+    .nav-main-links li a {
+        font-size: 16px;
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+
+    .church-name {
+        font-size: 20px;
+    }
+}
+
+/* Focus ring improvements for accessibility */
+*:focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
