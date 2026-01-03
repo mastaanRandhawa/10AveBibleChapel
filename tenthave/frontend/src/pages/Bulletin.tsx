@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { format } from "date-fns";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import Calendar, { CalendarEvent } from "../components/Calendar";
@@ -233,11 +234,13 @@ const Bulletin: React.FC = () => {
         // Fetch calendar events
         const calendarData = await calendarAPI.getAll({ status: "PUBLISHED", isPublic: "true" });
         // Transform API data to match CalendarEvent interface
+        // FIX: Use date-fns format() to convert timestamps to date strings in LOCAL time
+        // This prevents timezone offset issues where dates shift by one day
         const transformedEvents = calendarData.map((event) => ({
           id: event.id,
           title: event.title,
           description: event.description || "",
-          date: new Date(event.startDate).toISOString().split("T")[0],
+          date: format(new Date(event.startDate), "yyyy-MM-dd"),
           time: new Date(event.startDate).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }),
           location: event.location || "",
           category: event.category || "general",

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { parse, format } from "date-fns";
 import { CalendarEvent } from "./Calendar";
 import Button from "./Button";
 import {
@@ -133,12 +134,10 @@ const EventModal: React.FC<EventModalProps> = ({
 
   if (!isOpen) return null;
 
+  // FIX: Parse date-only strings (YYYY-MM-DD) as LOCAL dates using date-fns
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const date = parse(dateString, "yyyy-MM-dd", new Date());
+    return format(date, "MMMM d, yyyy");
   };
 
   return (

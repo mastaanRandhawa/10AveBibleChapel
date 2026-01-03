@@ -1,4 +1,5 @@
 import React from "react";
+import { parse, format } from "date-fns";
 import { CalendarEvent } from "./Calendar";
 import { EVENT_CATEGORIES } from "../constants";
 import "./EventDetailsModal.css";
@@ -24,12 +25,11 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
+  // FIX: Parse date-only strings (YYYY-MM-DD) as LOCAL dates using date-fns
+  // new Date("2026-01-05") interprets as UTC, causing timezone offset issues
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const date = parse(dateString, "yyyy-MM-dd", new Date());
+    return format(date, "MMMM d, yyyy");
   };
 
   const formatTime = (timeString: string) => {

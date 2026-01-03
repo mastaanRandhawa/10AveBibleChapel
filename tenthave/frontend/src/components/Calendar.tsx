@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { format, parse } from "date-fns";
 import "./Calendar.css";
 
 // Event interface
@@ -35,8 +36,10 @@ const Calendar: React.FC<CalendarProps> = ({
   onDeleteEvent,
   isAdmin = false,
 }) => {
+  // FIX: Use date-fns format() to get today's date in LOCAL time, not UTC
+  // This prevents timezone offset issues where "today" becomes "yesterday"
   const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
+    format(new Date(), "yyyy-MM-dd")
   );
   const calendarRef = useRef<FullCalendar>(null);
 
@@ -119,8 +122,11 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   // Format date for selected panel
+  // FIX: Parse date-only strings (YYYY-MM-DD) as LOCAL dates using date-fns
+  // new Date("2026-01-05") interprets as UTC midnight, which becomes previous day in timezones behind UTC
+  // parse() treats the string as a local date, preventing timezone shift
   const formatSelectedDate = (dateStr: string) => {
-    const date = new Date(dateStr);
+    const date = parse(dateStr, "yyyy-MM-dd", new Date());
     const dayNames = [
       "Sunday",
       "Monday",
