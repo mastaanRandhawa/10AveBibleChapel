@@ -100,9 +100,10 @@ export interface Announcement {
   priority?: string;
   status: string;
   isPublic: boolean;
+  publishedAt?: string;
+  pinned: boolean;
   startDate?: string;
   endDate?: string;
-  image?: string;
   link?: string;
   createdAt: string;
   updatedAt: string;

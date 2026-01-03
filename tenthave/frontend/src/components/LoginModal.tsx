@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LoginModal.css";
 import { useAuth } from "../context/AuthContext";
 import { LoginModalProps, User, LoginCredentials } from "../types";
+import PasswordInput from "./PasswordInput";
 
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
@@ -174,38 +175,28 @@ const LoginModal: React.FC<LoginModalProps> = ({
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password" className="form-label">
-              PASSWORD
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="form-input"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
+          <PasswordInput
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Enter your password"
+            label="PASSWORD"
+            required
+            autoComplete={isLogin ? "current-password" : "new-password"}
+          />
 
           {!isLogin && (
-            <div className="form-group">
-              <label htmlFor="confirmPassword" className="form-label">
-                CONFIRM PASSWORD
-              </label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                className="form-input"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="Confirm your password"
-                required
-              />
-            </div>
+            <PasswordInput
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm your password"
+              label="CONFIRM PASSWORD"
+              required
+              autoComplete="new-password"
+            />
           )}
 
           <button type="submit" className="login-submit-btn" disabled={loading}>

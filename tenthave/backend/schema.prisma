@@ -111,30 +111,33 @@ model CalendarEvent {
 // ============================================================================
 
 model Announcement {
-  id          String        @id @default(cuid())
-  title       String
-  content     String        @db.Text // HTML or markdown content
+  id            String        @id @default(cuid())
+  title         String
+  content       String        @db.Text // HTML or markdown content
   
   // Announcement details
-  category    String?       // "general", "ministry", "event", "prayer", etc.
-  priority    String?       // "high", "normal", "low"
+  category      String?       // "general", "ministry", "event", "prayer", etc.
+  priority      String?       // "high", "normal", "low"
   
   // Visibility and scheduling
-  status      ContentStatus @default(PUBLISHED)
-  isPublic    Boolean       @default(true)
-  startDate   DateTime?     // When to start showing
-  endDate     DateTime?     // When to stop showing
+  status        ContentStatus @default(DRAFT)
+  isPublic      Boolean       @default(true)
+  publishedAt   DateTime?     // When it was published
+  pinned        Boolean       @default(false) // Pinned to top
+  startDate     DateTime?     // When to start showing
+  endDate       DateTime?     // When to stop showing
   
-  // Optional attachments
-  image       String?       // Announcement image path
-  link        String?       // Related link
+  // Optional link
+  link          String?       // Related link
   
   // Timestamps
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   
   @@index([status])
   @@index([isPublic])
+  @@index([pinned])
+  @@index([publishedAt])
   @@index([startDate])
   @@index([endDate])
   @@index([createdAt])

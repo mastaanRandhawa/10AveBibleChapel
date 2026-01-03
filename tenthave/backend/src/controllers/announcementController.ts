@@ -92,6 +92,7 @@ export const getAnnouncements = async (req: Request, res: Response) => {
     const announcements = await prisma.announcement.findMany({
       where,
       orderBy: [
+        { pinned: 'desc' },
         { priority: 'desc' },
         { createdAt: 'desc' },
       ],
@@ -136,9 +137,10 @@ export const createAnnouncement = async (req: Request, res: Response) => {
       priority,
       status,
       isPublic,
+      pinned,
+      publishedAt,
       startDate,
       endDate,
-      image,
       link,
     } = req.body;
 
@@ -153,11 +155,12 @@ export const createAnnouncement = async (req: Request, res: Response) => {
         content,
         category,
         priority,
-        status: status || ContentStatus.PUBLISHED,
+        status: status || ContentStatus.DRAFT,
         isPublic: isPublic !== undefined ? isPublic : true,
+        pinned: pinned || false,
+        publishedAt: publishedAt ? new Date(publishedAt) : null,
         startDate: startDate ? new Date(startDate) : null,
         endDate: endDate ? new Date(endDate) : null,
-        image,
         link,
       },
     });
@@ -180,9 +183,10 @@ export const updateAnnouncement = async (req: Request, res: Response) => {
       priority,
       status,
       isPublic,
+      pinned,
+      publishedAt,
       startDate,
       endDate,
-      image,
       link,
     } = req.body;
 
@@ -203,9 +207,10 @@ export const updateAnnouncement = async (req: Request, res: Response) => {
     if (priority !== undefined) updateData.priority = priority;
     if (status !== undefined) updateData.status = status;
     if (isPublic !== undefined) updateData.isPublic = isPublic;
+    if (pinned !== undefined) updateData.pinned = pinned;
+    if (publishedAt !== undefined) updateData.publishedAt = publishedAt ? new Date(publishedAt) : null;
     if (startDate !== undefined) updateData.startDate = startDate ? new Date(startDate) : null;
     if (endDate !== undefined) updateData.endDate = endDate ? new Date(endDate) : null;
-    if (image !== undefined) updateData.image = image;
     if (link !== undefined) updateData.link = link;
 
     const updatedAnnouncement = await prisma.announcement.update({

@@ -482,7 +482,10 @@ const AnnouncementsTab: React.FC = () => {
               <tbody>
                 {filteredAnnouncements.map((item) => (
                   <tr key={item.id}>
-                    <td className="table-cell-title">{item.title}</td>
+                    <td className="table-cell-title">
+                      {item.pinned && <span style={{ marginRight: "0.5rem" }}>📌</span>}
+                      {item.title}
+                    </td>
                     <td>{item.category || "—"}</td>
                     <td>
                       <span
@@ -524,7 +527,10 @@ const AnnouncementsTab: React.FC = () => {
           <div className="items-list">
             {filteredAnnouncements.map((item) => (
               <div key={item.id} className="item-card">
-                <h3>{item.title}</h3>
+                <h3>
+                  {item.pinned && <span style={{ marginRight: "0.5rem" }}>📌</span>}
+                  {item.title}
+                </h3>
                 <p>{item.content}</p>
                 <div className="item-meta">
                   <span
@@ -1329,8 +1335,9 @@ const AnnouncementForm: React.FC<{
     content: item?.content || "",
     category: item?.category || "",
     priority: item?.priority || "normal",
-    status: item?.status || "PUBLISHED",
+    status: item?.status || "DRAFT",
     isPublic: item?.isPublic ?? true,
+    pinned: item?.pinned ?? false,
   });
   const [saving, setSaving] = useState(false);
 
@@ -1338,10 +1345,17 @@ const AnnouncementForm: React.FC<{
     e.preventDefault();
     setSaving(true);
     try {
+      const dataToSend = {
+        ...formData,
+        publishedAt:
+          formData.status === "PUBLISHED" && !item?.publishedAt
+            ? new Date().toISOString()
+            : item?.publishedAt,
+      };
       if (item) {
-        await announcementsAPI.update(item.id, formData);
+        await announcementsAPI.update(item.id, dataToSend);
       } else {
-        await announcementsAPI.create(formData);
+        await announcementsAPI.create(dataToSend);
       }
       onSave();
     } catch (err: any) {
@@ -1379,6 +1393,7 @@ const AnnouncementForm: React.FC<{
             setFormData({ ...formData, content: e.target.value })
           }
           required
+          rows={6}
         />
       </div>
 
@@ -1402,10 +1417,23 @@ const AnnouncementForm: React.FC<{
           value={formData.status}
           onChange={(e) => setFormData({ ...formData, status: e.target.value })}
         >
-          <option value="PUBLISHED">Published</option>
           <option value="DRAFT">Draft</option>
+          <option value="PUBLISHED">Published</option>
           <option value="ARCHIVED">Archived</option>
         </select>
+      </div>
+
+      <div className="form-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.pinned}
+            onChange={(e) =>
+              setFormData({ ...formData, pinned: e.target.checked })
+            }
+          />
+          {" "}Pin to top of announcements
+        </label>
       </div>
 
       <div className="form-group">
