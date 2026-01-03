@@ -30,6 +30,7 @@ async function main() {
       name: "Admin User",
       role: UserRole.ADMIN,
       isActive: true,
+      isApproved: true, // Admins are auto-approved
     },
   });
 
@@ -40,6 +41,7 @@ async function main() {
       name: "John Smith",
       role: UserRole.MEMBER,
       isActive: true,
+      isApproved: true, // Approved member - can view prayer requests
     },
   });
 
@@ -50,10 +52,22 @@ async function main() {
       name: "Mary Johnson",
       role: UserRole.MEMBER,
       isActive: true,
+      isApproved: false, // Unapproved member - pending admin approval
     },
   });
 
-  console.log("✅ Created users:", [admin.email, member1.email, member2.email]);
+  const guest = await prisma.user.create({
+    data: {
+      email: "guest@example.com",
+      passwordHash: "guest123", // Plain text password
+      name: "Guest User",
+      role: UserRole.GUEST,
+      isActive: true,
+      isApproved: false, // Guest user - not approved
+    },
+  });
+
+  console.log("✅ Created users:", [admin.email, member1.email, member2.email, guest.email]);
 
   // Create Announcements
   console.log("📢 Creating announcements...");
@@ -1023,15 +1037,16 @@ async function main() {
 
   console.log("\n🎉 Database seeding completed successfully!");
   console.log("\n📋 Summary:");
-  console.log(`   - Users: 3 (1 admin, 2 members)`);
+  console.log(`   - Users: 4 (1 admin, 2 members, 1 guest)`);
   console.log(`   - Announcements: ${announcements.length}`);
   console.log(`   - Calendar Events: ${events.length}`);
   console.log(`   - Sermons: ${sermons.length}`);
   console.log(`   - Prayer Requests: ${prayerRequests.length}`);
   console.log("\n🔐 Test Credentials:");
-  console.log("   Admin: admin@tenthave.com / admin123");
-  console.log("   Member: john@example.com / member123");
-  console.log("   Member: mary@example.com / member123");
+  console.log("   Admin (approved): admin@tenthave.com / admin123");
+  console.log("   Member (approved): john@example.com / member123");
+  console.log("   Member (pending): mary@example.com / member123");
+  console.log("   Guest (pending): guest@example.com / guest123");
 }
 
 main()

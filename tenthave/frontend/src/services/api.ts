@@ -339,6 +339,7 @@ export interface User {
   name: string;
   role: string;
   isActive: boolean;
+  isApproved: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -362,6 +363,14 @@ export const usersAPI = {
       method: "PUT",
       headers: getHeaders(true),
       body: JSON.stringify(data),
+    });
+  },
+
+  async updateApproval(id: string, isApproved: boolean): Promise<User> {
+    return fetchAPI<User>(`/users/${id}/approval`, {
+      method: "PATCH",
+      headers: getHeaders(true),
+      body: JSON.stringify({ isApproved }),
     });
   },
 

@@ -4,6 +4,7 @@ import {
   getUser,
   updateUser,
   deleteUser,
+  updateUserApproval,
 } from "../controllers/userController";
 import { authenticateToken, requireAdmin } from "../middleware/auth";
 
@@ -20,6 +21,9 @@ router.get("/:id", getUser);
 
 // PUT /api/users/:id - Update user
 router.put("/:id", updateUser);
+
+// PATCH /api/users/:id/approval - Update user approval status
+router.patch("/:id/approval", updateUserApproval);
 
 // DELETE /api/users/:id - Delete user
 router.delete("/:id", deleteUser);

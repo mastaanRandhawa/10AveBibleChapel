@@ -100,6 +100,13 @@ const Header: React.FC = () => {
               {userMenuOpen && (
                 <div className="user-menu-dropdown">
                   <Link 
+                    to="/profile" 
+                    className="user-menu-item"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    MY PROFILE
+                  </Link>
+                  <Link 
                     to="/members" 
                     className="user-menu-item"
                     onClick={() => setUserMenuOpen(false)}
@@ -158,6 +165,15 @@ const Header: React.FC = () => {
             ))}
             {isAuthenticated ? (
               <>
+                <li>
+                  <Link 
+                    to="/profile" 
+                    onClick={toggleMenu}
+                    className={isActiveRoute("/profile") ? "active" : ""}
+                  >
+                    MY PROFILE
+                  </Link>
+                </li>
                 <li>
                   <Link 
                     to="/members" 

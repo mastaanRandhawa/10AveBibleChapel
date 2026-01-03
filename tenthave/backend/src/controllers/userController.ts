@@ -28,6 +28,7 @@ export const getUsers = async (req: AuthRequest, res: Response) => {
         name: true,
         role: true,
         isActive: true,
+        isApproved: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -58,6 +59,7 @@ export const getUser = async (req: AuthRequest, res: Response) => {
         name: true,
         role: true,
         isActive: true,
+        isApproved: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -78,7 +80,7 @@ export const getUser = async (req: AuthRequest, res: Response) => {
 export const updateUser = async (req: AuthRequest, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, role, isActive } = req.body;
+    const { name, role, isActive, isApproved } = req.body;
 
     // Check if user exists
     const existingUser = await prisma.user.findUnique({
@@ -94,6 +96,7 @@ export const updateUser = async (req: AuthRequest, res: Response) => {
     if (name !== undefined) updateData.name = name;
     if (role !== undefined) updateData.role = role;
     if (isActive !== undefined) updateData.isActive = isActive;
+    if (isApproved !== undefined) updateData.isApproved = isApproved;
 
     const updatedUser = await prisma.user.update({
       where: { id },
@@ -104,6 +107,7 @@ export const updateUser = async (req: AuthRequest, res: Response) => {
         name: true,
         role: true,
         isActive: true,
+        isApproved: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -142,6 +146,47 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
   } catch (error) {
     console.error("Error deleting user:", error);
     res.status(500).json({ error: "Failed to delete user" });
+  }
+};
+
+// PATCH /api/users/:id/approval - Update user approval status (Admin only)
+export const updateUserApproval = async (req: AuthRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { isApproved } = req.body;
+
+    if (typeof isApproved !== "boolean") {
+      return res.status(400).json({ error: "isApproved must be a boolean" });
+    }
+
+    // Check if user exists
+    const existingUser = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: { isApproved },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        isActive: true,
+        isApproved: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error("Error updating user approval:", error);
+    res.status(500).json({ error: "Failed to update user approval" });
   }
 };
 

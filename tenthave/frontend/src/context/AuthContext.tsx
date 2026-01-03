@@ -13,6 +13,7 @@ export interface User {
   email: string;
   name: string;
   role: string;
+  isApproved: boolean;
 }
 
 interface AuthContextType {
@@ -22,10 +23,12 @@ interface AuthContextType {
   isLoading: boolean;
   isAdmin: boolean;
   isMember: boolean;
+  isApproved: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
+  updateProfile: (data: { name?: string; email?: string }) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -75,7 +78,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response: AuthResponse = await authAPI.login({ email, password });
       localStorage.setItem("token", response.token);
       setToken(response.token);
-      setUser(response.user);
+      setUser(response.user as User);
       toast.showSuccess(`Welcome back, ${response.user.name}`);
     } catch (error) {
       console.error("Login failed:", error);
@@ -96,7 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
       localStorage.setItem("token", response.token);
       setToken(response.token);
-      setUser(response.user);
+      setUser(response.user as User);
       toast.showSuccess(
         `Account created successfully. Welcome, ${response.user.name}`
       );
@@ -129,9 +132,39 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const updateProfile = async (data: { name?: string; email?: string }): Promise<void> => {
+    if (!token) {
+      throw new Error("Not authenticated");
+    }
+    
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/auth/me`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to update profile");
+      }
+
+      const updatedUser = await response.json();
+      setUser(updatedUser as User);
+      toast.showSuccess("Profile updated successfully");
+    } catch (error) {
+      console.error("Update profile failed:", error);
+      throw error;
+    }
+  };
+
   const isAuthenticated = !!user && !!token;
   const isAdmin = user?.role === "ADMIN";
   const isMember = user?.role === "MEMBER" || user?.role === "ADMIN";
+  const isApproved = user?.isApproved || isAdmin || false;
 
   const value: AuthContextType = {
     user,
@@ -140,10 +173,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isLoading,
     isAdmin,
     isMember,
+    isApproved,
     login,
     register,
     logout,
     refreshUser,
+    updateProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -173,15 +173,15 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
 const PrayerRequestsList: React.FC<{
   onLoginClick: () => void;
 }> = ({ onLoginClick }) => {
-  const { isAuthenticated, isMember, isLoading: authLoading } = useAuth();
+  const { isAuthenticated, isApproved, isAdmin, isLoading: authLoading } = useAuth();
   const [prayerRequests, setPrayerRequests] = useState<PrayerRequest[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Only fetch if user is authorized (member or admin)
+  // Only fetch if user is authorized (approved or admin)
   useEffect(() => {
     const fetchPrayerRequests = async () => {
-      if (!isAuthenticated || !isMember) {
+      if (!isAuthenticated || (!isApproved && !isAdmin)) {
         return;
       }
 
@@ -202,7 +202,7 @@ const PrayerRequestsList: React.FC<{
     };
 
     fetchPrayerRequests();
-  }, [isAuthenticated, isMember]);
+  }, [isAuthenticated, isApproved, isAdmin]);
 
   const handlePrint = () => {
     window.print();
@@ -254,8 +254,8 @@ const PrayerRequestsList: React.FC<{
     );
   }
 
-  // Show verification required message if logged in but not a member
-  if (!isMember) {
+  // Show approval required message if logged in but not approved
+  if (!isApproved && !isAdmin) {
     return (
       <div className="prayer-requests-section">
         <div className="section-header">
@@ -265,11 +265,11 @@ const PrayerRequestsList: React.FC<{
         <div className="prayer-login-prompt">
           <div className="prayer-login-card">
             <div className="prayer-login-icon">⏳</div>
-            <h3>Verification Required</h3>
+            <h3>Approval Pending</h3>
             <p>
-              Your account must be verified by church leadership before you can
-              view prayer requests. Please contact the church office if you have
-              questions.
+              Your account is pending admin approval. Once approved by church leadership, 
+              you will be able to view and pray for community prayer requests. 
+              Please contact the church office if you have questions.
             </p>
           </div>
         </div>
@@ -287,7 +287,7 @@ const PrayerRequestsList: React.FC<{
             <p>Join us in praying for these needs</p>
           </div>
           <button className="print-btn no-print" onClick={handlePrint}>
-            🖨️ Print
+            PRINT
           </button>
         </div>
       </div>

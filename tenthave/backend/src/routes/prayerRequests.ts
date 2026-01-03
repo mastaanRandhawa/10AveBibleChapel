@@ -9,16 +9,16 @@ import {
 import {
   authenticateToken,
   requireAdmin,
-  requireMemberOrAdmin,
+  requireApprovedUser,
 } from "../middleware/auth";
 
 const router: express.Router = express.Router();
 
-// GET /api/prayer-requests - Get all prayer requests - MEMBERS & ADMINS ONLY
-router.get("/", authenticateToken, requireMemberOrAdmin, getPrayerRequests);
+// GET /api/prayer-requests - Get all prayer requests - APPROVED USERS & ADMINS ONLY
+router.get("/", authenticateToken, requireApprovedUser, getPrayerRequests);
 
-// GET /api/prayer-requests/:id - Get a specific prayer request - MEMBERS & ADMINS ONLY
-router.get("/:id", authenticateToken, requireMemberOrAdmin, getPrayerRequest);
+// GET /api/prayer-requests/:id - Get a specific prayer request - APPROVED USERS & ADMINS ONLY
+router.get("/:id", authenticateToken, requireApprovedUser, getPrayerRequest);
 
 // POST /api/prayer-requests - Create a new prayer request - PUBLIC (anyone can submit)
 router.post("/", createPrayerRequest);

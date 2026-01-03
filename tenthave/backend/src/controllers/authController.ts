@@ -4,10 +4,10 @@ import { prisma } from "../index";
 import { AuthRequest } from "../middleware/auth";
 
 // Generate JWT token
-const generateToken = (userId: string, email: string, role: string): string => {
+const generateToken = (userId: string, email: string, role: string, isApproved: boolean): string => {
   const secret = process.env.JWT_SECRET || "your-secret-key";
   return jwt.sign(
-    { id: userId, email, role },
+    { id: userId, email, role, isApproved },
     secret,
     { expiresIn: "7d" } // Token expires in 7 days
   );
@@ -47,7 +47,7 @@ export const register = async (req: Request, res: Response) => {
     });
 
     // Generate token
-    const token = generateToken(user.id, user.email, user.role);
+    const token = generateToken(user.id, user.email, user.role, user.isApproved);
 
     res.status(201).json({
       message: "User registered successfully",
@@ -57,6 +57,7 @@ export const register = async (req: Request, res: Response) => {
         email: user.email,
         name: user.name,
         role: user.role,
+        isApproved: user.isApproved,
       },
     });
   } catch (error) {
@@ -95,7 +96,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     // Generate token
-    const token = generateToken(user.id, user.email, user.role);
+    const token = generateToken(user.id, user.email, user.role, user.isApproved);
 
     res.json({
       message: "Login successful",
@@ -105,6 +106,7 @@ export const login = async (req: Request, res: Response) => {
         email: user.email,
         name: user.name,
         role: user.role,
+        isApproved: user.isApproved,
       },
     });
   } catch (error) {
@@ -129,6 +131,7 @@ export const getCurrentUser = async (req: AuthRequest, res: Response) => {
         email: true,
         name: true,
         role: true,
+        isApproved: true,
         createdAt: true,
       },
     });
@@ -141,5 +144,66 @@ export const getCurrentUser = async (req: AuthRequest, res: Response) => {
   } catch (error) {
     console.error("Get current user error:", error);
     res.status(500).json({ error: "Failed to get user info" });
+  }
+};
+
+// PATCH /api/auth/me - Update current user profile
+export const updateCurrentUser = async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+
+    const { name, email } = req.body;
+
+    // Build update data - only allow updating safe fields
+    const updateData: any = {};
+    if (name !== undefined) {
+      if (name.trim().length < 2) {
+        return res.status(400).json({ error: "Name must be at least 2 characters" });
+      }
+      updateData.name = name.trim();
+    }
+    if (email !== undefined) {
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ error: "Invalid email format" });
+      }
+      
+      // Check if email is already taken by another user
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
+      if (existingUser && existingUser.id !== userId) {
+        return res.status(400).json({ error: "Email is already taken" });
+      }
+      
+      updateData.email = email.toLowerCase().trim();
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ error: "No valid fields to update" });
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updateData,
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        isApproved: true,
+        createdAt: true,
+      },
+    });
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error("Update current user error:", error);
+    res.status(500).json({ error: "Failed to update profile" });
   }
 };

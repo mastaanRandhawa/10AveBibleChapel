@@ -7,6 +7,7 @@ export interface AuthRequest extends Request {
     id: string;
     email: string;
     role: string;
+    isApproved?: boolean;
   };
 }
 
@@ -35,6 +36,7 @@ export const authenticateToken = (
         id: decoded.id,
         email: decoded.email,
         role: decoded.role,
+        isApproved: decoded.isApproved,
       };
 
       next();
@@ -78,6 +80,32 @@ export const requireMemberOrAdmin = (
   next();
 };
 
+// Check if user is approved (or admin who bypasses approval)
+export const requireApprovedUser = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  if (!req.user) {
+    return res.status(401).json({ error: "Authentication required" });
+  }
+
+  // Admins bypass approval requirement
+  if (req.user.role === "ADMIN") {
+    return next();
+  }
+
+  // Check if user is approved
+  if (!req.user.isApproved) {
+    return res.status(403).json({ 
+      error: "Your account is pending admin approval",
+      code: "APPROVAL_REQUIRED" 
+    });
+  }
+
+  next();
+};
+
 // Optional authentication - doesn't fail if no token
 export const optionalAuth = (
   req: AuthRequest,
@@ -100,6 +128,7 @@ export const optionalAuth = (
           id: decoded.id,
           email: decoded.email,
           role: decoded.role,
+          isApproved: decoded.isApproved,
         };
       }
       next();

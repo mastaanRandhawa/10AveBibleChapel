@@ -1116,11 +1116,13 @@ const SermonsTab: React.FC = () => {
 
 // Users Tab
 const UsersTab: React.FC = () => {
+  const toast = useToast();
   const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
+  const [approvalFilter, setApprovalFilter] = useState("all");
 
   useEffect(() => {
     loadUsers();
@@ -1128,7 +1130,7 @@ const UsersTab: React.FC = () => {
 
   useEffect(() => {
     filterUsers();
-  }, [users, searchQuery, roleFilter]);
+  }, [users, searchQuery, roleFilter, approvalFilter]);
 
   const loadUsers = async () => {
     try {
@@ -1155,6 +1157,12 @@ const UsersTab: React.FC = () => {
       filtered = filtered.filter((u) => u.role === roleFilter);
     }
 
+    if (approvalFilter === "approved") {
+      filtered = filtered.filter((u) => u.isApproved);
+    } else if (approvalFilter === "pending") {
+      filtered = filtered.filter((u) => !u.isApproved);
+    }
+
     setFilteredUsers(filtered);
   };
 
@@ -1167,9 +1175,23 @@ const UsersTab: React.FC = () => {
       return;
     try {
       await usersAPI.update(id, { role });
+      toast.showSuccess("User role updated successfully");
       loadUsers();
     } catch (err: any) {
-      alert("Failed to update user: " + err.message);
+      toast.showError("Failed to update user: " + err.message);
+    }
+  };
+
+  const handleToggleApproval = async (id: string, currentStatus: boolean) => {
+    const action = currentStatus ? "revoke approval for" : "approve";
+    if (!window.confirm(`Are you sure you want to ${action} this user?`))
+      return;
+    try {
+      await usersAPI.updateApproval(id, !currentStatus);
+      toast.showSuccess(`User ${currentStatus ? "approval revoked" : "approved"} successfully`);
+      loadUsers();
+    } catch (err: any) {
+      toast.showError("Failed to update approval: " + err.message);
     }
   };
 
@@ -1219,6 +1241,15 @@ const UsersTab: React.FC = () => {
             <option value="MEMBER">Members</option>
             <option value="GUEST">Guests</option>
           </select>
+          <select
+            className="admin-filter-select"
+            value={approvalFilter}
+            onChange={(e) => setApprovalFilter(e.target.value)}
+          >
+            <option value="all">All Approvals</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending Approval</option>
+          </select>
         </div>
       )}
 
@@ -1244,6 +1275,7 @@ const UsersTab: React.FC = () => {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Role</th>
+                  <th>Approval</th>
                   <th>Status</th>
                   <th>Joined</th>
                   <th>Actions</th>
@@ -1257,6 +1289,15 @@ const UsersTab: React.FC = () => {
                     <td>
                       <span className={`role-badge role-${user.role.toLowerCase()}`}>
                         {user.role}
+                      </span>
+                    </td>
+                    <td>
+                      <span
+                        className={`status-badge ${
+                          user.isApproved ? "status-approved" : "status-pending"
+                        }`}
+                      >
+                        {user.isApproved ? "Approved" : "Pending"}
                       </span>
                     </td>
                     <td>
@@ -1279,12 +1320,19 @@ const UsersTab: React.FC = () => {
                           onChange={(e) =>
                             handleUpdateRole(user.id, e.target.value)
                           }
-                          style={{ minWidth: "120px" }}
+                          style={{ minWidth: "100px", marginRight: "0.5rem" }}
                         >
                           <option value="GUEST">Guest</option>
                           <option value="MEMBER">Member</option>
                           <option value="ADMIN">Admin</option>
                         </select>
+                        <button
+                          className={user.isApproved ? "btn-secondary" : "btn-primary"}
+                          onClick={() => handleToggleApproval(user.id, user.isApproved)}
+                          style={{ fontSize: "0.85rem", padding: "0.4rem 0.8rem" }}
+                        >
+                          {user.isApproved ? "Revoke" : "Approve"}
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -1305,6 +1353,13 @@ const UsersTab: React.FC = () => {
                   </span>
                   <span
                     className={`status-badge ${
+                      user.isApproved ? "status-approved" : "status-pending"
+                    }`}
+                  >
+                    {user.isApproved ? "Approved" : "Pending"}
+                  </span>
+                  <span
+                    className={`status-badge ${
                       user.isActive ? "status-approved" : "status-archived"
                     }`}
                   >
@@ -1317,11 +1372,18 @@ const UsersTab: React.FC = () => {
                     className="admin-filter-select"
                     value={user.role}
                     onChange={(e) => handleUpdateRole(user.id, e.target.value)}
+                    style={{ marginRight: "0.5rem" }}
                   >
                     <option value="GUEST">Guest</option>
                     <option value="MEMBER">Member</option>
                     <option value="ADMIN">Admin</option>
                   </select>
+                  <button
+                    className={user.isApproved ? "btn-secondary" : "btn-primary"}
+                    onClick={() => handleToggleApproval(user.id, user.isApproved)}
+                  >
+                    {user.isApproved ? "Revoke" : "Approve"}
+                  </button>
                 </div>
               </div>
             ))}

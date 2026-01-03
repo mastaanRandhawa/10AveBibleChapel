@@ -18,6 +18,7 @@ const Bulletin = lazy(() => import("./pages/Bulletin"));
 const Prayer = lazy(() => import("./pages/Prayer"));
 const Login = lazy(() => import("./pages/Login"));
 const Members = lazy(() => import("./pages/Members"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 const App: React.FC = () => {
   return (
@@ -42,6 +43,7 @@ const App: React.FC = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/members" element={<Members />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </Suspense>
 
