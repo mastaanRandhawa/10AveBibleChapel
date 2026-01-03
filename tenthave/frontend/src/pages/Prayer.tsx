@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import LoginModal from "../components/LoginModal";
 import Button from "../components/Button";
-import { prayerRequestsAPI } from "../services/api";
+import { prayerRequestsAPI, PrayerRequest } from "../services/api";
+import { useAuth } from "../context/AuthContext";
 import prayingImage from "../assets/praying.jpg";
 import "./Prayer.css";
 
@@ -160,12 +161,218 @@ const PrayerRequestForm: React.FC<{ onLoginClick: () => void }> = ({
   );
 };
 
+// Prayer Requests List Component
+const PrayerRequestsList: React.FC<{
+  onLoginClick: () => void;
+}> = ({ onLoginClick }) => {
+  const { isAuthenticated, isMember, isLoading: authLoading } = useAuth();
+  const [prayerRequests, setPrayerRequests] = useState<PrayerRequest[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Only fetch if user is authorized (member or admin)
+  useEffect(() => {
+    const fetchPrayerRequests = async () => {
+      if (!isAuthenticated || !isMember) {
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        const requests = await prayerRequestsAPI.getAll({
+          status: "APPROVED",
+        });
+        setPrayerRequests(requests);
+      } catch (err: any) {
+        console.error("Failed to fetch prayer requests:", err);
+        setError(err.message || "Failed to load prayer requests");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrayerRequests();
+  }, [isAuthenticated, isMember]);
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Show loading state during auth check
+  if (authLoading) {
+    return (
+      <div className="prayer-requests-section">
+        <div className="section-header">
+          <h2>PRAYER REQUESTS</h2>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login prompt if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="prayer-requests-section">
+        <div className="section-header">
+          <h2>PRAYER REQUESTS</h2>
+          <p>View and pray for our community's prayer needs</p>
+        </div>
+        <div className="prayer-login-prompt">
+          <div className="prayer-login-card">
+            <div className="prayer-login-icon">🔒</div>
+            <h3>Login Required</h3>
+            <p>
+              Prayer requests are private and only available to our church
+              members. Please log in to view and pray for these requests.
+            </p>
+            <button className="prayer-login-btn" onClick={onLoginClick}>
+              Log In to View Requests
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show verification required message if logged in but not a member
+  if (!isMember) {
+    return (
+      <div className="prayer-requests-section">
+        <div className="section-header">
+          <h2>PRAYER REQUESTS</h2>
+          <p>View and pray for our community's prayer needs</p>
+        </div>
+        <div className="prayer-login-prompt">
+          <div className="prayer-login-card">
+            <div className="prayer-login-icon">⏳</div>
+            <h3>Verification Required</h3>
+            <p>
+              Your account must be verified by church leadership before you can
+              view prayer requests. Please contact the church office if you have
+              questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Authorized user view
+  return (
+    <div className="prayer-requests-section print-area">
+      <div className="section-header">
+        <div className="section-header-content">
+          <div className="section-header-text">
+            <h2>PRAYER REQUESTS</h2>
+            <p>Join us in praying for these needs</p>
+          </div>
+          <button className="print-btn no-print" onClick={handlePrint}>
+            🖨️ Print
+          </button>
+        </div>
+      </div>
+
+      {/* Print-only header */}
+      <div className="print-only print-header">
+        <h1>Prayer Requests</h1>
+        <p className="print-date">
+          Printed on {new Date().toLocaleDateString()}
+        </p>
+      </div>
+
+      {loading && (
+        <div className="prayer-loading">
+          <p>Loading prayer requests...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="prayer-error">
+          <p>{error}</p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      )}
+
+      {!loading && !error && prayerRequests.length === 0 && (
+        <div className="prayer-empty">
+          <p>No prayer requests at this time.</p>
+        </div>
+      )}
+
+      {!loading && !error && prayerRequests.length > 0 && (
+        <div className="prayer-requests-list">
+          {prayerRequests.map((request) => (
+            <div
+              key={request.id}
+              className={`prayer-card ${request.isAnswered ? "answered" : ""}`}
+            >
+              <div className="prayer-header">
+                <div className="prayer-title-section">
+                  <h3 className="prayer-title">{request.title}</h3>
+                  <div className="prayer-badges">
+                    {request.isAnswered && (
+                      <span className="answered-badge">✓ Answered</span>
+                    )}
+                    {request.priority === "URGENT" && (
+                      <span className="priority-badge urgent">Urgent</span>
+                    )}
+                    {request.priority === "HIGH" && (
+                      <span className="priority-badge high">High Priority</span>
+                    )}
+                    {request.isPrivate && (
+                      <span className="privacy-badge">Private</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <p className="prayer-description">{request.description}</p>
+
+              {request.isAnswered && request.answerNotes && (
+                <div className="prayer-answer">
+                  <strong>Answer:</strong> {request.answerNotes}
+                </div>
+              )}
+
+              <div className="prayer-meta">
+                {request.requester && (
+                  <p className="prayer-requester">
+                    Requested by: {request.requester}
+                  </p>
+                )}
+                <p className="prayer-date">
+                  Submitted: {formatDate(request.createdAt)}
+                </p>
+                {request.isAnswered && request.answeredAt && (
+                  <p className="answered-date">
+                    Answered: {formatDate(request.answeredAt)}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Main Prayer Component
 const Prayer: React.FC = () => {
-  // Prayer request state
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  // Prayer request handlers
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
   };
@@ -177,6 +384,8 @@ const Prayer: React.FC = () => {
   const handleLoginSuccess = (userData: any) => {
     console.log("User logged in:", userData);
     setIsLoginModalOpen(false);
+    // Reload to fetch prayer requests
+    window.location.reload();
   };
 
   return (
@@ -197,6 +406,11 @@ const Prayer: React.FC = () => {
             <p>Share your prayer needs with our caring church community</p>
           </div>
           <PrayerRequestForm onLoginClick={handleLoginClick} />
+        </ScrollReveal>
+
+        {/* Prayer Requests List Section */}
+        <ScrollReveal>
+          <PrayerRequestsList onLoginClick={handleLoginClick} />
         </ScrollReveal>
       </div>
 

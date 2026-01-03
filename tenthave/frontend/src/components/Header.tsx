@@ -104,13 +104,13 @@ const Header: React.FC = () => {
                     className="user-menu-item"
                     onClick={() => setUserMenuOpen(false)}
                   >
-                    {user?.role === "ADMIN" ? "Admin Dashboard" : "Members Area"}
+                    {user?.role === "ADMIN" ? "DASHBOARD" : "MEMBERS AREA"}
                   </Link>
                   <button 
                     onClick={handleLogout} 
                     className="user-menu-item logout"
                   >
-                    Logout
+                    LOGOUT
                   </button>
                 </div>
               )}
@@ -164,7 +164,7 @@ const Header: React.FC = () => {
                     onClick={toggleMenu}
                     className={isActiveRoute("/members") ? "active" : ""}
                   >
-                    {user?.role === "ADMIN" ? "Admin Dashboard" : "Members Area"}
+                    {user?.role === "ADMIN" ? "DASHBOARD" : "MEMBERS AREA"}
                   </Link>
                 </li>
                 <li>
