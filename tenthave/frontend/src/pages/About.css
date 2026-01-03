@@ -16,8 +16,8 @@
 
 /* Section Dividers */
 .section-divider {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    height: 1px;
+    background: var(--border-color);
     margin: var(--spacing-2xl) 0;
     border: none;
 }
@@ -39,20 +39,6 @@
     color: var(--color-dark);
     text-align: center;
     margin-bottom: var(--spacing-xl);
-    letter-spacing: var(--letter-spacing-sm);
-    position: relative;
-}
-
-.section-heading::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: var(--color-primary);
-    border-radius: 2px;
 }
 
 .content-grid {
@@ -73,12 +59,11 @@
 
 /* Verse Highlight */
 .verse-highlight {
-    background: linear-gradient(135deg, var(--color-light), var(--color-bg));
-    border-left: 4px solid var(--color-primary);
-    padding: var(--spacing-lg);
-    margin: var(--spacing-lg) 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: var(--color-bg-secondary);
+    border-left: 3px solid var(--color-primary);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    border-radius: var(--radius-lg);
 }
 
 .verse-highlight blockquote {

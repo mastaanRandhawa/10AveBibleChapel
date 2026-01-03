@@ -6,34 +6,16 @@
     max-width: 400px;
     width: 100%;
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     font-family: var(--font-primary);
-    transition: all var(--interaction-normal);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-    transform: scaleX(0);
-    transition: transform var(--interaction-normal);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border-color);
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--color-primary-light);
-}
-
-.card:hover::before {
-    transform: scaleX(1);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
 }
 
 .card img {

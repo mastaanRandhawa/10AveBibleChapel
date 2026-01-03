@@ -15,49 +15,51 @@
     min-width: 40px;
     height: 40px;
     padding: var(--spacing-sm);
-    background: var(--sermon-card-bg);
-    border: 1px solid var(--sermon-card-border);
-    border-radius: 4px;
-    color: var(--sermon-card-text);
-    font-size: var(--font-size-h6);
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--color-dark);
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-regular);
     cursor: pointer;
-    transition: all var(--interaction-normal);
+    transition: all var(--transition-normal);
     text-decoration: none;
 }
 
 .pagination__button:hover:not(.disabled):not(.ellipsis) {
-    background: var(--sermon-card-border);
-    color: var(--sermon-card-text);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
 .pagination__button:focus-visible:not(.disabled):not(.ellipsis) {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
-    background: var(--sermon-card-border);
-    color: var(--sermon-card-text);
+    background: var(--color-primary);
+    color: var(--color-dark);
 }
 
 .pagination__button.active {
-    background: var(--sermon-card-border);
-    color: var(--sermon-card-text);
-    font-weight: var(--font-weight-bold);
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border-color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
 }
 
 .pagination__button.disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background: var(--sermon-card-bg);
-    color: var(--sermon-card-text-muted);
+    background: var(--color-bg);
+    color: var(--color-muted-gray);
 }
 
 .pagination__button.ellipsis {
     cursor: default;
     background: transparent;
     border: none;
-    color: var(--sermon-card-text-muted);
+    color: var(--color-muted-gray);
 }
 
 .pagination__button.ellipsis:hover {
@@ -90,7 +92,7 @@
     .pagination__button {
         min-width: 36px;
         height: 36px;
-        font-size: calc(var(--font-size-h6) - 1px);
+        font-size: var(--font-size-xs);
     }
 
     .pagination__button--prev,
@@ -105,13 +107,13 @@
 
 @media (max-width: 576px) {
     .pagination {
-        gap: 2px;
+        gap: var(--spacing-xs);
     }
 
     .pagination__button {
         min-width: 32px;
         height: 32px;
-        font-size: calc(var(--font-size-h6) - 2px);
+        font-size: var(--font-size-xs);
         padding: var(--spacing-xs);
     }
 
@@ -122,22 +124,5 @@
 
     .pagination__button--page {
         min-width: 32px;
-    }
-}
-
-@media (max-width: 375px) {
-    .pagination__button {
-        min-width: 28px;
-        height: 28px;
-        font-size: calc(var(--font-size-h6) - 3px);
-    }
-
-    .pagination__button--prev,
-    .pagination__button--next {
-        min-width: 28px;
-    }
-
-    .pagination__button--page {
-        min-width: 28px;
     }
 }

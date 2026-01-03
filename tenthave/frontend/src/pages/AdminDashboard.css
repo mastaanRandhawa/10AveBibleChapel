@@ -272,11 +272,11 @@
 .status-badge {
     display: inline-flex;
     align-items: center;
-    padding: 4px 10px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--letter-spacing-wide);
     border-radius: var(--radius-sm);
     line-height: 1;
 }
@@ -319,7 +319,7 @@
 .priority-badge {
     display: inline-flex;
     align-items: center;
-    padding: 4px 10px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
@@ -449,7 +449,9 @@
 }
 
 /* ============================================================================
-   BUTTONS - Professional SaaS Style
+   ADMIN DASHBOARD BUTTONS
+   Note: These are local to the admin dashboard. Global button classes 
+   (.button-primary, .button-ghost, .button-danger) are also available.
    ============================================================================ */
 
 .btn-primary {

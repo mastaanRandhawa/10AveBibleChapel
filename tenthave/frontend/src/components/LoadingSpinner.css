@@ -69,7 +69,7 @@
 .loading-message {
     margin-top: var(--spacing-lg);
     font-family: var(--font-primary);
-    font-size: var(--font-size-h6);
+    font-size: var(--font-size-body);
     color: var(--color-muted-gray);
     text-align: center;
 }
@@ -82,7 +82,7 @@
     }
 
     .loading-message {
-        font-size: 14px;
+        font-size: var(--font-size-small);
     }
 }
 
@@ -93,6 +93,6 @@
     }
 
     .loading-message {
-        font-size: 12px;
+        font-size: var(--font-size-xs);
     }
 }

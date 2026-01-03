@@ -83,8 +83,8 @@
 /* Responsive */
 @media (max-width: 767.98px) {
     .badge {
-        font-size: 10px;
-        padding: 2px 6px;
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
     }
 }
 

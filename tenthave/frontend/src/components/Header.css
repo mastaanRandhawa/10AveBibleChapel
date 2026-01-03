@@ -73,10 +73,10 @@
 
 .church-name {
     font-family: var(--font-primary);
-    font-size: 18px;
+    font-size: var(--font-size-h6);
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .church-icon-mobile {
@@ -108,11 +108,11 @@
     text-decoration: none;
     color: var(--color-dark);
     font-family: var(--font-primary);
-    font-size: 15px;
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-medium);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
-    transition: all var(--interaction-normal);
+    transition: all var(--transition-normal);
     position: relative;
     display: inline-block;
 }
@@ -120,12 +120,12 @@
 .nav-main-links li a::after {
     content: '';
     position: absolute;
-    bottom: 4px;
+    bottom: var(--spacing-xs);
     left: 50%;
     width: 0;
     height: 2px;
     background-color: var(--color-primary);
-    transition: all var(--interaction-normal);
+    transition: all var(--transition-normal);
     transform: translateX(-50%);
 }
 
@@ -179,10 +179,10 @@
     padding: var(--spacing-sm) var(--spacing-md);
     cursor: pointer;
     font-family: var(--font-primary);
-    font-size: 14px;
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-medium);
     color: var(--color-dark);
-    transition: all var(--interaction-normal);
+    transition: all var(--transition-normal);
 }
 
 .user-menu-trigger:hover {
@@ -203,8 +203,8 @@
 }
 
 .user-menu-arrow {
-    font-size: 10px;
-    transition: transform var(--interaction-fast);
+    font-size: var(--font-size-xs);
+    transition: transform var(--transition-fast);
 }
 
 .user-menu-arrow.open {
@@ -247,11 +247,11 @@
     border: none;
     cursor: pointer;
     font-family: var(--font-primary);
-    font-size: 14px;
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-medium);
     color: var(--color-dark);
     text-decoration: none;
-    transition: all var(--interaction-fast);
+    transition: all var(--transition-fast);
 }
 
 .user-menu-item:hover {
@@ -283,10 +283,10 @@
     background-color: var(--color-primary);
     color: var(--color-dark);
     font-family: var(--font-primary);
-    font-size: 14px;
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-semibold);
     border-radius: var(--radius-md);
-    transition: all var(--interaction-normal);
+    transition: all var(--transition-normal);
 }
 
 .login-button:hover {
@@ -393,11 +393,11 @@
     border: none;
     cursor: pointer;
     font-family: var(--font-primary);
-    font-size: 16px;
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-medium);
     color: var(--color-dark);
     text-decoration: none;
-    transition: all var(--interaction-normal);
+    transition: all var(--transition-normal);
 }
 
 .mobile-menu-links li a:hover,
@@ -490,7 +490,7 @@
 
     .mobile-menu-links li a,
     .mobile-logout-btn {
-        font-size: 15px;
+        font-size: var(--font-size-small);
         padding: var(--spacing-sm) var(--spacing-md);
     }
 }
@@ -502,12 +502,12 @@
     }
 
     .nav-main-links li a {
-        font-size: 16px;
+        font-size: var(--font-size-body);
         padding: var(--spacing-sm) var(--spacing-lg);
     }
 
     .church-name {
-        font-size: 20px;
+        font-size: var(--font-size-h5);
     }
 }
 

@@ -54,6 +54,7 @@
     gap: var(--spacing-lg);
 }
 
+/* Form styles - consistent with FormInput component */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -65,8 +66,6 @@
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-semibold);
     color: var(--color-dark);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wide);
 }
 
 .required {
@@ -248,95 +247,95 @@
 /* Mobile Devices (up to 768px) */
 @media (max-width: 768px) {
     .contact-main-content {
-        padding: 40px 20px;
+        padding: var(--spacing-2xl) var(--spacing-lg);
     }
 
     .contact-content-container {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: var(--spacing-xl);
     }
 
     .contact-form-section,
     .contact-details-section {
-        padding: 30px;
+        padding: var(--spacing-xl);
     }
 
     .contact-form-heading {
-        font-size: 24px;
-        margin-bottom: 25px;
+        font-size: var(--font-size-h4);
+        margin-bottom: var(--spacing-lg);
     }
 
     .contact-form {
-        gap: 18px;
+        gap: var(--spacing-lg);
     }
 
     .form-group input,
     .form-group textarea {
-        padding: 14px;
-        font-size: 16px;
+        padding: var(--spacing-md);
+        font-size: var(--font-size-body);
     }
 
     .submit-btn {
-        padding: 14px 28px;
-        font-size: 16px;
-        margin-top: 8px;
+        padding: var(--spacing-md) var(--spacing-xl);
+        font-size: var(--font-size-body);
+        margin-top: var(--spacing-sm);
     }
 
     .contact-details-section {
-        gap: 25px;
+        gap: var(--spacing-lg);
     }
 
     .contact-details-heading {
-        font-size: 18px;
+        font-size: var(--font-size-h6);
     }
 
     .contact-details-text {
-        font-size: 15px;
-        margin-left: 25px;
+        font-size: var(--font-size-small);
+        margin-left: var(--spacing-xl);
     }
 }
 
 /* Small Mobile Devices (up to 480px) */
 @media (max-width: 480px) {
     .contact-main-content {
-        padding: 30px 15px;
+        padding: var(--spacing-xl) var(--spacing-md);
     }
 
     .contact-form-section,
     .contact-details-section {
-        padding: 25px;
+        padding: var(--spacing-lg);
     }
 
     .contact-form-heading {
-        font-size: 22px;
-        margin-bottom: 20px;
+        font-size: var(--font-size-h5);
+        margin-bottom: var(--spacing-md);
     }
 
     .contact-form {
-        gap: 16px;
+        gap: var(--spacing-md);
     }
 
     .form-group input,
     .form-group textarea {
-        padding: 12px;
-        font-size: 15px;
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-small);
     }
 
     .submit-btn {
-        padding: 12px 24px;
-        font-size: 15px;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: var(--font-size-small);
     }
 
     .contact-details-section {
-        gap: 20px;
+        gap: var(--spacing-md);
     }
 
     .contact-details-heading {
-        font-size: 16px;
+        font-size: var(--font-size-body);
     }
 
     .contact-details-text {
-        font-size: 14px;
-        margin-left: 20px;
+        font-size: var(--font-size-small);
+        margin-left: var(--spacing-lg);
     }
 }
