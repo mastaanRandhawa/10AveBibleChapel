@@ -25,74 +25,21 @@ export interface SpecialCardProps {
 
 export interface SermonCardProps {
   // Required props
-  image: string;
   title: string;
-  description: string;
-
-  // Optional props with better defaults
-  name?: string;
-  link?: string;
-  time?: {
-    day: string;
-    start: string;
-    end: string;
-  };
-  location?: string;
-  speaker?: string;
-  date?: string;
-  category?: string;
-
-  // Styling and behavior
-  className?: string;
-  variant?: "default" | "compact" | "featured";
-  showTime?: boolean;
-  showLocation?: boolean;
-  showSpeaker?: boolean;
-  showDate?: boolean;
-  showImage?: boolean;
-
-  // Button customization
-  buttonText?: string;
-  buttonVariant?: "button-primary" | "button-secondary";
-}
-
-export interface SermonSeriesCardProps {
-  image: string;
-  title: string;
-  episodeCount: number;
-  link?: string;
-  className?: string;
-}
-
-export interface FeaturedSermonCardProps {
-  image: string;
-  title: string;
-  subtitle: string;
-  passage: string;
-  speaker: string;
   date: string;
-  link?: string;
-  className?: string;
-}
-
-export interface IndividualSermonCardProps {
-  image: string;
-  title: string;
-  subtitle: string;
   speaker: string;
-  date: string;
-  link?: string;
+
+  // Optional props
+  series?: string;
+  passage?: string;
+  videoUrl?: string;
+  audioUrl?: string;
   className?: string;
+
+  // Action handler
+  onClick?: () => void;
 }
 
-export interface SermonSeries {
-  id: string;
-  title: string;
-  description: string;
-  featuredSermon: FeaturedSermonCardProps;
-  sermons: IndividualSermonCardProps[];
-  speakers: string[];
-}
 
 export interface ServiceTime {
   day: string;

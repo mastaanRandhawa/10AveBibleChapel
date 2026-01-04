@@ -1,12 +1,11 @@
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import FeaturedSermonCard from "../components/FeaturedSermonCard";
-import IndividualSermonCard from "../components/IndividualSermonCard";
+import SermonCard from "../components/SermonCard";
+import SermonCardSkeleton from "../components/SermonCardSkeleton";
 import SermonFilter from "../components/SermonFilter";
 import Pagination from "../components/Pagination";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { sermonsAPI, Sermon } from "../services/api";
-import sermonCardImg from "../assets/sermonCardImg.svg";
 import "./SermonSeriesDetail.css";
 
 const SermonSeriesDetail: React.FC = () => {
@@ -107,17 +106,19 @@ const SermonSeriesDetail: React.FC = () => {
     }
   };
 
-  // Format date for display
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "2-digit" });
-  };
-
   if (loading) {
     return (
       <div className="sermon-series-detail-page">
-        <div className="container" style={{ padding: "4rem", textAlign: "center" }}>
-          <LoadingSpinner />
+        <div className="container" style={{ padding: "4rem 0" }}>
+          <div className="series-header">
+            <div className="series-label">SERMON SERIES</div>
+            <h1 className="series-title">Loading...</h1>
+          </div>
+          <SermonCardSkeleton />
+          <div className="sermons-grid" style={{ marginTop: "2rem" }}>
+            <SermonCardSkeleton />
+            <SermonCardSkeleton />
+          </div>
         </div>
       </div>
     );
@@ -152,15 +153,17 @@ const SermonSeriesDetail: React.FC = () => {
 
         {/* Featured Sermon */}
         {featuredSermon && (
-          <FeaturedSermonCard
-            image={featuredSermon.thumbnail || sermonCardImg}
-            title={featuredSermon.title}
-            subtitle={featuredSermon.description || ""}
-            passage={featuredSermon.passage || ""}
-            speaker={featuredSermon.speaker}
-            date={formatDate(featuredSermon.date)}
-            link={featuredSermon.videoUrl || featuredSermon.audioUrl || "#"}
-          />
+          <div style={{ marginBottom: "2rem" }}>
+            <SermonCard
+              title={featuredSermon.title}
+              series={featuredSermon.series}
+              speaker={featuredSermon.speaker}
+              date={featuredSermon.date}
+              passage={featuredSermon.passage}
+              videoUrl={featuredSermon.videoUrl}
+              audioUrl={featuredSermon.audioUrl}
+            />
+          </div>
         )}
 
         {/* Filter Section */}
@@ -175,15 +178,16 @@ const SermonSeriesDetail: React.FC = () => {
 
         {/* Sermons Grid */}
         <div className="sermons-grid">
-          {paginatedSermons.map((sermon, index) => (
-            <IndividualSermonCard
+          {paginatedSermons.map((sermon) => (
+            <SermonCard
               key={sermon.id}
-              image={sermon.thumbnail || sermonCardImg}
               title={sermon.title}
-              subtitle={sermon.description || ""}
+              series={sermon.series}
               speaker={sermon.speaker}
-              date={formatDate(sermon.date)}
-              link={sermon.videoUrl || sermon.audioUrl || "#"}
+              date={sermon.date}
+              passage={sermon.passage}
+              videoUrl={sermon.videoUrl}
+              audioUrl={sermon.audioUrl}
             />
           ))}
         </div>

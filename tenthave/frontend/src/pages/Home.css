@@ -161,8 +161,14 @@
 }
 
 .featured-sermon-container {
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto var(--spacing-2xl);
+    padding: 0 var(--spacing-lg);
+}
+
+.recordedSermon .sermon-card {
+    max-width: 100%;
+    width: 100%;
 }
 
 .view-all-sermons {
@@ -298,5 +304,16 @@
     .textJohn {
         width: 70%;
         margin: var(--spacing-xl) auto;
+    }
+
+    .featured-sermon-container {
+        max-width: 900px;
+    }
+}
+
+/* Responsive adjustments for sermon card on home page */
+@media (max-width: 767.98px) {
+    .featured-sermon-container {
+        padding: 0 var(--spacing-md);
     }
 }

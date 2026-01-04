@@ -1,20 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import SpecialCard from "../components/SpecialCard";
 import HeroSection from "../components/HeroSection";
 import LocationMap from "../components/LocationMap";
-import FeaturedSermonCard from "../components/FeaturedSermonCard";
+import SermonCard from "../components/SermonCard";
+import SermonCardSkeleton from "../components/SermonCardSkeleton";
 import PageContainer from "../components/PageContainer";
+import LoadingSpinner from "../components/LoadingSpinner";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES, CHURCH_INFO } from "../constants";
+import { sermonsAPI, Sermon } from "../services/api";
 import "./Home.css";
 
 // Import assets
 import churchTriPicture from "../assets/churchTriPhoto.svg";
 import churchPicture from "../assets/churchPicture.svg";
-import crossMountain from "../assets/crosss-mountain.png";
 // Home Hero Section Component
 const HomeHeroSection: React.FC = () => (
   <HeroSection
@@ -105,44 +107,120 @@ const SpecialServicesSection: React.FC = () => (
 );
 
 // Recorded Sermons Section Component
-const RecordedSermonsSection: React.FC = () => (
-  <section className="recordedSermon">
-    <ScrollReveal className="recentSermonsHeading">
-      <h2>RECORDED SERMONS</h2>
-      <p>Join us in exploring God's word through our latest messages</p>
-    </ScrollReveal>
+const RecordedSermonsSection: React.FC = () => {
+  const navigate = useNavigate();
+  const [latestSermon, setLatestSermon] = useState<Sermon | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    <ScrollReveal className="featured-sermon-container">
-      <FeaturedSermonCard
-        image={crossMountain}
-        title="BIGGER THAN US"
-        subtitle="Faith comes by hearing, and hearing by the word of God."
-        passage="Romans 10:17"
-        speaker=" "
-        date=" "
-        link="/sermon"
-      />
-    </ScrollReveal>
+  useEffect(() => {
+    const loadLatestSermon = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    <ScrollReveal className="view-all-sermons">
-      <Link to="/sermon">
-        <Button variant="button-primary" buttonText="VIEW ALL SERMONS" />
-      </Link>
-    </ScrollReveal>
-  </section>
-);
+        // Fetch published and public sermons
+        const sermons = await sermonsAPI.getAll({
+          status: "PUBLISHED",
+          isPublic: "true",
+        });
+
+        if (sermons && sermons.length > 0) {
+          // Sort by date (newest first) and get the latest sermon
+          const sortedSermons = sermons.sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
+          setLatestSermon(sortedSermons[0]);
+        }
+      } catch (err: any) {
+        console.error("Error loading latest sermon:", err);
+        setError(err.message || "Failed to load sermons");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadLatestSermon();
+  }, []);
+
+  return (
+    <section className="recordedSermon">
+      <ScrollReveal className="recentSermonsHeading">
+        <h2>LATEST SERMON</h2>
+        <p>Join us in exploring God's word through our latest messages</p>
+      </ScrollReveal>
+
+      {loading && (
+        <div style={{ padding: "2rem 0" }}>
+          <SermonCardSkeleton />
+        </div>
+      )}
+
+      {error && !loading && (
+        <div
+          style={{
+            padding: "3rem",
+            textAlign: "center",
+            color: "var(--color-error)",
+          }}
+        >
+          <p>{error}</p>
+          <p style={{ marginTop: "1rem", color: "var(--color-muted-gray)" }}>
+            Please try again later.
+          </p>
+        </div>
+      )}
+
+      {!loading && !error && !latestSermon && (
+        <div
+          style={{
+            padding: "3rem",
+            textAlign: "center",
+            color: "var(--color-muted-gray)",
+          }}
+        >
+          <p>No sermons available right now.</p>
+          <p style={{ marginTop: "1rem" }}>Check back soon for new messages.</p>
+        </div>
+      )}
+
+      {!loading && !error && latestSermon && (
+        <>
+          <ScrollReveal className="featured-sermon-container">
+            <SermonCard
+              title={latestSermon.title}
+              series={latestSermon.series}
+              speaker={latestSermon.speaker}
+              date={latestSermon.date}
+              passage={latestSermon.passage}
+              videoUrl={latestSermon.videoUrl}
+              audioUrl={latestSermon.audioUrl}
+              onClick={() => navigate("/sermon")}
+            />
+          </ScrollReveal>
+
+          <ScrollReveal className="view-all-sermons">
+            <Link to="/sermon">
+              <Button variant="button-primary" buttonText="VIEW ALL SERMONS" />
+            </Link>
+          </ScrollReveal>
+        </>
+      )}
+    </section>
+  );
+};
 
 // Main Home Component
 const Home: React.FC = () => {
   return (
     <PageContainer>
-    <main className="wrapperMAIN">
-      <HomeHeroSection />
-      <WeeklyServicesSection />
-      <SpecialServicesSection />
-      <RecordedSermonsSection />
-      <LocationMap />
-    </main>
+      <main className="wrapperMAIN">
+        <HomeHeroSection />
+        <WeeklyServicesSection />
+        <SpecialServicesSection />
+        <RecordedSermonsSection />
+        <LocationMap />
+      </main>
     </PageContainer>
   );
 };
