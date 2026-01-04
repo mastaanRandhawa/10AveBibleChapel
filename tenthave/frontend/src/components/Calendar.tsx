@@ -44,7 +44,6 @@ const Calendar: React.FC<CalendarProps> = ({
   );
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const calendarRef = useRef<FullCalendar>(null);
-  const detailsRef = useRef<HTMLDivElement>(null);
 
   // Convert our events to FullCalendar format
   const fullCalendarEvents = events.map((event) => ({
@@ -168,57 +167,6 @@ const Calendar: React.FC<CalendarProps> = ({
     year: selectedYear,
   } = formatSelectedDate(selectedDate);
 
-  // Get category name
-  const getCategoryName = (categoryId?: string) => {
-    if (!categoryId) return null;
-    const category = EVENT_CATEGORIES.find((cat) => cat.id === categoryId);
-    return category ? category.name : categoryId;
-  };
-
-  // Render additional fields
-  const renderAdditionalFields = (event: CalendarEvent) => {
-    const knownFields = [
-      "id",
-      "title",
-      "description",
-      "date",
-      "time",
-      "location",
-      "speaker",
-      "category",
-      "color",
-      "completed",
-    ];
-    const additionalFields = Object.entries(event).filter(
-      ([key, value]) =>
-        !knownFields.includes(key) &&
-        value !== null &&
-        value !== undefined &&
-        value !== ""
-    );
-
-    if (additionalFields.length === 0) return null;
-
-    return (
-      <div className="additional-fields">
-        <h5 className="additional-fields-title">Additional Details</h5>
-        {additionalFields.map(([key, value]) => (
-          <div key={key} className="field-row">
-            <span className="field-label">
-              {key.replace(/([A-Z])/g, " $1").replace(/_/g, " ").trim()}:
-            </span>
-            <span className="field-value">
-              {typeof value === "boolean"
-                ? value
-                  ? "Yes"
-                  : "No"
-                : String(value)}
-            </span>
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className="calendar-wrapper">
@@ -285,97 +233,10 @@ const Calendar: React.FC<CalendarProps> = ({
             </div>
           )}
 
-          {/* C) DETAILS SECTION - Always present */}
-          <div className="event-details" ref={detailsRef}>
-            {selectedEvent ? (
-              <>
-                {/* Event Title */}
-                <h3 className="details-title">{selectedEvent.title}</h3>
-
-                {/* Category Badge */}
-                {selectedEvent.category && (
-                  <span className="category-badge">
-                    {getCategoryName(selectedEvent.category)}
-                  </span>
-                )}
-
-                {/* Metadata */}
-                <div className="details-metadata">
-                  <div className="meta-item">
-                    <span className="meta-label">Date</span>
-                    <span className="meta-value">
-                      {dayName}, {selectedMonth} {dayNumber}, {selectedYear}
-                    </span>
-                  </div>
-                  {selectedEvent.time && (
-                    <div className="meta-item">
-                      <span className="meta-label">Time</span>
-                      <span className="meta-value">
-                        {formatTime(selectedEvent.time)}
-                      </span>
-                    </div>
-                  )}
-                  {selectedEvent.location && (
-                    <div className="meta-item">
-                      <span className="meta-label">Location</span>
-                      <span className="meta-value">{selectedEvent.location}</span>
-                    </div>
-                  )}
-                  {selectedEvent.speaker && (
-                    <div className="meta-item">
-                      <span className="meta-label">Speaker</span>
-                      <span className="meta-value">{selectedEvent.speaker}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Description */}
-                {selectedEvent.description && (
-                  <div className="details-description">
-                    <h4 className="description-title">Description</h4>
-                    <p className="description-text">{selectedEvent.description}</p>
-                  </div>
-                )}
-
-                {/* Additional Fields */}
-                {renderAdditionalFields(selectedEvent)}
-
-                {/* Admin Actions */}
-                {isAdmin && (onEditEvent || onDeleteEvent) && (
-                  <div className="details-actions">
-                    {onEditEvent && (
-                      <button
-                        className="action-btn edit-btn"
-                        onClick={() => onEditEvent(selectedEvent)}
-                        aria-label="Edit event"
-                      >
-                        Edit Event
-                      </button>
-                    )}
-                    {onDeleteEvent && (
-                      <button
-                        className="action-btn delete-btn"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              "Are you sure you want to delete this event?"
-                            )
-                          ) {
-                            onDeleteEvent(selectedEvent.id);
-                          }
-                        }}
-                        aria-label="Delete event"
-                      >
-                        Delete Event
-                      </button>
-                    )}
-                  </div>
-                )}
-              </>
-            ) : selectedDateEvents.length === 0 ? (
-              <p className="no-events-text">No events scheduled for this date.</p>
-            ) : null}
-          </div>
+          {/* No events message */}
+          {selectedDateEvents.length === 0 && (
+            <p className="no-events-text">No events scheduled for this date.</p>
+          )}
         </div>
 
         {/* Right: Calendar Grid */}
