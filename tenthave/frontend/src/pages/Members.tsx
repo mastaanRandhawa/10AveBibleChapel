@@ -42,7 +42,8 @@ const Members: React.FC = () => {
       toast.showInfo("Please log in to access the members area");
       navigate("/login");
     }
-  }, [authLoading, isAuthenticated, navigate, toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoading, isAuthenticated, navigate]);
 
   if (authLoading) {
     return <LoadingSpinner />;

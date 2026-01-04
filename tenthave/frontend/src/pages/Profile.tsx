@@ -30,7 +30,8 @@ const Profile: React.FC = () => {
       toast.showInfo("Please log in to access your profile");
       navigate("/login");
     }
-  }, [authLoading, isAuthenticated, navigate, toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoading, isAuthenticated, navigate]);
 
   // Initialize form with user data
   useEffect(() => {

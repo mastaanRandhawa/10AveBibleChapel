@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState,
   useCallback,
+  useMemo,
   ReactNode,
 } from "react";
 import Toast from "../components/Toast";
@@ -72,12 +73,15 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
   }, []);
 
-  const value: ToastContextType = {
-    showToast,
-    showSuccess,
-    showError,
-    showInfo,
-  };
+  const value: ToastContextType = useMemo(
+    () => ({
+      showToast,
+      showSuccess,
+      showError,
+      showInfo,
+    }),
+    [showToast, showSuccess, showError, showInfo]
+  );
 
   return (
     <ToastContext.Provider value={value}>

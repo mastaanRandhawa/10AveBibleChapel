@@ -23,7 +23,10 @@ const Header: React.FC = () => {
   // Close user menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node)
+      ) {
         setUserMenuOpen(false);
       }
     };
@@ -64,7 +67,11 @@ const Header: React.FC = () => {
         <div className="nav-left">
           <Link to="/" className="logo-link">
             <span className="church-name">10TH AVE BIBLE CHAPEL</span>
-            <img className="church-icon-mobile" src={HomeIcon} alt="Church Icon" />
+            <img
+              className="church-icon-mobile"
+              src={HomeIcon}
+              alt="Church Icon"
+            />
           </Link>
         </div>
 
@@ -73,10 +80,7 @@ const Header: React.FC = () => {
           <ul className="nav-main-links">
             {NAVIGATION_ITEMS.map(({ path, label }) => (
               <li key={path}>
-                <Link 
-                  to={path}
-                  className={isActiveRoute(path) ? "active" : ""}
-                >
+                <Link to={path} className={isActiveRoute(path) ? "active" : ""}>
                   {label}
                 </Link>
               </li>
@@ -88,33 +92,37 @@ const Header: React.FC = () => {
         <div className="nav-right">
           {isAuthenticated ? (
             <div className="user-menu-wrapper" ref={userMenuRef}>
-              <button 
+              <button
                 className="user-menu-trigger"
                 onClick={toggleUserMenu}
                 aria-label="User menu"
                 aria-expanded={userMenuOpen}
               >
                 <span className="user-name">{user?.name}</span>
-                <span className={`user-menu-arrow ${userMenuOpen ? 'open' : ''}`}>▼</span>
+                <span
+                  className={`user-menu-arrow ${userMenuOpen ? "open" : ""}`}
+                >
+                  ▼
+                </span>
               </button>
               {userMenuOpen && (
                 <div className="user-menu-dropdown">
-                  <Link 
-                    to="/profile" 
+                  <Link
+                    to="/profile"
                     className="user-menu-item"
                     onClick={() => setUserMenuOpen(false)}
                   >
                     MY PROFILE
                   </Link>
-                  <Link 
-                    to="/members" 
+                  <Link
+                    to="/members"
                     className="user-menu-item"
                     onClick={() => setUserMenuOpen(false)}
                   >
                     {user?.role === "ADMIN" ? "DASHBOARD" : "MEMBERS AREA"}
                   </Link>
-                  <button 
-                    onClick={handleLogout} 
+                  <button
+                    onClick={handleLogout}
                     className="user-menu-item logout"
                   >
                     LOGOUT
@@ -123,18 +131,15 @@ const Header: React.FC = () => {
               )}
             </div>
           ) : (
-            <Link 
-              to="/login" 
-              className="login-button"
-            >
+            <Link to="/login" className="login-button">
               LOGIN
             </Link>
           )}
         </div>
 
         {/* Mobile: Burger Menu */}
-        <button 
-          className="burger-menu" 
+        <button
+          className="burger-menu"
           onClick={toggleMenu}
           aria-label="Toggle menu"
           aria-expanded={menuActive}
@@ -144,8 +149,8 @@ const Header: React.FC = () => {
 
         {/* Mobile: Slide-out Menu */}
         <div className={`mobile-menu${menuActive ? " open" : ""}`}>
-          <button 
-            className="mobile-menu-close" 
+          <button
+            className="mobile-menu-close"
             onClick={toggleMenu}
             aria-label="Close menu"
           >
@@ -154,8 +159,8 @@ const Header: React.FC = () => {
           <ul className="mobile-menu-links">
             {NAVIGATION_ITEMS.map(({ path, label }) => (
               <li key={path}>
-                <Link 
-                  to={path} 
+                <Link
+                  to={path}
                   onClick={toggleMenu}
                   className={isActiveRoute(path) ? "active" : ""}
                 >
@@ -166,8 +171,8 @@ const Header: React.FC = () => {
             {isAuthenticated ? (
               <>
                 <li>
-                  <Link 
-                    to="/profile" 
+                  <Link
+                    to="/profile"
                     onClick={toggleMenu}
                     className={isActiveRoute("/profile") ? "active" : ""}
                   >
@@ -175,8 +180,8 @@ const Header: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/members" 
+                  <Link
+                    to="/members"
                     onClick={toggleMenu}
                     className={isActiveRoute("/members") ? "active" : ""}
                   >
@@ -184,20 +189,19 @@ const Header: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                  <button 
-                    onClick={handleLogout} 
-                    className="mobile-logout-btn"
-                  >
+                  <button onClick={handleLogout} className="mobile-logout-btn">
                     LOGOUT ({user?.name})
                   </button>
                 </li>
               </>
             ) : (
               <li>
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   onClick={toggleMenu}
-                  className={`mobile-login-link ${isActiveRoute("/login") ? "active" : ""}`}
+                  className={`mobile-login-link ${
+                    isActiveRoute("/login") ? "active" : ""
+                  }`}
                 >
                   LOGIN
                 </Link>
