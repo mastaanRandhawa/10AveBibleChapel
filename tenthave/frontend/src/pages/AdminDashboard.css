@@ -6,7 +6,7 @@
 /* Dashboard Layout */
 .members-page-wrapper {
     min-height: 100vh;
-    background: linear-gradient(135deg, #F7F6F1 0%, #FAFAFA 100%);
+    background: var(--color-bg-secondary);
 }
 
 .members-content {
@@ -25,8 +25,7 @@
     margin-bottom: var(--spacing-2xl);
     padding: var(--spacing-xs);
     background: var(--color-bg);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-lg);
     overflow-x: auto;
     border: 1px solid var(--border-color);
     scrollbar-width: thin;
@@ -58,7 +57,6 @@
 .tab-button.active {
     background: var(--color-primary);
     color: var(--color-dark);
-    box-shadow: var(--shadow-sm);
 }
 
 .tab-button:focus-visible {
@@ -72,11 +70,10 @@
 
 .dashboard-content {
     background: var(--color-bg);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     padding: var(--spacing-2xl);
-    box-shadow: var(--shadow-md);
     border: 1px solid var(--border-color);
-    animation: fadeInUp 0.3s ease-out;
+    animation: fadeInUp 0.2s ease-out;
 }
 
 @keyframes fadeInUp {

@@ -54,68 +54,70 @@ const Members: React.FC = () => {
 
   return (
     <PageContainer>
-    <div className="members-page-wrapper">
-      <HeroSection
-        title={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
-        subtitle={user?.name || ""}
-        variant="simple"
-      />
+      <div className="members-page-wrapper">
+        <HeroSection
+          title={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
+          subtitle={user?.name || ""}
+          variant="simple"
+        />
 
-      <div className="members-content">
-        <div className="dashboard-tabs">
-          <button
-            className={`tab-button ${activeTab === "prayers" ? "active" : ""}`}
-            onClick={() => setActiveTab("prayers")}
-          >
-            Prayer Requests
-          </button>
-          {isAdmin && (
-            <>
-              <button
-                className={`tab-button ${
-                  activeTab === "announcements" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("announcements")}
-              >
-                Announcements
-              </button>
-              <button
-                className={`tab-button ${
-                  activeTab === "calendar" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("calendar")}
-              >
-                Calendar
-              </button>
-              <button
-                className={`tab-button ${
-                  activeTab === "sermons" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("sermons")}
-              >
-                Sermons
-              </button>
-              <button
-                className={`tab-button ${
-                  activeTab === "users" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("users")}
-              >
-                Users
-              </button>
-            </>
-          )}
-        </div>
+        <div className="members-content">
+          <div className="dashboard-tabs">
+            <button
+              className={`tab-button ${
+                activeTab === "prayers" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("prayers")}
+            >
+              Prayer Requests
+            </button>
+            {isAdmin && (
+              <>
+                <button
+                  className={`tab-button ${
+                    activeTab === "announcements" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("announcements")}
+                >
+                  Announcements
+                </button>
+                <button
+                  className={`tab-button ${
+                    activeTab === "calendar" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("calendar")}
+                >
+                  Calendar
+                </button>
+                <button
+                  className={`tab-button ${
+                    activeTab === "sermons" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("sermons")}
+                >
+                  Sermons
+                </button>
+                <button
+                  className={`tab-button ${
+                    activeTab === "users" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("users")}
+                >
+                  Users
+                </button>
+              </>
+            )}
+          </div>
 
-        <div className="dashboard-content">
-          {activeTab === "prayers" && <PrayerRequestsTab />}
-          {activeTab === "announcements" && isAdmin && <AnnouncementsTab />}
-          {activeTab === "calendar" && isAdmin && <CalendarTab />}
-          {activeTab === "sermons" && isAdmin && <SermonsTab />}
-          {activeTab === "users" && isAdmin && <UsersTab />}
+          <div className="dashboard-content">
+            {activeTab === "prayers" && <PrayerRequestsTab />}
+            {activeTab === "announcements" && isAdmin && <AnnouncementsTab />}
+            {activeTab === "calendar" && isAdmin && <CalendarTab />}
+            {activeTab === "sermons" && isAdmin && <SermonsTab />}
+            {activeTab === "users" && isAdmin && <UsersTab />}
+          </div>
         </div>
       </div>
-    </div>
     </PageContainer>
   );
 };
@@ -212,7 +214,7 @@ const PrayerRequestsTab: React.FC = () => {
     return (
       <div className="tab-content">
         <div className="error-state">
-          <h3>⚠️ Error Loading Prayer Requests</h3>
+          <h3>Error Loading Prayer Requests</h3>
           <p>{error}</p>
           <button className="btn-primary" onClick={loadPrayers}>
             Retry
@@ -269,7 +271,6 @@ const PrayerRequestsTab: React.FC = () => {
 
       {prayers.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🙏</div>
           <h3>No Prayer Requests Yet</h3>
           <p>
             Prayer requests will appear here once members submit them through
@@ -278,7 +279,6 @@ const PrayerRequestsTab: React.FC = () => {
         </div>
       ) : filteredPrayers.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
           <h3>No Matching Prayer Requests</h3>
           <p>Try adjusting your search or filter criteria.</p>
         </div>
@@ -289,10 +289,14 @@ const PrayerRequestsTab: React.FC = () => {
               <h3>{prayer.title}</h3>
               <p>{prayer.description}</p>
               <div className="prayer-meta">
-                <span className={`status-badge status-${prayer.status.toLowerCase()}`}>
+                <span
+                  className={`status-badge status-${prayer.status.toLowerCase()}`}
+                >
                   {prayer.status}
                 </span>
-                <span className={`priority-badge priority-${prayer.priority.toLowerCase()}`}>
+                <span
+                  className={`priority-badge priority-${prayer.priority.toLowerCase()}`}
+                >
                   {prayer.priority}
                 </span>
                 <span>{prayer.category}</span>
@@ -453,9 +457,11 @@ const AnnouncementsTab: React.FC = () => {
 
       {announcements.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">📢</div>
           <h3>No Announcements Yet</h3>
-          <p>Create your first announcement to share updates with your church community.</p>
+          <p>
+            Create your first announcement to share updates with your church
+            community.
+          </p>
           <button
             className="btn-primary"
             onClick={() => {
@@ -468,7 +474,6 @@ const AnnouncementsTab: React.FC = () => {
         </div>
       ) : filteredAnnouncements.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
           <h3>No Matching Announcements</h3>
           <p>Try adjusting your search or filter criteria.</p>
         </div>
@@ -491,7 +496,14 @@ const AnnouncementsTab: React.FC = () => {
                 {filteredAnnouncements.map((item) => (
                   <tr key={item.id}>
                     <td className="table-cell-title">
-                      {item.pinned && <span style={{ marginRight: "0.5rem" }}>📌</span>}
+                      {item.pinned && (
+                        <span
+                          className="pinned-indicator"
+                          style={{ marginRight: "0.5rem" }}
+                        >
+                          Pinned
+                        </span>
+                      )}
                       {item.title}
                     </td>
                     <td>{item.category || "—"}</td>
@@ -536,7 +548,14 @@ const AnnouncementsTab: React.FC = () => {
             {filteredAnnouncements.map((item) => (
               <div key={item.id} className="item-card">
                 <h3>
-                  {item.pinned && <span style={{ marginRight: "0.5rem" }}>📌</span>}
+                  {item.pinned && (
+                    <span
+                      className="pinned-indicator"
+                      style={{ marginRight: "0.5rem" }}
+                    >
+                      Pinned
+                    </span>
+                  )}
                   {item.title}
                 </h3>
                 <p>{item.content}</p>
@@ -710,7 +729,6 @@ const CalendarTab: React.FC = () => {
 
       {events.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">📅</div>
           <h3>No Events Yet</h3>
           <p>
             Create your first event to keep your community informed about
@@ -728,7 +746,6 @@ const CalendarTab: React.FC = () => {
         </div>
       ) : filteredEvents.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
           <h3>No Matching Events</h3>
           <p>Try adjusting your search or filter criteria.</p>
         </div>
@@ -806,11 +823,9 @@ const CalendarTab: React.FC = () => {
                   >
                     {item.status}
                   </span>
-                  <span>
-                    {new Date(item.startDate).toLocaleDateString()}
-                  </span>
+                  <span>{new Date(item.startDate).toLocaleDateString()}</span>
                   {item.category && <span>{item.category}</span>}
-                  {item.location && <span>📍 {item.location}</span>}
+                  {item.location && <span>{item.location}</span>}
                 </div>
                 <div className="item-actions">
                   <button
@@ -897,8 +912,7 @@ const SermonsTab: React.FC = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Are you sure you want to delete this sermon?"))
-      return;
+    if (!window.confirm("Are you sure you want to delete this sermon?")) return;
     try {
       await sermonsAPI.delete(id);
       loadSermons();
@@ -994,7 +1008,6 @@ const SermonsTab: React.FC = () => {
 
       {sermons.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🎙️</div>
           <h3>No Sermons Yet</h3>
           <p>
             Start adding sermons to share God's Word with your congregation.
@@ -1011,7 +1024,6 @@ const SermonsTab: React.FC = () => {
         </div>
       ) : filteredSermons.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
           <h3>No Matching Sermons</h3>
           <p>Try adjusting your search or filter criteria.</p>
         </div>
@@ -1083,10 +1095,10 @@ const SermonsTab: React.FC = () => {
                   >
                     {item.status}
                   </span>
-                  <span>🎤 {item.speaker}</span>
+                  <span>{item.speaker}</span>
                   <span>{new Date(item.date).toLocaleDateString()}</span>
-                  {item.series && <span>📚 {item.series}</span>}
-                  {item.passage && <span>📖 {item.passage}</span>}
+                  {item.series && <span>{item.series}</span>}
+                  {item.passage && <span>{item.passage}</span>}
                 </div>
                 <div className="item-actions">
                   <button
@@ -1188,7 +1200,9 @@ const UsersTab: React.FC = () => {
       return;
     try {
       await usersAPI.updateApproval(id, !currentStatus);
-      toast.showSuccess(`User ${currentStatus ? "approval revoked" : "approved"} successfully`);
+      toast.showSuccess(
+        `User ${currentStatus ? "approval revoked" : "approved"} successfully`
+      );
       loadUsers();
     } catch (err: any) {
       toast.showError("Failed to update approval: " + err.message);
@@ -1255,13 +1269,11 @@ const UsersTab: React.FC = () => {
 
       {users.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">👥</div>
           <h3>No Users Found</h3>
           <p>Users will appear here once they register for an account.</p>
         </div>
       ) : filteredUsers.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
           <h3>No Matching Users</h3>
           <p>Try adjusting your search or filter criteria.</p>
         </div>
@@ -1287,7 +1299,9 @@ const UsersTab: React.FC = () => {
                     <td className="table-cell-title">{user.name}</td>
                     <td>{user.email}</td>
                     <td>
-                      <span className={`role-badge role-${user.role.toLowerCase()}`}>
+                      <span
+                        className={`role-badge role-${user.role.toLowerCase()}`}
+                      >
                         {user.role}
                       </span>
                     </td>
@@ -1327,9 +1341,16 @@ const UsersTab: React.FC = () => {
                           <option value="ADMIN">Admin</option>
                         </select>
                         <button
-                          className={user.isApproved ? "btn-secondary" : "btn-primary"}
-                          onClick={() => handleToggleApproval(user.id, user.isApproved)}
-                          style={{ fontSize: "0.85rem", padding: "0.4rem 0.8rem" }}
+                          className={
+                            user.isApproved ? "btn-secondary" : "btn-primary"
+                          }
+                          onClick={() =>
+                            handleToggleApproval(user.id, user.isApproved)
+                          }
+                          style={{
+                            fontSize: "0.85rem",
+                            padding: "0.4rem 0.8rem",
+                          }}
                         >
                           {user.isApproved ? "Revoke" : "Approve"}
                         </button>
@@ -1348,7 +1369,9 @@ const UsersTab: React.FC = () => {
                 <h3>{user.name}</h3>
                 <p>{user.email}</p>
                 <div className="item-meta">
-                  <span className={`role-badge role-${user.role.toLowerCase()}`}>
+                  <span
+                    className={`role-badge role-${user.role.toLowerCase()}`}
+                  >
                     {user.role}
                   </span>
                   <span
@@ -1365,7 +1388,9 @@ const UsersTab: React.FC = () => {
                   >
                     {user.isActive ? "Active" : "Inactive"}
                   </span>
-                  <span>Joined {new Date(user.createdAt).toLocaleDateString()}</span>
+                  <span>
+                    Joined {new Date(user.createdAt).toLocaleDateString()}
+                  </span>
                 </div>
                 <div className="item-actions">
                   <select
@@ -1379,8 +1404,12 @@ const UsersTab: React.FC = () => {
                     <option value="ADMIN">Admin</option>
                   </select>
                   <button
-                    className={user.isApproved ? "btn-secondary" : "btn-primary"}
-                    onClick={() => handleToggleApproval(user.id, user.isApproved)}
+                    className={
+                      user.isApproved ? "btn-secondary" : "btn-primary"
+                    }
+                    onClick={() =>
+                      handleToggleApproval(user.id, user.isApproved)
+                    }
                   >
                     {user.isApproved ? "Revoke" : "Approve"}
                   </button>
@@ -1501,8 +1530,8 @@ const AnnouncementForm: React.FC<{
             onChange={(e) =>
               setFormData({ ...formData, pinned: e.target.checked })
             }
-          />
-          {" "}Pin to top of announcements
+          />{" "}
+          Pin to top of announcements
         </label>
       </div>
 
@@ -1514,8 +1543,8 @@ const AnnouncementForm: React.FC<{
             onChange={(e) =>
               setFormData({ ...formData, isPublic: e.target.checked })
             }
-          />
-          {" "}Visible to public (non-members)
+          />{" "}
+          Visible to public (non-members)
         </label>
       </div>
 
@@ -1667,8 +1696,8 @@ const CalendarForm: React.FC<{
             onChange={(e) =>
               setFormData({ ...formData, isPublic: e.target.checked })
             }
-          />
-          {" "}Visible to public (non-members)
+          />{" "}
+          Visible to public (non-members)
         </label>
       </div>
 
@@ -1844,8 +1873,8 @@ const SermonForm: React.FC<{
             onChange={(e) =>
               setFormData({ ...formData, isPublic: e.target.checked })
             }
-          />
-          {" "}Visible to public (non-members)
+          />{" "}
+          Visible to public (non-members)
         </label>
       </div>
 
@@ -1857,8 +1886,8 @@ const SermonForm: React.FC<{
             onChange={(e) =>
               setFormData({ ...formData, isFeatured: e.target.checked })
             }
-          />
-          {" "}Feature on homepage
+          />{" "}
+          Feature on homepage
         </label>
       </div>
 

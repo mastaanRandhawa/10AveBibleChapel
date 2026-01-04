@@ -32,7 +32,7 @@ const SermonSeriesCard: React.FC<SermonSeriesCardProps> = ({
           {episodeCount} {episodeCount === 1 ? "EPISODE" : "EPISODES"}
         </p>
         <a href={link} className="sermon-series-card__button">
-          WATCH NOW →
+          WATCH NOW
         </a>
       </div>
     </div>

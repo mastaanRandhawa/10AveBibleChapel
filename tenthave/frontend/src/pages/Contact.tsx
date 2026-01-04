@@ -74,7 +74,7 @@ const ContactFormComponent: React.FC = () => {
 
       {success && (
         <div className="form-success-message" role="alert">
-          ✓ Thank you! Your message has been sent successfully.
+          Thank you! Your message has been sent successfully.
         </div>
       )}
 

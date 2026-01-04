@@ -1,21 +1,18 @@
-/* Enhanced Card Styles */
+/* Card Styles */
 .card {
     background-color: var(--color-bg);
     padding: var(--card-padding);
     text-align: left;
     max-width: 400px;
     width: 100%;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-lg);
     font-family: var(--font-primary);
-    transition: all var(--transition-normal);
+    transition: border-color var(--transition-fast);
     border: 1px solid var(--border-color);
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-primary);
+    border-color: var(--border-color-dark);
 }
 
 .card img {
@@ -23,11 +20,6 @@
     height: 48px;
     margin-bottom: var(--spacing-lg);
     display: block;
-    transition: transform var(--interaction-normal);
-}
-
-.card:hover img {
-    transform: scale(1.1);
 }
 
 /* Card Title */
@@ -37,11 +29,6 @@
     color: var(--color-dark);
     margin: 0 0 var(--spacing-md) 0;
     line-height: var(--line-height-tight);
-    transition: color var(--interaction-fast);
-}
-
-.card:hover .card-title {
-    color: var(--color-primary-dark);
 }
 
 /* Card Text */

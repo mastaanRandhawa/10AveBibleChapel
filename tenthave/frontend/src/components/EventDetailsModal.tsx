@@ -50,7 +50,9 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
       <div className="event-modal" onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
         <div className="event-modal-header">
-          <h2 className="event-modal-title">Events for {formatDate(selectedDate)}</h2>
+          <h2 className="event-modal-title">
+            Events for {formatDate(selectedDate)}
+          </h2>
           <button
             className="event-modal-close"
             onClick={onClose}
@@ -86,22 +88,24 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
                   {/* Event Description */}
                   {event.description && (
-                    <p className="event-modal-description">{event.description}</p>
+                    <p className="event-modal-description">
+                      {event.description}
+                    </p>
                   )}
 
                   {/* Event Meta Info: Time + Location */}
                   <div className="event-modal-meta">
                     {event.time && (
                       <div className="event-meta-item">
-                        <span className="meta-icon">🕐</span>
                         <span className="meta-label">Time:</span>
-                        <span className="meta-value">{formatTime(event.time)}</span>
+                        <span className="meta-value">
+                          {formatTime(event.time)}
+                        </span>
                       </div>
                     )}
 
                     {event.location && (
                       <div className="event-meta-item">
-                        <span className="meta-icon">📍</span>
                         <span className="meta-label">Location:</span>
                         <span className="meta-value">{event.location}</span>
                       </div>
@@ -109,7 +113,6 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
                     {event.speaker && (
                       <div className="event-meta-item">
-                        <span className="meta-icon">👤</span>
                         <span className="meta-label">Speaker:</span>
                         <span className="meta-value">{event.speaker}</span>
                       </div>

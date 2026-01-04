@@ -191,12 +191,10 @@ const Calendar: React.FC<CalendarProps> = ({
                     <h3 className="event-card-title">{event.title}</h3>
                   </div>
                   {event.time && (
-                    <p className="event-card-time">
-                      🕐 {formatTime(event.time)}
-                    </p>
+                    <p className="event-card-time">{formatTime(event.time)}</p>
                   )}
                   {event.location && (
-                    <p className="event-card-location">📍 {event.location}</p>
+                    <p className="event-card-location">{event.location}</p>
                   )}
                   {isAdmin && (onEditEvent || onDeleteEvent) && (
                     <div className="event-card-actions">

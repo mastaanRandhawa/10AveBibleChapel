@@ -28,16 +28,16 @@
 
 .event-modal {
     background: var(--color-bg);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     max-width: 650px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: var(--shadow-2xl);
+    box-shadow: var(--shadow-lg);
     position: relative;
     margin: auto;
     border: 1px solid var(--border-color);
-    animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.2s ease-out;
 }
 
 @keyframes slideIn {

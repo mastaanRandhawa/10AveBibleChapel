@@ -82,7 +82,7 @@ const SermonFilter: React.FC<SermonFilterProps> = ({
       </div>
 
       <button className="sermon-filter__reset" onClick={onReset}>
-        RESET →
+        RESET
       </button>
     </div>
   );

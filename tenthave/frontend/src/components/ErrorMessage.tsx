@@ -21,19 +21,6 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   className = "",
   role = "alert",
 }) => {
-  const getIcon = () => {
-    switch (type) {
-      case "error":
-        return "❌";
-      case "warning":
-        return "⚠️";
-      case "info":
-        return "ℹ️";
-      default:
-        return "❌";
-    }
-  };
-
   const getTypeClass = () => {
     switch (type) {
       case "error":
@@ -54,9 +41,6 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
       aria-live="polite"
     >
       <div className="error-message-content">
-        <span className="error-message-icon" aria-hidden="true">
-          {getIcon()}
-        </span>
         <span className="error-message-text">{message}</span>
         {dismissible && onDismiss && (
           <button
