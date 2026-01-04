@@ -4,7 +4,6 @@ import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
-import EventDetailsModal from "../components/EventDetailsModal";
 import PageContainer from "../components/PageContainer";
 import { announcementsAPI, calendarAPI, Announcement } from "../services/api";
 import bulletinImage from "../assets/bulletin.jpg";
@@ -16,7 +15,7 @@ const Bulletin: React.FC = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Old hardcoded events for fallback
   const [hardcodedEvents] = useState<CalendarEvent[]>([
     // January 2024 Events
@@ -220,11 +219,7 @@ const Bulletin: React.FC = () => {
   ]);
 
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-  const [isEventDetailsModalOpen, setIsEventDetailsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedDateEvents, setSelectedDateEvents] = useState<CalendarEvent[]>(
-    []
-  );
   const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
 
   // Load data from API
@@ -233,7 +228,10 @@ const Bulletin: React.FC = () => {
       try {
         setLoading(true);
         // Fetch calendar events
-        const calendarData = await calendarAPI.getAll({ status: "PUBLISHED", isPublic: "true" });
+        const calendarData = await calendarAPI.getAll({
+          status: "PUBLISHED",
+          isPublic: "true",
+        });
         // Transform API data to match CalendarEvent interface
         // FIX: Use date-fns format() to convert timestamps to date strings in LOCAL time
         // This prevents timezone offset issues where dates shift by one day
@@ -242,15 +240,24 @@ const Bulletin: React.FC = () => {
           title: event.title,
           description: event.description || "",
           date: format(new Date(event.startDate), "yyyy-MM-dd"),
-          time: new Date(event.startDate).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }),
+          time: new Date(event.startDate).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          }),
           location: event.location || "",
           category: event.category || "general",
           color: event.color || "var(--color-primary)",
         }));
-        setEvents(transformedEvents.length > 0 ? transformedEvents : hardcodedEvents);
+        setEvents(
+          transformedEvents.length > 0 ? transformedEvents : hardcodedEvents
+        );
 
         // Fetch announcements
-        const announcementData = await announcementsAPI.getAll({ status: "PUBLISHED", isPublic: "true" });
+        const announcementData = await announcementsAPI.getAll({
+          status: "PUBLISHED",
+          isPublic: "true",
+        });
         setAnnouncements(announcementData);
       } catch (error) {
         console.error("Error loading bulletin data:", error);
@@ -265,12 +272,6 @@ const Bulletin: React.FC = () => {
   }, [hardcodedEvents]);
 
   // Calendar event handlers
-  const handleDateClick = (date: string, dateEvents: CalendarEvent[]) => {
-    setSelectedDate(date);
-    setSelectedDateEvents(dateEvents);
-    setIsEventDetailsModalOpen(true);
-  };
-
   const handleAddEvent = (date: string) => {
     setSelectedDate(date);
     setEditingEvent(null);
@@ -299,13 +300,11 @@ const Bulletin: React.FC = () => {
 
   const handleEditEvent = (event: CalendarEvent) => {
     setEditingEvent(event);
-    setIsEventDetailsModalOpen(false);
     setIsEventModalOpen(true);
   };
 
   const handleDeleteEvent = (eventId: string) => {
     setEvents((prev) => prev.filter((event) => event.id !== eventId));
-    setIsEventDetailsModalOpen(false);
   };
 
   const handleCloseEventModal = () => {
@@ -313,94 +312,82 @@ const Bulletin: React.FC = () => {
     setEditingEvent(null);
   };
 
-  const handleCloseEventDetailsModal = () => {
-    setIsEventDetailsModalOpen(false);
-    setSelectedDateEvents([]);
-  };
-
   return (
     <PageContainer>
-    <div className="bulletin-page-wrapper">
-      <HeroSection
-        title="BULLETIN"
-        subtitle="CHURCH EVENTS & ANNOUNCEMENTS"
-        description="Stay connected with our church community through upcoming events and important announcements"
-        backgroundImage={`url(${bulletinImage})`}
-        variant="centered"
-      />
+      <div className="bulletin-page-wrapper">
+        <HeroSection
+          title="BULLETIN"
+          subtitle="CHURCH EVENTS & ANNOUNCEMENTS"
+          description="Stay connected with our church community through upcoming events and important announcements"
+          backgroundImage={`url(${bulletinImage})`}
+          variant="centered"
+        />
 
-      <div className="bulletin-content">
-        {/* Calendar Section */}
-        <ScrollReveal className="bulletin-calendar-section">
-          <div className="section-header">
-            <h2>UPCOMING EVENTS & CALENDAR</h2>
-            <p>
-              Stay connected with our church community through our comprehensive
-              event calendar
-            </p>
-          </div>
-          <Calendar
-            events={events}
-            onDateClick={handleDateClick}
-            onAddEvent={handleAddEvent}
-            onEditEvent={handleEditEvent}
-            onDeleteEvent={handleDeleteEvent}
-            isAdmin={false}
-          />
-        </ScrollReveal>
-
-        {/* Church Announcements Section */}
-        <ScrollReveal className="announcements-section">
-          <div className="section-header">
-            <h2>CHURCH ANNOUNCEMENTS</h2>
-            <p>Important updates and news from our church leadership</p>
-          </div>
-          {loading ? (
-            <p style={{ textAlign: "center" }}>Loading announcements...</p>
-          ) : announcements.length === 0 ? (
-            <p style={{ textAlign: "center" }}>No announcements at this time.</p>
-          ) : (
-            <div className="announcements-grid">
-              {announcements.slice(0, 6).map((announcement) => (
-                <div key={announcement.id} className="announcement-card">
-                  <div className="announcement-header">
-                    <h3>{announcement.title}</h3>
-                    <span className="announcement-date">
-                      {new Date(announcement.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <p>{announcement.content}</p>
-                  {announcement.category && (
-                    <div className="announcement-meta">
-                      <span className="announcement-category">{announcement.category}</span>
-                    </div>
-                  )}
-                </div>
-              ))}
+        <div className="bulletin-content">
+          {/* Calendar Section */}
+          <ScrollReveal className="bulletin-calendar-section">
+            <div className="section-header">
+              <h2>UPCOMING EVENTS & CALENDAR</h2>
+              <p>
+                Stay connected with our church community through our
+                comprehensive event calendar
+              </p>
             </div>
-          )}
-        </ScrollReveal>
+            <Calendar
+              events={events}
+              onAddEvent={handleAddEvent}
+              onEditEvent={handleEditEvent}
+              onDeleteEvent={handleDeleteEvent}
+              isAdmin={false}
+            />
+          </ScrollReveal>
+
+          {/* Church Announcements Section */}
+          <ScrollReveal className="announcements-section">
+            <div className="section-header">
+              <h2>CHURCH ANNOUNCEMENTS</h2>
+              <p>Important updates and news from our church leadership</p>
+            </div>
+            {loading ? (
+              <p style={{ textAlign: "center" }}>Loading announcements...</p>
+            ) : announcements.length === 0 ? (
+              <p style={{ textAlign: "center" }}>
+                No announcements at this time.
+              </p>
+            ) : (
+              <div className="announcements-grid">
+                {announcements.slice(0, 6).map((announcement) => (
+                  <div key={announcement.id} className="announcement-card">
+                    <div className="announcement-header">
+                      <h3>{announcement.title}</h3>
+                      <span className="announcement-date">
+                        {new Date(announcement.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p>{announcement.content}</p>
+                    {announcement.category && (
+                      <div className="announcement-meta">
+                        <span className="announcement-category">
+                          {announcement.category}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </ScrollReveal>
+        </div>
+
+        {/* Event Modal */}
+        <EventModal
+          isOpen={isEventModalOpen}
+          onClose={handleCloseEventModal}
+          onSave={handleSaveEvent}
+          selectedDate={selectedDate}
+          editingEvent={editingEvent}
+        />
       </div>
-
-      {/* Event Modals */}
-      <EventModal
-        isOpen={isEventModalOpen}
-        onClose={handleCloseEventModal}
-        onSave={handleSaveEvent}
-        selectedDate={selectedDate}
-        editingEvent={editingEvent}
-      />
-
-      <EventDetailsModal
-        isOpen={isEventDetailsModalOpen}
-        onClose={handleCloseEventDetailsModal}
-        events={selectedDateEvents}
-        selectedDate={selectedDate}
-        onEditEvent={handleEditEvent}
-        onDeleteEvent={handleDeleteEvent}
-        isAdmin={false}
-      />
-    </div>
     </PageContainer>
   );
 };
