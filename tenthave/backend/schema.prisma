@@ -17,28 +17,6 @@ enum UserRole {
   GUEST     // Limited access
 }
 
-enum PrayerCategory {
-  HEALTH
-  FAMILY
-  WORK
-  SPIRITUAL
-  COMMUNITY
-  OTHER
-}
-
-enum PrayerPriority {
-  URGENT
-  HIGH
-  NORMAL
-}
-
-enum PrayerStatus {
-  PENDING     // Awaiting approval
-  APPROVED    // Visible to authorized users
-  REJECTED    // Not approved for display
-  ANSWERED    // Prayer has been answered
-}
-
 enum ContentStatus {
   DRAFT       // Not yet published
   PUBLISHED   // Live on website
@@ -156,10 +134,7 @@ model PrayerRequest {
   description String
   requester   String?         // Optional name, can be anonymous
   
-  // Classification
-  category    PrayerCategory  @default(OTHER)
-  priority    PrayerPriority  @default(NORMAL)
-  status      PrayerStatus    @default(PENDING)
+  // Privacy
   isPrivate   Boolean         @default(false)
   
   // Response tracking
@@ -171,8 +146,6 @@ model PrayerRequest {
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   
-  @@index([status])
-  @@index([category])
   @@index([isPrivate])
   @@index([createdAt])
   @@map("prayer_requests")

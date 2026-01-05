@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
-import HeroSection from "../components/HeroSection";
+import PageHero from "../components/PageHero";
 import PageContainer from "../components/PageContainer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "./Profile.css";
@@ -102,10 +102,9 @@ const Profile: React.FC = () => {
   return (
     <PageContainer>
       <div className="profile-page-wrapper">
-        <HeroSection
+        <PageHero
           title="MY PROFILE"
-          subtitle="UPDATE YOUR INFORMATION"
-          variant="simple"
+          subtitle="Update your account information"
         />
 
         <div className="profile-content">

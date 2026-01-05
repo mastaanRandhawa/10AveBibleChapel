@@ -277,9 +277,6 @@ export interface PrayerRequest {
   title: string;
   description: string;
   requester?: string;
-  category: string;
-  priority: string;
-  status: string;
   isPrivate: boolean;
   isAnswered: boolean;
   answeredAt?: string;

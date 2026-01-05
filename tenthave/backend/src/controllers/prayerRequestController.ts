@@ -1,14 +1,10 @@
 import { Request, Response } from 'express';
 import { prisma } from '../index';
-import { PrayerStatus, PrayerCategory, PrayerPriority } from '@prisma/client';
 
 // GET /api/prayer-requests - Get all prayer requests
 export const getPrayerRequests = async (req: Request, res: Response) => {
   try {
     const {
-      status,
-      category,
-      priority,
       isPrivate,
       isAnswered,
       limit,
@@ -16,21 +12,6 @@ export const getPrayerRequests = async (req: Request, res: Response) => {
     } = req.query;
 
     const where: any = {};
-
-    // Filter by status
-    if (status) {
-      where.status = status as PrayerStatus;
-    }
-
-    // Filter by category
-    if (category) {
-      where.category = category as PrayerCategory;
-    }
-
-    // Filter by priority
-    if (priority) {
-      where.priority = priority as PrayerPriority;
-    }
 
     // Filter by private/public
     if (isPrivate !== undefined) {
@@ -45,7 +26,6 @@ export const getPrayerRequests = async (req: Request, res: Response) => {
     const prayerRequests = await prisma.prayerRequest.findMany({
       where,
       orderBy: [
-        { priority: 'desc' },
         { createdAt: 'desc' },
       ],
       take: limit ? parseInt(limit as string) : undefined,
@@ -86,9 +66,6 @@ export const createPrayerRequest = async (req: Request, res: Response) => {
       title,
       description,
       requester,
-      category,
-      priority,
-      status,
       isPrivate,
     } = req.body;
 
@@ -97,14 +74,22 @@ export const createPrayerRequest = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Title and description are required' });
     }
 
+    // Reject status, category, and priority if provided
+    if (req.body.status !== undefined) {
+      return res.status(400).json({ error: 'Status field is not allowed' });
+    }
+    if (req.body.category !== undefined) {
+      return res.status(400).json({ error: 'Category field is not allowed' });
+    }
+    if (req.body.priority !== undefined) {
+      return res.status(400).json({ error: 'Priority field is not allowed' });
+    }
+
     const prayerRequest = await prisma.prayerRequest.create({
       data: {
         title,
         description,
         requester,
-        category: category || PrayerCategory.OTHER,
-        priority: priority || PrayerPriority.NORMAL,
-        status: status || PrayerStatus.PENDING,
         isPrivate: isPrivate || false,
       },
     });
@@ -124,14 +109,22 @@ export const updatePrayerRequest = async (req: Request, res: Response) => {
       title,
       description,
       requester,
-      category,
-      priority,
-      status,
       isPrivate,
       isAnswered,
       answeredAt,
       answerNotes,
     } = req.body;
+
+    // Reject status, category, and priority if provided
+    if (req.body.status !== undefined) {
+      return res.status(400).json({ error: 'Status field is not allowed' });
+    }
+    if (req.body.category !== undefined) {
+      return res.status(400).json({ error: 'Category field is not allowed' });
+    }
+    if (req.body.priority !== undefined) {
+      return res.status(400).json({ error: 'Priority field is not allowed' });
+    }
 
     // Check if prayer request exists
     const existingPrayerRequest = await prisma.prayerRequest.findUnique({
@@ -147,9 +140,6 @@ export const updatePrayerRequest = async (req: Request, res: Response) => {
     if (title !== undefined) updateData.title = title;
     if (description !== undefined) updateData.description = description;
     if (requester !== undefined) updateData.requester = requester;
-    if (category !== undefined) updateData.category = category;
-    if (priority !== undefined) updateData.priority = priority;
-    if (status !== undefined) updateData.status = status;
     if (isPrivate !== undefined) updateData.isPrivate = isPrivate;
     if (isAnswered !== undefined) {
       updateData.isAnswered = isAnswered;

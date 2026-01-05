@@ -23,7 +23,7 @@ router.get("/:id", authenticateToken, requireApprovedUser, getPrayerRequest);
 // POST /api/prayer-requests - Create a new prayer request - PUBLIC (anyone can submit)
 router.post("/", createPrayerRequest);
 
-// PUT /api/prayer-requests/:id - Update a prayer request - ADMIN ONLY (for status updates, moderation)
+// PUT /api/prayer-requests/:id - Update a prayer request - ADMIN ONLY (for moderation)
 router.put("/:id", authenticateToken, requireAdmin, updatePrayerRequest);
 
 // DELETE /api/prayer-requests/:id - Delete a prayer request - ADMIN ONLY

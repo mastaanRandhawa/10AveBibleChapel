@@ -2,9 +2,6 @@ import {
   PrismaClient,
   UserRole,
   ContentStatus,
-  PrayerStatus,
-  PrayerCategory,
-  PrayerPriority,
 } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -957,9 +954,6 @@ async function main() {
         description:
           "Please pray for Sarah who is undergoing surgery next week. Pray for successful surgery and quick recovery.",
         requester: "John Smith",
-        category: PrayerCategory.HEALTH,
-        priority: PrayerPriority.URGENT,
-        status: PrayerStatus.APPROVED,
         isPrivate: false,
         isAnswered: false,
       },
@@ -970,9 +964,6 @@ async function main() {
         description:
           "Pray for our mission team traveling to Guatemala. Pray for safety, health, and open hearts in the communities we serve.",
         requester: "Mary Johnson",
-        category: PrayerCategory.COMMUNITY,
-        priority: PrayerPriority.HIGH,
-        status: PrayerStatus.APPROVED,
         isPrivate: false,
         isAnswered: false,
       },
@@ -983,9 +974,6 @@ async function main() {
         description:
           "Seeking prayers for guidance and favor as I search for new employment opportunities.",
         requester: "Anonymous",
-        category: PrayerCategory.WORK,
-        priority: PrayerPriority.NORMAL,
-        status: PrayerStatus.APPROVED,
         isPrivate: false,
         isAnswered: false,
       },
@@ -996,9 +984,6 @@ async function main() {
         description:
           "Pray for healing and restoration in a family experiencing conflict.",
         requester: null,
-        category: PrayerCategory.FAMILY,
-        priority: PrayerPriority.HIGH,
-        status: PrayerStatus.APPROVED,
         isPrivate: true,
         isAnswered: false,
       },
@@ -1009,9 +994,6 @@ async function main() {
         description:
           "Please pray for our church family to grow deeper in faith and love for God and one another.",
         requester: "Pastor John",
-        category: PrayerCategory.SPIRITUAL,
-        priority: PrayerPriority.NORMAL,
-        status: PrayerStatus.APPROVED,
         isPrivate: false,
         isAnswered: false,
       },
@@ -1022,9 +1004,6 @@ async function main() {
         description:
           "Thank you for your prayers! Our baby was born healthy. Praise God!",
         requester: "The Johnson Family",
-        category: PrayerCategory.FAMILY,
-        priority: PrayerPriority.NORMAL,
-        status: PrayerStatus.ANSWERED,
         isPrivate: false,
         isAnswered: true,
         answeredAt: new Date(),

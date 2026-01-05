@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { ScrollReveal } from "../components/ScrollReveal";
-import HeroSection from "../components/HeroSection";
+import PageHero from "../components/PageHero";
 import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import PageContainer from "../components/PageContainer";
 import { announcementsAPI, calendarAPI, Announcement } from "../services/api";
-import bulletinImage from "../assets/bulletin.jpg";
 import "./Bulletin.css";
 
 // Main Bulletin Component
@@ -315,12 +314,10 @@ const Bulletin: React.FC = () => {
   return (
     <PageContainer>
       <div className="bulletin-page-wrapper">
-        <HeroSection
+        <PageHero
+          eyebrow="CHURCH EVENTS & ANNOUNCEMENTS"
           title="BULLETIN"
-          subtitle="CHURCH EVENTS & ANNOUNCEMENTS"
-          description="Stay connected with our church community through upcoming events and important announcements"
-          backgroundImage={`url(${bulletinImage})`}
-          variant="centered"
+          subtitle="Stay connected with our church community through upcoming events and important announcements"
         />
 
         <div className="bulletin-content">

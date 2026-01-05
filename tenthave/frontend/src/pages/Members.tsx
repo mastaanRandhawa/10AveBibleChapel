@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { useNavigate } from "react-router-dom";
-import HeroSection from "../components/HeroSection";
+import PageHero from "../components/PageHero";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PageContainer from "../components/PageContainer";
 import { SkeletonTable } from "../components/SkeletonLoader";
@@ -56,10 +56,10 @@ const Members: React.FC = () => {
   return (
     <PageContainer>
       <div className="members-page-wrapper">
-        <HeroSection
-          title={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
-          subtitle={user?.name || ""}
-          variant="simple"
+        <PageHero
+          eyebrow={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
+          title={isAdmin ? "ADMIN" : "MEMBERS"}
+          subtitle={isAdmin ? "Manage announcements, sermons, calendar, and members" : undefined}
         />
 
         <div className="members-content">
@@ -131,8 +131,6 @@ const PrayerRequestsTab: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [categoryFilter, setCategoryFilter] = useState("all");
 
   useEffect(() => {
     loadPrayers();
@@ -140,13 +138,13 @@ const PrayerRequestsTab: React.FC = () => {
 
   useEffect(() => {
     filterPrayers();
-  }, [prayers, searchQuery, statusFilter, categoryFilter]);
+  }, [prayers, searchQuery]);
 
   const loadPrayers = async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await prayerRequestsAPI.getAll({ status: "APPROVED" });
+      const data = await prayerRequestsAPI.getAll();
       setPrayers(data);
     } catch (err: any) {
       setError(err.message);
@@ -167,33 +165,9 @@ const PrayerRequestsTab: React.FC = () => {
       );
     }
 
-    // Status filter
-    if (statusFilter !== "all") {
-      filtered = filtered.filter((p) => p.status === statusFilter);
-    }
-
-    // Category filter
-    if (categoryFilter !== "all") {
-      filtered = filtered.filter((p) => p.category === categoryFilter);
-    }
-
     setFilteredPrayers(filtered);
   };
 
-  const handleUpdateStatus = async (id: string, status: string) => {
-    if (!window.confirm(`Mark this prayer request as ${status}?`)) return;
-    try {
-      await prayerRequestsAPI.update(id, { status });
-      loadPrayers();
-    } catch (err: any) {
-      alert("Failed to update prayer request: " + err.message);
-    }
-  };
-
-  const getUniqueCategoriesFromPrayers = () => {
-    const categories = prayers.map((p) => p.category).filter(Boolean);
-    return Array.from(new Set(categories));
-  };
 
   if (loading) {
     return (
@@ -245,28 +219,6 @@ const PrayerRequestsTab: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <select
-            className="admin-filter-select"
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
-            <option value="all">All Statuses</option>
-            <option value="PENDING">Pending</option>
-            <option value="APPROVED">Approved</option>
-            <option value="ANSWERED">Answered</option>
-          </select>
-          <select
-            className="admin-filter-select"
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-          >
-            <option value="all">All Categories</option>
-            {getUniqueCategoriesFromPrayers().map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
         </div>
       )}
 
@@ -290,26 +242,23 @@ const PrayerRequestsTab: React.FC = () => {
               <h3>{prayer.title}</h3>
               <p>{prayer.description}</p>
               <div className="prayer-meta">
-                <span
-                  className={`status-badge status-${prayer.status.toLowerCase()}`}
-                >
-                  {prayer.status}
-                </span>
-                <span
-                  className={`priority-badge priority-${prayer.priority.toLowerCase()}`}
-                >
-                  {prayer.priority}
-                </span>
-                <span>{prayer.category}</span>
                 {prayer.requester && <span>By: {prayer.requester}</span>}
                 <span>{new Date(prayer.createdAt).toLocaleDateString()}</span>
               </div>
               {isAdmin && (
                 <div className="prayer-actions">
-                  {prayer.status !== "ANSWERED" && (
+                  {!prayer.isAnswered && (
                     <button
                       className="btn-success"
-                      onClick={() => handleUpdateStatus(prayer.id, "ANSWERED")}
+                      onClick={async () => {
+                        if (!window.confirm("Mark this prayer request as answered?")) return;
+                        try {
+                          await prayerRequestsAPI.update(prayer.id, { isAnswered: true, answeredAt: new Date().toISOString() });
+                          loadPrayers();
+                        } catch (err: any) {
+                          alert("Failed to update prayer request: " + err.message);
+                        }
+                      }}
                     >
                       Mark Answered
                     </button>
