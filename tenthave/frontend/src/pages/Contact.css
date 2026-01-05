@@ -25,7 +25,7 @@
 .contact-form-section {
     background: var(--color-bg);
     padding: var(--spacing-2xl);
-    border-radius: var(--radius-xl);
+    border-radius: 0;
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -76,7 +76,7 @@
     width: 100%;
     padding: var(--spacing-md);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     font-family: var(--font-primary);
     font-size: var(--font-size-body);
     background-color: var(--color-bg);
@@ -109,7 +109,7 @@
     padding: var(--spacing-md);
     background: #D1FAE5;
     border: 1px solid #10B981;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     color: #065F46;
     font-size: var(--font-size-small);
     margin-bottom: var(--spacing-lg);
@@ -122,7 +122,7 @@
     padding: var(--spacing-md);
     background: #FEF2F2;
     border: 1px solid #FCA5A5;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     color: var(--color-error);
     font-size: var(--font-size-small);
     margin-bottom: var(--spacing-lg);
@@ -142,7 +142,7 @@
     background: var(--color-primary);
     color: var(--color-dark);
     border: 2px solid var(--color-primary);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     font-family: var(--font-primary);
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-semibold);
@@ -176,7 +176,7 @@
 .contact-details-section {
     background: var(--color-bg);
     padding: var(--spacing-2xl);
-    border-radius: var(--radius-xl);
+    border-radius: 0;
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
@@ -189,7 +189,7 @@
     flex-direction: column;
     gap: var(--spacing-sm);
     padding: var(--spacing-lg);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     transition: background-color var(--transition-fast);
 }
 

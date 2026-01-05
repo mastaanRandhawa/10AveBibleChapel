@@ -170,19 +170,6 @@ const Calendar: React.FC<CalendarProps> = ({
 
   return (
     <div className="calendar-wrapper">
-      {/* Calendar Header */}
-      <div className="calendar-header">
-        {isAdmin && (
-          <button
-            className="calendar-add-event-btn"
-            onClick={() => onAddEvent(selectedDate)}
-            aria-label="Add new event"
-          >
-            + Add Event
-          </button>
-        )}
-      </div>
-
       {/* Calendar Content: Side Panel + Grid */}
       <div className="calendar-content">
         {/* Left: STABLE Selected Date Panel - NEVER changes layout */}

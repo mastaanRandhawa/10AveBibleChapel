@@ -109,7 +109,7 @@
     background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
     border: none;
     margin: var(--spacing-sm) 0 var(--spacing-md) 0;
-    border-radius: var(--radius-sm);
+    border-radius: 0;
 }
 
 /* Quick Links */

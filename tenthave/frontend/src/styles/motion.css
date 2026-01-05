@@ -35,7 +35,7 @@
             var(--color-bg-secondary) 100%);
     background-size: 200% 100%;
     animation: shimmer 1.5s ease-in-out infinite;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     display: block;
 }
 
@@ -78,7 +78,7 @@
 .skeleton-avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 0;
 }
 
 .skeleton-button {

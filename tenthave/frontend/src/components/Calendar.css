@@ -48,7 +48,7 @@
     background-color: var(--color-primary);
     color: var(--color-dark);
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     padding: var(--spacing-sm) var(--spacing-xl);
     font-family: var(--font-primary);
     font-size: var(--font-size-h6);
@@ -86,7 +86,7 @@
 .calendar-side-panel {
     background: var(--color-bg);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     padding: var(--spacing-2xl);
     position: sticky;
     top: calc(80px + var(--spacing-lg));
@@ -144,7 +144,7 @@
     background: transparent;
     border: none;
     border-left: 2px solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     cursor: pointer;
     transition: all 150ms ease;
     width: 100%;
@@ -164,7 +164,7 @@
 .event-indicator {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
+    border-radius: 0;
     flex-shrink: 0;
     margin-top: 6px;
 }
@@ -218,7 +218,7 @@
 .calendar-grid-panel {
     background: var(--color-bg);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     padding: var(--spacing-xl);
     box-shadow: var(--shadow-sm);
 }
@@ -590,12 +590,12 @@
 
 .calendar-side-panel::-webkit-scrollbar-track {
     background: var(--color-light);
-    border-radius: 4px;
+    border-radius: 0;
 }
 
 .calendar-side-panel::-webkit-scrollbar-thumb {
     background: var(--color-muted-gray);
-    border-radius: 4px;
+    border-radius: 0;
 }
 
 .calendar-side-panel::-webkit-scrollbar-thumb:hover {

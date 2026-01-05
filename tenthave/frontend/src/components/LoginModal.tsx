@@ -101,8 +101,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
   return (
     <div className="login-modal-overlay" onClick={handleOverlayClick}>
       <div className="login-modal">
-        <button className="login-modal-close" onClick={onClose}>
-          ✕
+        <button className="login-modal-close" onClick={onClose} aria-label="Close">
+          Close
         </button>
 
         <div className="login-modal-header">

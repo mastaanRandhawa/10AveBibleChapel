@@ -44,7 +44,7 @@
     width: 50%;
     height: auto;
     margin-bottom: var(--spacing-2xl);
-    border-radius: var(--radius-xl);
+    border-radius: 0;
     transition: transform var(--transition-normal);
 }
 
@@ -69,7 +69,7 @@
     max-width: 800px;
     margin: var(--spacing-3xl) auto;
     padding: var(--spacing-2xl);
-    border-radius: var(--radius-xl);
+    border-radius: 0;
 }
 
 .textJohn p {
@@ -88,7 +88,7 @@
     margin: var(--spacing-3xl) auto;
     text-align: center;
     padding: var(--spacing-2xl);
-    border-radius: var(--radius-xl);
+    border-radius: 0;
 }
 
 .learnAboutUs h2 {

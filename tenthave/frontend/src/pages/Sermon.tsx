@@ -318,7 +318,7 @@ const SermonPage: React.FC = () => {
                     onClick={() => setSearchQuery("")}
                     aria-label="Clear search"
                   >
-                    ✕
+                    Clear
                   </button>
                 )}
               </div>

@@ -63,7 +63,7 @@
     border-left: 3px solid var(--color-primary);
     padding: var(--spacing-xl);
     margin: var(--spacing-xl) 0;
-    border-radius: var(--radius-lg);
+    border-radius: 0;
 }
 
 .verse-highlight blockquote {
@@ -101,7 +101,7 @@
 .belief-image {
     width: 200px;
     height: 200px;
-    border-radius: 12px;
+    border-radius: 0;
     overflow: hidden;
     transition: transform 0.3s ease;
 }
@@ -149,7 +149,7 @@
     width: 60px;
     height: 3px;
     background-color: var(--color-primary);
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 .section-subtitle {
@@ -185,7 +185,7 @@
     align-items: flex-start;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    border-radius: 8px;
+    border-radius: 0;
     transition: background-color 0.3s ease;
 }
 
@@ -197,7 +197,7 @@
     width: 8px;
     height: 8px;
     background-color: var(--color-dark);
-    border-radius: 50%;
+    border-radius: 0;
     margin-top: var(--spacing-sm);
     flex-shrink: 0;
 }

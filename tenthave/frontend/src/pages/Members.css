@@ -67,7 +67,7 @@
     padding: var(--padding-xl);
     border: 2px solid var(--color-primary);
     border-bottom: 15px solid var(--color-primary);
-    border-radius: 8px;
+    border-radius: 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 

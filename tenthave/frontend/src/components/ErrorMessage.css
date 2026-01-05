@@ -1,7 +1,7 @@
 /* ErrorMessage Component Styles */
 .error-message {
     padding: var(--spacing-md);
-    border-radius: 6px;
+    border-radius: 0;
     margin: var(--spacing-md) 0;
     border-left: 4px solid;
     font-family: var(--font-primary);
@@ -22,17 +22,17 @@
 .error-message-dismiss {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
     cursor: pointer;
-    padding: 0;
-    width: 24px;
-    height: 24px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    transition: background-color var(--interaction-fast);
+    border-radius: 0;
+    transition: background-color var(--transition-fast);
     flex-shrink: 0;
+    opacity: 0.8;
 }
 
 .error-message-dismiss:hover {

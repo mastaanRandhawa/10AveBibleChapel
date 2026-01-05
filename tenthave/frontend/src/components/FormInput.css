@@ -25,7 +25,7 @@
     color: var(--input-text);
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     transition: all var(--transition-fast);
     line-height: var(--line-height-normal);
 }

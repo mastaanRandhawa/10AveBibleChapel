@@ -10,7 +10,7 @@
     width: 100%;
     min-height: 300px;
     font-family: var(--font-primary);
-    border-radius: var(--radius-xl);
+    border-radius: 0;
     box-shadow: var(--shadow-lg);
     transition: all var(--interaction-normal);
     position: relative;

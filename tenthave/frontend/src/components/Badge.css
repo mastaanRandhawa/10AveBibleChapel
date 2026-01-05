@@ -7,7 +7,7 @@
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     line-height: 1;
     white-space: nowrap;
 }

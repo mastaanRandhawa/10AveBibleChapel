@@ -32,7 +32,7 @@
 
 .skeleton-card-item {
     border: 1px solid var(--border-color-light);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     overflow: hidden;
     background: var(--color-white);
 }
@@ -46,7 +46,7 @@
     width: 100%;
     padding: var(--spacing-xl);
     background: var(--color-white);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     border: 1px solid var(--border-color-light);
 }
 

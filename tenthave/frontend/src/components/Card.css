@@ -5,7 +5,7 @@
     text-align: left;
     max-width: 400px;
     width: 100%;
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     font-family: var(--font-primary);
     transition: border-color var(--transition-fast);
     border: 1px solid var(--border-color);
@@ -47,7 +47,7 @@
     .card {
         padding: var(--spacing-lg);
         max-width: 100%;
-        border-radius: var(--radius-lg);
+        border-radius: 0;
     }
 
     .card img {
@@ -71,7 +71,7 @@
     .card {
         padding: var(--spacing-lg);
         max-width: 100%;
-        border-radius: var(--radius-lg);
+        border-radius: 0;
     }
 
     .card img {
@@ -94,7 +94,7 @@
     .card {
         padding: var(--card-padding);
         max-width: 400px;
-        border-radius: var(--radius-xl);
+        border-radius: 0;
     }
 
     .card img {

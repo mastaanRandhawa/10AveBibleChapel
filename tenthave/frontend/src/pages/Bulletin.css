@@ -31,7 +31,7 @@
     width: 80px;
     height: 3px;
     background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 .bulletin-hero p {
@@ -76,7 +76,7 @@
     width: 60px;
     height: 2px;
     background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
-    border-radius: 1px;
+    border-radius: 0;
 }
 
 .section-header p {
@@ -97,7 +97,7 @@
 /* Professional Calendar Container */
 .calendar-container {
     background: var(--color-bg);
-    border-radius: 16px;
+    border-radius: 0;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border: 1px solid rgba(251, 203, 156, 0.2);
@@ -127,7 +127,7 @@
 .calendar-nav-btn {
     background: var(--color-primary);
     border: none;
-    border-radius: 50%;
+    border-radius: 0;
     width: 45px;
     height: 45px;
     font-size: var(--font-size-h4);
@@ -167,7 +167,7 @@
 .calendar-today-btn {
     background: var(--color-bg);
     border: 2px solid var(--color-primary);
-    border-radius: 8px;
+    border-radius: 0;
     padding: var(--spacing-sm) var(--spacing-lg);
     font-family: var(--font-primary);
     font-size: var(--font-size-h6);
@@ -262,7 +262,7 @@
     padding: 4px 8px;
     min-width: 24px;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 0;
     transition: all 0.3s ease;
 }
 
@@ -285,7 +285,7 @@
     font-size: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 4px;
+    border-radius: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -319,7 +319,7 @@
     padding: 2px 6px;
     min-width: 18px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -330,7 +330,7 @@
     right: var(--spacing-sm);
     background: var(--color-primary);
     border: none;
-    border-radius: 50%;
+    border-radius: 0;
     width: 24px;
     height: 24px;
     font-size: 14px;
@@ -912,7 +912,7 @@
     padding: var(--spacing-xl);
     border: 2px solid var(--color-primary);
     border-bottom: 15px solid var(--color-primary);
-    border-radius: 8px;
+    border-radius: 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }

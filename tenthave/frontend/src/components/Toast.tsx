@@ -22,7 +22,7 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose }) => {
         <span className="toast-message">{message}</span>
       </div>
       <button className="toast-close" onClick={onClose} aria-label="Close">
-        ×
+        Close
       </button>
     </div>
   );

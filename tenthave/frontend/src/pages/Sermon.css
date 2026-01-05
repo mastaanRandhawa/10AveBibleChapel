@@ -19,7 +19,7 @@
     margin-bottom: var(--spacing-2xl);
     padding: var(--spacing-sm);
     background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -36,7 +36,7 @@
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -110,7 +110,7 @@
     padding: var(--spacing-md) var(--spacing-xl);
     padding-right: var(--spacing-5xl);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     font-family: var(--font-primary);
     font-size: var(--font-size-body);
     background: var(--color-bg);
@@ -137,7 +137,7 @@
     background: var(--color-muted-gray);
     color: var(--color-white);
     border: none;
-    border-radius: 50%;
+    border-radius: 0;
     width: 28px;
     height: 28px;
     display: flex;
@@ -159,7 +159,7 @@
     padding: var(--spacing-4xl) var(--spacing-lg);
     background: var(--color-bg-secondary);
     border: 2px dashed var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
 }
 
 .sermon-empty-state p {

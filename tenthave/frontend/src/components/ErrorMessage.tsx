@@ -49,7 +49,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
             aria-label="Dismiss message"
             type="button"
           >
-            ×
+            Close
           </button>
         )}
       </div>
