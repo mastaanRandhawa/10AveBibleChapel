@@ -1,3 +1,20 @@
 # https://www.robotstxt.org/robotstxt.html
+# Robots.txt for 10th Avenue Bible Chapel
+
+# Allow all search engines to crawl the site
 User-agent: *
-Disallow:
+Allow: /
+
+# Disallow private/member-only pages
+Disallow: /login
+Disallow: /members
+Disallow: /profile
+
+# Disallow admin and API endpoints (if any)
+Disallow: /api/
+
+# Allow sitemap
+Sitemap: https://10thavebiblechapel.com/sitemap.xml
+
+# Crawl-delay (optional, adjust if needed)
+# Crawl-delay: 1

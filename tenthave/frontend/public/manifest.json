@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "10th Ave Chapel",
+  "name": "Tenth Avenue Bible Chapel",
+  "description": "A small Bible believing Christian fellowship in Burnaby, BC",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#8B4513",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary"
 }

@@ -1,43 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#8B4513" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title"
+    content="Tenth Avenue Bible Chapel - A Small Bible Believing Christian Fellowship in Burnaby, BC" />
+  <meta name="description"
+    content="Tenth Avenue Bible Chapel is a small Bible believing Christian fellowship in Burnaby, BC. Join us for Breaking of Bread, Family Bible Hour, and Assembly Prayer Meeting. Services at 7103 - 10th Ave., Burnaby." />
+  <meta name="keywords"
+    content="church, 10th avenue bible chapel, burnaby, bc, bible, christian, fellowship, worship, sermon, burnaby church" />
+  <meta name="author" content="10th Avenue Bible Chapel" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="geo.region" content="CA-BC" />
+  <meta name="geo.placename" content="Burnaby" />
+  <meta name="geo.position" content="49.2488;-122.9805" />
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.tenthavechapel.com" />
+  <meta property="og:title" content="Tenth Avenue Bible Chapel - A Small Bible Believing Christian Fellowship" />
+  <meta property="og:description"
+    content="Tenth Avenue Bible Chapel is a small Bible believing Christian fellowship in Burnaby, BC. Join us for Breaking of Bread, Family Bible Hour, and Assembly Prayer Meeting." />
+  <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+  <meta property="og:site_name" content="10th Avenue Bible Chapel" />
+  <meta property="og:locale" content="en_CA" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.tenthavechapel.com" />
+  <meta name="twitter:title" content="Tenth Avenue Bible Chapel - A Small Bible Believing Christian Fellowship" />
+  <meta name="twitter:description"
+    content="Tenth Avenue Bible Chapel is a small Bible believing Christian fellowship in Burnaby, BC. Join us for weekly services and Bible study." />
+  <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://10thavebiblechapel.com/" />
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+
+  <!-- Google Analytics 4 - Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+
+  <!-- Google Search Console Verification - Replace with your verification code -->
+  <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
+
+  <!-- Structured Data (JSON-LD) for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PlaceOfWorship",
+      "@id": "https://www.tenthavechapel.com",
+      "name": "Tenth Avenue Bible Chapel",
+      "alternateName": "10th Avenue Bible Chapel",
+      "description": "A small Bible believing Christian fellowship in Burnaby, BC",
+      "url": "https://www.tenthavechapel.com",
+      "logo": "https://www.tenthavechapel.com/logo512.png",
+      "image": "https://www.tenthavechapel.com/logo512.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "7103 - 10th Ave.",
+        "addressLocality": "Burnaby",
+        "addressRegion": "BC",
+        "postalCode": "V3N 2R5",
+        "addressCountry": "CA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "49.2488",
+        "longitude": "-122.9805"
+      },
+      "telephone": "604-524-5445",
+      "email": "info@tenthavechapel.com",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "10:00",
+          "closes": "11:30",
+          "description": "Breaking of Bread"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "11:30",
+          "closes": "12:30",
+          "description": "Family Bible Hour"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Wednesday",
+          "opens": "19:00",
+          "closes": "20:00",
+          "description": "Assembly Prayer Meeting"
+        }
+      ],
+      "sameAs": [
+        "https://www.tenthavechapel.com"
+      ]
+    }
+    </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Tenth Avenue Bible Chapel",
+      "alternateName": "10th Avenue Bible Chapel",
+      "url": "https://www.tenthavechapel.com",
+      "logo": "https://www.tenthavechapel.com/logo512.png",
+      "description": "A small Bible believing Christian fellowship",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "7103 - 10th Ave.",
+        "addressLocality": "Burnaby",
+        "addressRegion": "BC",
+        "postalCode": "V3N 2R5",
+        "addressCountry": "CA"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-604-524-5445",
+        "contactType": "General Inquiry",
+        "email": "info@tenthavechapel.com",
+        "areaServed": "CA",
+        "availableLanguage": "English"
+      }
+    }
+    </script>
+
+  <title>Tenth Avenue Bible Chapel - A Small Bible Believing Christian Fellowship in Burnaby, BC</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+
 </html>

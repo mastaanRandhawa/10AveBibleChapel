@@ -24,15 +24,21 @@ const SermonSeriesDetail: React.FC = () => {
       setError(null);
 
       // Fetch all sermons and filter by series
-      const allSermons = await sermonsAPI.getAll({ status: "PUBLISHED", isPublic: "true" });
-      
+      const allSermons = await sermonsAPI.getAll({
+        status: "PUBLISHED",
+        isPublic: "true",
+      });
+
       // Filter by series - match seriesId to series name
       const seriesSermons = allSermons.filter((sermon) => {
         if (!sermon.series) {
           return seriesId === "standalone-sermons";
         }
         // Convert series name to ID format and compare
-        const sermonSeriesId = sermon.series.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+        const sermonSeriesId = sermon.series
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "");
         return sermonSeriesId === seriesId?.toLowerCase();
       });
 
@@ -42,8 +48,10 @@ const SermonSeriesDetail: React.FC = () => {
       }
 
       // Sort by date (newest first)
-      seriesSermons.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      
+      seriesSermons.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+
       setSermons(seriesSermons);
     } catch (err: any) {
       console.error("Error loading sermon series:", err);
@@ -131,7 +139,10 @@ const SermonSeriesDetail: React.FC = () => {
           <div className="error-message">
             <h1>Series Not Found</h1>
             <p>The sermon series you're looking for doesn't exist.</p>
-            <button onClick={() => navigate("/sermon")} style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}>
+            <button
+              onClick={() => navigate("/sermon")}
+              style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}
+            >
               Back to Sermons
             </button>
           </div>
