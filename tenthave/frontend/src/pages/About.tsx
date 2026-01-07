@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import PageContainer from "../components/PageContainer";
 import mountainsImage from "../assets/church-inside.jpg";
 import "./About.css";
+import prayingIcon from "../assets/Praying-aboutus.jpg";
 
 // Belief item interface
 interface BeliefItem {
@@ -121,43 +122,32 @@ const BeliefsList: React.FC = () => (
 const About: React.FC = () => {
   return (
     <PageContainer>
-    <div className="about-page-wrapper">
-      <HeroSection
-        title="ABOUT US"
-        subtitle="WHO WE ARE"
-        description="Discover our mission, beliefs, and the heart of our church community"
-        backgroundImage={`url(${mountainsImage})`}
-        variant="centered"
-      />
+      <div className="about-page-wrapper">
+        <HeroSection
+          title="ABOUT US"
+          subtitle="WHO WE ARE"
+          description="Discover our mission, beliefs, and the heart of our church community"
+          backgroundImage={`url(${mountainsImage})`}
+          variant="centered"
+        />
 
-      <div className="about-content">
-        <ScrollReveal className="who-we-are-section">
-          <WhoWeAreSection />
-        </ScrollReveal>
+        <div className="about-content">
+          <ScrollReveal className="who-we-are-section">
+            <WhoWeAreSection />
+          </ScrollReveal>
 
-        <ScrollReveal className="beliefs-section">
-          <div className="beliefs-images">
-            <div className="belief-image">
-              <img
-                src="/assets/prayingiconround.svg"
-                alt="Man praying with Bible"
-              />
+          <ScrollReveal className="beliefs-section">
+            <div className="beliefs-images">
+              <img src={prayingIcon} alt="Man praying with Bible" />
             </div>
-            <div className="belief-image">
-              <img src="/assets/bible.svg" alt="People reading Bible" />
+            <div className="beliefs-header">
+              <h3 className="mission-subtitle">OUR MISSION & VISION</h3>
+              <h2 className="section-heading2">What Do We Believe?</h2>
             </div>
-            <div className="belief-image">
-              <img src="/assets/breakingofbread.svg" alt="Baptism ceremony" />
-            </div>
-          </div>
-          <div className="beliefs-header">
-            <h3 className="mission-subtitle">OUR MISSION & VISION</h3>
-            <h2 className="section-heading2">What Do We Believe?</h2>
-          </div>
-          <BeliefsList />
-        </ScrollReveal>
+            <BeliefsList />
+          </ScrollReveal>
+        </div>
       </div>
-    </div>
     </PageContainer>
   );
 };

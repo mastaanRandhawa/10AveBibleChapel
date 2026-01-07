@@ -67,11 +67,11 @@
 }
 
 .verse-highlight blockquote {
-    font-size: var(--font-size-h4);
+    font-size: var(--font-size-h3);
     font-style: italic;
     color: var(--color-dark);
     margin: 0 0 var(--spacing-sm) 0;
-    line-height: 1.6;
+    line-height: 1;
     text-align: center;
 }
 
