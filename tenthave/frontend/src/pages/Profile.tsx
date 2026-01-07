@@ -6,7 +6,7 @@ import PageHero from "../components/PageHero";
 import PageContainer from "../components/PageContainer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "./Profile.css";
-import profileImage from "../assets/worship.jpg";
+import profileImage from "../assets/bible-wood.jpg";
 
 const Profile: React.FC = () => {
   const {

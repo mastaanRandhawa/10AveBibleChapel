@@ -21,7 +21,7 @@ import {
 import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
 import "./Members.css";
 import "./AdminDashboard.css";
-import membersImage from "../assets/admin.png";
+import membersImage from "../assets/group-people-holding-hands-praying-worship-believe.jpg";
 
 const Members: React.FC = () => {
   const {

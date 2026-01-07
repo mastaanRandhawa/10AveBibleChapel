@@ -43,7 +43,6 @@
 .specialServices img {
     width: 50%;
     height: auto;
-    margin-bottom: var(--spacing-2xl);
     border-radius: 0;
     transition: transform var(--transition-normal);
 }
@@ -67,8 +66,9 @@
 
 .textJohn {
     max-width: 800px;
-    margin: var(--spacing-3xl) auto;
+    margin: 0 auto;
     padding: var(--spacing-2xl);
+    padding-top: var(--spacing-3xl);
     border-radius: 0;
 }
 

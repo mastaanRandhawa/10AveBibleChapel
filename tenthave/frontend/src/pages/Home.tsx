@@ -15,7 +15,7 @@ import { sermonsAPI, Sermon } from "../services/api";
 import "./Home.css";
 
 // Import assets
-import churchTriPicture from "../assets/churchTriPhoto.svg";
+import churchTriPicture from "../assets/sunday-school.jpg";
 import churchPicture from "../assets/churchPicture.svg";
 // Home Hero Section Component
 const HomeHeroSection: React.FC = () => (
@@ -64,46 +64,49 @@ const WeeklyServicesSection: React.FC = () => (
 
 // Special Services Section Component
 const SpecialServicesSection: React.FC = () => (
-  <section
-    className="specialServices"
-    aria-labelledby="special-ministries-heading"
-  >
-    <img
-      src={churchTriPicture}
-      alt="10th Avenue Bible Chapel building exterior"
-    />
-
-    <ScrollReveal className="learnAboutUs">
-      <h2>LEARN MORE ABOUT US</h2>
-      <p>
-        Discover our mission, values, and the community that makes 10th Avenue
-        Bible Chapel a welcoming place for all who seek to grow in faith.
-      </p>
-    </ScrollReveal>
-
-    <Link to="/about" aria-label="Learn more about 10th Avenue Bible Chapel">
-      <Button variant="button-primary" buttonText="LEARN MORE" />
-    </Link>
-
-    <ScrollReveal className="specialMinistriesHeading">
-      <h2 id="special-ministries-heading">SPECIAL MINISTRIES & EVENTS</h2>
-    </ScrollReveal>
-
-    <ScrollReveal
-      className="specialServicesCard"
-      role="list"
-      aria-label="Special ministries and events"
+  <>
+    <section
+      className="specialServices"
+      aria-labelledby="special-ministries-heading"
     >
-      {SPECIAL_MINISTRIES.map((ministry) => (
-        <SpecialCard
-          key={ministry.id}
-          headingOne={ministry.name}
-          paragraph={ministry.description}
-          iconlink={ministry.icon}
-        />
-      ))}
-    </ScrollReveal>
-  </section>
+      <img
+        src={churchTriPicture}
+        alt="10th Avenue Bible Chapel building exterior"
+      />
+
+      <ScrollReveal className="learnAboutUs">
+        <h2>LEARN MORE ABOUT US</h2>
+        <p>
+          Discover our mission, values, and the community that makes 10th Avenue
+          Bible Chapel a welcoming place for all who seek to grow in faith.
+        </p>
+      </ScrollReveal>
+
+      <Link to="/about" aria-label="Learn more about 10th Avenue Bible Chapel">
+        <Button variant="button-primary" buttonText="LEARN MORE" />
+      </Link>
+    </section>
+    <section className="specialMinistries">
+      <ScrollReveal className="specialMinistriesHeading">
+        <h2 id="special-ministries-heading">SPECIAL MINISTRIES & EVENTS</h2>
+      </ScrollReveal>
+
+      <ScrollReveal
+        className="specialServicesCard"
+        role="list"
+        aria-label="Special ministries and events"
+      >
+        {SPECIAL_MINISTRIES.map((ministry) => (
+          <SpecialCard
+            key={ministry.id}
+            headingOne={ministry.name}
+            paragraph={ministry.description}
+            iconlink={ministry.icon}
+          />
+        ))}
+      </ScrollReveal>
+    </section>
+  </>
 );
 
 // Recorded Sermons Section Component

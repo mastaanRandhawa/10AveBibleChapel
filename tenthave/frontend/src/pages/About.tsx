@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import PageContainer from "../components/PageContainer";
-import mountainsImage from "../assets/mountains.jpg";
+import mountainsImage from "../assets/church-inside.jpg";
 import "./About.css";
 
 // Belief item interface
