@@ -6,6 +6,7 @@ import PageHero from "../components/PageHero";
 import PageContainer from "../components/PageContainer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "./Profile.css";
+import profileImage from "../assets/worship.jpg";
 
 const Profile: React.FC = () => {
   const {
@@ -103,6 +104,7 @@ const Profile: React.FC = () => {
     <PageContainer>
       <div className="profile-page-wrapper">
         <PageHero
+          backgroundImage={profileImage}
           title="MY PROFILE"
           subtitle="Update your account information"
         />

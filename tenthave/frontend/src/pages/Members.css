@@ -1478,3 +1478,356 @@
         font-size: var(--font-size-h6);
     }
 }
+
+/* ============================================
+   PRINT STYLES FOR PRAYER LIST
+   ============================================ */
+
+/* Utility classes for print control */
+.print-only {
+    display: none;
+}
+
+.no-print {
+    display: block;
+}
+
+@media print {
+
+    /* Utility classes */
+    .print-only {
+        display: block !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Page setup - minimal margins for maximum space usage */
+    @page {
+        margin: 1cm;
+        size: auto;
+    }
+
+    /* Hide all non-essential UI elements */
+    header,
+    nav,
+    footer,
+    .page-hero,
+    .members-hero,
+    .dashboard-tabs,
+    .tab-button,
+    .admin-filters,
+    .admin-search,
+    .prayer-actions,
+    button,
+    .btn-primary,
+    .btn-success,
+    .btn-secondary,
+    .skeleton-loader,
+    .skeleton-card,
+    .error-state button,
+    .empty-state,
+    .prayer-form-section,
+    .prayer-view-section,
+    .print-btn,
+    input,
+    textarea,
+    select,
+    form,
+    .login-link-btn,
+    .prayer-login-btn,
+    .view-all-btn {
+        display: none !important;
+    }
+
+    /* Reset page styles for print */
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 10pt;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-container,
+    .members-page-wrapper {
+        background: white !important;
+        min-height: auto !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Centered page with paper-like max-width */
+    .members-content {
+        max-width: 8.5in !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+    .dashboard-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Print header - centered, small caps */
+    .print-header {
+        text-align: center;
+        margin-bottom: 0.8cm;
+        padding-bottom: 0.4cm;
+        border-bottom: 1px dotted #999;
+        page-break-after: avoid;
+    }
+
+    .print-header h1 {
+        font-size: 18pt;
+        font-weight: normal;
+        margin: 0 0 0.2cm 0;
+        color: black;
+        font-family: var(--font-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+    }
+
+    .print-date {
+        font-size: 9pt;
+        color: black;
+        margin: 0;
+        font-family: var(--font-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    /* Tab content styling */
+    .tab-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .tab-header {
+        display: none !important;
+    }
+
+    /* Two-column layout for prayer list */
+    .items-grid,
+    .prayer-grid,
+    .prayer-requests-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.6cm 0.8cm !important;
+        column-gap: 0.8cm !important;
+    }
+
+    /* Prayer cards - minimal styling, dotted borders */
+    .prayer-card {
+        background: white !important;
+        border: none !important;
+        border-bottom: 1px dotted #999 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0.4cm 0 !important;
+        margin: 0 !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        transform: none !important;
+    }
+
+    .prayer-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .prayer-card.answered {
+        opacity: 0.6;
+    }
+
+    .prayer-card.priority-urgent,
+    .prayer-card.priority-high,
+    .prayer-card.priority-normal {
+        border-left: none !important;
+    }
+
+    /* Prayer card content - compact, readable */
+    .prayer-card h3 {
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        color: black !important;
+        margin: 0 0 0.2cm 0 !important;
+        page-break-after: avoid;
+        font-family: var(--font-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        line-height: 1.3;
+    }
+
+    .prayer-title {
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        color: black !important;
+        margin-bottom: 0.2cm !important;
+        page-break-after: avoid;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .prayer-description {
+        font-size: 9.5pt !important;
+        color: black !important;
+        line-height: 1.5 !important;
+        margin-bottom: 0.2cm !important;
+    }
+
+    .prayer-card p {
+        font-size: 9.5pt !important;
+        color: black !important;
+        line-height: 1.5 !important;
+        margin-bottom: 0.2cm !important;
+    }
+
+    /* Prayer meta information - minimal, subtle */
+    .prayer-meta {
+        font-size: 8pt !important;
+        color: black !important;
+        margin-top: 0.15cm !important;
+        padding-top: 0.15cm !important;
+        border-top: 1px dotted #ccc !important;
+        line-height: 1.4 !important;
+    }
+
+    .prayer-meta span {
+        display: inline;
+        margin: 0 0.3cm 0 0;
+    }
+
+    .prayer-meta span:not(:last-child)::after {
+        content: " • ";
+        margin: 0 0.2cm;
+    }
+
+    .prayer-requester,
+    .prayer-date,
+    .answered-date {
+        font-size: 8pt !important;
+        color: black !important;
+    }
+
+    .prayer-requester {
+        font-style: italic;
+    }
+
+    /* Hide badges in print - keep it clean */
+    .prayer-badges,
+    .answered-badge,
+    .priority-badge,
+    .category-badge,
+    .privacy-badge {
+        display: none !important;
+    }
+
+    /* Prayer header section */
+    .prayer-header {
+        margin-bottom: 0.2cm !important;
+    }
+
+    .prayer-title-section {
+        margin-bottom: 0.2cm !important;
+    }
+
+    /* Remove all backgrounds, shadows, and images */
+    * {
+        background-image: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        background: white !important;
+    }
+
+    /* Ensure good contrast for links */
+    a {
+        text-decoration: underline;
+        color: black !important;
+    }
+
+    /* Show URLs for links in print */
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 7pt;
+        color: black;
+        word-break: break-all;
+    }
+
+    /* Don't show URLs for internal anchors or javascript links */
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+        content: "";
+    }
+
+    /* Loading/error states shouldn't appear in print */
+    .prayer-loading,
+    .prayer-error,
+    .prayer-empty,
+    .skeleton-loader,
+    .error-state {
+        display: none !important;
+    }
+
+    /* Section headers - small caps, spaced letters */
+    .section-header {
+        page-break-after: avoid;
+        margin-bottom: 0.4cm !important;
+        border-bottom: 1px dotted #999;
+        padding-bottom: 0.2cm;
+    }
+
+    .section-header h2 {
+        font-size: 10pt !important;
+        font-weight: normal !important;
+        color: black !important;
+        margin-bottom: 0.1cm !important;
+        page-break-after: avoid;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+    }
+
+    .section-header h2::after {
+        display: none !important;
+    }
+
+    .section-header p {
+        font-size: 8pt !important;
+        color: black !important;
+        margin: 0 !important;
+    }
+
+    /* Prevent orphaned headings */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        page-break-after: avoid;
+    }
+
+    /* Prevent breaking prayer items */
+    .prayer-card,
+    .prayer-card h3,
+    .prayer-card .prayer-description {
+        orphans: 2;
+        widows: 2;
+    }
+
+    /* Ensure proper spacing between sections */
+    .tab-content>*+* {
+        margin-top: 0.3cm;
+    }
+
+    /* Add dotted lines between prayer items for writing space */
+    .prayer-card:not(:last-child)::after {
+        content: "";
+        display: block;
+        height: 0.3cm;
+        border-bottom: 1px dotted #ddd;
+        margin-top: 0.2cm;
+    }
+}

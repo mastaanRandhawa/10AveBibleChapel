@@ -90,7 +90,7 @@ export const CHURCH_INFO = {
 
 // Contact information
 export const CONTACT_INFO = {
-  phone: "+1 (604) 222-7777",
+  phone: "+1 (604) 524-5445",
   email: "info@10thavebiblechapel.com",
   address: "7103 - 10th Ave., Burnaby, BC V3N 2R5",
   mapUrl: "https://maps.google.com/?q=7103+10th+Ave+Burnaby+BC",

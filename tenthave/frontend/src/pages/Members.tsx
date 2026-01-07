@@ -21,6 +21,7 @@ import {
 import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
 import "./Members.css";
 import "./AdminDashboard.css";
+import membersImage from "../assets/admin.png";
 
 const Members: React.FC = () => {
   const {
@@ -57,9 +58,14 @@ const Members: React.FC = () => {
     <PageContainer>
       <div className="members-page-wrapper">
         <PageHero
+          backgroundImage={membersImage}
           eyebrow={isAdmin ? "ADMIN DASHBOARD" : "MEMBERS AREA"}
           title={isAdmin ? "ADMIN" : "MEMBERS"}
-          subtitle={isAdmin ? "Manage announcements, sermons, calendar, and members" : undefined}
+          subtitle={
+            isAdmin
+              ? "Manage announcements, sermons, calendar, and members"
+              : undefined
+          }
         />
 
         <div className="members-content">
@@ -168,7 +174,6 @@ const PrayerRequestsTab: React.FC = () => {
     setFilteredPrayers(filtered);
   };
 
-
   if (loading) {
     return (
       <div className="tab-content">
@@ -201,6 +206,19 @@ const PrayerRequestsTab: React.FC = () => {
 
   return (
     <div className="tab-content">
+      {/* Print-only header */}
+      <div className="print-only print-header">
+        <h1>Prayer List</h1>
+        <p className="print-date">
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+      </div>
+
       <div className="tab-header">
         <div>
           <h2>Prayer Requests</h2>
@@ -251,12 +269,22 @@ const PrayerRequestsTab: React.FC = () => {
                     <button
                       className="btn-success"
                       onClick={async () => {
-                        if (!window.confirm("Mark this prayer request as answered?")) return;
+                        if (
+                          !window.confirm(
+                            "Mark this prayer request as answered?"
+                          )
+                        )
+                          return;
                         try {
-                          await prayerRequestsAPI.update(prayer.id, { isAnswered: true, answeredAt: new Date().toISOString() });
+                          await prayerRequestsAPI.update(prayer.id, {
+                            isAnswered: true,
+                            answeredAt: new Date().toISOString(),
+                          });
                           loadPrayers();
                         } catch (err: any) {
-                          alert("Failed to update prayer request: " + err.message);
+                          alert(
+                            "Failed to update prayer request: " + err.message
+                          );
                         }
                       }}
                     >
