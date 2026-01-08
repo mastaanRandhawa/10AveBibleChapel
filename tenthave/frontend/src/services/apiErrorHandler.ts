@@ -43,9 +43,9 @@ export class ServerError extends Error {
  */
 export function parseAPIError(response: Response, errorData: any): APIError {
   const message = errorData?.error || errorData?.message || "An error occurred";
-  
+
   let error: APIError;
-  
+
   switch (response.status) {
     case 401:
       error = new UnauthorizedError(message);
@@ -65,15 +65,8 @@ export function parseAPIError(response: Response, errorData: any): APIError {
       error = new Error(message) as APIError;
       error.status = response.status;
   }
-  
-  return error;
-}
 
-/**
- * Check if an error is an authentication error (401/403)
- */
-export function isAuthError(error: any): boolean {
-  return error?.status === 401 || error?.status === 403;
+  return error;
 }
 
 /**
@@ -83,19 +76,18 @@ export function getUserFriendlyErrorMessage(error: any): string {
   if (error instanceof UnauthorizedError) {
     return "Please log in to continue";
   }
-  
+
   if (error instanceof ForbiddenError) {
     return "You don't have permission to perform this action";
   }
-  
+
   if (error instanceof NotFoundError) {
     return "The item you're looking for doesn't exist";
   }
-  
+
   if (error instanceof ServerError) {
     return "Server error. Please try again later";
   }
-  
+
   return error?.message || "An unexpected error occurred";
 }
-

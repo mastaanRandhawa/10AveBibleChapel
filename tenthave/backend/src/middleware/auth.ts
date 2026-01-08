@@ -63,23 +63,6 @@ export const requireAdmin = (
   next();
 };
 
-// Check if user is member or admin
-export const requireMemberOrAdmin = (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  if (!req.user) {
-    return res.status(401).json({ error: "Authentication required" });
-  }
-
-  if (req.user.role !== "ADMIN" && req.user.role !== "MEMBER") {
-    return res.status(403).json({ error: "Member or Admin access required" });
-  }
-
-  next();
-};
-
 // Check if user is approved (or admin who bypasses approval)
 export const requireApprovedUser = (
   req: AuthRequest,
@@ -97,43 +80,11 @@ export const requireApprovedUser = (
 
   // Check if user is approved
   if (!req.user.isApproved) {
-    return res.status(403).json({ 
+    return res.status(403).json({
       error: "Your account is pending admin approval",
-      code: "APPROVAL_REQUIRED" 
+      code: "APPROVAL_REQUIRED",
     });
   }
 
   next();
-};
-
-// Optional authentication - doesn't fail if no token
-export const optionalAuth = (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
-
-    if (!token) {
-      return next();
-    }
-
-    const secret = process.env.JWT_SECRET || "your-secret-key";
-
-    jwt.verify(token, secret, (err: Error | null, decoded: any) => {
-      if (!err && decoded) {
-        req.user = {
-          id: decoded.id,
-          email: decoded.email,
-          role: decoded.role,
-          isApproved: decoded.isApproved,
-        };
-      }
-      next();
-    });
-  } catch (error) {
-    next();
-  }
 };

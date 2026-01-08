@@ -29,8 +29,8 @@ const Footer: React.FC = () => {
             <a href="tel:6045245445">(604) 524-5445</a>
           </p>
           <p>
-            <a href="mailto:info@tenthavebiblechapel.com">
-              info@tenthavebiblechapel.com
+            <a href="mailto:info@tenthavechapel.com">
+              info@tenthavechapel.com
             </a>
           </p>
         </div>
