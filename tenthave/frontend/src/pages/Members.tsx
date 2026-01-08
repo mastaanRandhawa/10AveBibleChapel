@@ -1107,6 +1107,7 @@ const SermonsTab: React.FC = () => {
 // Users Tab
 const UsersTab: React.FC = () => {
   const toast = useToast();
+  const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1184,6 +1185,23 @@ const UsersTab: React.FC = () => {
       loadUsers();
     } catch (err: any) {
       toast.showError("Failed to update approval: " + err.message);
+    }
+  };
+
+  const handleDelete = async (id: string, userName: string) => {
+    if (
+      !window.confirm(
+        `Are you sure you want to delete user "${userName}"? This action cannot be undone.`
+      )
+    )
+      return;
+    try {
+      await usersAPI.delete(id);
+      toast.showSuccess("User deleted successfully");
+      loadUsers();
+    } catch (err: any) {
+      const errorMessage = getUserFriendlyErrorMessage(err);
+      toast.showError("Failed to delete user: " + errorMessage);
     }
   };
 
@@ -1328,9 +1346,26 @@ const UsersTab: React.FC = () => {
                           style={{
                             fontSize: "0.85rem",
                             padding: "0.4rem 0.8rem",
+                            marginRight: "0.5rem",
                           }}
                         >
                           {user.isApproved ? "Revoke" : "Approve"}
+                        </button>
+                        <button
+                          className="btn-danger"
+                          onClick={() => handleDelete(user.id, user.name)}
+                          disabled={currentUser?.id === user.id}
+                          style={{
+                            fontSize: "0.85rem",
+                            padding: "0.4rem 0.8rem",
+                          }}
+                          title={
+                            currentUser?.id === user.id
+                              ? "Cannot delete your own account"
+                              : `Delete ${user.name}`
+                          }
+                        >
+                          Delete
                         </button>
                       </div>
                     </td>
@@ -1388,8 +1423,21 @@ const UsersTab: React.FC = () => {
                     onClick={() =>
                       handleToggleApproval(user.id, user.isApproved)
                     }
+                    style={{ marginRight: "0.5rem" }}
                   >
                     {user.isApproved ? "Revoke" : "Approve"}
+                  </button>
+                  <button
+                    className="btn-danger"
+                    onClick={() => handleDelete(user.id, user.name)}
+                    disabled={currentUser?.id === user.id}
+                    title={
+                      currentUser?.id === user.id
+                        ? "Cannot delete your own account"
+                        : `Delete ${user.name}`
+                    }
+                  >
+                    Delete
                   </button>
                 </div>
               </div>

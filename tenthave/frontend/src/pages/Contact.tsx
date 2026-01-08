@@ -3,15 +3,13 @@ import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import PageContainer from "../components/PageContainer";
 import { CONTACT_INFO } from "../constants";
+import { contactAPI, ContactFormData } from "../services/api";
+import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
 import contactUsImage from "../assets/contact-us.jpg";
 import "./Contact.css";
 
-// Contact form interface
-interface ContactForm {
-  name: string;
-  email: string;
-  message: string;
-}
+// Contact form interface (using API type)
+type ContactForm = ContactFormData;
 
 // Contact Form Component
 const ContactFormComponent: React.FC = () => {
@@ -42,10 +40,7 @@ const ContactFormComponent: React.FC = () => {
     setSuccess(false);
 
     try {
-      // Simulate API call - replace with actual backend integration
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      console.log("Form submitted:", formData);
+      await contactAPI.send(formData);
 
       // Reset form on success
       setFormData({ name: "", email: "", message: "" });
@@ -54,7 +49,8 @@ const ContactFormComponent: React.FC = () => {
       // Clear success message after 5 seconds
       setTimeout(() => setSuccess(false), 5000);
     } catch (err: any) {
-      setError(err.message || "Failed to send message. Please try again.");
+      const errorMessage = getUserFriendlyErrorMessage(err);
+      setError(errorMessage || "Failed to send message. Please try again.");
     } finally {
       setLoading(false);
     }

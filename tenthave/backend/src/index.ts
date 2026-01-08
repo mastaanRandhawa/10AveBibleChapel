@@ -10,6 +10,7 @@ import announcementRoutes from "./routes/announcements";
 import prayerRequestRoutes from "./routes/prayerRequests";
 import sermonRoutes from "./routes/sermons";
 import userRoutes from "./routes/users";
+import contactRoutes from "./routes/contact";
 
 // Load environment variables
 dotenv.config();
@@ -37,6 +38,7 @@ app.use("/api/announcements", announcementRoutes);
 app.use("/api/prayer-requests", prayerRequestRoutes);
 app.use("/api/sermons", sermonRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/contact", contactRoutes);
 
 // Error handling middleware
 app.use(
