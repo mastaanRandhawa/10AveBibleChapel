@@ -353,15 +353,15 @@ const SermonPage: React.FC = () => {
                     ? paginatedSeries.map((series) => (
                         <SermonCard
                           key={series.id}
-                          title={series.latestSermon.title}
-                          series={`${series.seriesName} (${
-                            series.episodeCount
-                          } sermon${series.episodeCount > 1 ? "s" : ""})`}
+                          title={series.seriesName}
+                          series={series.seriesName}
                           speaker={series.latestSermon.speaker}
                           date={series.latestSermon.date}
                           passage={series.latestSermon.passage}
                           videoUrl={series.latestSermon.videoUrl}
                           audioUrl={series.latestSermon.audioUrl}
+                          isSeries={true}
+                          episodeCount={series.episodeCount}
                           onClick={() => handleSeriesClick(series.id)}
                         />
                       ))
@@ -375,6 +375,7 @@ const SermonPage: React.FC = () => {
                           passage={sermon.passage}
                           videoUrl={sermon.videoUrl}
                           audioUrl={sermon.audioUrl}
+                          isSeries={false}
                           onClick={() => {
                             if (sermon.series) {
                               const seriesId = sermon.series

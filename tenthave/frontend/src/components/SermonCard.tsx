@@ -1,4 +1,5 @@
 import React from "react";
+import Badge from "./Badge";
 import "./SermonCard.css";
 
 export interface SermonCardProps {
@@ -14,20 +15,24 @@ export interface SermonCardProps {
   audioUrl?: string;
   className?: string;
 
+  // Series-specific props
+  isSeries?: boolean;
+  episodeCount?: number;
+
   // Action handler
   onClick?: () => void;
 }
 
 /**
  * SermonCard - A unified sermon card component with modern light theme
- * 
+ *
  * Features:
  * - Series/category label at top
  * - Prominent sermon title (2-line clamp)
  * - Subtle brand-accent underline
  * - Metadata row (date, speaker, passage)
  * - Circular action button (Watch/Listen/Details)
- * 
+ *
  * @example
  * <SermonCard
  *   title="The Best Is Yet To Come"
@@ -46,6 +51,8 @@ const SermonCard: React.FC<SermonCardProps> = ({
   videoUrl,
   audioUrl,
   className = "",
+  isSeries = false,
+  episodeCount,
   onClick,
 }) => {
   // Format date for display (MM.DD.YY)
@@ -59,6 +66,7 @@ const SermonCard: React.FC<SermonCardProps> = ({
 
   // Determine action button text and behavior
   const getActionLabel = (): string => {
+    if (isSeries) return "Browse";
     if (videoUrl) return "Watch";
     if (audioUrl) return "Listen";
     return "Details";
@@ -67,7 +75,14 @@ const SermonCard: React.FC<SermonCardProps> = ({
   // Handle action button click
   const handleAction = (e: React.MouseEvent) => {
     e.stopPropagation();
-    
+
+    // For series, always use onClick to navigate to series page
+    if (isSeries && onClick) {
+      onClick();
+      return;
+    }
+
+    // For individual sermons, open video/audio or use onClick
     if (videoUrl) {
       window.open(videoUrl, "_blank", "noopener,noreferrer");
     } else if (audioUrl) {
@@ -84,8 +99,8 @@ const SermonCard: React.FC<SermonCardProps> = ({
     }
   };
 
-  // Get label text (series or "SERMON")
-  const labelText = series || "SERMON";
+  // Get label text (series name or "SERMON")
+  const labelText = isSeries ? series || "SERIES" : series || "SERMON";
 
   // Build metadata items
   const metadataItems: string[] = [];
@@ -97,7 +112,9 @@ const SermonCard: React.FC<SermonCardProps> = ({
 
   return (
     <article
-      className={`sermon-card ${className}`}
+      className={`sermon-card ${
+        isSeries ? "sermon-card--series" : ""
+      } ${className}`}
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
@@ -109,8 +126,15 @@ const SermonCard: React.FC<SermonCardProps> = ({
       }}
     >
       <div className="sermon-card__content">
-        {/* Top Label */}
-        <div className="sermon-card__label">{labelText}</div>
+        {/* Top Label Row - Series Badge + Label */}
+        <div className="sermon-card__label-row">
+          {isSeries && (
+            <Badge variant="primary" className="sermon-card__series-badge">
+              SERMON SERIES
+            </Badge>
+          )}
+          <div className="sermon-card__label">{labelText}</div>
+        </div>
 
         {/* Title */}
         <h3 className="sermon-card__title">{title}</h3>
@@ -118,8 +142,16 @@ const SermonCard: React.FC<SermonCardProps> = ({
         {/* Accent Underline */}
         <div className="sermon-card__accent" />
 
-        {/* Metadata Row */}
+        {/* Metadata Row with Episode Count for Series */}
         <div className="sermon-card__metadata">
+          {isSeries && episodeCount !== undefined && (
+            <>
+              <span className="sermon-card__episode-count">
+                {episodeCount} {episodeCount === 1 ? "sermon" : "sermons"}
+              </span>
+              <span className="sermon-card__metadata-separator">•</span>
+            </>
+          )}
           {metadataItems.map((item, index) => (
             <React.Fragment key={index}>
               <span className="sermon-card__metadata-item">{item}</span>
@@ -133,9 +165,13 @@ const SermonCard: React.FC<SermonCardProps> = ({
 
       {/* Action Button */}
       <button
-        className="sermon-card__action"
+        className={`sermon-card__action ${
+          isSeries ? "sermon-card__action--series" : ""
+        }`}
         onClick={handleAction}
-        aria-label={`${getActionLabel()} sermon: ${title}`}
+        aria-label={`${getActionLabel()} ${
+          isSeries ? "series" : "sermon"
+        }: ${title}`}
         type="button"
       >
         <span className="sermon-card__action-text">{getActionLabel()}</span>
@@ -145,4 +181,3 @@ const SermonCard: React.FC<SermonCardProps> = ({
 };
 
 export default SermonCard;
-
