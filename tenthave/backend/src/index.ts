@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
 import { PrismaClient } from "@prisma/client";
+import { buildOpenApiSpec } from "./swagger/openapiSpec";
 
 // Import routes
 import authRoutes from "./routes/auth";
@@ -39,6 +41,11 @@ app.use("/api/prayer-requests", prayerRequestRoutes);
 app.use("/api/sermons", sermonRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/contact", contactRoutes);
+
+// Swagger UI (OpenAPI)
+const openApiSpec = buildOpenApiSpec();
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiSpec, { explorer: true }));
+app.get("/api-docs.json", (_req, res) => res.json(openApiSpec));
 
 // Error handling middleware
 app.use(
