@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -93,7 +93,7 @@ model CalendarEvent {
 model Announcement {
   id            String        @id @default(cuid())
   title         String
-  content       String        @db.Text // HTML or markdown content
+  content       String // HTML or markdown (unlimited length in PostgreSQL)
   
   // Announcement details
   category      String?       // "general", "ministry", "event", "prayer", etc.
@@ -158,7 +158,7 @@ model PrayerRequest {
 model Sermon {
   id          String        @id @default(cuid())
   title       String
-  description String?       @db.Text
+  description String?
   
   // Sermon details
   speaker     String
