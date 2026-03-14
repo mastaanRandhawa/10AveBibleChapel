@@ -1,0 +1,319 @@
+/* Enhanced Home Page Styles */
+.weeklyServices {
+    padding: var(--section-padding);
+    text-align: center;
+    background-color: var(--color-bg);
+}
+
+.weeklyServices h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.weeklyServices p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-muted-gray);
+    margin-bottom: var(--spacing-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: var(--line-height-relaxed);
+}
+
+.weeklyServicesCard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.specialServices {
+    padding: var(--section-padding);
+    margin: var(--section-margin);
+    text-align: center;
+    background-color: var(--color-bg-secondary);
+}
+
+.specialServices img {
+    width: 50%;
+    height: auto;
+    border-radius: 0;
+    transition: transform var(--transition-normal);
+}
+
+.specialServices img:hover {
+    transform: scale(1.02);
+}
+
+.specialServices h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.textServices {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.textJohn {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl);
+    padding-top: var(--spacing-3xl);
+    border-radius: 0;
+}
+
+.textJohn p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-style: italic;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-dark);
+    line-height: var(--line-height-relaxed);
+    text-align: center;
+    margin: 0;
+}
+
+.learnAboutUs {
+    max-width: 600px;
+    margin: var(--spacing-3xl) auto;
+    text-align: center;
+    padding: var(--spacing-2xl);
+    border-radius: 0;
+}
+
+.learnAboutUs h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.learnAboutUs p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-body);
+    color: var(--color-muted-gray);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+}
+
+.specialServicesCard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.specialMinistriesHeading {
+    margin: var(--spacing-3xl) 0 var(--spacing-2xl) 0;
+    text-align: center;
+}
+
+.specialMinistriesHeading h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.recordedSermon {
+    margin: var(--section-margin);
+    padding: var(--section-padding);
+    background-color: var(--color-bg-secondary);
+}
+
+.recentSermonsHeading {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.recentSermonsHeading h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.recentSermonsHeading p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    color: var(--color-muted-gray);
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.featured-sermon-container {
+    max-width: 900px;
+    margin: 0 auto var(--spacing-2xl);
+    padding: 0 var(--spacing-lg);
+}
+
+.recordedSermon .sermon-card {
+    max-width: 100%;
+    width: 100%;
+}
+
+.view-all-sermons {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+
+
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Initial state before scrolling */
+.scroll-reveal {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Class added by JavaScript when element is in viewport */
+.scroll-reveal.visible {
+    opacity: 1;
+}
+
+
+
+/* Responsive Media Queries */
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    .weeklyServicesCard {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .specialServicesCard {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .specialServices img {
+        width: 80%;
+        height: auto;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .learnAboutUs {
+        width: 90%;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .textServices {
+        width: 90%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 90%;
+        margin: var(--spacing-xl) auto;
+    }
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    .weeklyServicesCard {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .specialServicesCard {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .specialServices img {
+        width: 80%;
+        height: auto;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .learnAboutUs {
+        width: 90%;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .textServices {
+        width: 90%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 90%;
+        margin: var(--spacing-xl) auto;
+    }
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .learnAboutUs {
+        width: 80%;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .textServices {
+        width: 80%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 80%;
+        margin: var(--spacing-xl) auto;
+    }
+}
+
+/* Medium Devices and up (768px+) */
+@media (min-width: 768px) {
+    .learnAboutUs {
+        width: 60%;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .textServices {
+        width: 70%;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    .textJohn {
+        width: 70%;
+        margin: var(--spacing-xl) auto;
+    }
+
+    .featured-sermon-container {
+        max-width: 900px;
+    }
+}
+
+/* Responsive adjustments for sermon card on home page */
+@media (max-width: 767.98px) {
+    .featured-sermon-container {
+        padding: 0 var(--spacing-md);
+    }
+}

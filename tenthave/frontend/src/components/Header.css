@@ -1,0 +1,562 @@
+/* ===========================
+   MODERN NAVBAR STYLES
+   3-Column Layout: Logo | Nav Links | User Menu
+   =========================== */
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-md) 0;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(0);
+}
+
+.header.header-visible {
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-sm) 0;
+}
+
+/* Hide header when scrolling down */
+.header:not(.header-visible) {
+    transform: translateY(-100%);
+}
+
+/* ===========================
+   NAV CONTAINER - 3 Columns
+   =========================== */
+.nav-container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: 0 var(--container-padding);
+}
+
+/* ===========================
+   LEFT: Logo + Church Name
+   =========================== */
+.nav-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo-link {
+    text-decoration: none;
+    color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all var(--interaction-normal);
+    padding: var(--spacing-xs);
+    border-radius: 0;
+}
+
+.logo-link:hover {
+    color: var(--color-primary-dark);
+    transform: translateX(2px);
+}
+
+.logo-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.church-name {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.church-icon-mobile {
+    display: none;
+}
+
+/* ===========================
+   CENTER: Main Navigation Links
+   =========================== */
+.nav-center {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-main-links {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-md);
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+.nav-main-links li {
+    margin: 0;
+}
+
+.nav-main-links li a {
+    text-decoration: none;
+    color: var(--color-dark);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 0;
+    transition: all var(--transition-normal);
+    position: relative;
+    display: inline-block;
+}
+
+.nav-main-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: var(--spacing-xs);
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: all var(--transition-normal);
+    transform: translateX(-50%);
+}
+
+.nav-main-links li a:hover {
+    color: var(--color-primary);
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+.nav-main-links li a:hover::after {
+    width: 75%;
+}
+
+.nav-main-links li a.active {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    background-color: rgba(251, 203, 156, 0.15);
+}
+
+.nav-main-links li a.active::after {
+    width: 75%;
+}
+
+.nav-main-links li a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    color: var(--color-primary);
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+/* ===========================
+   RIGHT: User Menu / Login
+   =========================== */
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* User Menu Wrapper */
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    transition: all var(--transition-normal);
+}
+
+.user-menu-trigger:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+    border-color: var(--color-primary);
+}
+
+.user-menu-trigger:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.user-name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-menu-arrow {
+    font-size: var(--font-size-xs);
+    transition: transform var(--transition-fast);
+}
+
+.user-menu-arrow.open {
+    transform: rotate(180deg);
+}
+
+/* User Menu Dropdown */
+.user-menu-dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-xs));
+    right: 0;
+    min-width: 200px;
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xs);
+    z-index: 1000;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .user-menu-dropdown {
+        animation: fadeInSimple 0.1s ease-out;
+    }
+
+    @keyframes fadeInSimple {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .nav-main-links li a::after,
+    .user-menu-arrow,
+    .login-button,
+    .logo-link {
+        transition-duration: 0.01s;
+    }
+
+    .login-button:hover,
+    .logo-link:hover {
+        transform: none;
+    }
+}
+
+.user-menu-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.user-menu-item:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+    color: var(--color-primary);
+}
+
+.user-menu-item:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
+.user-menu-item.logout {
+    color: var(--color-error);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-md);
+}
+
+.user-menu-item.logout:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Login Button */
+.login-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semibold);
+    border-radius: 0;
+    transition: all var(--transition-normal);
+}
+
+.login-button:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.login-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ===========================
+   MOBILE: Burger Menu + Slide-out
+   =========================== */
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: 0;
+    transition: background-color var(--interaction-normal);
+}
+
+.burger-menu:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+.burger-menu:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.burger-menu img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--color-bg);
+    box-shadow: var(--shadow-xl);
+    z-index: 1001;
+    transition: left var(--interaction-normal);
+    overflow-y: auto;
+    padding: var(--spacing-xl);
+}
+
+.mobile-menu.open {
+    left: 0;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: 0;
+    transition: background-color var(--interaction-normal);
+}
+
+.mobile-menu-close:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+}
+
+.mobile-menu-close img {
+    width: 24px;
+    height: 24px;
+}
+
+.mobile-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-3xl) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.mobile-menu-links li {
+    margin: 0;
+}
+
+.mobile-menu-links li a,
+.mobile-logout-btn,
+.mobile-login-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-md);
+    border-radius: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+}
+
+.mobile-menu-links li a:hover,
+.mobile-logout-btn:hover {
+    background-color: rgba(251, 203, 156, 0.1);
+    color: var(--color-primary);
+}
+
+.mobile-menu-links li a.active {
+    background-color: rgba(251, 203, 156, 0.15);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.mobile-logout-btn {
+    color: var(--color-error);
+    margin-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-lg);
+}
+
+.mobile-logout-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.mobile-login-link {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    font-weight: var(--font-weight-semibold);
+}
+
+.mobile-login-link:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+/* Tablet and below: Show burger menu, hide desktop nav */
+@media (max-width: 991.98px) {
+    .nav-container {
+        grid-template-columns: 1fr auto;
+        gap: var(--spacing-md);
+    }
+
+    .nav-center {
+        display: none;
+    }
+
+    .nav-right {
+        display: none;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+
+    .church-name {
+        display: none;
+    }
+
+    .church-icon-mobile {
+        display: block;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 575.98px) {
+    .header {
+        padding: var(--spacing-sm) 0;
+    }
+
+    .nav-container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .church-icon-mobile {
+        width: 28px;
+        height: 28px;
+    }
+
+    .mobile-menu {
+        width: 90%;
+        max-width: 100%;
+        padding: var(--spacing-lg);
+    }
+
+    .mobile-menu-links li a,
+    .mobile-logout-btn {
+        font-size: var(--font-size-small);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+/* Large desktop: Increase spacing */
+@media (min-width: 1400px) {
+    .nav-main-links {
+        gap: var(--spacing-lg);
+    }
+
+    .nav-main-links li a {
+        font-size: var(--font-size-body);
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+
+    .church-name {
+        font-size: var(--font-size-h5);
+    }
+}
+
+/* Focus ring improvements for accessibility */
+*:focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

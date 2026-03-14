@@ -1,164 +1,178 @@
 # 10th Avenue Bible Chapel Website
 
-A modern, responsive website for 10th Avenue Bible Chapel built with React and TypeScript.
+A full-stack web application for managing church calendar events, announcements, and prayer requests.
 
-## 🚀 Features
-
-- **TypeScript**: Full TypeScript implementation for better type safety and developer experience
-- **Modular Architecture**: Clean, organized code structure with reusable components
-- **Responsive Design**: Mobile-first approach with modern UI/UX
-- **Scroll Animations**: Smooth scroll reveal animations throughout the site
-- **Modern React**: Built with React 19 and latest best practices
-- **Custom Hooks**: Reusable logic with custom hooks for scroll detection and animations
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-src/
-├── components/          # Reusable UI components
-│   ├── Button.tsx      # Button component with multiple variants
-│   ├── Card.tsx        # Service card component
-│   ├── Header.tsx      # Navigation header
-│   ├── Footer.tsx      # Site footer
-│   ├── ScrollReveal.tsx # Scroll animation wrapper
-│   └── ...
-├── pages/              # Page components
-│   ├── Home.tsx        # Homepage with modular sections
-│   ├── About.tsx       # About page with beliefs
-│   ├── Contact.tsx     # Contact form and information
-│   ├── Sermon.tsx      # Sermon listings
-│   ├── Prayers.tsx     # Prayer requests
-│   └── Bulletin.tsx    # Church announcements
-├── hooks/              # Custom React hooks
-│   ├── useScrollReveal.ts # Scroll animation hook
-│   └── useScrollPosition.ts # Scroll position tracking
-├── types/              # TypeScript type definitions
-│   └── index.ts        # Common interfaces and types
-├── constants/          # Application constants
-│   └── index.ts        # Static data and configuration
-└── assets/             # Images and static assets
+tenthave/
+├── frontend/          # React frontend application
+├── backend/           # Express.js backend API
+└── README.md         # This file
 ```
 
-## 🛠️ Key Improvements
+## Prerequisites
 
-### TypeScript Conversion
-
-- Converted all JavaScript files to TypeScript
-- Added comprehensive type definitions
-- Improved type safety and IntelliSense support
-- Better error catching at compile time
-
-### Modularization
-
-- **Component Separation**: Broke down large components into smaller, focused ones
-- **Custom Hooks**: Extracted reusable logic into custom hooks
-- **Constants**: Centralized static data and configuration
-- **Type Definitions**: Organized interfaces and types
-
-### Code Quality
-
-- **Consistent Naming**: Standardized component and file naming
-- **Props Interfaces**: Clear type definitions for all component props
-- **Error Handling**: Better error boundaries and validation
-- **Performance**: Optimized re-renders and animations
-
-### New Features
-
-- **Scroll Animations**: Smooth reveal animations using Intersection Observer
-- **Form Handling**: Proper form state management with TypeScript
-- **Filtering**: Interactive filtering for bulletin and prayer requests
-- **Responsive Design**: Improved mobile experience
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
+- MySQL database
 - npm or yarn
 
-### Installation
+## Quick Start
 
+### 1. Install Dependencies
+
+**Backend:**
 ```bash
-# Install dependencies
+cd backend
 npm install
-
-# Start development server
-npm start
-
-# Build for production
-npm run build
 ```
 
-### Development
+**Frontend:**
+```bash
+cd frontend
+npm install
+```
+
+### 2. Set Up Database
+
+1. Create a MySQL database named `tenthave`
+2. Copy `.env.example` to `.env` in the `backend` folder:
+   ```bash
+   cd backend
+   copy .env.example .env
+   ```
+3. Update `backend/.env` with your database credentials:
+   ```env
+   DATABASE_URL="mysql://username:password@localhost:3306/tenthave"
+   JWT_SECRET="your-secret-key-here"
+   ```
+
+### 3. Run Database Migrations
 
 ```bash
-# Run tests
-npm test
-
-# Type checking
-npx tsc --noEmit
+cd backend
+npm run prisma:generate
+npm run prisma:migrate
 ```
 
-## 📦 Dependencies
+### 4. Start the Application
 
-### Core Dependencies
+**Terminal 1 - Backend:**
+```bash
+cd backend
+npm run dev
+```
+Backend will run on `http://localhost:5000`
 
+**Terminal 2 - Frontend:**
+```bash
+cd frontend
+npm start
+```
+Frontend will run on `http://localhost:3000`
+
+## Available Scripts
+
+### Backend Scripts
+
+- `npm run dev` - Start development server with auto-reload
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run prisma:generate` - Generate Prisma Client
+- `npm run prisma:migrate` - Run database migrations
+- `npm run prisma:studio` - Open Prisma Studio (database GUI)
+
+### Frontend Scripts
+
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run tests
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login and get JWT token
+- `GET /api/auth/me` - Get current user (requires auth)
+
+### Calendar Events
+- `GET /api/calendar` - Get all events (PUBLIC)
+- `GET /api/calendar/:id` - Get specific event (PUBLIC)
+- `POST /api/calendar` - Create event (ADMIN ONLY)
+- `PUT /api/calendar/:id` - Update event (ADMIN ONLY)
+- `DELETE /api/calendar/:id` - Delete event (ADMIN ONLY)
+
+### Announcements
+- `GET /api/announcements` - Get all announcements (PUBLIC)
+- `GET /api/announcements/:id` - Get specific announcement (PUBLIC)
+- `POST /api/announcements` - Create announcement (ADMIN ONLY)
+- `PUT /api/announcements/:id` - Update announcement (ADMIN ONLY)
+- `DELETE /api/announcements/:id` - Delete announcement (ADMIN ONLY)
+
+### Prayer Requests
+- `GET /api/prayer-requests` - Get all requests (PUBLIC)
+- `GET /api/prayer-requests/:id` - Get specific request (PUBLIC)
+- `POST /api/prayer-requests` - Create request (PUBLIC)
+- `PUT /api/prayer-requests/:id` - Update request (PUBLIC)
+- `DELETE /api/prayer-requests/:id` - Delete request (PUBLIC)
+
+## Creating an Admin User
+
+After registering a user, update their role in the database:
+
+```sql
+UPDATE users SET role = 'ADMIN' WHERE email = 'your-email@example.com';
+```
+
+Or use Prisma Studio:
+```bash
+cd backend
+npm run prisma:studio
+```
+
+## Environment Variables
+
+### Backend (.env)
+- `DATABASE_URL` - MySQL connection string
+- `JWT_SECRET` - Secret key for JWT tokens
+- `PORT` - Server port (default: 5000)
+- `NODE_ENV` - Environment (development/production)
+
+## Tech Stack
+
+### Frontend
 - React 19
-- React Router DOM 7
-- TypeScript 5
+- TypeScript
+- React Router
+- FullCalendar
 
-### Development Dependencies
+### Backend
+- Express.js
+- TypeScript
+- Prisma ORM
+- MySQL
+- JWT Authentication
+- bcryptjs
 
-- @types/react
-- @types/react-dom
-- @types/node
-- TypeScript ESLint
+## Deploying the frontend (Cloudflare Workers)
 
-## 🎨 Styling
+The repo root only contains `tenthave/`, so Wrangler must run **after** a CRA build and from the folder that has `wrangler.toml`.
 
-The project uses CSS modules and custom CSS with:
+In **Cloudflare** (Workers & Pages → your project → Settings → Builds):
 
-- Modern CSS Grid and Flexbox
-- Responsive design patterns
-- Smooth animations and transitions
-- Consistent color scheme and typography
+| Setting | Value |
+|--------|--------|
+| **Root directory** | `tenthave/frontend` |
+| **Build command** | `npm ci && npm run build` |
+| **Deploy command** | `npx wrangler deploy` |
 
-## 🔧 Configuration
+Why the build failed before:
 
-### TypeScript Configuration
+1. **Root was `/`** — no `index.html` / `build/` at repo root, so Wrangler could not detect static files.
+2. **No build step** — `tenthave/frontend/wrangler.toml` points at `./build`; that folder only exists after `npm run build`.
 
-- Strict type checking enabled
-- React JSX support
-- Modern ES6+ features
-- Path mapping for clean imports
+Optional: add `WRANGLER_LOG=debug` temporarily if deploy still fails. The Express API is **not** deployed by this flow; host the backend separately (e.g. Railway, Render) and set the frontend’s API base URL via env at build time if needed.
 
-### Build Configuration
+## License
 
-- Optimized for production builds
-- Asset optimization
-- Code splitting support
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🙏 Acknowledgments
-
-- 10th Avenue Bible Chapel community
-- React and TypeScript communities
-- All contributors and supporters
+Private - 10th Avenue Bible Chapel

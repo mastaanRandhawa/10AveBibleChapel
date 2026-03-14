@@ -1,0 +1,603 @@
+/* ===========================
+   MODERN CALENDAR STYLES
+   Professional Layout with Light Side Panel
+   =========================== */
+
+/* Calendar Wrapper */
+.calendar-wrapper {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--container-padding);
+}
+
+/* ===========================
+   CALENDAR HEADER
+   =========================== */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.calendar-header-left {
+    flex: 1;
+}
+
+.calendar-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin: 0 0 var(--spacing-xs) 0;
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+.calendar-subtitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-muted-gray);
+    margin: 0;
+}
+
+.calendar-add-event-btn {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
+    border-radius: 0;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--interaction-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+.calendar-add-event-btn:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.calendar-add-event-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ===========================
+   CALENDAR CONTENT LAYOUT
+   Side Panel + Calendar Grid
+   =========================== */
+.calendar-content {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+}
+
+/* ===========================
+   LEFT: SELECTED DATE PANEL (Modern Minimal)
+   =========================== */
+.calendar-side-panel {
+    background: var(--color-bg);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 0;
+    padding: var(--spacing-2xl);
+    position: sticky;
+    top: calc(80px + var(--spacing-lg));
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+/* ===========================
+   MODERN MINIMAL PANEL LAYOUT
+   =========================== */
+
+/* A) HEADER - Clean and minimal */
+.panel-header {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.panel-title {
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-muted-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.panel-date {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-dark);
+    margin: 0 0 var(--spacing-xs) 0;
+    line-height: 1.3;
+}
+
+.panel-count {
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-muted-gray);
+    margin: 0;
+}
+
+/* B) EVENTS LIST - Modern minimal rows */
+.events-list {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.event-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    background: transparent;
+    border: none;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 150ms ease;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-primary);
+}
+
+.event-row:hover {
+    background: rgba(251, 203, 156, 0.04);
+}
+
+.event-row.active {
+    background: rgba(251, 203, 156, 0.08);
+    border-left-color: var(--color-primary);
+}
+
+.event-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 0;
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.event-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.event-title {
+    font-size: 15px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    margin-bottom: 3px;
+    line-height: 1.4;
+}
+
+.event-meta {
+    font-size: 13px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-muted-gray);
+    line-height: 1.4;
+}
+
+.no-events-text {
+    font-family: var(--font-primary);
+    font-size: 15px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-muted-gray);
+    margin: 0;
+    padding-top: var(--spacing-md);
+}
+
+/* Empty State */
+.side-panel-empty {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    color: var(--color-muted-gray);
+    font-style: italic;
+}
+
+.side-panel-empty p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    margin: 0;
+}
+
+/* ===========================
+   RIGHT: CALENDAR GRID
+   =========================== */
+.calendar-grid-panel {
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ===========================
+   FULLCALENDAR CUSTOMIZATION
+   =========================== */
+.fc {
+    font-family: var(--font-primary) !important;
+    border: none !important;
+}
+
+/* Header Toolbar */
+.fc-toolbar {
+    margin-bottom: var(--spacing-xl) !important;
+    padding: 0 !important;
+}
+
+.fc-toolbar-title {
+    font-size: var(--font-size-h4) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--color-dark) !important;
+    letter-spacing: 0.5px !important;
+}
+
+.fc-button {
+    background: none !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--color-dark) !important;
+    font-size: var(--font-size-h6) !important;
+    font-weight: var(--font-weight-medium) !important;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    border-radius: var(--radius-md) !important;
+    transition: all var(--interaction-normal) !important;
+    box-shadow: none !important;
+}
+
+.fc-button:hover {
+    background: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-dark) !important;
+}
+
+.fc-button:focus {
+    outline: 2px solid var(--color-primary) !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
+}
+
+.fc-button-active {
+    background: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-dark) !important;
+}
+
+/* Remove default borders */
+.fc-theme-standard .fc-scrollgrid {
+    border: none !important;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-color: var(--border-color) !important;
+}
+
+/* Day Headers */
+.fc-col-header-cell {
+    background: var(--color-bg) !important;
+    padding: var(--spacing-md) var(--spacing-sm) !important;
+    border-bottom: 2px solid var(--border-color) !important;
+}
+
+.fc-col-header-cell-cushion {
+    font-size: 13px !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--color-muted-gray) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    text-decoration: none !important;
+}
+
+/* Day Cells */
+.fc-daygrid-day {
+    background: var(--color-bg) !important;
+    min-height: 90px !important;
+    padding: var(--spacing-sm) !important;
+    cursor: pointer !important;
+    transition: all var(--interaction-fast) !important;
+}
+
+.fc-daygrid-day:hover {
+    background: rgba(251, 203, 156, 0.05) !important;
+}
+
+.fc-daygrid-day-frame {
+    padding: var(--spacing-xs) !important;
+}
+
+.fc-daygrid-day-top {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--spacing-xs) !important;
+}
+
+.fc-daygrid-day-number {
+    font-size: var(--font-size-h6) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-dark) !important;
+    padding: var(--spacing-xs) var(--spacing-sm) !important;
+    border-radius: var(--radius-sm) !important;
+    transition: all var(--interaction-fast) !important;
+}
+
+/* Today's Date */
+.fc-day-today {
+    background: rgba(251, 203, 156, 0.08) !important;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+    background: var(--color-primary) !important;
+    color: var(--color-dark) !important;
+    font-weight: var(--font-weight-bold) !important;
+}
+
+/* Other Month Days */
+.fc-day-other .fc-daygrid-day-number {
+    color: var(--color-muted-light) !important;
+    opacity: 0.5 !important;
+}
+
+/* Event Chips - Color indicators only (no text) */
+.fc-daygrid-event {
+    margin: 2px 0 !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    border: none !important;
+    min-height: 8px !important;
+    height: 8px !important;
+}
+
+.fc-event {
+    background: var(--color-primary) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    margin: 2px 4px !important;
+    transition: all var(--interaction-fast) !important;
+    cursor: pointer !important;
+    height: 8px !important;
+    min-height: 8px !important;
+    display: block !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+}
+
+.fc-event:hover {
+    opacity: 0.85 !important;
+    transform: scaleY(1.3) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.fc-event-title {
+    display: none !important;
+}
+
+.fc-event-time {
+    display: none !important;
+}
+
+.fc-event-main {
+    padding: 0 !important;
+    height: 8px !important;
+}
+
+/* More Link */
+.fc-daygrid-more-link {
+    font-size: 11px !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-primary) !important;
+    padding: var(--spacing-xs) !important;
+    margin-top: var(--spacing-xs) !important;
+}
+
+.fc-daygrid-more-link:hover {
+    background: rgba(251, 203, 156, 0.1) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+/* Tablet: Stack side panel above calendar */
+@media (max-width: 1024px) {
+    .calendar-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .calendar-side-panel {
+        position: static;
+        max-height: none;
+    }
+
+    .fc-daygrid-day {
+        min-height: 100px !important;
+    }
+}
+
+/* Mobile: Reduce spacing and font sizes */
+@media (max-width: 768px) {
+    .calendar-wrapper {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .calendar-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .calendar-add-event-btn {
+        width: 100%;
+    }
+
+    .calendar-title {
+        font-size: var(--font-size-h3);
+    }
+
+    .calendar-subtitle {
+        font-size: var(--font-size-h6);
+    }
+
+    .calendar-grid-panel {
+        padding: var(--spacing-md);
+    }
+
+    .fc-toolbar {
+        flex-direction: column !important;
+        gap: var(--spacing-md) !important;
+    }
+
+    .fc-toolbar-title {
+        font-size: var(--font-size-h5) !important;
+    }
+
+    .fc-daygrid-day {
+        min-height: 80px !important;
+        padding: var(--spacing-xs) !important;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 13px !important;
+        padding: 2px 6px !important;
+    }
+
+    .fc-event {
+        height: 8px !important;
+        min-height: 8px !important;
+    }
+
+    .fc-event-title {
+        display: none !important;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 576px) {
+    .calendar-wrapper {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .calendar-side-panel {
+        padding: var(--spacing-md);
+    }
+
+    .calendar-grid-panel {
+        padding: var(--spacing-sm);
+    }
+
+    .fc-daygrid-day {
+        min-height: 60px !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        font-size: 11px !important;
+    }
+
+    .fc-button {
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+        font-size: 13px !important;
+    }
+
+    .event-card-title {
+        font-size: 14px;
+    }
+
+    .panel-title {
+        font-size: 12px;
+    }
+
+    .panel-date {
+        font-size: 16px;
+    }
+
+    .panel-count {
+        font-size: 12px;
+    }
+
+    .event-title {
+        font-size: 14px;
+    }
+
+    .event-meta {
+        font-size: 12px;
+    }
+
+    .no-events-text {
+        font-size: 14px;
+    }
+}
+
+/* ===========================
+   ACCESSIBILITY
+   =========================== */
+
+/* Focus states */
+.calendar-side-panel:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.side-panel-event-card:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Keyboard navigation */
+.fc-daygrid-day:focus {
+    outline: 2px solid var(--color-primary) !important;
+    outline-offset: -2px !important;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+
+    .calendar-side-panel,
+    .calendar-grid-panel {
+        border-width: 2px;
+    }
+
+    .fc-button {
+        border-width: 2px !important;
+    }
+}
+
+/* Scrollbar styling for side panel */
+.calendar-side-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.calendar-side-panel::-webkit-scrollbar-track {
+    background: var(--color-light);
+    border-radius: 0;
+}
+
+.calendar-side-panel::-webkit-scrollbar-thumb {
+    background: var(--color-muted-gray);
+    border-radius: 0;
+}
+
+.calendar-side-panel::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}

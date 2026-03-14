@@ -1,0 +1,90 @@
+/* Badge Component */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    border-radius: 0;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Content Status Badges */
+.badge-draft {
+    background-color: var(--badge-draft-bg);
+    color: var(--badge-draft-text);
+}
+
+.badge-published {
+    background-color: var(--badge-published-bg);
+    color: var(--badge-published-text);
+}
+
+.badge-archived {
+    background-color: var(--badge-archived-bg);
+    color: var(--badge-archived-text);
+}
+
+.badge-pinned {
+    background-color: var(--badge-pinned-bg);
+    color: var(--badge-pinned-text);
+}
+
+/* Prayer Request Status Badges */
+.badge-pending {
+    background-color: var(--badge-pending-bg);
+    color: var(--badge-pending-text);
+}
+
+.badge-approved {
+    background-color: var(--badge-approved-bg);
+    color: var(--badge-approved-text);
+}
+
+.badge-rejected {
+    background-color: var(--badge-rejected-bg);
+    color: var(--badge-rejected-text);
+}
+
+.badge-answered {
+    background-color: var(--badge-answered-bg);
+    color: var(--badge-answered-text);
+}
+
+/* Generic Badges */
+.badge-primary {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.badge-secondary {
+    background-color: var(--color-muted-gray);
+    color: var(--color-white);
+}
+
+.badge-success {
+    background-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.badge-error {
+    background-color: var(--color-error);
+    color: var(--color-white);
+}
+
+.badge-warning {
+    background-color: var(--color-warning);
+    color: var(--color-white);
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .badge {
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+}
+

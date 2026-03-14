@@ -1,0 +1,105 @@
+/* Form Input Component */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-sm);
+    line-height: var(--line-height-normal);
+}
+
+.form-label-required {
+    color: var(--color-error);
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-body);
+    font-family: var(--font-primary);
+    color: var(--input-text);
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 0;
+    transition: all var(--transition-fast);
+    line-height: var(--line-height-normal);
+}
+
+.form-input::placeholder {
+    color: var(--input-placeholder);
+}
+
+.form-input:hover:not(:disabled) {
+    border-color: var(--border-color-dark);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--input-border-focus);
+    box-shadow: 0 0 0 3px rgba(251, 203, 156, 0.2);
+}
+
+.form-input:disabled {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-muted-gray);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.form-input-error {
+    border-color: var(--input-border-error);
+}
+
+.form-input-error:focus {
+    border-color: var(--input-border-error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-error {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    color: var(--color-error);
+    line-height: var(--line-height-normal);
+}
+
+.form-helper-text {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    color: var(--color-muted-gray);
+    line-height: var(--line-height-normal);
+}
+
+/* Textarea variant */
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: var(--font-primary);
+}
+
+/* Select variant */
+.form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-md) center;
+    padding-right: var(--spacing-2xl);
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .form-input,
+    .form-textarea,
+    .form-select {
+        font-size: var(--font-size-small);
+    }
+}
+

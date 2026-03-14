@@ -1,0 +1,294 @@
+/* Enhanced Hero Section Styles */
+.hero {
+    position: relative;
+    width: 100%;
+    margin-top: calc(-1 * var(--spacing-xl));
+    height: auto;
+    background: url(../assets/churchPicture.svg) no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Simple Hero Variant - Matching Image Design */
+.hero--simple {
+    background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-light) 100%);
+    justify-content: center;
+    min-height: 30vh;
+    position: relative;
+}
+
+/* Centered Hero Variant - Background Image with Centered Text */
+.hero--centered {
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-overlay {
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
+    color: var(--color-light);
+    max-width: 100%;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-overlay--simple {
+    padding: var(--spacing-2xl);
+    text-align: center;
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-overlay--centered {
+    padding: var(--spacing-2xl);
+    text-align: center;
+    max-width: 800px;
+    color: var(--color-light);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-title--simple {
+    font-size: var(--font-size-h1);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin: 0;
+    text-shadow: none;
+    line-height: var(--line-height-tight);
+    position: relative;
+}
+
+.hero-title--simple::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 0;
+}
+
+/* Centered variant text styles */
+.hero-title--centered {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-light);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.hero-subtitle--centered {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary-light);
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+}
+
+.hero-description--centered {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-normal);
+    margin: var(--spacing-lg) 0;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-light);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary-light);
+    margin-bottom: var(--spacing-sm);
+}
+
+.hero-description {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-normal);
+    margin: var(--spacing-lg) 0;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-light);
+    max-width: 500px;
+}
+
+.hero-button {
+    margin-top: var(--spacing-xl);
+}
+
+/* Responsive Media Queries */
+/* Very Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    .hero {
+        min-height: 40vh;
+        margin-top: calc(-1 * var(--spacing-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-lg);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-h5);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-h6);
+        margin: var(--spacing-md) 0;
+    }
+}
+
+/* Extra Small Devices (376px to 575.98px) */
+@media (min-width: 376px) and (max-width: 575.98px) {
+    .hero {
+        min-height: 50vh;
+        margin-top: calc(-1 * var(--spacing-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-xl);
+    }
+
+    .hero-description {
+        margin: var(--spacing-md) 0;
+    }
+}
+
+/* Small Devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .hero {
+        min-height: 60vh;
+        margin-top: calc(-1 * var(--spacing-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-xl);
+    }
+}
+
+/* Medium Devices and up (768px+) */
+@media (min-width: 768px) {
+    .hero {
+        min-height: 70vh;
+        margin-top: calc(-1 * var(--spacing-xl));
+    }
+
+    .hero-overlay {
+        padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-2xl);
+    }
+}
+
+/* Large Devices (992px+) */
+@media (min-width: 992px) {
+    .hero {
+        min-height: 80vh;
+    }
+}
+
+/* Extra Large Devices (1200px+) */
+@media (min-width: 1200px) {
+    .hero {
+        min-height: 90vh;
+    }
+}
+
+/* Simple Hero Variant Responsive Styles */
+@media (max-width: 1024px) {
+    .hero-title--simple {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero--simple {
+        min-height: 25vh;
+    }
+
+    .hero-title--simple {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero--simple {
+        min-height: 20vh;
+    }
+
+    .hero-title--simple {
+        font-size: 2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .hero-overlay--simple {
+        padding: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-title--simple {
+        font-size: 1.75rem;
+    }
+}

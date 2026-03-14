@@ -1,0 +1,128 @@
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-xl) 0;
+    font-family: var(--font-primary);
+}
+
+.pagination__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: var(--spacing-sm);
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    color: var(--color-dark);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+}
+
+.pagination__button:hover:not(.disabled):not(.ellipsis) {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.pagination__button:focus-visible:not(.disabled):not(.ellipsis) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.pagination__button.active {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border-color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.pagination__button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--color-bg);
+    color: var(--color-muted-gray);
+}
+
+.pagination__button.ellipsis {
+    cursor: default;
+    background: transparent;
+    border: none;
+    color: var(--color-muted-gray);
+}
+
+.pagination__button.ellipsis:hover {
+    background: transparent;
+    transform: none;
+}
+
+.pagination__pages {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.pagination__button--prev,
+.pagination__button--next {
+    min-width: 40px;
+}
+
+.pagination__button--page {
+    min-width: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pagination {
+        gap: var(--spacing-xs);
+        margin: var(--spacing-lg) 0;
+    }
+
+    .pagination__button {
+        min-width: 36px;
+        height: 36px;
+        font-size: var(--font-size-xs);
+    }
+
+    .pagination__button--prev,
+    .pagination__button--next {
+        min-width: 36px;
+    }
+
+    .pagination__button--page {
+        min-width: 36px;
+    }
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        gap: var(--spacing-xs);
+    }
+
+    .pagination__button {
+        min-width: 32px;
+        height: 32px;
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-xs);
+    }
+
+    .pagination__button--prev,
+    .pagination__button--next {
+        min-width: 32px;
+    }
+
+    .pagination__button--page {
+        min-width: 32px;
+    }
+}
