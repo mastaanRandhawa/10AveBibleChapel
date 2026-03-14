@@ -1,0 +1,10 @@
+# Repo root — Cloudflare runs deploy from here when Root directory is /
+# Build MUST run first so ./tenthave/frontend/build exists:
+#   cd tenthave/frontend && npm ci && npm run build
+
+name = "tenthave-bible-chapel"
+compatibility_date = "2026-03-14"
+
+[assets]
+directory = "./tenthave/frontend/build"
+not_found_handling = "single-page-application"
