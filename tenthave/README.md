@@ -14,7 +14,7 @@ tenthave/
 ## Prerequisites
 
 - Node.js (v18 or higher)
-- MySQL database
+- PostgreSQL database
 - npm or yarn
 
 ## Quick Start
@@ -35,7 +35,7 @@ npm install
 
 ### 2. Set Up Database
 
-1. Create a MySQL database named `tenthave`
+1. Create a PostgreSQL database named `tenthave` (e.g. `createdb tenthave` or via pgAdmin)
 2. Copy `.env.example` to `.env` in the `backend` folder:
    ```bash
    cd backend
@@ -43,9 +43,10 @@ npm install
    ```
 3. Update `backend/.env` with your database credentials:
    ```env
-   DATABASE_URL="mysql://username:password@localhost:3306/tenthave"
+   DATABASE_URL="postgresql://username:password@localhost:5432/tenthave?schema=public"
    JWT_SECRET="your-secret-key-here"
    ```
+   Hosted DBs (Neon, Supabase, Railway) often require `?sslmode=require` on the URL.
 
 ### 3. Run Database Migrations
 
@@ -133,7 +134,7 @@ npm run prisma:studio
 ## Environment Variables
 
 ### Backend (.env)
-- `DATABASE_URL` - MySQL connection string
+- `DATABASE_URL` - PostgreSQL connection string (`postgresql://...`)
 - `JWT_SECRET` - Secret key for JWT tokens
 - `PORT` - Server port (default: 5000)
 - `NODE_ENV` - Environment (development/production)
@@ -150,7 +151,7 @@ npm run prisma:studio
 - Express.js
 - TypeScript
 - Prisma ORM
-- MySQL
+- PostgreSQL
 - JWT Authentication
 - bcryptjs
 
