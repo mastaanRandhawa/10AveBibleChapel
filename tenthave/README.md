@@ -154,6 +154,25 @@ npm run prisma:studio
 - JWT Authentication
 - bcryptjs
 
+## Deploying the frontend (Cloudflare Workers)
+
+The repo root only contains `tenthave/`, so Wrangler must run **after** a CRA build and from the folder that has `wrangler.toml`.
+
+In **Cloudflare** (Workers & Pages → your project → Settings → Builds):
+
+| Setting | Value |
+|--------|--------|
+| **Root directory** | `tenthave/frontend` |
+| **Build command** | `npm ci && npm run build` |
+| **Deploy command** | `npx wrangler deploy` |
+
+Why the build failed before:
+
+1. **Root was `/`** — no `index.html` / `build/` at repo root, so Wrangler could not detect static files.
+2. **No build step** — `tenthave/frontend/wrangler.toml` points at `./build`; that folder only exists after `npm run build`.
+
+Optional: add `WRANGLER_LOG=debug` temporarily if deploy still fails. The Express API is **not** deployed by this flow; host the backend separately (e.g. Railway, Render) and set the frontend’s API base URL via env at build time if needed.
+
 ## License
 
 Private - 10th Avenue Bible Chapel

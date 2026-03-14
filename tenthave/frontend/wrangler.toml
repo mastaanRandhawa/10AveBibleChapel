@@ -1,0 +1,11 @@
+# Cloudflare Workers — static React app (Create React App → build/)
+# Dashboard: Root directory = tenthave/frontend
+# Build command: npm ci && npm run build
+# Deploy command: npx wrangler deploy
+
+name = "tenthave-bible-chapel"
+compatibility_date = "2025-03-14"
+
+[assets]
+directory = "./build"
+not_found_handling = "single-page-application"
