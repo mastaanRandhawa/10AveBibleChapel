@@ -156,22 +156,29 @@ npm run prisma:studio
 
 ## Deploying the frontend (Cloudflare Workers)
 
-The repo root only contains `tenthave/`, so Wrangler must run **after** a CRA build and from the folder that has `wrangler.toml`.
+Wrangler only reads config from the **current working directory**. If Cloudflare **Root directory** is `/`, it never sees `tenthave/frontend/wrangler.toml` — use the repo-root config below.
 
-In **Cloudflare** (Workers & Pages → your project → Settings → Builds):
+### Option A — Root directory `/` (matches Workers “versions upload”)
+
+| Setting | Value |
+|--------|--------|
+| **Root directory** | `/` (empty or repo root) |
+| **Build command** | `cd tenthave/frontend && npm ci && npm run build` |
+| **Deploy command** | `npx wrangler versions upload` *(or `npx wrangler deploy`)* |
+
+Repo root **`wrangler.toml`** points at `./tenthave/frontend/build`. The build step **must** run before deploy or assets are missing.
+
+### Option B — Root directory `tenthave/frontend`
 
 | Setting | Value |
 |--------|--------|
 | **Root directory** | `tenthave/frontend` |
 | **Build command** | `npm ci && npm run build` |
-| **Deploy command** | `npx wrangler deploy` |
+| **Deploy command** | `npx wrangler deploy` *(or `npx wrangler versions upload`)* |
 
-Why the build failed before:
+Uses `tenthave/frontend/wrangler.toml` (`assets.directory = "./build"`).
 
-1. **Root was `/`** — no `index.html` / `build/` at repo root, so Wrangler could not detect static files.
-2. **No build step** — `tenthave/frontend/wrangler.toml` points at `./build`; that folder only exists after `npm run build`.
-
-Optional: add `WRANGLER_LOG=debug` temporarily if deploy still fails. The Express API is **not** deployed by this flow; host the backend separately (e.g. Railway, Render) and set the frontend’s API base URL via env at build time if needed.
+The Express API is **not** deployed by this flow; host the backend separately and set the frontend API URL at build time if needed.
 
 ## License
 
