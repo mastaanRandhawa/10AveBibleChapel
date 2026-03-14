@@ -1,8 +1,7 @@
 import { parseAPIError } from "./apiErrorHandler";
 
 // API base URL - adjust for production
-const API_BASE_URL =
-  process.env.REACT_APP_API_URL || "https://one0avebiblechapel.onrender.com/api";
+const API_BASE_URL = "https://one0avebiblechapel.onrender.com/api";
 
 // Helper function to get auth token
 const getAuthToken = (): string | null => {
