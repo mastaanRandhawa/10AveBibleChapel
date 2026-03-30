@@ -38,6 +38,14 @@ export class ServerError extends Error {
   }
 }
 
+/** Fetch failed before an HTTP response (offline, CORS, DNS, blocked mixed content, etc.) */
+export class NetworkError extends Error {
+  constructor(message = "Could not reach the API. Check your connection or try again later.") {
+    super(message);
+    this.name = "NetworkError";
+  }
+}
+
 /**
  * Parse and enhance API errors with proper types
  */
@@ -73,6 +81,10 @@ export function parseAPIError(response: Response, errorData: any): APIError {
  * Get a user-friendly message for an error
  */
 export function getUserFriendlyErrorMessage(error: any): string {
+  if (error instanceof NetworkError) {
+    return error.message;
+  }
+
   if (error instanceof UnauthorizedError) {
     return "Please log in to continue";
   }

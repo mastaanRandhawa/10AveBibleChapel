@@ -1,0 +1,11 @@
+# SPA fallback for Apache / LiteSpeed (cPanel): serve index.html for client routes
+# If the app lives in a subfolder (e.g. /church), set RewriteBase to that path and use:
+#   RewriteRule . /church/index.html [L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

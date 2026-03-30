@@ -1,7 +1,9 @@
-import { parseAPIError } from "./apiErrorHandler";
+import { NetworkError, parseAPIError } from "./apiErrorHandler";
 
-// API base URL - adjust for production
-const API_BASE_URL = "https://one0avebiblechapel.onrender.com/api";
+// Public API URL — set REACT_APP_API_URL in .env (build-time). Never put secrets here.
+export const API_BASE_URL =
+  process.env.REACT_APP_API_URL ||
+  "https://whimsical-indigo-chameleon.prayforperu.org/api";
 
 // Helper function to get auth token
 const getAuthToken = (): string | null => {
@@ -24,12 +26,26 @@ const getHeaders = (includeAuth = false): HeadersInit => {
   return headers;
 };
 
+function resolveApiUrl(endpoint: string): string {
+  const base = API_BASE_URL.replace(/\/$/, "") + "/";
+  const path = endpoint.replace(/^\/+/, "");
+  return new URL(path, base).href;
+}
+
 // Generic fetch wrapper with enhanced error handling
 async function fetchAPI<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+  const url = resolveApiUrl(endpoint);
+  let response: Response;
+  try {
+    response = await fetch(url, options);
+  } catch {
+    throw new NetworkError(
+      "Could not reach the API. If the site loads but data does not, check browser blocking (extensions), CORS, or that the backend is up."
+    );
+  }
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({
@@ -67,6 +83,16 @@ export interface AuthResponse {
   };
 }
 
+/** Shape returned by GET/PATCH /auth/me */
+export interface AuthMeUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  isApproved: boolean;
+  createdAt: string;
+}
+
 export const authAPI = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     return fetchAPI<AuthResponse>("/auth/login", {
@@ -84,10 +110,21 @@ export const authAPI = {
     });
   },
 
-  async getCurrentUser() {
-    return fetchAPI("/auth/me", {
+  async getCurrentUser(): Promise<AuthMeUser> {
+    return fetchAPI<AuthMeUser>("/auth/me", {
       method: "GET",
       headers: getHeaders(true),
+    });
+  },
+
+  async updateCurrentUser(data: {
+    name?: string;
+    email?: string;
+  }): Promise<AuthMeUser> {
+    return fetchAPI<AuthMeUser>("/auth/me", {
+      method: "PATCH",
+      headers: getHeaders(true),
+      body: JSON.stringify(data),
     });
   },
 };
