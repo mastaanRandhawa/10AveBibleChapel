@@ -14,6 +14,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { path: "/bulletin", label: "BULLETIN" },
   { path: "/prayer", label: "PRAYER" },
   { path: "/sermon", label: "SERMONS" },
+  { path: "/recordings", label: "RECORDINGS" },
   { path: "/contact", label: "CONTACT US" },
   { path: "/about", label: "ABOUT US" },
 ];

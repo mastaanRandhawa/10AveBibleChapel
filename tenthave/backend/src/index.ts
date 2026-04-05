@@ -13,6 +13,7 @@ import prayerRequestRoutes from "./routes/prayerRequests";
 import sermonRoutes from "./routes/sermons";
 import userRoutes from "./routes/users";
 import contactRoutes from "./routes/contact";
+import voiceRecordingRoutes from "./routes/voiceRecordings";
 
 // Load environment variables
 dotenv.config();
@@ -41,6 +42,7 @@ app.use("/api/prayer-requests", prayerRequestRoutes);
 app.use("/api/sermons", sermonRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/voice-recordings", voiceRecordingRoutes);
 
 // Swagger UI (OpenAPI)
 const openApiSpec = buildOpenApiSpec();

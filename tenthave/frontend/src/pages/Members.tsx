@@ -12,11 +12,13 @@ import {
   sermonsAPI,
   prayerRequestsAPI,
   usersAPI,
+  voiceRecordingsAPI,
   Announcement,
   CalendarEvent,
   Sermon,
   PrayerRequest,
   User,
+  VoiceRecording,
 } from "../services/api";
 import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
 import "./Members.css";
@@ -34,7 +36,7 @@ const Members: React.FC = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<
-    "announcements" | "calendar" | "sermons" | "prayers" | "users"
+    "announcements" | "calendar" | "sermons" | "prayers" | "users" | "voiceRecordings"
   >("prayers");
 
   // Redirect if not authenticated
@@ -106,6 +108,14 @@ const Members: React.FC = () => {
                 </button>
                 <button
                   className={`tab-button ${
+                    activeTab === "voiceRecordings" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("voiceRecordings")}
+                >
+                  Voice Recordings
+                </button>
+                <button
+                  className={`tab-button ${
                     activeTab === "users" ? "active" : ""
                   }`}
                   onClick={() => setActiveTab("users")}
@@ -121,6 +131,7 @@ const Members: React.FC = () => {
             {activeTab === "announcements" && isAdmin && <AnnouncementsTab />}
             {activeTab === "calendar" && isAdmin && <CalendarTab />}
             {activeTab === "sermons" && isAdmin && <SermonsTab />}
+            {activeTab === "voiceRecordings" && isAdmin && <VoiceRecordingsTab />}
             {activeTab === "users" && isAdmin && <UsersTab />}
           </div>
         </div>
@@ -1914,6 +1925,516 @@ const SermonForm: React.FC<{
             }
           />{" "}
           Feature on homepage
+        </label>
+      </div>
+
+      <div className="form-actions">
+        <button type="submit" className="btn-primary" disabled={saving}>
+          {saving ? "Saving..." : item ? "Update" : "Create"}
+        </button>
+        <button
+          type="button"
+          className="btn-secondary"
+          onClick={onCancel}
+          disabled={saving}
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+};
+
+// Voice Recordings Tab
+const VoiceRecordingsTab: React.FC = () => {
+  const [recordings, setRecordings] = useState<VoiceRecording[]>([]);
+  const [filteredRecordings, setFilteredRecordings] = useState<VoiceRecording[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [editingItem, setEditingItem] = useState<VoiceRecording | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  useEffect(() => {
+    loadRecordings();
+  }, []);
+
+  useEffect(() => {
+    filterRecordings();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recordings, searchQuery, statusFilter]);
+
+  const loadRecordings = async () => {
+    try {
+      setLoading(true);
+      const data = await voiceRecordingsAPI.getAll();
+      setRecordings(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterRecordings = () => {
+    let filtered = [...recordings];
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (r) =>
+          r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          r.speaker.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (r.description &&
+            r.description.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+    }
+    if (statusFilter !== "all") {
+      filtered = filtered.filter((r) => r.status === statusFilter);
+    }
+    setFilteredRecordings(filtered);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this recording?")) return;
+    try {
+      await voiceRecordingsAPI.delete(id);
+      loadRecordings();
+    } catch (err: any) {
+      alert("Failed to delete: " + err.message);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="tab-content">
+        <div className="skeleton-loader">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="skeleton-card">
+              <div className="skeleton-line"></div>
+              <div className="skeleton-line medium"></div>
+              <div className="skeleton-line short"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="tab-content">
+      <div className="tab-header">
+        <div>
+          <h2>Voice Recordings</h2>
+          <p className="tab-header-description">
+            Manage embedded audio recordings and messages
+          </p>
+        </div>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            setShowForm(true);
+            setEditingItem(null);
+          }}
+        >
+          + Add Recording
+        </button>
+      </div>
+
+      {showForm && (
+        <VoiceRecordingForm
+          item={editingItem}
+          onSave={() => {
+            setShowForm(false);
+            setEditingItem(null);
+            loadRecordings();
+          }}
+          onCancel={() => {
+            setShowForm(false);
+            setEditingItem(null);
+          }}
+        />
+      )}
+
+      {recordings.length > 0 && !showForm && (
+        <div className="admin-filters">
+          <input
+            type="text"
+            className="admin-search"
+            placeholder="Search recordings..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
+            className="admin-filter-select"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="all">All Statuses</option>
+            <option value="PUBLISHED">Published</option>
+            <option value="DRAFT">Draft</option>
+            <option value="ARCHIVED">Archived</option>
+          </select>
+        </div>
+      )}
+
+      {recordings.length === 0 ? (
+        <div className="empty-state">
+          <h3>No Voice Recordings Yet</h3>
+          <p>Add embedded audio recordings to share with the congregation.</p>
+          <button
+            className="btn-primary"
+            onClick={() => {
+              setShowForm(true);
+              setEditingItem(null);
+            }}
+          >
+            Add First Recording
+          </button>
+        </div>
+      ) : filteredRecordings.length === 0 ? (
+        <div className="empty-state">
+          <h3>No Matching Recordings</h3>
+          <p>Try adjusting your search or filter criteria.</p>
+        </div>
+      ) : (
+        <>
+          {/* Desktop Table View */}
+          <div className="admin-table-container">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Speaker</th>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecordings.map((item) => (
+                  <tr key={item.id}>
+                    <td className="table-cell-title">{item.title}</td>
+                    <td>{item.speaker}</td>
+                    <td className="table-cell-date">
+                      {new Date(item.date).toLocaleDateString()}
+                    </td>
+                    <td>{item.category || "—"}</td>
+                    <td>{item.embedType === "audio" ? "Audio" : "Embed"}</td>
+                    <td>
+                      <span className={`status-badge status-${item.status.toLowerCase()}`}>
+                        {item.status}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="table-actions">
+                        <button
+                          className="btn-secondary"
+                          onClick={() => {
+                            setEditingItem(item);
+                            setShowForm(true);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn-danger"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="items-list">
+            {filteredRecordings.map((item) => (
+              <div key={item.id} className="item-card">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <div className="item-meta">
+                  <span className={`status-badge status-${item.status.toLowerCase()}`}>
+                    {item.status}
+                  </span>
+                  <span>{item.speaker}</span>
+                  <span>{new Date(item.date).toLocaleDateString()}</span>
+                  {item.category && <span>{item.category}</span>}
+                  <span>{item.embedType === "audio" ? "Audio" : "Embed"}</span>
+                </div>
+                <div className="item-actions">
+                  <button
+                    className="btn-secondary"
+                    onClick={() => {
+                      setEditingItem(item);
+                      setShowForm(true);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn-danger"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+// Helpers: parse a raw embed code (<iframe ...> or <audio ...>) or plain URL
+// Returns { embedUrl, embedType } ready to store
+function parseEmbedInput(raw: string): { embedUrl: string; embedType: string } {
+  const trimmed = raw.trim();
+
+  // Full <iframe> tag — extract src attribute
+  const iframeSrcMatch = trimmed.match(/<iframe[^>]+src=["']([^"']+)["']/i);
+  if (iframeSrcMatch) {
+    return { embedUrl: iframeSrcMatch[1], embedType: "iframe" };
+  }
+
+  // Full <audio> or <source> tag — extract src attribute
+  const audioSrcMatch = trimmed.match(/<(?:audio|source)[^>]+src=["']([^"']+)["']/i);
+  if (audioSrcMatch) {
+    return { embedUrl: audioSrcMatch[1], embedType: "audio" };
+  }
+
+  // Plain URL — detect audio extensions
+  const audioExtensions = /\.(mp3|ogg|wav|aac|flac|m4a)(\?.*)?$/i;
+  if (audioExtensions.test(trimmed)) {
+    return { embedUrl: trimmed, embedType: "audio" };
+  }
+
+  // Default: treat as iframe src URL
+  return { embedUrl: trimmed, embedType: "iframe" };
+}
+
+// Voice Recording Form
+const VoiceRecordingForm: React.FC<{
+  item: VoiceRecording | null;
+  onSave: () => void;
+  onCancel: () => void;
+}> = ({ item, onSave, onCancel }) => {
+  // Raw field holds whatever the admin pastes (full embed code or URL)
+  const [embedRaw, setEmbedRaw] = useState(item?.embedUrl || "");
+  const [embedTypeOverride, setEmbedTypeOverride] = useState<string | null>(null);
+
+  const [formData, setFormData] = useState({
+    title: item?.title || "",
+    description: item?.description || "",
+    speaker: item?.speaker || "",
+    date: item?.date ? new Date(item.date).toISOString().slice(0, 10) : "",
+    passage: item?.passage || "",
+    category: item?.category || "",
+    status: item?.status || "PUBLISHED",
+    isPublic: item?.isPublic ?? true,
+    isFeatured: item?.isFeatured ?? false,
+  });
+  const [saving, setSaving] = useState(false);
+
+  // Derive embedUrl and embedType from raw input, unless admin has overridden
+  const parsed = parseEmbedInput(embedRaw);
+  const resolvedEmbedType = embedTypeOverride ?? parsed.embedType;
+
+  // Preview: is the raw input a full embed code?
+  const isEmbedCode = embedRaw.trim().startsWith("<");
+
+  const handleEmbedRawChange = (value: string) => {
+    setEmbedRaw(value);
+    setEmbedTypeOverride(null); // reset override when user re-pastes
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!parsed.embedUrl) {
+      alert("Please provide an embed code or URL for the recording.");
+      return;
+    }
+    setSaving(true);
+    try {
+      const payload = {
+        ...formData,
+        date: new Date(formData.date).toISOString(),
+        embedUrl: parsed.embedUrl,
+        embedType: resolvedEmbedType,
+      };
+      if (item) {
+        await voiceRecordingsAPI.update(item.id, payload);
+      } else {
+        await voiceRecordingsAPI.create(payload);
+      }
+      onSave();
+    } catch (err: any) {
+      alert("Failed to save: " + err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="crud-form">
+      <h3 style={{ margin: "0 0 var(--spacing-lg) 0" }}>
+        {item ? "Edit Recording" : "Add New Recording"}
+      </h3>
+
+      <div className="form-group">
+        <label htmlFor="vr-title">Title *</label>
+        <input
+          id="vr-title"
+          type="text"
+          placeholder="Enter recording title"
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="vr-description">Description</label>
+        <textarea
+          id="vr-description"
+          placeholder="Enter a short description"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="vr-speaker">Speaker *</label>
+        <input
+          id="vr-speaker"
+          type="text"
+          placeholder="Enter speaker name"
+          value={formData.speaker}
+          onChange={(e) => setFormData({ ...formData, speaker: e.target.value })}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="vr-date">Date *</label>
+        <input
+          id="vr-date"
+          type="date"
+          value={formData.date}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="vr-passage">Bible Passage</label>
+        <input
+          id="vr-passage"
+          type="text"
+          placeholder="e.g., Romans 8:1-11"
+          value={formData.passage}
+          onChange={(e) => setFormData({ ...formData, passage: e.target.value })}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="vr-category">Category</label>
+        <input
+          id="vr-category"
+          type="text"
+          placeholder="e.g., Sermon, Devotional, Teaching, Prayer"
+          value={formData.category}
+          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+        />
+      </div>
+
+      {/* ── Embed input ── */}
+      <div className="form-group">
+        <label htmlFor="vr-embed-raw">Embed Code or URL *</label>
+        <textarea
+          id="vr-embed-raw"
+          rows={4}
+          placeholder={`Paste any of the following:\n• Full <iframe> embed code from SoundCloud, Spotify, Anchor…\n• A direct audio file URL  (e.g. https://example.com/audio.mp3)\n• Just the iframe src URL`}
+          value={embedRaw}
+          onChange={(e) => handleEmbedRawChange(e.target.value)}
+          required
+          style={{ fontFamily: "monospace", fontSize: "0.85rem", resize: "vertical" }}
+        />
+        {/* Live feedback */}
+        {embedRaw.trim() && (
+          <div className="vr-embed-preview-row">
+            {isEmbedCode ? (
+              <span className="vr-embed-tag vr-embed-tag--code">
+                ✓ Embed code detected — src extracted automatically
+              </span>
+            ) : (
+              <span className="vr-embed-tag vr-embed-tag--url">
+                ✓ URL detected
+              </span>
+            )}
+            <span className="vr-embed-detected-type">
+              Type auto-set: <strong>{resolvedEmbedType === "audio" ? "Audio player" : "iFrame embed"}</strong>
+            </span>
+          </div>
+        )}
+        <small style={{ color: "var(--color-muted-gray)", marginTop: "0.25rem", display: "block" }}>
+          On SoundCloud: Share → Embed → copy the code. On Spotify: Share → Embed episode → copy code. Any{" "}
+          <code style={{ fontSize: "0.8rem" }}>&lt;iframe&gt;</code> embed code works.
+        </small>
+      </div>
+
+      {/* Override embed type if auto-detection is wrong */}
+      <div className="form-group">
+        <label htmlFor="vr-embed-type">Player Type</label>
+        <select
+          id="vr-embed-type"
+          value={resolvedEmbedType}
+          onChange={(e) => setEmbedTypeOverride(e.target.value)}
+        >
+          <option value="iframe">iFrame embed (SoundCloud, Spotify, Anchor, etc.)</option>
+          <option value="audio">Direct audio file (MP3, OGG, WAV)</option>
+        </select>
+        <small style={{ color: "var(--color-muted-gray)", marginTop: "0.25rem", display: "block" }}>
+          Auto-detected from what you pasted above. Change only if the player looks wrong.
+        </small>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="vr-status">Status</label>
+        <select
+          id="vr-status"
+          value={formData.status}
+          onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+        >
+          <option value="PUBLISHED">Published</option>
+          <option value="DRAFT">Draft</option>
+          <option value="ARCHIVED">Archived</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.isPublic}
+            onChange={(e) => setFormData({ ...formData, isPublic: e.target.checked })}
+          />{" "}
+          Visible to public (non-members)
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.isFeatured}
+            onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+          />{" "}
+          Feature on Voice Recordings page
         </label>
       </div>
 

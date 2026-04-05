@@ -96,6 +96,15 @@
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     flex-wrap: wrap;
+    width: 100%;
+    min-width: 0;
+}
+
+.beliefs-images img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
 }
 
 .belief-image {

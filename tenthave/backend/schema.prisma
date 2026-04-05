@@ -187,3 +187,39 @@ model Sermon {
   @@index([series])
   @@map("sermons")
 }
+
+// ============================================================================
+// VOICE RECORDINGS
+// ============================================================================
+
+model VoiceRecording {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+
+  // Recording details
+  speaker     String
+  date        DateTime
+  passage     String?       // Bible passage reference
+  category    String?       // "sermon", "devotional", "prayer", "teaching", etc.
+
+  // Embed URL (SoundCloud, Anchor, Spotify, direct MP3, etc.)
+  embedUrl    String        // The embeddable player URL or direct audio src
+  embedType   String        @default("iframe") // "iframe" | "audio"
+
+  // Visibility and status
+  status      ContentStatus @default(PUBLISHED)
+  isPublic    Boolean       @default(true)
+  isFeatured  Boolean       @default(false)
+
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([isPublic])
+  @@index([isFeatured])
+  @@index([date])
+  @@index([category])
+  @@map("voice_recordings")
+}

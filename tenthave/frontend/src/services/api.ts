@@ -416,6 +416,61 @@ export const usersAPI = {
 };
 
 // ============================================================================
+// VOICE RECORDINGS API
+// ============================================================================
+
+export interface VoiceRecording {
+  id: string;
+  title: string;
+  description?: string;
+  speaker: string;
+  date: string;
+  passage?: string;
+  category?: string;
+  embedUrl: string;
+  embedType: string;
+  status: string;
+  isPublic: boolean;
+  isFeatured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const voiceRecordingsAPI = {
+  async getAll(params?: Record<string, string>): Promise<VoiceRecording[]> {
+    const queryString = params ? `?${new URLSearchParams(params)}` : "";
+    return fetchAPI<VoiceRecording[]>(`/voice-recordings${queryString}`);
+  },
+
+  async getById(id: string): Promise<VoiceRecording> {
+    return fetchAPI<VoiceRecording>(`/voice-recordings/${id}`);
+  },
+
+  async create(data: Partial<VoiceRecording>): Promise<VoiceRecording> {
+    return fetchAPI<VoiceRecording>("/voice-recordings", {
+      method: "POST",
+      headers: getHeaders(true),
+      body: JSON.stringify(data),
+    });
+  },
+
+  async update(id: string, data: Partial<VoiceRecording>): Promise<VoiceRecording> {
+    return fetchAPI<VoiceRecording>(`/voice-recordings/${id}`, {
+      method: "PUT",
+      headers: getHeaders(true),
+      body: JSON.stringify(data),
+    });
+  },
+
+  async delete(id: string): Promise<{ message: string }> {
+    return fetchAPI<{ message: string }>(`/voice-recordings/${id}`, {
+      method: "DELETE",
+      headers: getHeaders(true),
+    });
+  },
+};
+
+// ============================================================================
 // CONTACT API
 // ============================================================================
 

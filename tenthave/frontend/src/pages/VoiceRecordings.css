@@ -1,0 +1,290 @@
+/* VoiceRecordings Page — matches Sermon page structure */
+
+.vr-page {
+  min-height: 100vh;
+  background-color: var(--color-light);
+  font-family: var(--font-primary);
+}
+
+.vr-page__body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--section-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+}
+
+/* Section header */
+.vr-section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.vr-section-label {
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-sm);
+  margin: 0 0 var(--spacing-md);
+  opacity: 0.8;
+}
+
+.vr-section-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  margin: 0 0 var(--spacing-md);
+}
+
+.vr-section-accent {
+  width: 60px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: 0 auto;
+}
+
+/* Featured Section */
+.vr-featured-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.vr-featured-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Controls */
+.vr-controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.vr-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.vr-search {
+  width: 100%;
+  max-width: 600px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--border-color);
+  border-radius: 0;
+  background: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-body);
+  color: var(--color-dark);
+  transition: border-color var(--transition-fast);
+  display: block;
+}
+
+.vr-search:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.vr-search::placeholder {
+  color: var(--color-muted-gray);
+}
+
+/* Category tabs */
+.vr-category-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.vr-category-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 2px solid var(--border-color);
+  background: var(--color-white);
+  color: var(--color-muted-gray);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.vr-category-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-dark);
+  background: var(--color-bg-secondary);
+}
+
+.vr-category-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-dark);
+  font-weight: var(--font-weight-bold);
+}
+
+.vr-category-btn:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Main grid */
+.vr-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Skeleton loader */
+.vr-skeleton {
+  background: var(--color-white);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--border-color-light);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.vr-skeleton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: vr-shimmer 1.5s infinite;
+}
+
+@keyframes vr-shimmer {
+  to { left: 100%; }
+}
+
+.vr-skeleton__label {
+  width: 80px;
+  height: 12px;
+  background: var(--border-color-light);
+}
+
+.vr-skeleton__title {
+  width: 65%;
+  height: 22px;
+  background: var(--border-color-light);
+}
+
+.vr-skeleton__accent {
+  width: 40px;
+  height: 3px;
+  background: var(--border-color-light);
+}
+
+.vr-skeleton__meta {
+  width: 45%;
+  height: 14px;
+  background: var(--border-color-light);
+}
+
+/* Error state */
+.vr-error {
+  text-align: center;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+}
+
+.vr-error h3 {
+  font-size: var(--font-size-h4);
+  color: var(--color-dark);
+  margin: 0 0 var(--spacing-md);
+}
+
+.vr-error p {
+  color: var(--color-muted-gray);
+  margin: 0 0 var(--spacing-lg);
+}
+
+.vr-retry-btn {
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.vr-retry-btn:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+/* Empty state */
+.vr-empty {
+  text-align: center;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+}
+
+.vr-empty__icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--spacing-lg);
+}
+
+.vr-empty h3 {
+  font-size: var(--font-size-h4);
+  color: var(--color-dark);
+  margin: 0 0 var(--spacing-md);
+}
+
+.vr-empty p {
+  color: var(--color-muted-gray);
+  margin: 0;
+  font-size: var(--font-size-body);
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .vr-page__body {
+    padding: var(--spacing-xl) var(--spacing-md);
+    gap: var(--spacing-2xl);
+  }
+
+  .vr-section-title {
+    font-size: var(--font-size-h3);
+  }
+
+  .vr-search {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .vr-page__body {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+
+  .vr-controls {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+  }
+
+  .vr-search {
+    flex: 1;
+    min-width: 260px;
+    max-width: 480px;
+  }
+
+  .vr-category-tabs {
+    flex: 0 0 auto;
+  }
+}

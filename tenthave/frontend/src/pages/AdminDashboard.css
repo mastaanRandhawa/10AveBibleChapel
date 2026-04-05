@@ -656,6 +656,41 @@
     border-top: 1px solid var(--border-color);
 }
 
+/* Voice Recording embed preview feedback */
+.vr-embed-preview-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+}
+
+.vr-embed-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+}
+
+.vr-embed-tag--code {
+    background: rgba(var(--color-success-rgb, 34, 139, 34), 0.1);
+    color: var(--color-success, #227B22);
+    border: 1px solid rgba(34, 139, 34, 0.3);
+}
+
+.vr-embed-tag--url {
+    background: rgba(var(--color-primary-rgb, 251, 203, 156), 0.25);
+    color: var(--color-dark);
+    border: 1px solid var(--color-primary);
+}
+
+.vr-embed-detected-type {
+    font-size: var(--font-size-xs);
+    color: var(--color-muted-gray);
+}
+
 /* ============================================================================
    EMPTY STATES - Engaging Empty State Design
    ============================================================================ */
