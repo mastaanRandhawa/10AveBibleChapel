@@ -25,7 +25,26 @@ const PORT = process.env.PORT || 5000;
 export const prisma = new PrismaClient();
 
 // Middleware
-app.use(cors());
+const allowedOrigins = [
+  "http://tenthavenuechapel.com",
+  "http://www.tenthavenuechapel.com",
+  "https://tenthavenuechapel.com",
+  "https://www.tenthavenuechapel.com",
+  "http://localhost:3000",
+];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. curl, Postman, same-origin server calls)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: ${origin}`));
+      }
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -46,7 +65,11 @@ app.use("/api/voice-recordings", voiceRecordingRoutes);
 
 // Swagger UI (OpenAPI)
 const openApiSpec = buildOpenApiSpec();
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiSpec, { explorer: true }));
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(openApiSpec, { explorer: true }),
+);
 app.get("/api-docs.json", (_req, res) => res.json(openApiSpec));
 
 // Error handling middleware
@@ -55,14 +78,14 @@ app.use(
     err: Error,
     req: express.Request,
     res: express.Response,
-    next: express.NextFunction
+    next: express.NextFunction,
   ) => {
     console.error(err.stack);
     res.status(500).json({
       error: "Something went wrong!",
       message: process.env.NODE_ENV === "development" ? err.message : undefined,
     });
-  }
+  },
 );
 
 // 404 handler

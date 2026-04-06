@@ -36,8 +36,8 @@ const useSEO = ({
         const attr = selector.includes("[property")
           ? "property"
           : selector.includes("[name")
-          ? "name"
-          : "name";
+            ? "name"
+            : "name";
         const match = selector.match(/["']([^"']+)["']/);
         if (match) el.setAttribute(attr, match[1]);
         document.head.appendChild(el);
@@ -58,7 +58,9 @@ const useSEO = ({
     if (canonical) {
       setMeta('meta[property="og:url"]', canonical);
       setMeta('meta[name="twitter:url"]', canonical);
-      let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+      let link = document.querySelector<HTMLLinkElement>(
+        'link[rel="canonical"]',
+      );
       if (!link) {
         link = document.createElement("link");
         link.rel = "canonical";
@@ -78,7 +80,7 @@ const useSEO = ({
         document.head.appendChild(script);
       }
       script.textContent = JSON.stringify(
-        Array.isArray(jsonLd) ? jsonLd : jsonLd
+        Array.isArray(jsonLd) ? jsonLd : jsonLd,
       );
     } else if (script) {
       script.remove();
@@ -88,7 +90,16 @@ const useSEO = ({
       // Restore base title on unmount
       document.title = `${BASE_TITLE} - A Small Bible Believing Christian Fellowship in Burnaby, BC`;
     };
-  }, [title, description, canonical, ogTitle, ogDescription, ogImage, ogType, jsonLd]);
+  }, [
+    title,
+    description,
+    canonical,
+    ogTitle,
+    ogDescription,
+    ogImage,
+    ogType,
+    jsonLd,
+  ]);
 };
 
 export default useSEO;

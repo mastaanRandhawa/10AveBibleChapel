@@ -2,8 +2,7 @@ import { NetworkError, parseAPIError } from "./apiErrorHandler";
 
 // Public API URL — set REACT_APP_API_URL in .env (build-time). Never put secrets here.
 export const API_BASE_URL =
-  process.env.REACT_APP_API_URL ||
-  "https://www.tenthavechapel.com/api";
+  process.env.REACT_APP_API_URL || "http://tenthavenuechapel.com/api";
 
 // Helper function to get auth token
 const getAuthToken = (): string | null => {
@@ -35,7 +34,7 @@ function resolveApiUrl(endpoint: string): string {
 // Generic fetch wrapper with enhanced error handling
 async function fetchAPI<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ): Promise<T> {
   const url = resolveApiUrl(endpoint);
   let response: Response;
@@ -43,7 +42,7 @@ async function fetchAPI<T>(
     response = await fetch(url, options);
   } catch {
     throw new NetworkError(
-      "Could not reach the API. If the site loads but data does not, check browser blocking (extensions), CORS, or that the backend is up."
+      "Could not reach the API. If the site loads but data does not, check browser blocking (extensions), CORS, or that the backend is up.",
     );
   }
 
@@ -51,7 +50,7 @@ async function fetchAPI<T>(
     const errorData = await response.json().catch(() => ({
       error: "An error occurred",
     }));
-    
+
     // Parse and throw enhanced error
     const error = parseAPIError(response, errorData);
     throw error;
@@ -227,7 +226,7 @@ export const calendarAPI = {
 
   async update(
     id: string,
-    data: Partial<CalendarEvent>
+    data: Partial<CalendarEvent>,
   ): Promise<CalendarEvent> {
     return fetchAPI<CalendarEvent>(`/calendar/${id}`, {
       method: "PUT",
@@ -345,7 +344,7 @@ export const prayerRequestsAPI = {
 
   async update(
     id: string,
-    data: Partial<PrayerRequest>
+    data: Partial<PrayerRequest>,
   ): Promise<PrayerRequest> {
     return fetchAPI<PrayerRequest>(`/prayer-requests/${id}`, {
       method: "PUT",
@@ -454,7 +453,10 @@ export const voiceRecordingsAPI = {
     });
   },
 
-  async update(id: string, data: Partial<VoiceRecording>): Promise<VoiceRecording> {
+  async update(
+    id: string,
+    data: Partial<VoiceRecording>,
+  ): Promise<VoiceRecording> {
     return fetchAPI<VoiceRecording>(`/voice-recordings/${id}`, {
       method: "PUT",
       headers: getHeaders(true),
