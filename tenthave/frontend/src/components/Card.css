@@ -33,6 +33,28 @@
     line-height: var(--line-height-tight);
 }
 
+/* Card Time */
+.card-time {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+}
+
+.card-time-day {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.card-time-hours {
+    font-size: var(--font-size-body);
+    color: var(--color-muted-gray);
+    font-weight: var(--font-weight-regular);
+}
+
 /* Card Text */
 .card-text {
     font-size: var(--font-size-body);

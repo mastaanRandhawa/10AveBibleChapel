@@ -9,11 +9,20 @@ const Card: React.FC<CardProps> = ({
   paragraph,
   iconlink,
   className = "",
+  time,
 }) => {
   return (
     <div className={`card ${className}`.trim()}>
       <img src={iconlink} alt="Service Icon" />
       <h3 className="card-title">{headingOne}</h3>
+      {time && (
+        <div className="card-time">
+          <span className="card-time-day">{time.day}</span>
+          <span className="card-time-hours">
+            {time.start} – {time.end}
+          </span>
+        </div>
+      )}
       <p className="card-text">{paragraph}</p>
       {linkToService && (
         <Button

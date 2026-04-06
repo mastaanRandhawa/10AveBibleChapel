@@ -5,6 +5,7 @@ import PageContainer from "../components/PageContainer";
 import { CONTACT_INFO } from "../constants";
 import { contactAPI, ContactFormData } from "../services/api";
 import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
+import useSEO from "../hooks/useSEO";
 import contactUsImage from "../assets/contact-us.jpg";
 import "./Contact.css";
 
@@ -190,6 +191,13 @@ const ContactDetailsComponent: React.FC = () => {
 
 // Main Contact Component
 const Contact: React.FC = () => {
+  useSEO({
+    title: "Contact Us",
+    description:
+      "Get in touch with Tenth Avenue Bible Chapel in Burnaby, BC. Send us a message, find our address at 7103 - 10th Ave., or call us at 604-524-5445.",
+    canonical: "https://www.tenthavechapel.com/contact",
+  });
+
   return (
     <PageContainer>
       <div className="contact-page-wrapper">

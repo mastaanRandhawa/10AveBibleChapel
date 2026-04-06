@@ -6,10 +6,18 @@ import Calendar, { CalendarEvent } from "../components/Calendar";
 import EventModal from "../components/EventModal";
 import PageContainer from "../components/PageContainer";
 import { announcementsAPI, calendarAPI, Announcement } from "../services/api";
+import useSEO from "../hooks/useSEO";
 import "./Bulletin.css";
 
 // Main Bulletin Component
 const Bulletin: React.FC = () => {
+  useSEO({
+    title: "Bulletin & Events",
+    description:
+      "Stay up to date with announcements, upcoming events, and the church calendar at Tenth Avenue Bible Chapel in Burnaby, BC.",
+    canonical: "https://www.tenthavechapel.com/bulletin",
+  });
+
   // Calendar and event management state
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);

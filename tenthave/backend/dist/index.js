@@ -7,7 +7,9 @@ exports.prisma = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const client_1 = require("@prisma/client");
+const openapiSpec_1 = require("./swagger/openapiSpec");
 // Import routes
 const auth_1 = __importDefault(require("./routes/auth"));
 const calendar_1 = __importDefault(require("./routes/calendar"));
@@ -16,6 +18,7 @@ const prayerRequests_1 = __importDefault(require("./routes/prayerRequests"));
 const sermons_1 = __importDefault(require("./routes/sermons"));
 const users_1 = __importDefault(require("./routes/users"));
 const contact_1 = __importDefault(require("./routes/contact"));
+const voiceRecordings_1 = __importDefault(require("./routes/voiceRecordings"));
 // Load environment variables
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -38,6 +41,11 @@ app.use("/api/prayer-requests", prayerRequests_1.default);
 app.use("/api/sermons", sermons_1.default);
 app.use("/api/users", users_1.default);
 app.use("/api/contact", contact_1.default);
+app.use("/api/voice-recordings", voiceRecordings_1.default);
+// Swagger UI (OpenAPI)
+const openApiSpec = (0, openapiSpec_1.buildOpenApiSpec)();
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(openApiSpec, { explorer: true }));
+app.get("/api-docs.json", (_req, res) => res.json(openApiSpec));
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);

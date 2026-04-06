@@ -4,9 +4,9 @@
     padding: var(--spacing-xl);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    text-align: left;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
     min-height: 300px;
     font-family: var(--font-primary);
@@ -48,7 +48,7 @@
 
 /* specialCard Title */
 .specialCard-title {
-    font-size: var(--font-size-h4);
+    font-size: var(--font-size-h2);
     font-weight: var(--font-weight-bold);
     color: var(--color-white);
     margin: 0 0 var(--spacing-sm) 0;

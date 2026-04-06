@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import HeroSection from "../components/HeroSection";
 import PageContainer from "../components/PageContainer";
+import useSEO from "../hooks/useSEO";
 import mountainsImage from "../assets/church-inside.jpg";
 import "./About.css";
 import prayingIcon from "../assets/Praying-aboutus.jpg";
@@ -120,6 +121,13 @@ const BeliefsList: React.FC = () => (
 
 // Main About Component
 const About: React.FC = () => {
+  useSEO({
+    title: "About Us",
+    description:
+      "Learn about Tenth Avenue Bible Chapel — a Bible-believing Christian fellowship with a long history in Burnaby, BC. Discover our beliefs, mission, and welcoming community.",
+    canonical: "https://www.tenthavechapel.com/about",
+  });
+
   return (
     <PageContainer>
       <div className="about-page-wrapper">

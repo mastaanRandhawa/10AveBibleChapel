@@ -4,8 +4,8 @@ import SermonCard from "../components/SermonCard";
 import SermonCardSkeleton from "../components/SermonCardSkeleton";
 import SermonFilter from "../components/SermonFilter";
 import Pagination from "../components/Pagination";
-import LoadingSpinner from "../components/LoadingSpinner";
 import { sermonsAPI, Sermon } from "../services/api";
+import useSEO from "../hooks/useSEO";
 import "./SermonSeriesDetail.css";
 
 const SermonSeriesDetail: React.FC = () => {
@@ -113,6 +113,17 @@ const SermonSeriesDetail: React.FC = () => {
       });
     }
   };
+
+  const derivedSeriesTitle = sermons[0]?.series || "Standalone Sermons";
+  const derivedSpeaker = sermons[0]?.speaker;
+
+  useSEO({
+    title: loading ? "Sermon Series" : derivedSeriesTitle,
+    description: loading
+      ? "Loading sermon series..."
+      : `Listen to sermons from the "${derivedSeriesTitle}" series${derivedSpeaker ? ` by ${derivedSpeaker}` : ""} at Tenth Avenue Bible Chapel in Burnaby, BC.`,
+    canonical: `https://www.tenthavechapel.com/sermon/${seriesId}`,
+  });
 
   if (loading) {
     return (

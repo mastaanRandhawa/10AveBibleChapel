@@ -12,6 +12,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { WEEKLY_SERVICES, SPECIAL_MINISTRIES, CHURCH_INFO } from "../constants";
 import { sermonsAPI, Sermon } from "../services/api";
+import useSEO from "../hooks/useSEO";
 import "./Home.css";
 
 // Import assets
@@ -47,6 +48,7 @@ const WeeklyServicesSection: React.FC = () => (
           key={service.id}
           iconlink={service.icon}
           headingOne={service.name}
+          time={service.time}
           paragraph={service.description}
           linkToService={service.zoomLink}
         />
@@ -215,6 +217,14 @@ const RecordedSermonsSection: React.FC = () => {
 
 // Main Home Component
 const Home: React.FC = () => {
+  useSEO({
+    title: "Tenth Avenue Bible Chapel",
+    description:
+      "A small Bible believing Christian fellowship in Burnaby, BC. Join us Sundays for Breaking of Bread, Family Bible Hour, and Wednesday Assembly Prayer Meeting at 7103 - 10th Ave., Burnaby.",
+    canonical: "https://www.tenthavechapel.com/",
+    ogType: "website",
+  });
+
   return (
     <PageContainer>
       <main className="wrapperMAIN">

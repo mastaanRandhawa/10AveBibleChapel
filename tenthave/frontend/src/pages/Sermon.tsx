@@ -6,6 +6,7 @@ import SermonCardSkeleton from "../components/SermonCardSkeleton";
 import Pagination from "../components/Pagination";
 import PageContainer from "../components/PageContainer";
 import { sermonsAPI, Sermon } from "../services/api";
+import useSEO from "../hooks/useSEO";
 import crossMountain from "../assets/crosss-mountain.png";
 import "./Sermon.css";
 
@@ -17,6 +18,13 @@ interface SermonSeries {
 }
 
 const SermonPage: React.FC = () => {
+  useSEO({
+    title: "Sermons",
+    description:
+      "Browse sermon series and individual messages from Tenth Avenue Bible Chapel in Burnaby, BC. Biblical teachings covering a wide range of scripture passages and topics.",
+    canonical: "https://www.tenthavechapel.com/sermon",
+  });
+
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<"series" | "all">("series");
   const [currentPage, setCurrentPage] = useState(1);

@@ -11,11 +11,13 @@ const SpecialCard: React.FC<SpecialCardProps> = ({
   return (
     <div
       className={`specialCard ${className}`.trim()}
-      style={{ background: `url(${iconlink}) no-repeat center center/cover grey` }}
+      style={{
+        background: `url(${iconlink}) no-repeat center center/cover grey`,
+      }}
       title="Special service background"
     >
       <h3 className="specialCard-title">{headingOne}</h3>
-      <p className="specialCard-text">{paragraph}</p>
+      {paragraph && <p className="specialCard-text">{paragraph}</p>}
     </div>
   );
 };

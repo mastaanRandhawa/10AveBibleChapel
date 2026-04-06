@@ -4,9 +4,7 @@ import { NavigationItem, Service, Ministry } from "../types";
 import prayingIcon from "../assets/prayingiconround.svg";
 import bibleIcon from "../assets/bible.svg";
 import breakingOfBreadIcon from "../assets/breakingofbread.svg";
-import sundaySchoolIcon from "../assets/sundaySchool.png";
-import spanishBibleIcon from "../assets/spanishBible.png";
-import eslIcon from "../assets/ESL.png";
+import sundaySchoolIcon from "../assets/sundaySchool.jpg";
 
 // Navigation items
 export const NAVIGATION_ITEMS: NavigationItem[] = [
@@ -14,7 +12,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { path: "/bulletin", label: "BULLETIN" },
   { path: "/prayer", label: "PRAYER" },
   { path: "/sermon", label: "SERMONS" },
-  { path: "/recordings", label: "RECORDINGS" },
+  // { path: "/recordings", label: "RECORDINGS" },
   { path: "/contact", label: "CONTACT US" },
   { path: "/about", label: "ABOUT US" },
 ];
@@ -27,7 +25,7 @@ export const WEEKLY_SERVICES: Service[] = [
     description:
       "Join us for our weekly breaking of bread service where we remember the Lord's death and resurrection.",
     icon: prayingIcon,
-    time: { day: "Sunday", start: "9:30 AM", end: "10:30 AM" },
+    time: { day: "Sunday", start: "10:00 AM", end: "11:00 AM" },
     zoomLink:
       "https://us02web.zoom.us/j/6042227777?pwd=R2tDVy92NGlsWVkyb1BEendaRllPQT09",
   },
@@ -36,16 +34,16 @@ export const WEEKLY_SERVICES: Service[] = [
     name: "FAMILY BIBLE HOUR",
     description: "A time for family Bible study and fellowship together.",
     icon: bibleIcon,
-    time: { day: "Sunday", start: "11:00 AM", end: "12:00 PM" },
+    time: { day: "Sunday", start: "11:30 AM", end: "12:30 PM" },
     zoomLink:
       "https://us02web.zoom.us/j/6042227777?pwd=R2tDVy92NGlsWVkyb1BEendaRllPQT09",
   },
   {
     id: "estudio-biblico",
-    name: "ESTUDIO BÍBLICO",
-    description: "Spanish Bible study for our Spanish-speaking community.",
+    name: "MID-WEEK PRAYER MEETING",
+    description: "A time for prayer and fellowship together.",
     icon: breakingOfBreadIcon,
-    time: { day: "Sunday", start: "12:30 PM", end: "1:30 PM" },
+    time: { day: "Wednesday", start: "7:00 PM", end: "8:00 PM" },
     zoomLink:
       "https://us02web.zoom.us/j/6042227777?pwd=R2tDVy92NGlsWVkyb1BEendaRllPQT09",
   },
@@ -55,25 +53,10 @@ export const WEEKLY_SERVICES: Service[] = [
 export const SPECIAL_MINISTRIES: Ministry[] = [
   {
     id: "sunday-school",
-    name: "SUNDAY SCHOOL CLASS",
-    description:
-      "Weekly kids club, Sundays from 11:30 am to 12:30 pm, for children ages 8 through 14.",
+    name: "TO BE ANNOUNCED",
+    description: "",
     icon: sundaySchoolIcon,
     isActive: true,
-  },
-  {
-    id: "spanish-bible-study",
-    name: "SPANISH BIBLE STUDY",
-    description: "Weekly Spanish Bible study for adults and families.",
-    icon: spanishBibleIcon,
-    isActive: true,
-  },
-  {
-    id: "esl",
-    name: "ESL (CANCELLED)",
-    description: "English as a Second Language classes - currently on hold.",
-    icon: eslIcon,
-    isActive: false,
   },
 ];
 

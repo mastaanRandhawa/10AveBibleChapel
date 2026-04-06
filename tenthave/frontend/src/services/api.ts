@@ -3,7 +3,7 @@ import { NetworkError, parseAPIError } from "./apiErrorHandler";
 // Public API URL — set REACT_APP_API_URL in .env (build-time). Never put secrets here.
 export const API_BASE_URL =
   process.env.REACT_APP_API_URL ||
-  "https://whimsical-indigo-chameleon.prayforperu.org/api";
+  "https://www.tenthavechapel.com/api";
 
 // Helper function to get auth token
 const getAuthToken = (): string | null => {

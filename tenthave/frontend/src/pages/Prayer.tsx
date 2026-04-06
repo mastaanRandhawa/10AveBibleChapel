@@ -7,6 +7,7 @@ import PageContainer from "../components/PageContainer";
 import { useToast } from "../context/ToastContext";
 import { prayerRequestsAPI } from "../services/api";
 import { getUserFriendlyErrorMessage } from "../services/apiErrorHandler";
+import useSEO from "../hooks/useSEO";
 import prayingImage from "../assets/praying.jpg";
 import "./Prayer.css";
 
@@ -180,6 +181,13 @@ const ViewPrayerRequestsSection: React.FC = () => {
 
 // Main Prayer Component
 const Prayer: React.FC = () => {
+  useSEO({
+    title: "Prayer Requests",
+    description:
+      "Submit a prayer request or join the Tenth Avenue Bible Chapel community in prayer. We believe in the power of prayer and would love to pray with you.",
+    canonical: "https://www.tenthavechapel.com/prayer",
+  });
+
   return (
     <PageContainer>
       <div className="prayer-page-wrapper">

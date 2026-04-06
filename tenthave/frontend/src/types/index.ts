@@ -14,6 +14,7 @@ export interface CardProps {
   paragraph: string;
   linkToService?: string;
   className?: string;
+  time?: ServiceTime;
 }
 
 export interface SpecialCardProps {
