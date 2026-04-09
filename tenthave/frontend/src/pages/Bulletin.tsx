@@ -200,7 +200,6 @@ const Bulletin: React.FC = () => {
                 onEventUpdate={isAdmin ? handleEventUpdate : undefined}
                 onEventDelete={isAdmin ? handleEventDelete : undefined}
                 categories={CHURCH_CATEGORIES}
-                defaultView="month"
               />
             )}
           </ScrollReveal>

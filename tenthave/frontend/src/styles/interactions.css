@@ -8,6 +8,7 @@
     --interaction-fast: 150ms ease-out;
     --interaction-normal: 250ms ease-out;
     --interaction-slow: 350ms ease-out;
+    --interaction-standard: 200ms ease-in-out;
 
     /* Interaction distances */
     --lift-distance: 4px;
@@ -20,6 +21,43 @@
     --hover-overlay-strong: rgba(251, 203, 156, 0.12);
     --focus-ring: 2px solid var(--color-primary);
     --focus-ring-offset: 2px;
+}
+
+/* ========================================
+   GLOBAL INTERACTIVE BASELINE
+   ======================================== */
+
+/*
+  Subtle, consistent transitions for common interactive elements.
+  Keeps the existing look while smoothing state changes.
+*/
+:where(a, button, [role="button"], input, textarea, select) {
+    transition:
+        color var(--interaction-standard),
+        background-color var(--interaction-standard),
+        border-color var(--interaction-standard),
+        box-shadow var(--interaction-standard),
+        transform var(--interaction-fast),
+        opacity var(--interaction-fast);
+}
+
+/* Gentle card hover polish for common card-like surfaces */
+:where(.card, .sermon-card, .announcement-card, .contact-form-section, .contact-details-section, .voice-recording-card) {
+    transition:
+        transform var(--interaction-normal),
+        box-shadow var(--interaction-normal),
+        border-color var(--interaction-normal),
+        background-color var(--interaction-normal);
+}
+
+:where(.card, .sermon-card, .announcement-card, .voice-recording-card):hover {
+    transform: translateY(-2px);
+}
+
+/* Keep keyboard focus highly visible and consistent */
+:where(a, button, [role="button"], input, textarea, select):focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
 }
 
 /* ========================================
@@ -272,6 +310,10 @@
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
+
+    :where(a, button, [role="button"], input, textarea, select, .card, .sermon-card, .announcement-card, .contact-form-section, .contact-details-section, .voice-recording-card) {
+        transition-duration: 0.01s !important;
+    }
 
     .interactive-lift,
     .interactive-lift-strong,

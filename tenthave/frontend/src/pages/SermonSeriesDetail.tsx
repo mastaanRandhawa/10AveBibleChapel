@@ -175,7 +175,8 @@ const SermonSeriesDetail: React.FC = () => {
 
         {/* Featured Sermon */}
         {featuredSermon && (
-          <div style={{ marginBottom: "2rem" }}>
+          <div className="featured-recently-added">
+            <h2 className="featured-recently-added-title">Recently Added</h2>
             <SermonCard
               title={featuredSermon.title}
               series={featuredSermon.series}

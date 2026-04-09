@@ -22,7 +22,6 @@ export interface ChurchEventManagerProps {
   onEventDelete?: (id: string) => Promise<void> | void;
   isAdmin?: boolean;
   categories?: string[];
-  defaultView?: "month" | "week" | "day" | "list";
   className?: string;
 }
 
@@ -56,12 +55,10 @@ export function ChurchEventManager({
   onEventDelete,
   isAdmin = false,
   categories = CHURCH_CATEGORIES,
-  defaultView = "month",
   className,
 }: ChurchEventManagerProps) {
   const [events, setEvents] = useState<ChurchEvent[]>(initialEvents);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [view, setView] = useState<"month" | "week" | "day" | "list">(defaultView);
   const [selectedEvent, setSelectedEvent] = useState<ChurchEvent | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -152,26 +149,13 @@ export function ChurchEventManager({
   const navigateDate = (direction: "prev" | "next") => {
     setCurrentDate((prev) => {
       const d = new Date(prev);
-      if (view === "month") d.setMonth(prev.getMonth() + (direction === "next" ? 1 : -1));
-      else if (view === "week") d.setDate(prev.getDate() + (direction === "next" ? 7 : -7));
-      else d.setDate(prev.getDate() + (direction === "next" ? 1 : -1));
+      d.setMonth(prev.getMonth() + (direction === "next" ? 1 : -1));
       return d;
     });
   };
 
   const getHeaderTitle = () => {
-    if (view === "month")
-      return currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
-    if (view === "week")
-      return `Week of ${currentDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
-    if (view === "day")
-      return currentDate.toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      });
-    return "All Events";
+    return currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
   };
 
   const currentEventData = isCreating ? newEvent : selectedEvent;
@@ -208,22 +192,6 @@ export function ChurchEventManager({
         </div>
 
         <div className="cem-view-actions">
-          <div className="cem-view-switcher-wrap">
-            <div className="cem-view-switcher" role="tablist" aria-label="Calendar view">
-              {(["month", "week", "day", "list"] as const).map((v) => (
-                <button
-                  key={v}
-                  type="button"
-                  role="tab"
-                  aria-selected={view === v}
-                  className={`cem-view-btn ${view === v ? "active" : ""}`}
-                  onClick={() => setView(v)}
-                >
-                  {v.charAt(0).toUpperCase() + v.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
           {isAdmin && (
             <button
               type="button"
@@ -240,66 +208,29 @@ export function ChurchEventManager({
       </div>
 
       {/* Calendar Views */}
-      {view === "month" && (
-        <MonthView
-          currentDate={currentDate}
-          events={events}
-          getColorHex={getColorHex}
-          onEventClick={(ev) => {
-            setSelectedEvent(ev);
-            setIsCreating(false);
-            setIsDialogOpen(true);
-          }}
-          onDayClick={
-            isAdmin
-              ? (date) => {
-                  setIsCreating(true);
-                  setNewEvent((prev) => ({
-                    ...prev,
-                    startTime: date,
-                    endTime: new Date(date.getTime() + 3600000),
-                  }));
-                  setIsDialogOpen(true);
-                }
-              : undefined
-          }
-        />
-      )}
-      {view === "week" && (
-        <WeekView
-          currentDate={currentDate}
-          events={events}
-          getColorHex={getColorHex}
-          onEventClick={(ev) => {
-            setSelectedEvent(ev);
-            setIsCreating(false);
-            setIsDialogOpen(true);
-          }}
-        />
-      )}
-      {view === "day" && (
-        <DayView
-          currentDate={currentDate}
-          events={events}
-          getColorHex={getColorHex}
-          onEventClick={(ev) => {
-            setSelectedEvent(ev);
-            setIsCreating(false);
-            setIsDialogOpen(true);
-          }}
-        />
-      )}
-      {view === "list" && (
-        <ListView
-          events={events}
-          getColorHex={getColorHex}
-          onEventClick={(ev) => {
-            setSelectedEvent(ev);
-            setIsCreating(false);
-            setIsDialogOpen(true);
-          }}
-        />
-      )}
+      <MonthView
+        currentDate={currentDate}
+        events={events}
+        getColorHex={getColorHex}
+        onEventClick={(ev) => {
+          setSelectedEvent(ev);
+          setIsCreating(false);
+          setIsDialogOpen(true);
+        }}
+        onDayClick={
+          isAdmin
+            ? (date) => {
+                setIsCreating(true);
+                setNewEvent((prev) => ({
+                  ...prev,
+                  startTime: date,
+                  endTime: new Date(date.getTime() + 3600000),
+                }));
+                setIsDialogOpen(true);
+              }
+            : undefined
+        }
+      />
 
       {/* Event Dialog Modal */}
       {isDialogOpen && (
@@ -619,6 +550,7 @@ function MonthView({
                   day: "numeric",
                 })}
               </div>
+              <div className="cem-month-day-panel-hint">Tap an event card to view details</div>
             </div>
             <button
               type="button"
@@ -690,9 +622,13 @@ function MonthView({
           return (
             <div
               key={i}
-              className={`cem-month-cell ${!isCurrentMonth ? "other-month" : ""} ${isToday ? "today" : ""} ${isSelected ? "selected-day" : ""}`}
+              className={`cem-month-cell ${!isCurrentMonth ? "other-month" : ""} ${isToday ? "today" : ""} ${dayEvents.length > 0 ? "has-events" : ""} ${isSelected ? "selected-day" : ""}`}
               onClick={() => handleMonthCellClick(day, dayEvents)}
               style={{ cursor: cellCursor }}
+              aria-label={`${day.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })}${dayEvents.length ? `, ${dayEvents.length} event${dayEvents.length > 1 ? "s" : ""}` : ", no events"}`}
             >
               <span className={`cem-month-day-num ${isToday ? "today-num" : ""}`}>
                 {day.getDate()}
@@ -738,6 +674,9 @@ function MonthView({
                       <span className="cem-month-more">+{dayEvents.length - 3} more</span>
                     )}
                   </>
+                )}
+                {narrowDayPanel && dayEvents.length > 0 && (
+                  <span className="cem-month-cell-tap-hint">Tap to view</span>
                 )}
               </div>
             </div>

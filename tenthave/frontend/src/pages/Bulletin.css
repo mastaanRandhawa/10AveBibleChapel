@@ -900,8 +900,8 @@
 /* Admin badge inline */
 .bulletin-admin-badge {
     display: inline-block;
-    background: #1e293b;
-    color: #f8fafc;
+    background: var(--color-primary);
+    color: var(--color-dark);
     font-size: calc(var(--font-size-h6) - 4px);
     font-weight: var(--font-weight-bold);
     padding: 2px 10px;

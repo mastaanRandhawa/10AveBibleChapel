@@ -32,6 +32,20 @@
     line-height: var(--line-height-tight);
 }
 
+.featured-recently-added {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.featured-recently-added-title {
+    margin: 0 0 var(--spacing-md) 0;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+}
+
 .error-message {
     text-align: center;
     padding: var(--spacing-4xl) var(--spacing-lg);

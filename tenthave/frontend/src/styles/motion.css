@@ -189,6 +189,24 @@
    CONTENT REVEAL ANIMATIONS
    ======================================== */
 
+/*
+  Shared ScrollReveal baseline.
+  Uses transform + opacity only for smooth, performant reveals.
+*/
+.scroll-reveal.scroll-reveal-base {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+        opacity 280ms ease-in-out,
+        transform 320ms ease-in-out;
+    will-change: opacity, transform;
+}
+
+.scroll-reveal.scroll-reveal-base.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Slide up reveal (for content appearing) */
 .slide-up {
     animation: slideUp 0.3s ease-out forwards;
@@ -281,8 +299,17 @@
     .modal-content-enter,
     .dropdown-enter,
     .slide-up,
-    .stagger-item {
+    .stagger-item,
+    .scroll-reveal.scroll-reveal-base,
+    .scroll-reveal.scroll-reveal-base.visible {
         animation: fadeInSimple 0.1s ease-out forwards;
+    }
+
+    .scroll-reveal.scroll-reveal-base,
+    .scroll-reveal.scroll-reveal-base.visible {
+        transition: none;
+        transform: none;
+        will-change: auto;
     }
 
     @keyframes fadeInSimple {

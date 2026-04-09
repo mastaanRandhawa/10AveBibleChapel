@@ -1,5 +1,4 @@
-/* Church Event Manager — uses design tokens from global.css
-   Scoped “professional” palette: slate header, restrained accents */
+/* Church Event Manager — uses design tokens from global.css */
 
 .church-event-manager {
     font-family: var(--font-primary);
@@ -12,24 +11,24 @@
     min-width: 0;
     box-sizing: border-box;
 
-    --cem-chrome-start: #1e293b;
-    --cem-chrome-end: #334155;
-    --cem-chrome-text: #f8fafc;
-    --cem-chrome-muted: #cbd5e1;
-    --cem-chrome-divider: rgba(248, 250, 252, 0.14);
-    --cem-accent: #2563eb;
-    --cem-accent-hover: #1d4ed8;
-    --cem-control-border: #94a3b8;
-    --cem-control-bg: #f8fafc;
-    --cem-active-tab-bg: #0f172a;
-    --cem-active-tab-text: #f8fafc;
-    --cem-today-bg: rgba(37, 99, 235, 0.09);
-    --cem-today-border: #2563eb;
-    --cem-today-pill-bg: #2563eb;
-    --cem-today-pill-text: #ffffff;
-    --cem-modal-accent: #1e293b;
-    --cem-event-pill-fallback: #e2e8f0;
-    --cem-event-pill-text: #0f172a;
+    --cem-chrome-start: var(--color-dark);
+    --cem-chrome-end: var(--color-muted-gray);
+    --cem-chrome-text: var(--color-bg);
+    --cem-chrome-muted: var(--color-light);
+    --cem-chrome-divider: rgba(255, 255, 255, 0.25);
+    --cem-accent: var(--color-primary);
+    --cem-accent-hover: var(--color-primary-dark);
+    --cem-control-border: var(--border-color-dark);
+    --cem-control-bg: var(--color-light);
+    --cem-active-tab-bg: var(--color-dark);
+    --cem-active-tab-text: var(--color-bg);
+    --cem-today-bg: rgba(251, 203, 156, 0.25);
+    --cem-today-border: var(--color-primary);
+    --cem-today-pill-bg: var(--color-primary);
+    --cem-today-pill-text: var(--color-dark);
+    --cem-modal-accent: var(--color-primary);
+    --cem-event-pill-fallback: var(--color-light);
+    --cem-event-pill-text: var(--color-dark);
 }
 
 /* ─── Controls Bar ──────────────────────────────────────────────────── */
@@ -103,7 +102,7 @@
 }
 
 .church-event-manager .cem-date-nav-btn:active {
-    background: #e2e8f0;
+    background: var(--color-light);
 }
 
 .cem-date-nav-btn:not(:last-child) {
@@ -128,6 +127,7 @@
     gap: var(--spacing-sm);
     flex-wrap: wrap;
     min-width: 0;
+    margin-left: auto;
 }
 
 /* Allows horizontal scroll on small screens without crushing tabs */
@@ -254,6 +254,10 @@
     background: var(--color-light);
 }
 
+.cem-month-cell.has-events {
+    box-shadow: inset 0 0 0 1px rgba(251, 203, 156, 0.5);
+}
+
 .cem-month-cell.other-month {
     background: var(--color-bg-secondary);
 }
@@ -320,7 +324,7 @@
 
 /* Narrow month: event titles live in the day panel above the grid */
 .cem-month-day-panel {
-    background: linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%);
+    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-bg) 100%);
     border-bottom: 2px solid var(--border-color);
     padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
 }
@@ -339,7 +343,7 @@
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #64748b;
+    color: var(--color-muted-gray);
 }
 
 .cem-month-day-panel-date {
@@ -351,13 +355,20 @@
     margin-top: 2px;
 }
 
+.cem-month-day-panel-hint {
+    margin-top: 4px;
+    font-family: var(--font-primary);
+    font-size: 0.6875rem;
+    color: var(--color-muted-gray);
+}
+
 .cem-month-day-panel-close {
     flex-shrink: 0;
     width: 2.5rem;
     height: 2.5rem;
     border: none;
-    background: #e2e8f0;
-    color: #334155;
+    background: var(--color-light);
+    color: var(--color-dark);
     font-size: 1.5rem;
     line-height: 1;
     cursor: pointer;
@@ -368,13 +379,13 @@
 }
 
 .cem-month-day-panel-close:hover {
-    background: #cbd5e1;
+    background: var(--color-bg-secondary);
 }
 
 .cem-month-day-panel-empty {
     font-family: var(--font-primary);
     font-size: var(--font-size-small);
-    color: #64748b;
+    color: var(--color-muted-gray);
     margin: 0 0 var(--spacing-sm);
     padding: var(--spacing-sm) 0;
 }
@@ -406,7 +417,7 @@
 
 .cem-month-day-panel-event:hover,
 .cem-month-day-panel-event:focus-visible {
-    border-color: #94a3b8;
+    border-color: var(--color-primary-dark);
     box-shadow: var(--shadow-sm);
     outline: none;
 }
@@ -437,7 +448,7 @@
 .cem-month-day-panel-event-time {
     font-family: var(--font-primary);
     font-size: 0.6875rem;
-    color: #64748b;
+    color: var(--color-muted-gray);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -452,7 +463,7 @@
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-sm);
-    border: 2px dashed #94a3b8;
+    border: 2px dashed var(--border-color-dark);
     background: transparent;
     color: var(--cem-chrome-start);
     cursor: pointer;
@@ -460,17 +471,17 @@
 }
 
 .cem-month-day-panel-add:hover {
-    background: #e2e8f0;
+    background: var(--color-light);
     border-color: var(--cem-chrome-start);
 }
 
 .cem-month-cell.selected-day {
-    background: #e8f0fe;
-    box-shadow: inset 0 0 0 2px #2563eb;
+    background: rgba(251, 203, 156, 0.25);
+    box-shadow: inset 0 0 0 2px var(--color-primary);
 }
 
 .cem-month-cell.selected-day.today {
-    background: linear-gradient(180deg, #e8f0fe 0%, var(--cem-today-bg) 100%);
+    background: linear-gradient(180deg, var(--color-light) 0%, var(--cem-today-bg) 100%);
 }
 
 .cem-month-cell-indicators {
@@ -481,6 +492,10 @@
     align-content: flex-start;
     margin-top: auto;
     padding-top: 4px;
+}
+
+.cem-month-cell-tap-hint {
+    display: none;
 }
 
 .cem-month-dot {
@@ -495,8 +510,8 @@
     height: auto;
     min-width: 1rem;
     border-radius: 999px;
-    background: #cbd5e1 !important;
-    color: #475569;
+    background: var(--color-light) !important;
+    color: var(--color-muted-gray);
     font-size: 0.5625rem;
     font-weight: var(--font-weight-bold);
     display: inline-flex;
@@ -947,7 +962,7 @@
 .cem-form-select:focus {
     outline: none;
     border-color: var(--cem-accent);
-    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 0 0 1px rgba(251, 203, 156, 0.25);
 }
 
 .cem-form-textarea {
@@ -1090,6 +1105,7 @@
         align-items: stretch;
         width: 100%;
         gap: var(--spacing-sm);
+        margin-left: 0;
     }
 
     .cem-view-switcher-wrap {
@@ -1133,6 +1149,17 @@
 
     .cem-month-cell {
         min-height: 72px;
+        position: relative;
+        border: 1px solid transparent;
+    }
+
+    .cem-month-cell.has-events {
+        border-color: rgba(251, 203, 156, 0.7);
+        background: linear-gradient(180deg, var(--color-light) 0%, var(--color-bg) 100%);
+    }
+
+    .cem-month-cell:active {
+        background: var(--color-light);
     }
 
     .cem-day-name-long {
@@ -1146,6 +1173,31 @@
     .cem-month-day-name {
         padding: var(--spacing-xs) 2px;
         font-size: 0.625rem;
+    }
+
+    .cem-month-day-panel {
+        border-bottom: 2px solid var(--color-primary);
+    }
+
+    .cem-month-day-panel-event {
+        min-height: 3.25rem;
+    }
+
+    .cem-month-day-panel-event-title::after {
+        content: " >";
+        color: var(--color-muted-gray);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .cem-month-cell-tap-hint {
+        display: inline-block;
+        margin-top: auto;
+        font-family: var(--font-primary);
+        font-size: 0.5625rem;
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--color-primary-dark);
     }
 
     .cem-form-row {
@@ -1262,6 +1314,10 @@
     .cem-month-cell {
         min-height: 58px;
         padding: 3px 2px;
+    }
+
+    .cem-month-cell.has-events {
+        border-color: rgba(251, 203, 156, 0.85);
     }
 
     .cem-month-day-num {

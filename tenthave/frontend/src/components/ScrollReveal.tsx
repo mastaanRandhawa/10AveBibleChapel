@@ -10,7 +10,7 @@ export const ScrollReveal: React.FC<
   return (
     <div
       ref={elementRef}
-      className={`scroll-reveal ${isVisible ? "visible" : ""} ${className}`}
+      className={`scroll-reveal scroll-reveal-base ${isVisible ? "visible" : ""} ${className}`}
       {...props}
     >
       {children}
