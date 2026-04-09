@@ -1,15 +1,64 @@
-import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
+import React, { useState, useEffect, useCallback } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import PageHero from "../components/PageHero";
-import Calendar, { CalendarEvent } from "../components/Calendar";
-import EventModal from "../components/EventModal";
 import PageContainer from "../components/PageContainer";
-import { announcementsAPI, calendarAPI, Announcement } from "../services/api";
+import {
+  ChurchEventManager,
+  ChurchEvent,
+  CHURCH_CATEGORIES,
+} from "../components/ui/event-manager";
+import { announcementsAPI, calendarAPI, Announcement, CalendarEvent } from "../services/api";
+import { useAuth } from "../context/AuthContext";
 import useSEO from "../hooks/useSEO";
 import "./Bulletin.css";
 
-// Main Bulletin Component
+// ─── Helper: map API CalendarEvent → ChurchEvent ──────────────────────────────
+
+function apiEventToChurchEvent(event: CalendarEvent): ChurchEvent {
+  const start = new Date(event.startDate);
+  const end = event.endDate ? new Date(event.endDate) : new Date(start.getTime() + 3600000);
+  return {
+    id: event.id,
+    title: event.title,
+    description: event.description,
+    startTime: start,
+    endTime: end,
+    color: apiColorToChurchColor(event.color),
+    category: event.category || undefined,
+    location: event.location || undefined,
+  };
+}
+
+function apiColorToChurchColor(color?: string | null): string {
+  if (!color) return "primary";
+  const c = color.trim();
+  if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(c)) return c;
+  // If already a church color value, return as is
+  const churchColors = ["primary", "dark", "success", "warning", "error", "gray"];
+  if (churchColors.includes(color)) return color;
+  // Map CSS variable names to church color tokens
+  if (color.includes("primary")) return "primary";
+  if (color.includes("success")) return "success";
+  if (color.includes("warning")) return "warning";
+  if (color.includes("error")) return "error";
+  if (color.includes("muted-gray")) return "gray";
+  return "primary";
+}
+
+function churchColorToCssVar(value: string): string {
+  const map: Record<string, string> = {
+    primary: "var(--cem-event-primary)",
+    dark: "var(--color-dark)",
+    success: "var(--color-success)",
+    warning: "var(--color-warning)",
+    error: "var(--color-error)",
+    gray: "var(--color-muted-gray)",
+  };
+  return map[value] || "var(--cem-event-primary)";
+}
+
+// ─── Main Bulletin Component ──────────────────────────────────────────────────
+
 const Bulletin: React.FC = () => {
   useSEO({
     title: "Bulletin & Events",
@@ -18,306 +67,96 @@ const Bulletin: React.FC = () => {
     canonical: "https://www.tenthavechapel.com/bulletin",
   });
 
-  // Calendar and event management state
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const { isAdmin } = useAuth();
+
+  const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
+  const [eventsError, setEventsError] = useState<string | null>(null);
 
-  // Old hardcoded events for fallback
-  const [hardcodedEvents] = useState<CalendarEvent[]>([
-    // January 2024 Events
-    {
-      id: "1",
-      title: "Sunday Service",
-      description: "Weekly worship service with Pastor John Smith",
-      date: "2024-01-21",
-      time: "11:30",
-      location: "Main Sanctuary",
-      speaker: "Pastor John Smith",
-      category: "worship",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "2",
-      title: "Youth Group Meeting",
-      description: "Youth group will meet for fellowship and Bible study",
-      date: "2024-01-19",
-      time: "19:00",
-      location: "Youth Room",
-      category: "youth",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "3",
-      title: "Prayer Meeting",
-      description: "Weekly prayer meeting for church, community, and world",
-      date: "2024-01-17",
-      time: "18:30",
-      location: "Prayer Room",
-      category: "prayer",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "4",
-      title: "Bible Study",
-      description: "Adult Bible study on the Book of Romans",
-      date: "2024-01-18",
-      time: "19:30",
-      location: "Fellowship Hall",
-      speaker: "Elder Mary Johnson",
-      category: "study",
-      color: "var(--color-success)",
-    },
-    {
-      id: "5",
-      title: "Men's Fellowship",
-      description: "Men's breakfast and fellowship meeting",
-      date: "2024-01-20",
-      time: "08:00",
-      location: "Church Kitchen",
-      category: "fellowship",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "6",
-      title: "Women's Ministry",
-      description: "Women's ministry meeting and craft session",
-      date: "2024-01-22",
-      time: "14:00",
-      location: "Activity Room",
-      category: "ministry",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "7",
-      title: "Children's Sunday School",
-      description: "Sunday School for children ages 5-12",
-      date: "2024-01-21",
-      time: "10:00",
-      location: "Children's Wing",
-      category: "education",
-      color: "var(--color-accent)",
-    },
-    {
-      id: "8",
-      title: "Board Meeting",
-      description: "Monthly church board meeting",
-      date: "2024-01-23",
-      time: "19:00",
-      location: "Pastor's Office",
-      category: "administration",
-      color: "var(--color-muted-gray)",
-    },
-    {
-      id: "9",
-      title: "Community Outreach",
-      description: "Food bank volunteer day",
-      date: "2024-01-24",
-      time: "09:00",
-      location: "Community Center",
-      category: "outreach",
-      color: "var(--color-success)",
-    },
-    {
-      id: "10",
-      title: "Choir Practice",
-      description: "Weekly choir rehearsal",
-      date: "2024-01-25",
-      time: "19:30",
-      location: "Sanctuary",
-      category: "music",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "11",
-      title: "Mission Trip Planning",
-      description: "Planning meeting for Guatemala mission trip",
-      date: "2024-01-26",
-      time: "18:00",
-      location: "Conference Room",
-      category: "missions",
-      color: "var(--color-warning)",
-    },
-    {
-      id: "12",
-      title: "New Member Class",
-      description: "Introduction class for new church members",
-      date: "2024-01-27",
-      time: "10:00",
-      location: "Fellowship Hall",
-      speaker: "Pastor John Smith",
-      category: "education",
-      color: "var(--color-success)",
-    },
-    {
-      id: "13",
-      title: "Sunday Service",
-      description: "Weekly worship service with special guest speaker",
-      date: "2024-01-28",
-      time: "11:30",
-      location: "Main Sanctuary",
-      speaker: "Rev. Dr. Sarah Williams",
-      category: "worship",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "14",
-      title: "Prayer Walk",
-      description: "Community prayer walk around the neighborhood",
-      date: "2024-01-29",
-      time: "17:00",
-      location: "Church Parking Lot",
-      category: "prayer",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "15",
-      title: "Youth Game Night",
-      description: "Fun games and activities for youth group",
-      date: "2024-01-30",
-      time: "19:00",
-      location: "Youth Room",
-      category: "youth",
-      color: "var(--color-primary)",
-    },
-    // February 2024 Events
-    {
-      id: "16",
-      title: "Ash Wednesday Service",
-      description: "Ash Wednesday service marking the beginning of Lent",
-      date: "2024-02-14",
-      time: "19:00",
-      location: "Main Sanctuary",
-      speaker: "Pastor John Smith",
-      category: "worship",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "17",
-      title: "Valentine's Day Fellowship",
-      description: "Couples fellowship and dinner",
-      date: "2024-02-14",
-      time: "18:00",
-      location: "Fellowship Hall",
-      category: "fellowship",
-      color: "var(--color-primary)",
-    },
-    {
-      id: "18",
-      title: "Mission Trip Departure",
-      description: "Guatemala mission trip departure",
-      date: "2024-02-15",
-      time: "06:00",
-      location: "Church Parking Lot",
-      category: "missions",
-      color: "var(--color-warning)",
-    },
-    {
-      id: "19",
-      title: "Lenten Study Series",
-      description: "Weekly Lenten study on spiritual disciplines",
-      date: "2024-02-16",
-      time: "19:30",
-      location: "Fellowship Hall",
-      speaker: "Elder Mary Johnson",
-      category: "study",
-      color: "var(--color-success)",
-    },
-  ]);
+  // ─── Load data from API ───────────────────────────────────────────────
 
-  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
+  const loadData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setEventsError(null);
 
-  // Load data from API
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        // Fetch calendar events
-        const calendarData = await calendarAPI.getAll({
-          status: "PUBLISHED",
-          isPublic: "true",
-        });
-        // Transform API data to match CalendarEvent interface
-        // FIX: Use date-fns format() to convert timestamps to date strings in LOCAL time
-        // This prevents timezone offset issues where dates shift by one day
-        const transformedEvents = calendarData.map((event) => ({
-          id: event.id,
-          title: event.title,
-          description: event.description || "",
-          date: format(new Date(event.startDate), "yyyy-MM-dd"),
-          time: new Date(event.startDate).toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          }),
-          location: event.location || "",
-          category: event.category || "general",
-          color: event.color || "var(--color-primary)",
-        }));
-        setEvents(
-          transformedEvents.length > 0 ? transformedEvents : hardcodedEvents
-        );
-
-        // Fetch announcements
-        const announcementData = await announcementsAPI.getAll({
-          status: "PUBLISHED",
-          isPublic: "true",
-        });
-        setAnnouncements(announcementData);
-      } catch (error) {
-        console.error("Error loading bulletin data:", error);
-        // Use hardcoded events as fallback
-        setEvents(hardcodedEvents);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, [hardcodedEvents]);
-
-  // Calendar event handlers
-  const handleAddEvent = (date: string) => {
-    setSelectedDate(date);
-    setEditingEvent(null);
-    setIsEventModalOpen(true);
-  };
-
-  const handleSaveEvent = (eventData: Omit<CalendarEvent, "id">) => {
-    if (editingEvent) {
-      // Update existing event
-      setEvents((prev) =>
-        prev.map((event) =>
-          event.id === editingEvent.id
-            ? { ...eventData, id: editingEvent.id }
-            : event
-        )
+      // Fetch calendar events
+      const calendarData = await calendarAPI.getAll(
+        isAdmin ? undefined : { status: "PUBLISHED", isPublic: "true" }
       );
-    } else {
-      // Add new event
-      const newEvent: CalendarEvent = {
-        ...eventData,
-        id: Date.now().toString(),
-      };
-      setEvents((prev) => [...prev, newEvent]);
+      setEvents(calendarData.map(apiEventToChurchEvent));
+
+      // Fetch announcements
+      const announcementData = await announcementsAPI.getAll(
+        isAdmin ? undefined : { status: "PUBLISHED", isPublic: "true" }
+      );
+      setAnnouncements(announcementData);
+    } catch (error) {
+      console.error("Error loading bulletin data:", error);
+      setEventsError("Failed to load calendar data.");
+      setEvents([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [isAdmin]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  // ─── Admin event handlers (wired to real API) ─────────────────────────
+
+  const handleEventCreate = async (event: Omit<ChurchEvent, "id">) => {
+    const payload = {
+      title: event.title,
+      description: event.description,
+      startDate: event.startTime.toISOString(),
+      endDate: event.endTime.toISOString(),
+      isAllDay: false,
+      category: event.category,
+      color: churchColorToCssVar(event.color),
+      location: event.location,
+      status: "PUBLISHED",
+      isPublic: true,
+    };
+    try {
+      const created = await calendarAPI.create(payload);
+      setEvents((prev) => [...prev, apiEventToChurchEvent(created)]);
+    } catch (err) {
+      console.error("Failed to create event:", err);
+      throw err;
     }
   };
 
-  const handleEditEvent = (event: CalendarEvent) => {
-    setEditingEvent(event);
-    setIsEventModalOpen(true);
+  const handleEventUpdate = async (id: string, updated: Partial<ChurchEvent>) => {
+    const payload: Partial<CalendarEvent> = {};
+    if (updated.title) payload.title = updated.title;
+    if (updated.description !== undefined) payload.description = updated.description;
+    if (updated.startTime) payload.startDate = updated.startTime.toISOString();
+    if (updated.endTime) payload.endDate = updated.endTime.toISOString();
+    if (updated.category) payload.category = updated.category;
+    if (updated.location !== undefined) payload.location = updated.location;
+    try {
+      const result = await calendarAPI.update(id, payload);
+      setEvents((prev) => prev.map((e) => (e.id === id ? apiEventToChurchEvent(result) : e)));
+    } catch (err) {
+      console.error("Failed to update event:", err);
+      throw err;
+    }
   };
 
-  const handleDeleteEvent = (eventId: string) => {
-    setEvents((prev) => prev.filter((event) => event.id !== eventId));
+  const handleEventDelete = async (id: string) => {
+    try {
+      await calendarAPI.delete(id);
+      setEvents((prev) => prev.filter((e) => e.id !== id));
+    } catch (err) {
+      console.error("Failed to delete event:", err);
+      throw err;
+    }
   };
 
-  const handleCloseEventModal = () => {
-    setIsEventModalOpen(false);
-    setEditingEvent(null);
-  };
+  // ─── Render ───────────────────────────────────────────────────────────
 
   return (
     <PageContainer>
@@ -329,22 +168,41 @@ const Bulletin: React.FC = () => {
         />
 
         <div className="bulletin-content">
-          {/* Calendar Section */}
+          {/* Calendar / Event Manager Section */}
           <ScrollReveal className="bulletin-calendar-section">
             <div className="section-header">
               <h2>UPCOMING EVENTS & CALENDAR</h2>
               <p>
-                Stay connected with our church community through our
-                comprehensive event calendar
+                Stay connected with our church community through our comprehensive event calendar
+                {isAdmin && (
+                  <span className="bulletin-admin-badge"> — Admin Mode</span>
+                )}
               </p>
             </div>
-            <Calendar
-              events={events}
-              onAddEvent={handleAddEvent}
-              onEditEvent={handleEditEvent}
-              onDeleteEvent={handleDeleteEvent}
-              isAdmin={false}
-            />
+
+            {loading ? (
+              <div className="bulletin-loading">
+                <div className="bulletin-loading-spinner" />
+                <p>Loading calendar events...</p>
+              </div>
+            ) : eventsError ? (
+              <div className="bulletin-error">
+                <p>{eventsError}</p>
+                <button className="bulletin-retry-btn" onClick={loadData}>
+                  Retry
+                </button>
+              </div>
+            ) : (
+              <ChurchEventManager
+                events={events}
+                isAdmin={isAdmin}
+                onEventCreate={isAdmin ? handleEventCreate : undefined}
+                onEventUpdate={isAdmin ? handleEventUpdate : undefined}
+                onEventDelete={isAdmin ? handleEventDelete : undefined}
+                categories={CHURCH_CATEGORIES}
+                defaultView="month"
+              />
+            )}
           </ScrollReveal>
 
           {/* Church Announcements Section */}
@@ -356,9 +214,7 @@ const Bulletin: React.FC = () => {
             {loading ? (
               <p style={{ textAlign: "center" }}>Loading announcements...</p>
             ) : announcements.length === 0 ? (
-              <p style={{ textAlign: "center" }}>
-                No announcements at this time.
-              </p>
+              <p style={{ textAlign: "center" }}>No announcements at this time.</p>
             ) : (
               <div className="announcements-grid">
                 {announcements.slice(0, 6).map((announcement) => (
@@ -372,9 +228,7 @@ const Bulletin: React.FC = () => {
                     <p>{announcement.content}</p>
                     {announcement.category && (
                       <div className="announcement-meta">
-                        <span className="announcement-category">
-                          {announcement.category}
-                        </span>
+                        <span className="announcement-category">{announcement.category}</span>
                       </div>
                     )}
                   </div>
@@ -383,15 +237,6 @@ const Bulletin: React.FC = () => {
             )}
           </ScrollReveal>
         </div>
-
-        {/* Event Modal */}
-        <EventModal
-          isOpen={isEventModalOpen}
-          onClose={handleCloseEventModal}
-          onSave={handleSaveEvent}
-          selectedDate={selectedDate}
-          editingEvent={editingEvent}
-        />
       </div>
     </PageContainer>
   );

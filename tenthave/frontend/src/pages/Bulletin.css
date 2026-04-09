@@ -49,6 +49,7 @@
     margin: 0 auto;
     padding: 0 var(--spacing-lg) var(--spacing-xl);
     margin-top: var(--spacing-xl);
+    min-width: 0;
 }
 
 /* Section Headers */
@@ -896,6 +897,89 @@
 }
 
 
+/* Admin badge inline */
+.bulletin-admin-badge {
+    display: inline-block;
+    background: #1e293b;
+    color: #f8fafc;
+    font-size: calc(var(--font-size-h6) - 4px);
+    font-weight: var(--font-weight-bold);
+    padding: 2px 10px;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    margin-left: var(--spacing-sm);
+    vertical-align: middle;
+}
+
+/* Loading state */
+.bulletin-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-3xl);
+    background: var(--color-light);
+    border: 1px solid var(--border-color);
+}
+
+.bulletin-loading p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-muted-gray);
+    margin: 0;
+}
+
+.bulletin-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-light);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: bulletin-spin 0.8s linear infinite;
+}
+
+@keyframes bulletin-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.bulletin-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    background: var(--color-light);
+    border: 2px solid var(--color-error);
+    text-align: center;
+}
+
+.bulletin-error p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h6);
+    color: var(--color-error);
+    margin: 0;
+}
+
+.bulletin-retry-btn {
+    background: var(--color-error);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+    border-radius: 0;
+}
+
+.bulletin-retry-btn:hover {
+    opacity: 0.85;
+}
+
 /* Announcements Section */
 .announcements-section {
     margin-bottom: var(--spacing-xl);
@@ -903,7 +987,7 @@
 
 .announcements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
     gap: var(--spacing-lg);
 }
 
